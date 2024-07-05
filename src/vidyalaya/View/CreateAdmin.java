@@ -19,7 +19,8 @@ public class CreateAdmin extends javax.swing.JFrame {
     public CreateAdmin() {
         initComponents();
         
-        // Custom Font Setting
+        // Custom Font Setting 
+        // Nirjal
         try {
             File fontStyle = new File("src/vidyalaya/assets/DMSans-Regular.ttf");
             Font font = Font.createFont(Font.TRUETYPE_FONT, fontStyle).deriveFont(Font.BOLD, 25f);
