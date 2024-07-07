@@ -4,6 +4,7 @@
  */
 package vidyalaya;
 
+import vidyalaya.Controller.CreateAdminController;
 import vidyalaya.View.CreateAdmin;
 
 /**
@@ -11,12 +12,14 @@ import vidyalaya.View.CreateAdmin;
  * @author trishan9
  */
 public class Vidyalaya {
+
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        CreateAdmin myAdmin = new CreateAdmin();
-        myAdmin.setVisible(true);
+        CreateAdmin userView = new CreateAdmin();
+        CreateAdminController userController = new CreateAdminController(userView);
+        userController.open();
     }
-    
+
 }

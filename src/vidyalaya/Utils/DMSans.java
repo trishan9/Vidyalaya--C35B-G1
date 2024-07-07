@@ -12,17 +12,19 @@ import java.io.File;
  * @author trishan9
  */
 public class DMSans {
+
     private Font font;
-    public DMSans(){
+
+    public DMSans(float fontSize) {
         try {
             File fontStyle = new File("src/vidyalaya/Assets/DMSans-Regular.ttf");
-            this.font = Font.createFont(Font.TRUETYPE_FONT, fontStyle).deriveFont(Font.BOLD, 25f);
-        } catch(Exception e){
+            this.font = Font.createFont(Font.TRUETYPE_FONT, fontStyle).deriveFont(Font.BOLD, fontSize);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
-    public Font getFont(){
+
+    public Font getFont() {
         return this.font;
     }
 }

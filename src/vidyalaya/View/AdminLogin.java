@@ -11,15 +11,15 @@ import vidyalaya.Utils.UIUtils;
  *
  * @author trishan9
  */
-public class CreateAdmin extends javax.swing.JFrame {
+public class AdminLogin extends javax.swing.JFrame {
 
     /**
-     * Creates new form CreateAdmin
+     * Creates new form AdminLogin
      */
-    public CreateAdmin() {
+    public AdminLogin() {
         initComponents();
 
-        setTitle("Admin Signup - Vidyalaya");
+        setTitle("Admin Login - Vidyalaya");
         setSize(1400, 954);
         setLocationRelativeTo(null);
         setResizable(false);
@@ -31,54 +31,36 @@ public class CreateAdmin extends javax.swing.JFrame {
         UIUtils.setCustomFont(jLabelHead, 25f);
         UIUtils.setCustomFont(createMessage, 25f);
         UIUtils.setCustomFont(label, 16f);
-        UIUtils.setCustomFont(label1, 16f);
-        UIUtils.setCustomFont(label2, 16f);
-        UIUtils.setCustomFont(label3, 16f);
         UIUtils.setCustomFont(label4, 14f);
-        UIUtils.setCustomFont(signIn, 14f);
-        UIUtils.setCustomFont(signupBtn, 16f);
+        UIUtils.setCustomFont(pwLabel, 16f);
+        UIUtils.setCustomFont(signUp, 14f);
+        UIUtils.setCustomFont(signinBtn, 16f);
 
-        UIUtils.setCursorPointer(signIn);
-        UIUtils.setCursorPointer(signupBtn);
-
+        UIUtils.setCursorPointer(signUp);
     }
 
-    public void addSignInRedirectListener(ActionListener listener) {
-        signIn.addActionListener(listener);
+    public void addSignUpRedirectListener(ActionListener listener) {
+        signUp.addActionListener(listener);
     }
 
-    public void addCreateAdminListener(ActionListener listener) {
-        signupBtn.addActionListener(listener);
-    }
-
-    /**
-     * @return the txtName
-     */
-    public javax.swing.JTextField getNameField() {
-        return txtName;
+    public void addAdminLoginListener(ActionListener listener) {
+        signinBtn.addActionListener(listener);
     }
 
     /**
-     * @return the txtInstitutionName
+     * @return the txtUsername
      */
-    public javax.swing.JTextField getInstitutionNameField() {
-        return txtInsName;
+    public javax.swing.JTextField getUsernameField() {
+        return txtUsername;
     }
-
-    /**
-     * @return the txtEmail
-     */
-    public javax.swing.JTextField getEmailField() {
-        return txtEmail;
-    }
-
+    
     /**
      * @return the txtPassword
      */
     public javax.swing.JPasswordField getPasswordField() {
         return txtPassword;
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -95,17 +77,13 @@ public class CreateAdmin extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         createMessage = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        txtName = new javax.swing.JTextField();
+        txtUsername = new javax.swing.JTextField();
         label = new javax.swing.JLabel();
-        txtInsName = new javax.swing.JTextField();
-        label1 = new javax.swing.JLabel();
-        label2 = new javax.swing.JLabel();
-        txtEmail = new javax.swing.JTextField();
-        label3 = new javax.swing.JLabel();
+        signinBtn = new javax.swing.JButton();
+        pwLabel = new javax.swing.JLabel();
         txtPassword = new javax.swing.JPasswordField();
-        signupBtn = new javax.swing.JButton();
         label4 = new javax.swing.JLabel();
-        signIn = new javax.swing.JButton();
+        signUp = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -152,105 +130,74 @@ public class CreateAdmin extends javax.swing.JFrame {
 
         createMessage.setForeground(new java.awt.Color(0, 162, 100));
         createMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        createMessage.setText("Create an admin account");
+        createMessage.setText("Hi, Welcome Back Admin!");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(222, 222, 222), 2, true));
 
-        txtName.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(222, 222, 222), 2, true));
-        txtName.addActionListener(new java.awt.event.ActionListener() {
+        txtUsername.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(222, 222, 222), 2, true));
+        txtUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNameActionPerformed(evt);
+                txtUsernameActionPerformed(evt);
             }
         });
 
-        label.setText("Name");
+        label.setText("Username");
 
-        txtInsName.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(222, 222, 222), 2, true));
-        txtInsName.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        txtInsName.addActionListener(new java.awt.event.ActionListener() {
+        signinBtn.setBackground(new java.awt.Color(77, 215, 131));
+        signinBtn.setText("Sign in");
+        signinBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
+        signinBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtInsNameActionPerformed(evt);
+                signinBtnActionPerformed(evt);
             }
         });
 
-        label1.setText("Institution Name");
-
-        label2.setText("Email");
-
-        txtEmail.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(222, 222, 222), 2, true));
-        txtEmail.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtEmailActionPerformed(evt);
-            }
-        });
-
-        label3.setText("Password");
+        pwLabel.setText("Password");
 
         txtPassword.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(222, 222, 222), 2, true));
-
-        signupBtn.setBackground(new java.awt.Color(77, 215, 131));
-        signupBtn.setText("Sign Up");
-        signupBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(signupBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(label)
-                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(label2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtInsName, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
-                            .addComponent(label1)
-                            .addComponent(label3)
-                            .addComponent(txtPassword))))
-                .addGap(33, 33, 33))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(signinBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
+                    .addComponent(label, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pwLabel, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtPassword))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtInsName, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(label, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(36, 36, 36)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(label2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(label, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
-                    .addComponent(txtPassword))
+                .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
+                .addComponent(pwLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
-                .addComponent(signupBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(signinBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 24, Short.MAX_VALUE))
         );
 
         label4.setForeground(new java.awt.Color(107, 114, 128));
-        label4.setText("Already have an account?");
+        label4.setText("Don't have an account?");
 
-        signIn.setText("Sign in");
-        signIn.setBorder(null);
-        signIn.setBorderPainted(false);
-        signIn.setContentAreaFilled(false);
-        signIn.addActionListener(new java.awt.event.ActionListener() {
+        signUp.setText("Sign up");
+        signUp.setBorder(null);
+        signUp.setBorderPainted(false);
+        signUp.setContentAreaFilled(false);
+        signUp.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        signUp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                signInActionPerformed(evt);
+                signUpActionPerformed(evt);
             }
         });
 
@@ -258,23 +205,23 @@ public class CreateAdmin extends javax.swing.JFrame {
         pnlCenter.setLayout(pnlCenterLayout);
         pnlCenterLayout.setHorizontalGroup(
             pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCenterLayout.createSequentialGroup()
-                .addContainerGap(469, Short.MAX_VALUE)
-                .addGroup(pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(createMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(465, 465, 465))
             .addGroup(pnlCenterLayout.createSequentialGroup()
-                .addGroup(pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlCenterLayout.createSequentialGroup()
-                        .addGap(123, 123, 123)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnlCenterLayout.createSequentialGroup()
-                        .addGap(614, 614, 614)
-                        .addComponent(label4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(signIn)))
+                .addGap(614, 614, 614)
+                .addComponent(label4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(signUp)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCenterLayout.createSequentialGroup()
+                .addContainerGap(400, Short.MAX_VALUE)
+                .addGroup(pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCenterLayout.createSequentialGroup()
+                        .addGroup(pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(createMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(465, 465, 465))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCenterLayout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(395, 395, 395))))
         );
         pnlCenterLayout.setVerticalGroup(
             pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -288,7 +235,7 @@ public class CreateAdmin extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label4)
-                    .addComponent(signIn))
+                    .addComponent(signUp))
                 .addContainerGap(257, Short.MAX_VALUE))
         );
 
@@ -310,21 +257,17 @@ public class CreateAdmin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
+    private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtNameActionPerformed
+    }//GEN-LAST:event_txtUsernameActionPerformed
 
-    private void txtInsNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtInsNameActionPerformed
+    private void signinBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signinBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtInsNameActionPerformed
+    }//GEN-LAST:event_signinBtnActionPerformed
 
-    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
+    private void signUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUpActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtEmailActionPerformed
-
-    private void signInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signInActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_signInActionPerformed
+    }//GEN-LAST:event_signUpActionPerformed
 
     /**
      * @param args the command line arguments
@@ -343,20 +286,21 @@ public class CreateAdmin extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CreateAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CreateAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CreateAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CreateAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CreateAdmin().setVisible(true);
+                new AdminLogin().setVisible(true);
             }
         });
     }
@@ -368,17 +312,13 @@ public class CreateAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelHead;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel label;
-    private javax.swing.JLabel label1;
-    private javax.swing.JLabel label2;
-    private javax.swing.JLabel label3;
     private javax.swing.JLabel label4;
     private javax.swing.JPanel pnlCenter;
     private javax.swing.JPanel pnlNav;
-    private javax.swing.JButton signIn;
-    private javax.swing.JButton signupBtn;
-    private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtInsName;
-    private javax.swing.JTextField txtName;
+    private javax.swing.JLabel pwLabel;
+    private javax.swing.JButton signUp;
+    private javax.swing.JButton signinBtn;
     private javax.swing.JPasswordField txtPassword;
+    private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 }

@@ -11,15 +11,15 @@ import vidyalaya.Utils.UIUtils;
  *
  * @author trishan9
  */
-public class CreateAdmin extends javax.swing.JFrame {
+public class CreateUser extends javax.swing.JFrame {
 
     /**
-     * Creates new form CreateAdmin
+     * Creates new form CreateUser
      */
-    public CreateAdmin() {
+    public CreateUser() {
         initComponents();
 
-        setTitle("Admin Signup - Vidyalaya");
+        setTitle("Create Student/Teacher Account - Vidyalaya Admin");
         setSize(1400, 954);
         setLocationRelativeTo(null);
         setResizable(false);
@@ -115,7 +115,7 @@ public class CreateAdmin extends javax.swing.JFrame {
 
         jLabelHead.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
         jLabelHead.setForeground(new java.awt.Color(0, 162, 100));
-        jLabelHead.setText("Vidyalaya");
+        jLabelHead.setText("Vidyalaya Admin");
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vidyalaya/Assets/vidyalaya-logo.png"))); // NOI18N
 
@@ -128,7 +128,7 @@ public class CreateAdmin extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabelHead)
-                .addContainerGap(1216, Short.MAX_VALUE))
+                .addContainerGap(1134, Short.MAX_VALUE))
         );
         pnlNavLayout.setVerticalGroup(
             pnlNavLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,7 +152,7 @@ public class CreateAdmin extends javax.swing.JFrame {
 
         createMessage.setForeground(new java.awt.Color(0, 162, 100));
         createMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        createMessage.setText("Create an admin account");
+        createMessage.setText("Create student/teacher account");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(222, 222, 222), 2, true));
@@ -343,20 +343,21 @@ public class CreateAdmin extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CreateAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CreateUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CreateAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CreateUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CreateAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CreateUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CreateAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CreateUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CreateAdmin().setVisible(true);
+                new CreateUser().setVisible(true);
             }
         });
     }
