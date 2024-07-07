@@ -6,6 +6,7 @@ package vidyalaya.View;
 
 import java.awt.Font;
 import java.io.File;
+import vidyalaya.Utils.DMSans;
 
 /**
  *
@@ -20,14 +21,9 @@ public class CreateAdmin extends javax.swing.JFrame {
         initComponents();
         
         // Custom Font Setting 
-        // Nirjal
-        try {
-            File fontStyle = new File("src/vidyalaya/assets/DMSans-Regular.ttf");
-            Font font = Font.createFont(Font.TRUETYPE_FONT, fontStyle).deriveFont(Font.BOLD, 25f);
-            jLabelHead.setFont(font);
-        } catch(Exception e){
-            e.printStackTrace();
-        }
+        DMSans dmSans = new DMSans();
+        jLabelHead.setFont(dmSans.getFont());
+        createMessage.setFont(dmSans.getFont());
     }
 
     /**
@@ -39,62 +35,125 @@ public class CreateAdmin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel3 = new javax.swing.JPanel();
+        pnlNav = new javax.swing.JPanel();
         jLabelHead = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
+        pnlCenter = new javax.swing.JPanel();
+        pnlCenterLeft = new javax.swing.JPanel();
+        pnlCenterMid = new javax.swing.JPanel();
+        pnlMessage = new javax.swing.JPanel();
+        createMessage = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        pnlForm = new javax.swing.JPanel();
+        pnlCenterRight = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(222, 222, 222), 2));
-        jPanel3.setPreferredSize(new java.awt.Dimension(835, 80));
+        pnlNav.setBackground(new java.awt.Color(255, 255, 255));
+        pnlNav.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(222, 222, 222), 2));
+        pnlNav.setPreferredSize(new java.awt.Dimension(835, 80));
 
         jLabelHead.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
         jLabelHead.setForeground(new java.awt.Color(0, 162, 100));
         jLabelHead.setText("Vidyalaya");
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vidyalaya/assets/vidyalaya-logo.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vidyalaya/Assets/vidyalaya-logo.png"))); // NOI18N
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnlNavLayout = new javax.swing.GroupLayout(pnlNav);
+        pnlNav.setLayout(pnlNavLayout);
+        pnlNavLayout.setHorizontalGroup(
+            pnlNavLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlNavLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabelHead)
-                .addContainerGap(629, Short.MAX_VALUE))
+                .addContainerGap(1274, Short.MAX_VALUE))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        pnlNavLayout.setVerticalGroup(
+            pnlNavLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlNavLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(jLabelHead)
                 .addContainerGap(23, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlNavLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        getContentPane().add(jPanel3, java.awt.BorderLayout.PAGE_START);
+        getContentPane().add(pnlNav, java.awt.BorderLayout.PAGE_START);
 
-        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+        pnlCenter.setBackground(new java.awt.Color(255, 255, 255));
+        pnlCenter.setPreferredSize(new java.awt.Dimension(0, 800));
+        pnlCenter.setLayout(new java.awt.GridLayout(1, 3, 400, 0));
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 835, Short.MAX_VALUE)
+        pnlCenterLeft.setMaximumSize(new java.awt.Dimension(100, 100));
+        pnlCenterLeft.setPreferredSize(new java.awt.Dimension(20, 362));
+
+        javax.swing.GroupLayout pnlCenterLeftLayout = new javax.swing.GroupLayout(pnlCenterLeft);
+        pnlCenterLeft.setLayout(pnlCenterLeftLayout);
+        pnlCenterLeftLayout.setHorizontalGroup(
+            pnlCenterLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 220, Short.MAX_VALUE)
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pnlCenterLeftLayout.setVerticalGroup(
+            pnlCenterLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 362, Short.MAX_VALUE)
         );
 
-        getContentPane().add(jPanel4, java.awt.BorderLayout.CENTER);
+        pnlCenter.add(pnlCenterLeft);
+
+        pnlCenterMid.setBackground(new java.awt.Color(255, 255, 255));
+        pnlCenterMid.setLayout(new java.awt.BorderLayout());
+
+        pnlMessage.setBackground(new java.awt.Color(255, 255, 255));
+        pnlMessage.setPreferredSize(new java.awt.Dimension(278, 250));
+        pnlMessage.setLayout(new java.awt.BorderLayout());
+
+        createMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        createMessage.setText("Create an admin account");
+        pnlMessage.add(createMessage, java.awt.BorderLayout.CENTER);
+
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vidyalaya/Assets/vidyalaya-large.png"))); // NOI18N
+        jLabel3.setPreferredSize(new java.awt.Dimension(100, 120));
+        jLabel3.setVerifyInputWhenFocusTarget(false);
+        pnlMessage.add(jLabel3, java.awt.BorderLayout.PAGE_START);
+
+        pnlCenterMid.add(pnlMessage, java.awt.BorderLayout.PAGE_START);
+
+        pnlForm.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout pnlFormLayout = new javax.swing.GroupLayout(pnlForm);
+        pnlForm.setLayout(pnlFormLayout);
+        pnlFormLayout.setHorizontalGroup(
+            pnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 220, Short.MAX_VALUE)
+        );
+        pnlFormLayout.setVerticalGroup(
+            pnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        pnlCenterMid.add(pnlForm, java.awt.BorderLayout.CENTER);
+
+        pnlCenter.add(pnlCenterMid);
+
+        javax.swing.GroupLayout pnlCenterRightLayout = new javax.swing.GroupLayout(pnlCenterRight);
+        pnlCenterRight.setLayout(pnlCenterRightLayout);
+        pnlCenterRightLayout.setHorizontalGroup(
+            pnlCenterRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 220, Short.MAX_VALUE)
+        );
+        pnlCenterRightLayout.setVerticalGroup(
+            pnlCenterRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 362, Short.MAX_VALUE)
+        );
+
+        pnlCenter.add(pnlCenterRight);
+
+        getContentPane().add(pnlCenter, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -135,9 +194,16 @@ public class CreateAdmin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel createMessage;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabelHead;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel pnlCenter;
+    private javax.swing.JPanel pnlCenterLeft;
+    private javax.swing.JPanel pnlCenterMid;
+    private javax.swing.JPanel pnlCenterRight;
+    private javax.swing.JPanel pnlForm;
+    private javax.swing.JPanel pnlMessage;
+    private javax.swing.JPanel pnlNav;
     // End of variables declaration//GEN-END:variables
 }

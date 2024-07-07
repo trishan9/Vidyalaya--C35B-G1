@@ -9,15 +9,12 @@ import vidyalaya.View.CreateAdmin;
 /**
  *
  * @author trishan9
- * Rehan changes
  */
 public class Vidyalaya {
-
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
         CreateAdmin myAdmin = new CreateAdmin();
         myAdmin.setVisible(true);
     }
