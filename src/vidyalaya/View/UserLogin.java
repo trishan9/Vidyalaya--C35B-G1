@@ -4,6 +4,7 @@
  */
 package vidyalaya.View;
 
+import java.awt.event.ActionListener;
 import vidyalaya.Utils.UIUtils;
 
 /**
@@ -33,6 +34,24 @@ public class UserLogin extends javax.swing.JFrame {
         UIUtils.setCustomFont(pwLabel, 16f);
         UIUtils.setCustomFont(signinBtn, 16f);
 
+    }
+
+    public void addUserLoginListener(ActionListener listener) {
+        signinBtn.addActionListener(listener);
+    }
+
+    /**
+     * @return the txtUsername
+     */
+    public javax.swing.JTextField getUsernameField() {
+        return txtUsername;
+    }
+
+    /**
+     * @return the txtPassword
+     */
+    public javax.swing.JPasswordField getPasswordField() {
+        return txtPassword;
     }
 
     /**

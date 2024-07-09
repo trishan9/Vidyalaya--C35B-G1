@@ -4,8 +4,10 @@
  */
 package vidyalaya;
 
-import vidyalaya.Controller.CreateAdminController;
-import vidyalaya.View.CreateAdmin;
+import vidyalaya.Controller.AdminLoginController;
+import vidyalaya.Controller.UserLoginController;
+import vidyalaya.View.AdminLogin;
+import vidyalaya.View.UserLogin;
 
 /**
  *
@@ -17,9 +19,13 @@ public class Vidyalaya {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        CreateAdmin userView = new CreateAdmin();
-        CreateAdminController userController = new CreateAdminController(userView);
+        AdminLogin userView = new AdminLogin();
+        AdminLoginController userController = new AdminLoginController(userView);
         userController.open();
+
+//        UserLogin userView = new UserLogin();
+//        UserLoginController userController = new UserLoginController(userView);
+//        userController.open();
     }
 
 }
