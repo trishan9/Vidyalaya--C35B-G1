@@ -7,7 +7,7 @@ package vidyalaya.Controller;
 import vidyalaya.DAO.AuthDAO.AuthDAO;
 import vidyalaya.DAO.AuthDAO.AuthDAOImplementation;
 
-import vidyalaya.View.CreateUser;
+import vidyalaya.View.Dashboard.Admin.CreateUser;
 
 /**
  *

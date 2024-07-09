@@ -18,7 +18,7 @@ import vidyalaya.Utils.UIUtils;
 
 import vidyalaya.View.AdminLogin;
 import vidyalaya.View.CreateAdmin;
-import vidyalaya.View.CreateUser;
+import vidyalaya.View.Dashboard.Admin.CreateUser;
 
 /**
  *

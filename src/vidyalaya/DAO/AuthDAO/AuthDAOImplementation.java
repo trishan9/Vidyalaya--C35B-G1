@@ -16,6 +16,10 @@ import vidyalaya.Model.StudentData;
 import vidyalaya.Model.TeacherData;
 import vidyalaya.Model.UserTypeEnum;
 
+import vidyalaya.SessionManagement.AdminSession;
+import vidyalaya.SessionManagement.StudentSession;
+import vidyalaya.SessionManagement.TeacherSession;
+
 /**
  *
  * @author trish
@@ -40,7 +44,9 @@ public class AuthDAOImplementation implements AuthDAO {
 
             final ResultSet response = statement.executeQuery();
             if (response.next()) {
-                return new AdminData(response);
+                AdminData adminData = new AdminData(response);
+                AdminSession.setCurrentUser(adminData);
+                return adminData;
             }
             statement.close();
             throw new Exception("Password is invalid, Please try again!");
@@ -67,7 +73,9 @@ public class AuthDAOImplementation implements AuthDAO {
 
             final ResultSet response = statement.executeQuery();
             if (response.next()) {
-                return new TeacherData(response);
+                TeacherData teacherData = new TeacherData(response);
+                TeacherSession.setCurrentUser(teacherData);
+                return teacherData;
             }
             statement.close();
             throw new Exception("Password is invalid, Please try again!");
@@ -94,7 +102,9 @@ public class AuthDAOImplementation implements AuthDAO {
 
             final ResultSet response = statement.executeQuery();
             if (response.next()) {
-                return new StudentData(response);
+                StudentData studentData = new StudentData(response);
+                StudentSession.setCurrentUser(studentData);
+                return studentData;
             }
             statement.close();
             throw new Exception("Password is invalid, Please try again!");
