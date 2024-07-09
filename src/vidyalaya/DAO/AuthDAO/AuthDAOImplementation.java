@@ -6,12 +6,15 @@ package vidyalaya.DAO.AuthDAO;
 
 import vidyalaya.Database.MySqlConnection;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import vidyalaya.Model.AdminData;
 import vidyalaya.Model.LoginRequest;
+import vidyalaya.Model.StudentData;
 import vidyalaya.Model.TeacherData;
+import vidyalaya.Model.UserTypeEnum;
 
 /**
  *
@@ -30,12 +33,12 @@ public class AuthDAOImplementation implements AuthDAO {
         statement.setString(2, loginModel.getPassword());
 
         try {
-            boolean doesExist = checkIfAdminExistsByUsername(dbConnection, loginModel.getUsername());
+            boolean doesExist = checkIfUserExists(dbConnection, "admin", "username", loginModel.getUsername());
             if (!doesExist) {
                 throw new Exception("Admin with username " + loginModel.getUsername() + " doesn't exists");
             }
 
-            final var response = statement.executeQuery();
+            final ResultSet response = statement.executeQuery();
             if (response.next()) {
                 return new AdminData(response);
             }
@@ -44,7 +47,7 @@ public class AuthDAOImplementation implements AuthDAO {
         } catch (Exception ex) {
             throw ex;
         } finally {
-            dbConnection.close();
+            mysql.closeConnection(dbConnection);
         }
     }
 
@@ -57,12 +60,12 @@ public class AuthDAOImplementation implements AuthDAO {
         statement.setString(2, loginModel.getPassword());
 
         try {
-            boolean doesExist = checkIfTeacherExistsByTeacherId(dbConnection, loginModel.getUsername());
+            boolean doesExist = checkIfUserExists(dbConnection, "teacher", "teacher_id", loginModel.getUsername());
             if (!doesExist) {
                 throw new Exception("Teacher with teacher id " + loginModel.getUsername() + " doesn't exists");
             }
 
-            final var response = statement.executeQuery();
+            final ResultSet response = statement.executeQuery();
             if (response.next()) {
                 return new TeacherData(response);
             }
@@ -71,7 +74,34 @@ public class AuthDAOImplementation implements AuthDAO {
         } catch (Exception ex) {
             throw ex;
         } finally {
-            dbConnection.close();
+            mysql.closeConnection(dbConnection);
+        }
+    }
+
+    @Override
+    public StudentData loginStudent(LoginRequest loginModel) throws Exception {
+        Connection dbConnection = mysql.openConnection();
+
+        final PreparedStatement statement = dbConnection.prepareStatement("SELECT * FROM student where student_id = ? AND password = ? LIMIT 1");
+        statement.setString(1, loginModel.getUsername());
+        statement.setString(2, loginModel.getPassword());
+
+        try {
+            boolean doesExist = checkIfUserExists(dbConnection, "student", "student_id", loginModel.getUsername());
+            if (!doesExist) {
+                throw new Exception("Student with student id " + loginModel.getUsername() + " doesn't exists");
+            }
+
+            final ResultSet response = statement.executeQuery();
+            if (response.next()) {
+                return new StudentData(response);
+            }
+            statement.close();
+            throw new Exception("Password is invalid, Please try again!");
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            mysql.closeConnection(dbConnection);
         }
     }
 
@@ -86,7 +116,7 @@ public class AuthDAOImplementation implements AuthDAO {
         statement.setString(4, registerModel.getPassword());
 
         try {
-            boolean doesExist = checkIfAdminExistsByEmail(dbConnection, registerModel.getEmail());
+            boolean doesExist = checkIfUserExists(dbConnection, "admin", "email", registerModel.getEmail());
             if (doesExist) {
                 throw new Exception("Admin with email " + registerModel.getEmail() + " already exists");
             }
@@ -96,7 +126,7 @@ public class AuthDAOImplementation implements AuthDAO {
         } catch (Exception ex) {
             throw ex;
         } finally {
-            dbConnection.close();
+            mysql.closeConnection(dbConnection);
         }
     }
 
@@ -111,7 +141,7 @@ public class AuthDAOImplementation implements AuthDAO {
         statement.setString(4, registerModel.getPassword());
 
         try {
-            boolean doesExist = checkIfTeacherExistsByEmail(dbConnection, registerModel.getEmail());
+            boolean doesExist = checkIfUserExists(dbConnection, "teacher", "email", registerModel.getEmail());
             if (doesExist) {
                 throw new Exception("Teacher with email " + registerModel.getEmail() + " already exists");
             }
@@ -121,51 +151,88 @@ public class AuthDAOImplementation implements AuthDAO {
         } catch (Exception ex) {
             throw ex;
         } finally {
-            dbConnection.close();
+            mysql.closeConnection(dbConnection);
         }
     }
 
     @Override
-    public void deleteUser(int userId) throws Exception {
+    public void registerStudent(StudentData registerModel) throws Exception {
+        Connection dbConnection = mysql.openConnection();
+
+        final PreparedStatement statement = dbConnection.prepareStatement("INSERT INTO student (admin_id,course_id,name,email,password) VALUES (?,?,?,?)");
+        statement.setInt(1, registerModel.getAdminId());
+        statement.setInt(2, registerModel.getCourseId());
+        statement.setString(3, registerModel.getName());
+        statement.setString(4, registerModel.getEmail());
+        statement.setString(5, registerModel.getPassword());
+
+        try {
+            boolean doesExist = checkIfUserExists(dbConnection, "student", "email", registerModel.getEmail());
+            if (doesExist) {
+                throw new Exception("Student with email " + registerModel.getEmail() + " already exists");
+            }
+
+            statement.execute();
+            statement.close();
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            mysql.closeConnection(dbConnection);
+        }
     }
 
-    private boolean checkIfAdminExistsByUsername(Connection dbConnection, String username) throws SQLException {
+    @Override
+    public void deleteUser(int userId, UserTypeEnum userType) throws Exception {
+        Connection dbConnection = mysql.openConnection();
+
+        String tableName;
+        switch (userType) {
+            case TEACHER:
+                tableName = "teacher";
+                break;
+            case STUDENT:
+                tableName = "student";
+                break;
+            default:
+                throw new Exception("Invalid user type");
+        }
+
+        final PreparedStatement statement = dbConnection.prepareStatement("DELETE FROM " + tableName + " WHERE id = ?");
+        statement.setInt(1, userId);
+
+        try {
+            boolean doesExist = checkIfUserExistsById(dbConnection, tableName, userId);
+            if (doesExist) {
+                throw new Exception("User with ID " + userId + " doesn't exist in " + tableName + " table");
+            }
+
+            statement.executeUpdate();
+            statement.close();
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            mysql.closeConnection(dbConnection);
+        }
+    }
+
+    private boolean checkIfUserExists(Connection dbConnection, String tableName, String columnName, String value) throws SQLException {
         final boolean data;
-        try (PreparedStatement statement = dbConnection.prepareStatement("SELECT COUNT(id) as count FROM admin where username = ? LIMIT 1")) {
-            statement.setString(1, username);
-            final var response = statement.executeQuery();
+        try (PreparedStatement statement = dbConnection.prepareStatement("SELECT COUNT(id) as count FROM " + tableName + " WHERE " + columnName + " = ? LIMIT 1")) {
+            statement.setString(1, value);
+            final ResultSet response = statement.executeQuery();
             data = (response.next() && response.getInt("count") > 0);
         }
         return data;
     }
 
-    private boolean checkIfAdminExistsByEmail(Connection dbConnection, String email) throws SQLException {
+    private boolean checkIfUserExistsById(Connection dbConnection, String tableName, int userId) throws SQLException {
         final boolean data;
-        try (PreparedStatement statement = dbConnection.prepareStatement("SELECT COUNT(id) as count FROM admin where email = ? LIMIT 1")) {
-            statement.setString(1, email);
-            final var response = statement.executeQuery();
+        try (PreparedStatement statement = dbConnection.prepareStatement("SELECT COUNT(id) as count FROM " + tableName + " WHERE id = ? LIMIT 1")) {
+            statement.setInt(1, userId);
+            final ResultSet response = statement.executeQuery();
             data = (response.next() && response.getInt("count") > 0);
         }
         return data;
     }
 
-    private boolean checkIfTeacherExistsByTeacherId(Connection dbConnection, String teacher_id) throws SQLException {
-        final boolean data;
-        try (PreparedStatement statement = dbConnection.prepareStatement("SELECT COUNT(id) as count FROM teacher where teacher_id = ? LIMIT 1")) {
-            statement.setString(1, teacher_id);
-            final var response = statement.executeQuery();
-            data = (response.next() && response.getInt("count") > 0);
-        }
-        return data;
-    }
-
-    private boolean checkIfTeacherExistsByEmail(Connection dbConnection, String email) throws SQLException {
-        final boolean data;
-        try (PreparedStatement statement = dbConnection.prepareStatement("SELECT COUNT(id) as count FROM teacher where email = ? LIMIT 1")) {
-            statement.setString(1, email);
-            final var response = statement.executeQuery();
-            data = (response.next() && response.getInt("count") > 0);
-        }
-        return data;
-    }
 }

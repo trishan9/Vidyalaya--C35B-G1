@@ -6,7 +6,9 @@ package vidyalaya.DAO.AuthDAO;
 
 import vidyalaya.Model.AdminData;
 import vidyalaya.Model.LoginRequest;
+import vidyalaya.Model.StudentData;
 import vidyalaya.Model.TeacherData;
+import vidyalaya.Model.UserTypeEnum;
 
 /**
  *
@@ -17,10 +19,14 @@ public interface AuthDAO {
     public AdminData loginAdmin(LoginRequest loginModel) throws Exception;
     
     public TeacherData loginTeacher(LoginRequest loginModel) throws Exception;
+    
+    public StudentData loginStudent(LoginRequest loginModel) throws Exception;
 
     public void registerAdmin(AdminData registerModel) throws Exception;
     
     public void registerTeacher(TeacherData registerModel) throws Exception;
+    
+    public void registerStudent(StudentData registerModel) throws Exception;
 
-    public void deleteUser(int userId) throws Exception;
+    public void deleteUser(int userId, UserTypeEnum userType) throws Exception;
 }
