@@ -2,23 +2,23 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package vidyalaya.Controller;
+package vidyalaya.Controller.Admin;
 
 import vidyalaya.DAO.AuthDAO.AuthDAO;
 import vidyalaya.DAO.AuthDAO.AuthDAOImplementation;
 
-import vidyalaya.View.Dashboard.Admin.CreateUser;
+import vidyalaya.View.Dashboard.Admin.CoursesScreen;
 
 /**
  *
  * @author trishan9
  */
-public class CreateUserController {
+public class CoursesController {
 
     private final AuthDAO authDAO = new AuthDAOImplementation();
-    private final CreateUser userView;
+    private final CoursesScreen userView;
 
-    public CreateUserController(CreateUser userView) {
+    public CoursesController(CoursesScreen userView) {
         this.userView = userView;
     }
 

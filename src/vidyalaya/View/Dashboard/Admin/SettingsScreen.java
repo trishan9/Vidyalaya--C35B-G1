@@ -12,17 +12,17 @@ import vidyalaya.Utils.UIUtils;
 
 /**
  *
- * @author trishan9
+ * @author trish
  */
-public class CoursesScreen extends javax.swing.JFrame {
+public class SettingsScreen extends javax.swing.JFrame {
 
     /**
-     * Creates new form CoursesScreen
+     * Creates new form SettingsScreen
      */
-    public CoursesScreen() {
+    public SettingsScreen() {
         initComponents();
 
-        setTitle("Courses - Vidyalaya Admin");
+        setTitle("Settings - Vidyalaya Admin");
         setSize(1400, 954);
         setLocationRelativeTo(null);
         setResizable(false);
@@ -138,7 +138,7 @@ public class CoursesScreen extends javax.swing.JFrame {
         lblRole.setForeground(new java.awt.Color(130, 130, 130));
         lblRole.setText("Admin");
 
-        navCourses.setBackground(new java.awt.Color(77, 215, 131));
+        navCourses.setBackground(new java.awt.Color(255, 255, 255));
         navCourses.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
         navCourses.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         navCourses.setPreferredSize(new java.awt.Dimension(100, 52));
@@ -268,7 +268,7 @@ public class CoursesScreen extends javax.swing.JFrame {
             .addComponent(menuUsers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        navSettings.setBackground(new java.awt.Color(255, 255, 255));
+        navSettings.setBackground(new java.awt.Color(77, 215, 131));
         navSettings.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
         navSettings.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         navSettings.setPreferredSize(new java.awt.Dimension(100, 52));
@@ -372,7 +372,7 @@ public class CoursesScreen extends javax.swing.JFrame {
                 .addComponent(navSettings, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(80, 80, 80)
                 .addComponent(logOut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(130, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout pnlCenterLayout = new javax.swing.GroupLayout(pnlCenter);
@@ -400,7 +400,7 @@ public class CoursesScreen extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(pnlNav, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(pnlCenter, javax.swing.GroupLayout.DEFAULT_SIZE, 874, Short.MAX_VALUE))
+                .addComponent(pnlCenter, javax.swing.GroupLayout.DEFAULT_SIZE, 750, Short.MAX_VALUE))
         );
 
         pack();
@@ -423,23 +423,20 @@ public class CoursesScreen extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CoursesScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SettingsScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CoursesScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SettingsScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CoursesScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SettingsScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CoursesScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SettingsScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CoursesScreen().setVisible(true);
+                new SettingsScreen().setVisible(true);
             }
         });
     }

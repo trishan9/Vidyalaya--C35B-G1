@@ -4,6 +4,7 @@
  */
 package vidyalaya.Controller;
 
+import vidyalaya.Controller.Admin.CoursesController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -18,7 +19,7 @@ import vidyalaya.Utils.UIUtils;
 
 import vidyalaya.View.AdminLogin;
 import vidyalaya.View.CreateAdmin;
-import vidyalaya.View.Dashboard.Admin.CreateUser;
+import vidyalaya.View.Dashboard.Admin.CoursesScreen;
 
 /**
  *
@@ -63,7 +64,7 @@ public class AdminLoginController {
                 authDAO.loginAdmin(admin);
 
                 redirectToAdminDashboard();
-                UIUtils.info(new CreateUser(), "Logged in sucessfully!");
+                UIUtils.info(new CoursesScreen(), "Logged in sucessfully!");
             } catch (Exception ex) {
                 Logger.getLogger(AdminLoginController.class.getName()).log(Level.SEVERE, null, ex);
                 UIUtils.error(userView, ex.getMessage());
@@ -79,9 +80,9 @@ public class AdminLoginController {
     }
 
     public void redirectToAdminDashboard() {
-        CreateUser createUserView = new CreateUser();
-        CreateUserController createUserController = new CreateUserController(createUserView);
+        CoursesScreen createUserView = new CoursesScreen();
+        CoursesController coursesController = new CoursesController(createUserView);
         close();
-        createUserController.open();
+        coursesController.open();
     }
 }
