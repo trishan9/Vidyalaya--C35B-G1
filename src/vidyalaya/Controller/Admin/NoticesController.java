@@ -22,17 +22,17 @@ import vidyalaya.View.Dashboard.Admin.UsersScreen;
 
 /**
  *
- * @author trishan9
+ * @author trish
  */
-public class CoursesController {
+public class NoticesController {
 
     private final AuthDAO authDAO = new AuthDAOImplementation();
-    private final CoursesScreen userView;
+    private final NoticesScreen userView;
 
-    public CoursesController(CoursesScreen userView) {
+    public NoticesController(NoticesScreen userView) {
         this.userView = userView;
+        userView.addCoursesRedirectListener(new CoursesRedirectListener());
         userView.addRoutineRedirectListener(new RoutineRedirectListener());
-        userView.addNoticesRedirectListener(new NoticesRedirectListener());
         userView.addAttendanceRedirectListener(new AttendanceRedirectListener());
         userView.addUsersRedirectListener(new UsersRedirectListener());
         userView.addSettingsRedirectListener(new SettingsRedirectListener());
@@ -47,6 +47,17 @@ public class CoursesController {
         this.userView.dispose();
     }
 
+    class CoursesRedirectListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            CoursesScreen coursesView = new CoursesScreen();
+            CoursesController coursesController = new CoursesController(coursesView);
+            close();
+            coursesController.open();
+        }
+    }
+    
     class RoutineRedirectListener implements ActionListener {
 
         @Override
@@ -55,17 +66,6 @@ public class CoursesController {
             RoutineController routineController = new RoutineController(routineView);
             close();
             routineController.open();
-        }
-    }
-
-    class NoticesRedirectListener implements ActionListener {
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            NoticesScreen noticesView = new NoticesScreen();
-            NoticesController noticesController = new NoticesController(noticesView);
-            close();
-            noticesController.open();
         }
     }
 

@@ -4,6 +4,10 @@
  */
 package vidyalaya.View.Dashboard.Admin;
 
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import vidyalaya.Model.AdminData;
 
 import vidyalaya.SessionManagement.AdminSession;
@@ -46,6 +50,61 @@ public class SettingsScreen extends javax.swing.JFrame {
         AdminData currentUser = AdminSession.getCurrentUser();
         lblName.setText(currentUser.getName());
         lblId.setText(currentUser.getUsername());
+    }
+
+    public void addCoursesRedirectListener(ActionListener listener) {
+        menuCourses.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                listener.actionPerformed(null);
+            }
+        });
+    }
+
+    public void addRoutineRedirectListener(ActionListener listener) {
+        menuRoutine.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                listener.actionPerformed(null);
+            }
+        });
+    }
+
+    public void addNoticesRedirectListener(ActionListener listener) {
+        menuNotices.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                listener.actionPerformed(null);
+            }
+        });
+    }
+
+    public void addAttendanceRedirectListener(ActionListener listener) {
+        menuAttendance.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                listener.actionPerformed(null);
+            }
+        });
+    }
+
+    public void addUsersRedirectListener(ActionListener listener) {
+        menuUsers.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                listener.actionPerformed(null);
+            }
+        });
+    }
+
+    public void addLogoutListener(ActionListener listener) {
+        menuLogout.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                listener.actionPerformed(null);
+            }
+            
+        });
     }
 
     /**

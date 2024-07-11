@@ -22,16 +22,16 @@ import vidyalaya.View.Dashboard.Admin.UsersScreen;
 
 /**
  *
- * @author trishan9
+ * @author trish
  */
-public class CoursesController {
-
+public class RoutineController {
+    
     private final AuthDAO authDAO = new AuthDAOImplementation();
-    private final CoursesScreen userView;
+    private final RoutineScreen userView;
 
-    public CoursesController(CoursesScreen userView) {
+    public RoutineController(RoutineScreen userView) {
         this.userView = userView;
-        userView.addRoutineRedirectListener(new RoutineRedirectListener());
+        userView.addCoursesRedirectListener(new CoursesRedirectListener());
         userView.addNoticesRedirectListener(new NoticesRedirectListener());
         userView.addAttendanceRedirectListener(new AttendanceRedirectListener());
         userView.addUsersRedirectListener(new UsersRedirectListener());
@@ -47,14 +47,13 @@ public class CoursesController {
         this.userView.dispose();
     }
 
-    class RoutineRedirectListener implements ActionListener {
-
+    class CoursesRedirectListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            RoutineScreen routineView = new RoutineScreen();
-            RoutineController routineController = new RoutineController(routineView);
+            CoursesScreen coursesView = new CoursesScreen();
+            CoursesController coursesController = new CoursesController(coursesView);
             close();
-            routineController.open();
+            coursesController.open();
         }
     }
 

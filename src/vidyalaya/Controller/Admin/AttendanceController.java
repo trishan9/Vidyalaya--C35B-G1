@@ -22,18 +22,18 @@ import vidyalaya.View.Dashboard.Admin.UsersScreen;
 
 /**
  *
- * @author trishan9
+ * @author trish
  */
-public class CoursesController {
+public class AttendanceController {
 
     private final AuthDAO authDAO = new AuthDAOImplementation();
-    private final CoursesScreen userView;
+    private final AttendanceScreen userView;
 
-    public CoursesController(CoursesScreen userView) {
+    public AttendanceController(AttendanceScreen userView) {
         this.userView = userView;
+        userView.addCoursesRedirectListener(new CoursesRedirectListener());
         userView.addRoutineRedirectListener(new RoutineRedirectListener());
         userView.addNoticesRedirectListener(new NoticesRedirectListener());
-        userView.addAttendanceRedirectListener(new AttendanceRedirectListener());
         userView.addUsersRedirectListener(new UsersRedirectListener());
         userView.addSettingsRedirectListener(new SettingsRedirectListener());
         userView.addLogoutListener(new LogoutListener());
@@ -45,6 +45,17 @@ public class CoursesController {
 
     public void close() {
         this.userView.dispose();
+    }
+
+    class CoursesRedirectListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            CoursesScreen coursesView = new CoursesScreen();
+            CoursesController coursesController = new CoursesController(coursesView);
+            close();
+            coursesController.open();
+        }
     }
 
     class RoutineRedirectListener implements ActionListener {
@@ -66,17 +77,6 @@ public class CoursesController {
             NoticesController noticesController = new NoticesController(noticesView);
             close();
             noticesController.open();
-        }
-    }
-
-    class AttendanceRedirectListener implements ActionListener {
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            AttendanceScreen attendanceView = new AttendanceScreen();
-            AttendanceController attendanceController = new AttendanceController(attendanceView);
-            close();
-            attendanceController.open();
         }
     }
 

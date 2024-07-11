@@ -22,19 +22,19 @@ import vidyalaya.View.Dashboard.Admin.UsersScreen;
 
 /**
  *
- * @author trishan9
+ * @author trish
  */
-public class CoursesController {
-
+public class UsersController {
+    
     private final AuthDAO authDAO = new AuthDAOImplementation();
-    private final CoursesScreen userView;
+    private final UsersScreen userView;
 
-    public CoursesController(CoursesScreen userView) {
+    public UsersController(UsersScreen userView) {
         this.userView = userView;
+        userView.addCoursesRedirectListener(new CoursesRedirectListener());
         userView.addRoutineRedirectListener(new RoutineRedirectListener());
         userView.addNoticesRedirectListener(new NoticesRedirectListener());
         userView.addAttendanceRedirectListener(new AttendanceRedirectListener());
-        userView.addUsersRedirectListener(new UsersRedirectListener());
         userView.addSettingsRedirectListener(new SettingsRedirectListener());
         userView.addLogoutListener(new LogoutListener());
     }
@@ -45,6 +45,17 @@ public class CoursesController {
 
     public void close() {
         this.userView.dispose();
+    }
+
+    class CoursesRedirectListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            CoursesScreen coursesView = new CoursesScreen();
+            CoursesController coursesController = new CoursesController(coursesView);
+            close();
+            coursesController.open();
+        }
     }
 
     class RoutineRedirectListener implements ActionListener {
@@ -77,17 +88,6 @@ public class CoursesController {
             AttendanceController attendanceController = new AttendanceController(attendanceView);
             close();
             attendanceController.open();
-        }
-    }
-
-    class UsersRedirectListener implements ActionListener {
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            UsersScreen usersView = new UsersScreen();
-            UsersController usersController = new UsersController(usersView);
-            close();
-            usersController.open();
         }
     }
 

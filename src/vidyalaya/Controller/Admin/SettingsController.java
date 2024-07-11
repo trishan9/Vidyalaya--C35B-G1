@@ -22,20 +22,20 @@ import vidyalaya.View.Dashboard.Admin.UsersScreen;
 
 /**
  *
- * @author trishan9
+ * @author trish
  */
-public class CoursesController {
-
+public class SettingsController {
+        
     private final AuthDAO authDAO = new AuthDAOImplementation();
-    private final CoursesScreen userView;
+    private final SettingsScreen userView;
 
-    public CoursesController(CoursesScreen userView) {
+    public SettingsController(SettingsScreen userView) {
         this.userView = userView;
+        userView.addCoursesRedirectListener(new CoursesRedirectListener());
         userView.addRoutineRedirectListener(new RoutineRedirectListener());
         userView.addNoticesRedirectListener(new NoticesRedirectListener());
         userView.addAttendanceRedirectListener(new AttendanceRedirectListener());
         userView.addUsersRedirectListener(new UsersRedirectListener());
-        userView.addSettingsRedirectListener(new SettingsRedirectListener());
         userView.addLogoutListener(new LogoutListener());
     }
 
@@ -45,6 +45,17 @@ public class CoursesController {
 
     public void close() {
         this.userView.dispose();
+    }
+
+    class CoursesRedirectListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            CoursesScreen coursesView = new CoursesScreen();
+            CoursesController coursesController = new CoursesController(coursesView);
+            close();
+            coursesController.open();
+        }
     }
 
     class RoutineRedirectListener implements ActionListener {
@@ -88,17 +99,6 @@ public class CoursesController {
             UsersController usersController = new UsersController(usersView);
             close();
             usersController.open();
-        }
-    }
-
-    class SettingsRedirectListener implements ActionListener {
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            SettingsScreen settingsView = new SettingsScreen();
-            SettingsController settingsController = new SettingsController(settingsView);
-            close();
-            settingsController.open();
         }
     }
 
