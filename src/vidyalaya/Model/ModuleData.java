@@ -22,6 +22,12 @@ public class ModuleData {
         this.name = name;
     }
 
+    public ModuleData(int code, int admin_id, String name) {
+        this.code = code;
+        this.admin_id = admin_id;
+        this.name = name;
+    }
+
     public ModuleData(ResultSet result) throws SQLException {
         this.code = result.getInt("code");
         this.admin_id = result.getInt("admin_id");
