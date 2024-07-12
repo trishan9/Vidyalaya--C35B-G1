@@ -169,12 +169,11 @@ public class AuthDAOImplementation implements AuthDAO {
     public void registerStudent(StudentData registerModel) throws Exception {
         Connection dbConnection = mysql.openConnection();
 
-        final PreparedStatement statement = dbConnection.prepareStatement("INSERT INTO student (admin_id,course_id,name,email,password) VALUES (?,?,?,?)");
+        final PreparedStatement statement = dbConnection.prepareStatement("INSERT INTO student (admin_id,name,email,password) VALUES (?,?,?,?)");
         statement.setInt(1, registerModel.getAdminId());
-        statement.setInt(2, registerModel.getCourseId());
-        statement.setString(3, registerModel.getName());
-        statement.setString(4, registerModel.getEmail());
-        statement.setString(5, registerModel.getPassword());
+        statement.setString(2, registerModel.getName());
+        statement.setString(3, registerModel.getEmail());
+        statement.setString(4, registerModel.getPassword());
 
         try {
             boolean doesExist = checkIfUserExists(dbConnection, "student", "email", registerModel.getEmail());

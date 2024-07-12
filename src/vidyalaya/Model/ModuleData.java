@@ -14,17 +14,17 @@ import java.sql.SQLException;
 public class ModuleData {
 
     private int code;
-    private int course_id;
+    private int admin_id;
     private String name;
 
-    public ModuleData(int course_id, String name) {
-        this.course_id = course_id;
+    public ModuleData(int admin_id, String name) {
+        this.admin_id = admin_id;
         this.name = name;
     }
 
     public ModuleData(ResultSet result) throws SQLException {
         this.code = result.getInt("code");
-        this.course_id = result.getInt("course_id");
+        this.admin_id = result.getInt("admin_id");
         this.name = result.getString("name");
     }
 
@@ -36,12 +36,12 @@ public class ModuleData {
         this.code = code;
     }
 
-    public int getCourseId() {
-        return course_id;
+    public int getAdminId() {
+        return admin_id;
     }
 
-    public void setCourseId(int course_id) {
-        this.course_id = course_id;
+    public void setAdminId(int admin_id) {
+        this.admin_id = admin_id;
     }
 
     public String getName() {
