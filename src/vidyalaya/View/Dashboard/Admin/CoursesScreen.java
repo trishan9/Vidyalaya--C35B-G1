@@ -160,7 +160,6 @@ public class CoursesScreen extends javax.swing.JFrame {
         logOut = new javax.swing.JPanel();
         menuLogout = new javax.swing.JLabel();
         iconLogout = new javax.swing.JLabel();
-        pnlRIght = new javax.swing.JPanel();
         pnlRight = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         pnlCourses = new javax.swing.JPanel();
@@ -466,7 +465,7 @@ public class CoursesScreen extends javax.swing.JFrame {
                 .addComponent(navSettings, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(80, 80, 80)
                 .addComponent(logOut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(3176, Short.MAX_VALUE))
         );
 
         pnlRight.setBackground(new java.awt.Color(255, 255, 255));
@@ -474,7 +473,7 @@ public class CoursesScreen extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel3.setText("Courses");
 
-        pnlCourses.setLayout(new java.awt.GridLayout(310, 1));
+        pnlCourses.setLayout(new java.awt.GridLayout(0, 1));
 
         pnlCourse.setBackground(new java.awt.Color(255, 255, 255));
         pnlCourse.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(222, 222, 222)));
@@ -646,23 +645,6 @@ public class CoursesScreen extends javax.swing.JFrame {
                 .addGap(0, 0, 0))
         );
 
-        javax.swing.GroupLayout pnlRIghtLayout = new javax.swing.GroupLayout(pnlRIght);
-        pnlRIght.setLayout(pnlRIghtLayout);
-        pnlRIghtLayout.setHorizontalGroup(
-            pnlRIghtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlRIghtLayout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(pnlRight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
-        );
-        pnlRIghtLayout.setVerticalGroup(
-            pnlRIghtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlRIghtLayout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(pnlRight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
-        );
-
         javax.swing.GroupLayout pnlCenterLayout = new javax.swing.GroupLayout(pnlCenter);
         pnlCenter.setLayout(pnlCenterLayout);
         pnlCenterLayout.setHorizontalGroup(
@@ -670,15 +652,15 @@ public class CoursesScreen extends javax.swing.JFrame {
             .addGroup(pnlCenterLayout.createSequentialGroup()
                 .addComponent(pnlSideNav, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(pnlRIght, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlRight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(66, Short.MAX_VALUE))
         );
         pnlCenterLayout.setVerticalGroup(
             pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pnlSideNav, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(pnlCenterLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(pnlRIght, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(pnlRight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -694,7 +676,7 @@ public class CoursesScreen extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(pnlNav, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(pnlCenter, javax.swing.GroupLayout.DEFAULT_SIZE, 32629, Short.MAX_VALUE)
+                .addComponent(pnlCenter, javax.swing.GroupLayout.DEFAULT_SIZE, 3920, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
 
@@ -789,7 +771,6 @@ public class CoursesScreen extends javax.swing.JFrame {
     private javax.swing.JPanel pnlCourse1;
     private javax.swing.JPanel pnlCourses;
     private javax.swing.JPanel pnlNav;
-    private javax.swing.JPanel pnlRIght;
     private javax.swing.JPanel pnlRight;
     private javax.swing.JPanel pnlSideNav;
     // End of variables declaration//GEN-END:variables
