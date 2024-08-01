@@ -52,7 +52,7 @@ public class AttendanceController {
         @Override
         public void actionPerformed(ActionEvent e) {
             CoursesScreen coursesView = new CoursesScreen();
-            CoursesController coursesController = new CoursesController(coursesView);
+            vidyalaya.Controller.Admin.CoursesController coursesController = new vidyalaya.Controller.Admin.CoursesController(coursesView);
             close();
             coursesController.open();
         }
@@ -63,7 +63,7 @@ public class AttendanceController {
         @Override
         public void actionPerformed(ActionEvent e) {
             RoutineScreen routineView = new RoutineScreen();
-            RoutineController routineController = new RoutineController(routineView);
+            vidyalaya.Controller.Admin.RoutineController routineController = new vidyalaya.Controller.Admin.RoutineController(routineView);
             close();
             routineController.open();
         }
@@ -74,7 +74,7 @@ public class AttendanceController {
         @Override
         public void actionPerformed(ActionEvent e) {
             NoticesScreen noticesView = new NoticesScreen();
-            NoticesController noticesController = new NoticesController(noticesView);
+            vidyalaya.Controller.Admin.NoticesController noticesController = new vidyalaya.Controller.Admin.NoticesController(noticesView);
             close();
             noticesController.open();
         }
@@ -85,7 +85,7 @@ public class AttendanceController {
         @Override
         public void actionPerformed(ActionEvent e) {
             UsersScreen usersView = new UsersScreen();
-            UsersController usersController = new UsersController(usersView);
+            vidyalaya.Controller.Admin.UsersController usersController = new vidyalaya.Controller.Admin.UsersController(usersView);
             close();
             usersController.open();
         }
@@ -96,7 +96,7 @@ public class AttendanceController {
         @Override
         public void actionPerformed(ActionEvent e) {
             SettingsScreen settingsView = new SettingsScreen();
-            SettingsController settingsController = new SettingsController(settingsView);
+            vidyalaya.Controller.Admin.SettingsController settingsController = new vidyalaya.Controller.Admin.SettingsController(settingsView);
             close();
             settingsController.open();
         }

@@ -50,7 +50,7 @@ public class SettingsController {
         @Override
         public void actionPerformed(ActionEvent e) {
             MyCoursesScreen coursesView = new MyCoursesScreen();
-            MyCoursesController coursesController = new MyCoursesController(coursesView);
+            vidyalaya.Controller.Teacher.MyCoursesController coursesController = new vidyalaya.Controller.Teacher.MyCoursesController(coursesView);
             close();
             coursesController.open();
         }
@@ -61,7 +61,7 @@ public class SettingsController {
         @Override
         public void actionPerformed(ActionEvent e) {
             RoutineScreen routineView = new RoutineScreen();
-            RoutineController routineController = new RoutineController(routineView);
+            vidyalaya.Controller.Teacher.RoutineController routineController = new vidyalaya.Controller.Teacher.RoutineController(routineView);
             close();
             routineController.open();
         }
@@ -72,7 +72,7 @@ public class SettingsController {
         @Override
         public void actionPerformed(ActionEvent e) {
             NoticesScreen noticesView = new NoticesScreen();
-            NoticesController noticesController = new NoticesController(noticesView);
+            vidyalaya.Controller.Teacher.NoticesController noticesController = new vidyalaya.Controller.Teacher.NoticesController(noticesView);
             close();
             noticesController.open();
         }
@@ -83,7 +83,7 @@ public class SettingsController {
         @Override
         public void actionPerformed(ActionEvent e) {
             AttendanceScreen attendanceView = new AttendanceScreen();
-            AttendanceController attendanceController = new AttendanceController(attendanceView);
+            vidyalaya.Controller.Teacher.AttendanceController attendanceController = new vidyalaya.Controller.Teacher.AttendanceController(attendanceView);
             close();
             attendanceController.open();
         }

@@ -3,48 +3,20 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/View/Dashboard/Admin/SettingsScreen.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/DAO/AuthDAO/AuthDAO.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Controller/CreateAdminController.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/View/Dashboard/Teacher/SettingsScreen.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Model/ModuleData.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/View/Dashboard/Student/MyCoursesScreen.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/View/AdminLogin.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/View/Dashboard/Admin/NoticesScreen.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Controller/AdminLoginController.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/DAO/AuthDAO/AuthDAOImplementation.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Controller/Teacher/AttendanceController.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/View/Dashboard/Teacher/RoutineScreen.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/View/Dashboard/Admin/AttendanceScreen.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Controller/Admin/UsersController.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/View/Dashboard/Student/RoutineScreen.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/View/Dashboard/Teacher/NoticesScreen.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/View/Dashboard/Student/SettingsScreen.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Controller/Student/SettingsController.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Controller/Teacher/NoticesController.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Components/CourseCard.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Controller/Student/MyCoursesController.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/View/Dashboard/Teacher/MyCoursesScreen.java</file>
             <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Controller/Admin/NoticesController.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Controller/Student/RoutineController.java</file>
             <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Controller/Admin/AttendanceController.java</file>
             <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Controller/Student/NoticesController.java</file>
             <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Controller/Admin/RoutineController.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/View/Dashboard/Admin/CoursesScreen.java</file>
             <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Controller/Teacher/RoutineController.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/View/Dashboard/Student/AttendanceScreen.java</file>
             <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Controller/Admin/CoursesController.java</file>
             <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Controller/Admin/SettingsController.java</file>
             <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Controller/Student/AttendanceController.java</file>
             <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Controller/Teacher/SettingsController.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/View/Dashboard/Teacher/AttendanceScreen.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Controller/UserLoginController.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/View/UserLogin.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/View/Dashboard/Admin/RoutineScreen.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/View/Dashboard/Admin/UsersScreen.java</file>
+            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Controller/Teacher/AttendanceController.java</file>
+            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/View/Dashboard/Admin/AttendanceScreen.java</file>
+            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Controller/Admin/UsersController.java</file>
             <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Controller/Teacher/MyCoursesController.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Utils/CallbackFn.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/View/Dashboard/Student/NoticesScreen.java</file>
+            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Controller/Teacher/NoticesController.java</file>
         </group>
     </open-files>
 </project-private>
