@@ -23,16 +23,17 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="pnlNav" alignment="0" min="-2" pref="1400" max="-2" attributes="0"/>
-          <Component id="pnlCenter" alignment="0" min="-2" pref="1400" max="-2" attributes="0"/>
+          <Component id="pnlNav" min="-2" pref="1400" max="-2" attributes="0"/>
+          <Component id="pnlCenter" min="-2" pref="1400" max="-2" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <Component id="pnlNav" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
-              <Component id="pnlCenter" pref="874" max="32767" attributes="0"/>
+              <Component id="pnlCenter" pref="3920" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -58,12 +59,12 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
+              <Group type="102" attributes="0">
                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jLabelHead" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="1216" max="32767" attributes="0"/>
+                  <EmptySpace pref="1212" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -72,7 +73,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                   <Component id="jLabelHead" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="20" max="32767" attributes="0"/>
+                  <EmptySpace pref="19" max="32767" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
@@ -86,7 +87,7 @@
         <Component class="javax.swing.JLabel" name="jLabelHead">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="sansserif" size="24" style="1"/>
+              <Font name="sansserif" size="25" style="1"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="64" green="a2" red="0" type="rgb"/>
@@ -120,7 +121,7 @@
                   <Component id="pnlSideNav" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="pnlRight" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="62" max="32767" attributes="0"/>
+                  <EmptySpace pref="25" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -156,20 +157,20 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="navCourses" alignment="0" pref="212" max="32767" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
+                          <Component id="navCourses" pref="224" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
                               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="lblName" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblId" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblRole" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblName" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblId" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblRole" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <Component id="navRoutine" alignment="1" pref="212" max="32767" attributes="0"/>
-                          <Component id="navNotices" alignment="1" pref="212" max="32767" attributes="0"/>
-                          <Component id="navAttendance" alignment="0" pref="212" max="32767" attributes="0"/>
-                          <Component id="navSettings" alignment="0" pref="212" max="32767" attributes="0"/>
+                          <Component id="navRoutine" alignment="1" pref="224" max="32767" attributes="0"/>
+                          <Component id="navNotices" alignment="1" pref="224" max="32767" attributes="0"/>
+                          <Component id="navAttendance" alignment="0" pref="224" max="32767" attributes="0"/>
+                          <Component id="navSettings" alignment="0" pref="224" max="32767" attributes="0"/>
                           <Component id="logOut" alignment="0" min="-2" pref="145" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="19" max="32767" attributes="0"/>
@@ -178,9 +179,9 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -205,7 +206,7 @@
                       <Component id="navSettings" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="158" max="-2" attributes="0"/>
                       <Component id="logOut" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="130" max="32767" attributes="0"/>
+                      <EmptySpace pref="3176" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -220,26 +221,35 @@
             </Component>
             <Component class="javax.swing.JLabel" name="lblName">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="0"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Trishan Wagle"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblId">
               <Properties>
-                <Property name="text" type="java.lang.String" value="ST-230352"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="TE-530352"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblRole">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="0"/>
+                </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="82" green="82" red="82" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Student"/>
+                <Property name="text" type="java.lang.String" value="Teacher"/>
               </Properties>
             </Component>
             <Container class="javax.swing.JPanel" name="navCourses">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                  <Color blue="83" green="d7" red="4d" type="rgb"/>
                 </Property>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
@@ -270,8 +280,8 @@
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="iconCourses" alignment="0" pref="50" max="32767" attributes="0"/>
-                      <Component id="menuCourses" alignment="0" max="32767" attributes="0"/>
+                      <Component id="iconCourses" pref="50" max="32767" attributes="0"/>
+                      <Component id="menuCourses" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -347,7 +357,7 @@
             <Container class="javax.swing.JPanel" name="navNotices">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="83" green="d7" red="4d" type="rgb"/>
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
@@ -575,7 +585,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="970" max="-2" attributes="0"/>
@@ -584,7 +594,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
@@ -598,7 +608,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="24" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Notices S"/>
+                <Property name="text" type="java.lang.String" value="My Courses"/>
               </Properties>
             </Component>
           </SubComponents>

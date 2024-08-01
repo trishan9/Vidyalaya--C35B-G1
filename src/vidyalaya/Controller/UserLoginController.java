@@ -4,7 +4,6 @@
  */
 package vidyalaya.Controller;
 
-import vidyalaya.Controller.Student.MyCoursesController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -17,7 +16,6 @@ import vidyalaya.DAO.AuthDAO.AuthDAOImplementation;
 import vidyalaya.Model.LoginRequest;
 import vidyalaya.Utils.UIUtils;
 
-import vidyalaya.View.Dashboard.Student.MyCoursesScreen;
 import vidyalaya.View.UserLogin;
 
 /**
@@ -77,12 +75,12 @@ public class UserLoginController {
             case "student":
                 authDAO.loginStudent(user);
                 redirectToStudentDashboard();
-                UIUtils.info(new MyCoursesScreen(), "Logged in successfully as student!");
+                UIUtils.info(new vidyalaya.View.Dashboard.Student.MyCoursesScreen(), "Logged in successfully as student!");
                 break;
             case "teacher":
                 authDAO.loginTeacher(user);
                 redirectToTeacherDashboard();
-                UIUtils.info(new MyCoursesScreen(), "Logged in successfully as teacher!");
+                UIUtils.info(new vidyalaya.View.Dashboard.Teacher.MyCoursesScreen(), "Logged in successfully as teacher!");
                 break;
             default:
                 throw new IllegalArgumentException("Invalid user type: " + userType);
@@ -90,15 +88,15 @@ public class UserLoginController {
     }
 
     public void redirectToStudentDashboard() {
-        MyCoursesScreen myCoursesView = new MyCoursesScreen();
-        MyCoursesController myCoursesController = new MyCoursesController(myCoursesView);
+        vidyalaya.View.Dashboard.Student.MyCoursesScreen myCoursesView = new vidyalaya.View.Dashboard.Student.MyCoursesScreen();
+        vidyalaya.Controller.Student.MyCoursesController myCoursesController = new vidyalaya.Controller.Student.MyCoursesController(myCoursesView);
         close();
         myCoursesController.open();
     }
 
     public void redirectToTeacherDashboard() {
-        MyCoursesScreen myCoursesView = new MyCoursesScreen();
-        MyCoursesController myCoursesController = new MyCoursesController(myCoursesView);
+        vidyalaya.View.Dashboard.Teacher.MyCoursesScreen myCoursesView = new vidyalaya.View.Dashboard.Teacher.MyCoursesScreen();
+        vidyalaya.Controller.Teacher.MyCoursesController myCoursesController = new vidyalaya.Controller.Teacher.MyCoursesController(myCoursesView);
         close();
         myCoursesController.open();
     }

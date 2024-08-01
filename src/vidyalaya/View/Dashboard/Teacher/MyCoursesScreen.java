@@ -2,15 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package vidyalaya.View.Dashboard.Student;
+package vidyalaya.View.Dashboard.Teacher;
 
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import vidyalaya.Model.StudentData;
+import vidyalaya.Model.TeacherData;
 
-import vidyalaya.SessionManagement.StudentSession;
+import vidyalaya.SessionManagement.TeacherSession;
 
 import vidyalaya.Utils.UIUtils;
 
@@ -26,7 +26,7 @@ public class MyCoursesScreen extends javax.swing.JFrame {
     public MyCoursesScreen() {
         initComponents();
 
-        setTitle("My Courses - Vidyalaya");
+        setTitle("My Courses - Vidyalaya Teacher");
         setSize(1400, 954);
         setLocationRelativeTo(null);
         setResizable(false);
@@ -56,9 +56,9 @@ public class MyCoursesScreen extends javax.swing.JFrame {
 //        UIUtils.setCustomFont(courseCode, 17f);
 //        UIUtils.setCustomFont(courseCode1, 17f);
 
-        StudentData currentUser = StudentSession.getCurrentUser();
+        TeacherData currentUser = TeacherSession.getCurrentUser();
         lblName.setText(currentUser.getName());
-        lblId.setText(currentUser.getStudentId());
+        lblId.setText(currentUser.getTeacherId());
     }
 
     public void addRoutineRedirectListener(ActionListener listener) {
@@ -192,11 +192,11 @@ public class MyCoursesScreen extends javax.swing.JFrame {
         lblName.setText("Trishan Wagle");
 
         lblId.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblId.setText("ST-230352");
+        lblId.setText("TE-530352");
 
         lblRole.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblRole.setForeground(new java.awt.Color(130, 130, 130));
-        lblRole.setText("Student");
+        lblRole.setText("Teacher");
 
         navCourses.setBackground(new java.awt.Color(77, 215, 131));
         navCourses.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
@@ -409,7 +409,7 @@ public class MyCoursesScreen extends javax.swing.JFrame {
         pnlRight.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel3.setText("My Courses S");
+        jLabel3.setText("My Courses");
 
         javax.swing.GroupLayout pnlRightLayout = new javax.swing.GroupLayout(pnlRight);
         pnlRight.setLayout(pnlRightLayout);
@@ -436,7 +436,7 @@ public class MyCoursesScreen extends javax.swing.JFrame {
                 .addComponent(pnlSideNav, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(pnlRight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         pnlCenterLayout.setVerticalGroup(
             pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

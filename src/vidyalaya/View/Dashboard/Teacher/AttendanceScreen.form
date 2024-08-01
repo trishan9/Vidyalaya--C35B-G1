@@ -120,7 +120,7 @@
                   <Component id="pnlSideNav" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="pnlRight" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="62" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="40" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -225,7 +225,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="lblId">
               <Properties>
-                <Property name="text" type="java.lang.String" value="ST-230352"/>
+                <Property name="text" type="java.lang.String" value="TE-530352"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblRole">
@@ -233,7 +233,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="82" green="82" red="82" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Student"/>
+                <Property name="text" type="java.lang.String" value="Teacher"/>
               </Properties>
             </Component>
             <Container class="javax.swing.JPanel" name="navCourses">
@@ -347,7 +347,7 @@
             <Container class="javax.swing.JPanel" name="navNotices">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="83" green="d7" red="4d" type="rgb"/>
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
@@ -401,7 +401,7 @@
             <Container class="javax.swing.JPanel" name="navAttendance">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                  <Color blue="83" green="d7" red="4d" type="rgb"/>
                 </Property>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
@@ -598,7 +598,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="24" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Notices S"/>
+                <Property name="text" type="java.lang.String" value="Attendance"/>
               </Properties>
             </Component>
           </SubComponents>

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package vidyalaya.Controller.Student;
+package vidyalaya.Controller.Teacher;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,27 +13,27 @@ import vidyalaya.DAO.AuthDAO.AuthDAO;
 import vidyalaya.DAO.AuthDAO.AuthDAOImplementation;
 
 import vidyalaya.View.UserLogin;
-import vidyalaya.View.Dashboard.Student.AttendanceScreen;
-import vidyalaya.View.Dashboard.Student.MyCoursesScreen;
-import vidyalaya.View.Dashboard.Student.NoticesScreen;
-import vidyalaya.View.Dashboard.Student.RoutineScreen;
-import vidyalaya.View.Dashboard.Student.SettingsScreen;
+import vidyalaya.View.Dashboard.Teacher.AttendanceScreen;
+import vidyalaya.View.Dashboard.Teacher.MyCoursesScreen;
+import vidyalaya.View.Dashboard.Teacher.NoticesScreen;
+import vidyalaya.View.Dashboard.Teacher.RoutineScreen;
+import vidyalaya.View.Dashboard.Teacher.SettingsScreen;
 
 /**
  *
  * @author trish
  */
-public class AttendanceController {
-
+public class SettingsController {
+        
     private final AuthDAO authDAO = new AuthDAOImplementation();
-    private final AttendanceScreen userView;
+    private final SettingsScreen userView;
 
-    public AttendanceController(AttendanceScreen userView) {
+    public SettingsController(SettingsScreen userView) {
         this.userView = userView;
         userView.addCoursesRedirectListener(new CoursesRedirectListener());
         userView.addRoutineRedirectListener(new RoutineRedirectListener());
         userView.addNoticesRedirectListener(new NoticesRedirectListener());
-        userView.addSettingsRedirectListener(new SettingsRedirectListener());
+        userView.addAttendanceRedirectListener(new AttendanceRedirectListener());
         userView.addLogoutListener(new LogoutListener());
     }
 
@@ -50,7 +50,7 @@ public class AttendanceController {
         @Override
         public void actionPerformed(ActionEvent e) {
             MyCoursesScreen coursesView = new MyCoursesScreen();
-            vidyalaya.Controller.Student.MyCoursesController coursesController = new vidyalaya.Controller.Student.MyCoursesController(coursesView);
+            MyCoursesController coursesController = new MyCoursesController(coursesView);
             close();
             coursesController.open();
         }
@@ -61,7 +61,7 @@ public class AttendanceController {
         @Override
         public void actionPerformed(ActionEvent e) {
             RoutineScreen routineView = new RoutineScreen();
-            vidyalaya.Controller.Student.RoutineController routineController = new vidyalaya.Controller.Student.RoutineController(routineView);
+            RoutineController routineController = new RoutineController(routineView);
             close();
             routineController.open();
         }
@@ -72,20 +72,20 @@ public class AttendanceController {
         @Override
         public void actionPerformed(ActionEvent e) {
             NoticesScreen noticesView = new NoticesScreen();
-            vidyalaya.Controller.Student.NoticesController noticesController = new vidyalaya.Controller.Student.NoticesController(noticesView);
+            NoticesController noticesController = new NoticesController(noticesView);
             close();
             noticesController.open();
         }
     }
 
-    class SettingsRedirectListener implements ActionListener {
+    class AttendanceRedirectListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            SettingsScreen settingsView = new SettingsScreen();
-            vidyalaya.Controller.Student.SettingsController settingsController = new vidyalaya.Controller.Student.SettingsController(settingsView);
+            AttendanceScreen attendanceView = new AttendanceScreen();
+            AttendanceController attendanceController = new AttendanceController(attendanceView);
             close();
-            settingsController.open();
+            attendanceController.open();
         }
     }
 
