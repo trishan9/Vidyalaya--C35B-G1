@@ -53,6 +53,7 @@ public class CoursesScreen extends javax.swing.JFrame {
         UIUtils.setCustomFont(menuSettings, 17f);
         UIUtils.setCustomFont(menuLogout, 17f);
         UIUtils.setCustomFont(jLabel3, 23f);
+        UIUtils.setCustomFont(createCourseBtn, 17f);
 //        UIUtils.setCustomFont(courseTitleHeader, 15f);
 //        UIUtils.setCustomFont(courseTitleHeader1, 15f);
 //        UIUtils.setCustomFont(courseTitle, 17f);
@@ -65,6 +66,15 @@ public class CoursesScreen extends javax.swing.JFrame {
         AdminData currentUser = AdminSession.getCurrentUser();
         lblName.setText(currentUser.getName());
         lblId.setText(currentUser.getUsername());
+    }
+
+    public void addCreateCourseListener(ActionListener listener) {
+        createCourseBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                listener.actionPerformed(null);
+            }
+        });
     }
 
     public void addRoutineRedirectListener(ActionListener listener) {
@@ -162,6 +172,9 @@ public class CoursesScreen extends javax.swing.JFrame {
         iconLogout = new javax.swing.JLabel();
         pnlRight = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
+        createCourse = new javax.swing.JPanel();
+        createCourseBtn = new javax.swing.JLabel();
+        iconUsers1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -458,6 +471,35 @@ public class CoursesScreen extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel3.setText("Courses");
 
+        createCourse.setBackground(new java.awt.Color(24, 97, 191));
+        createCourse.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
+        createCourse.setForeground(new java.awt.Color(255, 255, 255));
+        createCourse.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        createCourse.setPreferredSize(new java.awt.Dimension(100, 52));
+
+        createCourseBtn.setForeground(new java.awt.Color(255, 255, 255));
+        createCourseBtn.setText("Create Course");
+
+        iconUsers1.setBackground(new java.awt.Color(24, 97, 191));
+        iconUsers1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vidyalaya/Assets/icons/Create.png"))); // NOI18N
+
+        javax.swing.GroupLayout createCourseLayout = new javax.swing.GroupLayout(createCourse);
+        createCourse.setLayout(createCourseLayout);
+        createCourseLayout.setHorizontalGroup(
+            createCourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(createCourseLayout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addComponent(iconUsers1)
+                .addGap(18, 18, 18)
+                .addComponent(createCourseBtn)
+                .addContainerGap(67, Short.MAX_VALUE))
+        );
+        createCourseLayout.setVerticalGroup(
+            createCourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(iconUsers1, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+            .addComponent(createCourseBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout pnlRightLayout = new javax.swing.GroupLayout(pnlRight);
         pnlRight.setLayout(pnlRightLayout);
         pnlRightLayout.setHorizontalGroup(
@@ -465,7 +507,9 @@ public class CoursesScreen extends javax.swing.JFrame {
             .addGroup(pnlRightLayout.createSequentialGroup()
                 .addGap(0, 0, 0)
                 .addComponent(jLabel3)
-                .addGap(970, 970, 970))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 777, Short.MAX_VALUE)
+                .addComponent(createCourse, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         pnlRightLayout.setVerticalGroup(
             pnlRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -473,6 +517,9 @@ public class CoursesScreen extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel3)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(pnlRightLayout.createSequentialGroup()
+                .addComponent(createCourse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 12, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout pnlCenterLayout = new javax.swing.GroupLayout(pnlCenter);
@@ -483,7 +530,7 @@ public class CoursesScreen extends javax.swing.JFrame {
                 .addComponent(pnlSideNav, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(pnlRight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
         pnlCenterLayout.setVerticalGroup(
             pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -552,6 +599,8 @@ public class CoursesScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel createCourse;
+    private javax.swing.JLabel createCourseBtn;
     private javax.swing.JLabel iconAttendance;
     private javax.swing.JLabel iconCourses;
     private javax.swing.JLabel iconLogout;
@@ -559,6 +608,7 @@ public class CoursesScreen extends javax.swing.JFrame {
     private javax.swing.JLabel iconRoutine;
     private javax.swing.JLabel iconSettings;
     private javax.swing.JLabel iconUsers;
+    private javax.swing.JLabel iconUsers1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -6,11 +6,13 @@ package vidyalaya.Controller.Admin;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import vidyalaya.Components.Modals.CreateCourseForm;
 
 import vidyalaya.Controller.AdminLoginController;
+import vidyalaya.Controller.CreateCourseController;
 
-import vidyalaya.DAO.AuthDAO.AuthDAO;
-import vidyalaya.DAO.AuthDAO.AuthDAOImplementation;
+import vidyalaya.DAO.ModuleDAO.ModuleDAO;
+import vidyalaya.DAO.ModuleDAO.ModuleDAOImplementation;
 
 import vidyalaya.View.AdminLogin;
 import vidyalaya.View.Dashboard.Admin.AttendanceScreen;
@@ -26,11 +28,12 @@ import vidyalaya.View.Dashboard.Admin.UsersScreen;
  */
 public class CoursesController {
 
-    private final AuthDAO authDAO = new AuthDAOImplementation();
+    private final ModuleDAO moduleDAO = new ModuleDAOImplementation();
     private final CoursesScreen userView;
 
     public CoursesController(CoursesScreen userView) {
         this.userView = userView;
+        userView.addCreateCourseListener(new CreateCourseListener());
         userView.addRoutineRedirectListener(new RoutineRedirectListener());
         userView.addNoticesRedirectListener(new NoticesRedirectListener());
         userView.addAttendanceRedirectListener(new AttendanceRedirectListener());
@@ -45,6 +48,16 @@ public class CoursesController {
 
     public void close() {
         this.userView.dispose();
+    }
+
+    class CreateCourseListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            CreateCourseForm createCourseView = new CreateCourseForm();
+            CreateCourseController createCourseController = new CreateCourseController(createCourseView);
+            createCourseController.open();
+        }
     }
 
     class RoutineRedirectListener implements ActionListener {

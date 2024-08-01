@@ -118,7 +118,7 @@ public class ModuleDAOImplementation implements ModuleDAO {
 
     private boolean checkIfModuleExists(Connection dbConnection, String columnName, String value) throws SQLException {
         final boolean data;
-        try (PreparedStatement statement = dbConnection.prepareStatement("SELECT COUNT(id) as count FROM module" + " WHERE " + columnName + " = ? LIMIT 1")) {
+        try (PreparedStatement statement = dbConnection.prepareStatement("SELECT COUNT(code) as count FROM module" + " WHERE " + columnName + " = ? LIMIT 1")) {
             statement.setString(1, value);
             final ResultSet response = statement.executeQuery();
             data = (response.next() && response.getInt("count") > 0);
@@ -128,7 +128,7 @@ public class ModuleDAOImplementation implements ModuleDAO {
 
     private boolean checkIfModuleExists(Connection dbConnection, String columnName, int value) throws SQLException {
         final boolean data;
-        try (PreparedStatement statement = dbConnection.prepareStatement("SELECT COUNT(id) as count FROM module" + " WHERE " + columnName + " = ? LIMIT 1")) {
+        try (PreparedStatement statement = dbConnection.prepareStatement("SELECT COUNT(code) as count FROM module" + " WHERE " + columnName + " = ? LIMIT 1")) {
             statement.setInt(1, value);
             final ResultSet response = statement.executeQuery();
             data = (response.next() && response.getInt("count") > 0);
