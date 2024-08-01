@@ -12,6 +12,7 @@ import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -38,6 +39,10 @@ public class UIUtils {
         button.setFont(new DMSans(size).getFont());
     }
 
+    public static void setCustomFont(JComboBox comobobox, float size) {
+        comobobox.setFont(new DMSans(size).getFont());
+    }
+
     public static void setCursorPointer(JLabel label) {
         label.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }
@@ -53,7 +58,7 @@ public class UIUtils {
     public static void error(JFrame userView, String message) {
         JOptionPane.showMessageDialog(userView, message, "Error", JOptionPane.ERROR_MESSAGE);
     }
-    
+
     public static void info(JFrame userView, String message) {
         JOptionPane.showMessageDialog(userView, message, "Success", JOptionPane.INFORMATION_MESSAGE);
     }

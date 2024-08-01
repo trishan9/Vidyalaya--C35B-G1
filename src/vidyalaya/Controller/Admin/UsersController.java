@@ -6,6 +6,7 @@ package vidyalaya.Controller.Admin;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import vidyalaya.Components.Modals.CreateNewUserForm;
 
 import vidyalaya.Controller.AdminLoginController;
 
@@ -25,12 +26,13 @@ import vidyalaya.View.Dashboard.Admin.UsersScreen;
  * @author trish
  */
 public class UsersController {
-    
+
     private final AuthDAO authDAO = new AuthDAOImplementation();
     private final UsersScreen userView;
 
     public UsersController(UsersScreen userView) {
         this.userView = userView;
+        userView.addCreateNewUserListener(new CreateNewUserListener());
         userView.addCoursesRedirectListener(new CoursesRedirectListener());
         userView.addRoutineRedirectListener(new RoutineRedirectListener());
         userView.addNoticesRedirectListener(new NoticesRedirectListener());
@@ -45,6 +47,15 @@ public class UsersController {
 
     public void close() {
         this.userView.dispose();
+    }
+
+    class CreateNewUserListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            CreateNewUserForm createNewUserView = new CreateNewUserForm();
+            createNewUserView.setVisible(true);
+        }
     }
 
     class CoursesRedirectListener implements ActionListener {
