@@ -2,15 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package vidyalaya.View.Dashboard.Admin;
+package vidyalaya.View.Dashboard.Student;
 
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import vidyalaya.Model.AdminData;
+import vidyalaya.Model.StudentData;
 
-import vidyalaya.SessionManagement.AdminSession;
+import vidyalaya.SessionManagement.StudentSession;
 
 import vidyalaya.Utils.UIUtils;
 
@@ -18,15 +18,15 @@ import vidyalaya.Utils.UIUtils;
  *
  * @author trish
  */
-public class UsersScreen extends javax.swing.JFrame {
+public class AttendanceScreen extends javax.swing.JFrame {
 
     /**
-     * Creates new form UsersScreen
+     * Creates new form AttendanceScreen
      */
-    public UsersScreen() {
+    public AttendanceScreen() {
         initComponents();
 
-        setTitle("Users - Vidyalaya Admin");
+        setTitle("Attendance - Vidyalaya");
         setSize(1400, 954);
         setLocationRelativeTo(null);
         setResizable(false);
@@ -43,14 +43,13 @@ public class UsersScreen extends javax.swing.JFrame {
         UIUtils.setCustomFont(menuRoutine, 17f);
         UIUtils.setCustomFont(menuNotices, 17f);
         UIUtils.setCustomFont(menuAttendance, 17f);
-        UIUtils.setCustomFont(menuUsers, 17f);
         UIUtils.setCustomFont(menuSettings, 17f);
         UIUtils.setCustomFont(menuLogout, 17f);
         UIUtils.setCustomFont(jLabel3, 23f);
 
-        AdminData currentUser = AdminSession.getCurrentUser();
+        StudentData currentUser = StudentSession.getCurrentUser();
         lblName.setText(currentUser.getName());
-        lblId.setText(currentUser.getUsername());
+        lblId.setText(currentUser.getStudentId());
     }
 
     public void addCoursesRedirectListener(ActionListener listener) {
@@ -73,15 +72,6 @@ public class UsersScreen extends javax.swing.JFrame {
 
     public void addNoticesRedirectListener(ActionListener listener) {
         menuNotices.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                listener.actionPerformed(null);
-            }
-        });
-    }
-
-    public void addAttendanceRedirectListener(ActionListener listener) {
-        menuAttendance.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 listener.actionPerformed(null);
@@ -137,9 +127,6 @@ public class UsersScreen extends javax.swing.JFrame {
         navAttendance = new javax.swing.JPanel();
         menuAttendance = new javax.swing.JLabel();
         iconAttendance = new javax.swing.JLabel();
-        navUsers = new javax.swing.JPanel();
-        menuUsers = new javax.swing.JLabel();
-        iconUsers = new javax.swing.JLabel();
         navSettings = new javax.swing.JPanel();
         menuSettings = new javax.swing.JLabel();
         iconSettings = new javax.swing.JLabel();
@@ -157,7 +144,7 @@ public class UsersScreen extends javax.swing.JFrame {
 
         jLabelHead.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
         jLabelHead.setForeground(new java.awt.Color(0, 162, 100));
-        jLabelHead.setText("Vidyalaya Admin");
+        jLabelHead.setText("Vidyalaya");
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vidyalaya/Assets/vidyalaya-logo.png"))); // NOI18N
 
@@ -170,7 +157,7 @@ public class UsersScreen extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabelHead)
-                .addContainerGap(1134, Short.MAX_VALUE))
+                .addContainerGap(1216, Short.MAX_VALUE))
         );
         pnlNavLayout.setVerticalGroup(
             pnlNavLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -194,17 +181,17 @@ public class UsersScreen extends javax.swing.JFrame {
 
         lblName.setText("Trishan Wagle");
 
-        lblId.setText("sy-10000");
+        lblId.setText("ST-230352");
 
         lblRole.setForeground(new java.awt.Color(130, 130, 130));
-        lblRole.setText("Admin");
+        lblRole.setText("Student");
 
         navCourses.setBackground(new java.awt.Color(255, 255, 255));
         navCourses.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
         navCourses.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         navCourses.setPreferredSize(new java.awt.Dimension(100, 52));
 
-        menuCourses.setText("Courses");
+        menuCourses.setText("My Courses");
 
         iconCourses.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vidyalaya/Assets/icons/Courses.png"))); // NOI18N
 
@@ -277,7 +264,7 @@ public class UsersScreen extends javax.swing.JFrame {
             .addComponent(menuNotices, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        navAttendance.setBackground(new java.awt.Color(255, 255, 255));
+        navAttendance.setBackground(new java.awt.Color(77, 215, 131));
         navAttendance.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
         navAttendance.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         navAttendance.setPreferredSize(new java.awt.Dimension(100, 52));
@@ -301,32 +288,6 @@ public class UsersScreen extends javax.swing.JFrame {
             navAttendanceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(iconAttendance, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
             .addComponent(menuAttendance, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        navUsers.setBackground(new java.awt.Color(77, 215, 131));
-        navUsers.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
-        navUsers.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        navUsers.setPreferredSize(new java.awt.Dimension(100, 52));
-
-        menuUsers.setText("Users");
-
-        iconUsers.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vidyalaya/Assets/icons/Users.png"))); // NOI18N
-
-        javax.swing.GroupLayout navUsersLayout = new javax.swing.GroupLayout(navUsers);
-        navUsers.setLayout(navUsersLayout);
-        navUsersLayout.setHorizontalGroup(
-            navUsersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(navUsersLayout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(iconUsers)
-                .addGap(18, 18, 18)
-                .addComponent(menuUsers)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        navUsersLayout.setVerticalGroup(
-            navUsersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(iconUsers, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-            .addComponent(menuUsers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         navSettings.setBackground(new java.awt.Color(255, 255, 255));
@@ -400,7 +361,6 @@ public class UsersScreen extends javax.swing.JFrame {
                     .addComponent(navRoutine, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
                     .addComponent(navNotices, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
                     .addComponent(navAttendance, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
-                    .addComponent(navUsers, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
                     .addComponent(navSettings, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
                     .addComponent(logOut, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(19, Short.MAX_VALUE))
@@ -428,10 +388,8 @@ public class UsersScreen extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addComponent(navAttendance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(navUsers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
                 .addComponent(navSettings, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(80, 80, 80)
+                .addGap(158, 158, 158)
                 .addComponent(logOut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(130, Short.MAX_VALUE))
         );
@@ -439,7 +397,7 @@ public class UsersScreen extends javax.swing.JFrame {
         pnlRight.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel3.setText("Users");
+        jLabel3.setText("Attendance");
 
         javax.swing.GroupLayout pnlRightLayout = new javax.swing.GroupLayout(pnlRight);
         pnlRight.setLayout(pnlRightLayout);
@@ -448,14 +406,14 @@ public class UsersScreen extends javax.swing.JFrame {
             .addGroup(pnlRightLayout.createSequentialGroup()
                 .addGap(0, 0, 0)
                 .addComponent(jLabel3)
-                .addGap(129, 129, 129))
+                .addGap(970, 970, 970))
         );
         pnlRightLayout.setVerticalGroup(
             pnlRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlRightLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3)
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout pnlCenterLayout = new javax.swing.GroupLayout(pnlCenter);
@@ -466,7 +424,7 @@ public class UsersScreen extends javax.swing.JFrame {
                 .addComponent(pnlSideNav, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(pnlRight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 946, Short.MAX_VALUE))
+                .addGap(0, 40, Short.MAX_VALUE))
         );
         pnlCenterLayout.setVerticalGroup(
             pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -512,20 +470,20 @@ public class UsersScreen extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(UsersScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AttendanceScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(UsersScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AttendanceScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(UsersScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AttendanceScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(UsersScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AttendanceScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UsersScreen().setVisible(true);
+                new AttendanceScreen().setVisible(true);
             }
         });
     }
@@ -537,7 +495,6 @@ public class UsersScreen extends javax.swing.JFrame {
     private javax.swing.JLabel iconNotices;
     private javax.swing.JLabel iconRoutine;
     private javax.swing.JLabel iconSettings;
-    private javax.swing.JLabel iconUsers;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -552,13 +509,11 @@ public class UsersScreen extends javax.swing.JFrame {
     private javax.swing.JLabel menuNotices;
     private javax.swing.JLabel menuRoutine;
     private javax.swing.JLabel menuSettings;
-    private javax.swing.JLabel menuUsers;
     private javax.swing.JPanel navAttendance;
     private javax.swing.JPanel navCourses;
     private javax.swing.JPanel navNotices;
     private javax.swing.JPanel navRoutine;
     private javax.swing.JPanel navSettings;
-    private javax.swing.JPanel navUsers;
     private javax.swing.JPanel pnlCenter;
     private javax.swing.JPanel pnlNav;
     private javax.swing.JPanel pnlRight;

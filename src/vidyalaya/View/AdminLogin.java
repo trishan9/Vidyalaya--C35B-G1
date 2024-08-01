@@ -32,15 +32,24 @@ public class AdminLogin extends javax.swing.JFrame {
         UIUtils.setCustomFont(createMessage, 25f);
         UIUtils.setCustomFont(label, 16f);
         UIUtils.setCustomFont(label4, 14f);
+        UIUtils.setCustomFont(label5, 14f);
+
         UIUtils.setCustomFont(pwLabel, 16f);
         UIUtils.setCustomFont(signUp, 14f);
+        UIUtils.setCustomFont(signInAsUser, 14f);
+
         UIUtils.setCustomFont(signinBtn, 16f);
 
         UIUtils.setCursorPointer(signUp);
+        UIUtils.setCursorPointer(signInAsUser);
     }
 
     public void addSignUpRedirectListener(ActionListener listener) {
         signUp.addActionListener(listener);
+    }
+
+    public void addSignInAsUserRedirectListener(ActionListener listener) {
+        signInAsUser.addActionListener(listener);
     }
 
     public void addAdminLoginListener(ActionListener listener) {
@@ -53,14 +62,14 @@ public class AdminLogin extends javax.swing.JFrame {
     public javax.swing.JTextField getUsernameField() {
         return txtUsername;
     }
-    
+
     /**
      * @return the txtPassword
      */
     public javax.swing.JPasswordField getPasswordField() {
         return txtPassword;
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -84,6 +93,8 @@ public class AdminLogin extends javax.swing.JFrame {
         txtPassword = new javax.swing.JPasswordField();
         label4 = new javax.swing.JLabel();
         signUp = new javax.swing.JButton();
+        label5 = new javax.swing.JLabel();
+        signInAsUser = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -202,16 +213,24 @@ public class AdminLogin extends javax.swing.JFrame {
             }
         });
 
+        label5.setForeground(new java.awt.Color(107, 114, 128));
+        label5.setText("Are you a student or a teacher?");
+
+        signInAsUser.setText("Sign in as a user");
+        signInAsUser.setBorder(null);
+        signInAsUser.setBorderPainted(false);
+        signInAsUser.setContentAreaFilled(false);
+        signInAsUser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        signInAsUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                signInAsUserActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlCenterLayout = new javax.swing.GroupLayout(pnlCenter);
         pnlCenter.setLayout(pnlCenterLayout);
         pnlCenterLayout.setHorizontalGroup(
             pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlCenterLayout.createSequentialGroup()
-                .addGap(614, 614, 614)
-                .addComponent(label4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(signUp)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCenterLayout.createSequentialGroup()
                 .addContainerGap(400, Short.MAX_VALUE)
                 .addGroup(pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -223,6 +242,19 @@ public class AdminLogin extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCenterLayout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(395, 395, 395))))
+            .addGroup(pnlCenterLayout.createSequentialGroup()
+                .addGroup(pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlCenterLayout.createSequentialGroup()
+                        .addGap(604, 604, 604)
+                        .addComponent(label4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(signUp))
+                    .addGroup(pnlCenterLayout.createSequentialGroup()
+                        .addGap(549, 549, 549)
+                        .addComponent(label5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(signInAsUser)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         pnlCenterLayout.setVerticalGroup(
             pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -237,7 +269,11 @@ public class AdminLogin extends javax.swing.JFrame {
                 .addGroup(pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label4)
                     .addComponent(signUp))
-                .addContainerGap(257, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(label5)
+                    .addComponent(signInAsUser))
+                .addContainerGap(235, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -269,6 +305,10 @@ public class AdminLogin extends javax.swing.JFrame {
     private void signUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUpActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_signUpActionPerformed
+
+    private void signInAsUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signInAsUserActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_signInAsUserActionPerformed
 
     /**
      * @param args the command line arguments
@@ -314,9 +354,11 @@ public class AdminLogin extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel label;
     private javax.swing.JLabel label4;
+    private javax.swing.JLabel label5;
     private javax.swing.JPanel pnlCenter;
     private javax.swing.JPanel pnlNav;
     private javax.swing.JLabel pwLabel;
+    private javax.swing.JButton signInAsUser;
     private javax.swing.JButton signUp;
     private javax.swing.JButton signinBtn;
     private javax.swing.JPasswordField txtPassword;

@@ -4,12 +4,13 @@
  */
 package vidyalaya.Controller;
 
-import vidyalaya.Controller.Admin.CoursesController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import vidyalaya.Controller.Admin.CoursesController;
 
 import vidyalaya.DAO.AuthDAO.AuthDAO;
 import vidyalaya.DAO.AuthDAO.AuthDAOImplementation;
@@ -20,6 +21,7 @@ import vidyalaya.Utils.UIUtils;
 import vidyalaya.View.AdminLogin;
 import vidyalaya.View.CreateAdmin;
 import vidyalaya.View.Dashboard.Admin.CoursesScreen;
+import vidyalaya.View.UserLogin;
 
 /**
  *
@@ -33,6 +35,7 @@ public class AdminLoginController {
     public AdminLoginController(AdminLogin userView) {
         this.userView = userView;
         userView.addSignUpRedirectListener(new CreateAdminRedirectListener());
+        userView.addSignInAsUserRedirectListener(new LoginUserRedirectListener());
         userView.addAdminLoginListener(new AdminLoginListener());
     }
 
@@ -49,6 +52,14 @@ public class AdminLoginController {
         @Override
         public void actionPerformed(ActionEvent e) {
             redirectToCreateAdmin();
+        }
+    }
+
+    class LoginUserRedirectListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            redirectToUserLogin();
         }
     }
 
@@ -79,9 +90,16 @@ public class AdminLoginController {
         createAdminController.open();
     }
 
+    public void redirectToUserLogin() {
+        UserLogin userLoginView = new UserLogin();
+        UserLoginController userLoginController = new UserLoginController(userLoginView);
+        close();
+        userLoginController.open();
+    }
+
     public void redirectToAdminDashboard() {
-        CoursesScreen createUserView = new CoursesScreen();
-        CoursesController coursesController = new CoursesController(createUserView);
+        CoursesScreen coursesView = new CoursesScreen();
+        CoursesController coursesController = new CoursesController(coursesView);
         close();
         coursesController.open();
     }

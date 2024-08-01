@@ -4,7 +4,7 @@
  */
 package vidyalaya.Controller;
 
-import vidyalaya.Controller.Admin.CoursesController;
+import vidyalaya.Controller.Student.MyCoursesController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -17,7 +17,7 @@ import vidyalaya.DAO.AuthDAO.AuthDAOImplementation;
 import vidyalaya.Model.LoginRequest;
 import vidyalaya.Utils.UIUtils;
 
-import vidyalaya.View.Dashboard.Admin.CoursesScreen;
+import vidyalaya.View.Dashboard.Student.MyCoursesScreen;
 import vidyalaya.View.UserLogin;
 
 /**
@@ -77,12 +77,12 @@ public class UserLoginController {
             case "student":
                 authDAO.loginStudent(user);
                 redirectToStudentDashboard();
-                UIUtils.info(new CoursesScreen(), "Logged in successfully as student!");
+                UIUtils.info(new MyCoursesScreen(), "Logged in successfully as student!");
                 break;
             case "teacher":
                 authDAO.loginTeacher(user);
                 redirectToTeacherDashboard();
-                UIUtils.info(new CoursesScreen(), "Logged in successfully as teacher!");
+                UIUtils.info(new MyCoursesScreen(), "Logged in successfully as teacher!");
                 break;
             default:
                 throw new IllegalArgumentException("Invalid user type: " + userType);
@@ -90,16 +90,16 @@ public class UserLoginController {
     }
 
     public void redirectToStudentDashboard() {
-        CoursesScreen createUserView = new CoursesScreen();
-        CoursesController createUserController = new CoursesController(createUserView);
+        MyCoursesScreen myCoursesView = new MyCoursesScreen();
+        MyCoursesController myCoursesController = new MyCoursesController(myCoursesView);
         close();
-        createUserController.open();
+        myCoursesController.open();
     }
 
     public void redirectToTeacherDashboard() {
-        CoursesScreen createUserView = new CoursesScreen();
-        CoursesController coursesController = new CoursesController(createUserView);
+        MyCoursesScreen myCoursesView = new MyCoursesScreen();
+        MyCoursesController myCoursesController = new MyCoursesController(myCoursesView);
         close();
-        coursesController.open();
+        myCoursesController.open();
     }
 }
