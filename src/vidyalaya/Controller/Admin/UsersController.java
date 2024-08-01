@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import vidyalaya.Components.Modals.CreateNewUserForm;
 
 import vidyalaya.Controller.AdminLoginController;
+import vidyalaya.Controller.CreateNewUserController;
 
 import vidyalaya.DAO.AuthDAO.AuthDAO;
 import vidyalaya.DAO.AuthDAO.AuthDAOImplementation;
@@ -54,7 +55,8 @@ public class UsersController {
         @Override
         public void actionPerformed(ActionEvent e) {
             CreateNewUserForm createNewUserView = new CreateNewUserForm();
-            createNewUserView.setVisible(true);
+            CreateNewUserController createNewUserController = new CreateNewUserController(createNewUserView);
+            createNewUserController.open();
         }
     }
 

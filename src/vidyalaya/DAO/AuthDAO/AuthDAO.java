@@ -4,6 +4,8 @@
  */
 package vidyalaya.DAO.AuthDAO;
 
+import java.util.List;
+
 import vidyalaya.Model.AdminData;
 import vidyalaya.Model.LoginRequest;
 import vidyalaya.Model.StudentData;
@@ -27,6 +29,10 @@ public interface AuthDAO {
     public void registerTeacher(TeacherData registerModel) throws Exception;
     
     public void registerStudent(StudentData registerModel) throws Exception;
-
+    
+    public List<StudentData> getAllStudents() throws Exception;
+    
+    public List<TeacherData> getAllTeachers() throws Exception;
+    
     public void deleteUser(int userId, UserTypeEnum userType) throws Exception;
 }

@@ -10,6 +10,9 @@ import java.sql.ResultSet;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import vidyalaya.Model.AdminData;
 import vidyalaya.Model.LoginRequest;
 import vidyalaya.Model.StudentData;
@@ -184,6 +187,52 @@ public class AuthDAOImplementation implements AuthDAO {
             statement.execute();
             statement.close();
         } catch (Exception ex) {
+            throw ex;
+        } finally {
+            mysql.closeConnection(dbConnection);
+        }
+    }
+
+    @Override
+    public List<StudentData> getAllStudents() throws Exception {
+        Connection dbConnection = mysql.openConnection();
+
+        final PreparedStatement statement = dbConnection.prepareStatement("SELECT * FROM student WHERE admin_id = ?");
+        statement.setInt(1, AdminSession.getCurrentUser().getId());
+
+        try {
+            List<StudentData> studentData = new ArrayList<>();
+            try (ResultSet data = statement.executeQuery()) {
+                while(data.next()){
+                    studentData.add(new StudentData(data));
+                }
+            }
+            statement.close();
+            return studentData;
+        } catch (SQLException ex) {
+            throw ex;
+        } finally {
+            mysql.closeConnection(dbConnection);
+        }
+    }
+
+    @Override
+    public List<TeacherData> getAllTeachers() throws Exception {
+        Connection dbConnection = mysql.openConnection();
+
+        final PreparedStatement statement = dbConnection.prepareStatement("SELECT * FROM teacher WHERE admin_id = ?");
+        statement.setInt(1, AdminSession.getCurrentUser().getId());
+
+        try {
+            List<TeacherData> teacherData = new ArrayList<>();
+            try (ResultSet data = statement.executeQuery()) {
+                while(data.next()){
+                    teacherData.add(new TeacherData(data));
+                }
+            }
+            statement.close();
+            return teacherData;
+        } catch (SQLException ex) {
             throw ex;
         } finally {
             mysql.closeConnection(dbConnection);

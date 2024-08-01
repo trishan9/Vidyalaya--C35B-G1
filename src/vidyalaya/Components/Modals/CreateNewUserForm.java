@@ -4,6 +4,7 @@
  */
 package vidyalaya.Components.Modals;
 
+import java.awt.event.ActionListener;
 import vidyalaya.Utils.UIUtils;
 
 /**
@@ -35,6 +36,38 @@ public class CreateNewUserForm extends javax.swing.JFrame {
         UIUtils.setCustomFont(label4, 16f);
         UIUtils.setCustomFont(userType, 16f);
         UIUtils.setCustomFont(addNewUserBtn, 16f);
+    }
+
+    public void addCreateUserListener(ActionListener listener) {
+        addNewUserBtn.addActionListener(listener);
+    }
+
+    /**
+     * @return the txtName
+     */
+    public javax.swing.JTextField getNameField() {
+        return txtName;
+    }
+
+    /**
+     * @return the userType
+     */
+    public javax.swing.JComboBox getUserType() {
+        return userType;
+    }
+
+    /**
+     * @return the txtEmail
+     */
+    public javax.swing.JTextField getEmailField() {
+        return txtEmail;
+    }
+
+    /**
+     * @return the txtPassword
+     */
+    public javax.swing.JPasswordField getPasswordField() {
+        return txtPassword;
     }
 
     /**
@@ -90,6 +123,7 @@ public class CreateNewUserForm extends javax.swing.JFrame {
         addNewUserBtn.setBackground(new java.awt.Color(77, 215, 131));
         addNewUserBtn.setText("Add New User");
         addNewUserBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
+        addNewUserBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         addNewUserBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addNewUserBtnActionPerformed(evt);
