@@ -260,7 +260,7 @@ public class AuthDAOImplementation implements AuthDAO {
 
         try {
             boolean doesExist = checkIfUserExistsById(dbConnection, tableName, userId);
-            if (doesExist) {
+            if (!doesExist) {
                 throw new Exception("User with ID " + userId + " doesn't exist in " + tableName + " table");
             }
 

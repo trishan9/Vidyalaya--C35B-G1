@@ -4,10 +4,21 @@
  */
 package vidyalaya.DAO.ModuleDAO;
 
+import java.util.List;
+
+import vidyalaya.Model.ModuleData;
+
 /**
  *
  * @author trish
  */
 public interface ModuleDAO {
+        
+    public void createModule(ModuleData moduleModel) throws Exception;
+        
+    public List<ModuleData> getAllModules() throws Exception;
     
+    public void updateModule(int moduleCode, ModuleData moduleModel) throws Exception;
+    
+    public void deleteModule(int moduleCode) throws Exception;
 }
