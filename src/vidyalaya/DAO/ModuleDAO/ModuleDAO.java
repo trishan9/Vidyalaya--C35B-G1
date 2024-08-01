@@ -15,8 +15,10 @@ import vidyalaya.Model.ModuleData;
 public interface ModuleDAO {
         
     public void createModule(ModuleData moduleModel) throws Exception;
-        
+            
     public List<ModuleData> getAllModules() throws Exception;
+    
+    public ModuleData getModuleByCode(int moduleCode) throws Exception;
     
     public void updateModule(int moduleCode, ModuleData moduleModel) throws Exception;
     

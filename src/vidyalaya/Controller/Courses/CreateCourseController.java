@@ -2,13 +2,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package vidyalaya.Controller;
+package vidyalaya.Controller.Courses;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import vidyalaya.Utils.UIUtils;
+
 import vidyalaya.Components.Modals.CreateCourseForm;
 
 import vidyalaya.DAO.ModuleDAO.ModuleDAO;
@@ -18,8 +21,6 @@ import vidyalaya.Model.AdminData;
 import vidyalaya.Model.ModuleData;
 
 import vidyalaya.SessionManagement.AdminSession;
-
-import vidyalaya.Utils.UIUtils;
 
 /**
  *
@@ -55,8 +56,11 @@ public class CreateCourseController {
                 ModuleData course = new ModuleData(currentAdmin.getId(), name);
                 moduleDAO.createModule(course);
 
-                UIUtils.info(userView, "Course created successfully with name: " + name);
-                close();
+                vidyalaya.View.Dashboard.Admin.CoursesScreen coursesView = new vidyalaya.View.Dashboard.Admin.CoursesScreen();
+                vidyalaya.Controller.Courses.CoursesController coursesController = new vidyalaya.Controller.Courses.CoursesController(coursesView);
+                UIUtils.closeAllFrames();
+                coursesController.open();
+                UIUtils.info(coursesView, "Course created successfully: " + name);
             } catch (Exception ex) {
                 Logger.getLogger(CreateCourseController.class.getName()).log(Level.SEVERE, null, ex);
                 UIUtils.error(userView, ex.getMessage());

@@ -5,6 +5,7 @@
 package vidyalaya.Utils;
 
 import java.awt.Cursor;
+import java.awt.Frame;
 import java.awt.Image;
 
 import javax.imageio.ImageIO;
@@ -28,6 +29,14 @@ public class UIUtils {
             frame.setIconImage(icon);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public static void closeAllFrames() {
+        Frame[] frames = Frame.getFrames();
+
+        for (Frame frame : frames) {
+            frame.dispose();
         }
     }
 
@@ -62,4 +71,9 @@ public class UIUtils {
     public static void info(JFrame userView, String message) {
         JOptionPane.showMessageDialog(userView, message, "Success", JOptionPane.INFORMATION_MESSAGE);
     }
+
+    public static int confirm(JFrame userView, String message) {
+        return JOptionPane.showConfirmDialog(userView, message, "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+    }
+
 }

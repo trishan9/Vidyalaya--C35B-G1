@@ -65,7 +65,7 @@ public class UsersController {
         @Override
         public void actionPerformed(ActionEvent e) {
             CoursesScreen coursesView = new CoursesScreen();
-            vidyalaya.Controller.Admin.CoursesController coursesController = new vidyalaya.Controller.Admin.CoursesController(coursesView);
+            vidyalaya.Controller.Courses.CoursesController coursesController = new vidyalaya.Controller.Courses.CoursesController(coursesView);
             close();
             coursesController.open();
         }

@@ -1,22 +1,23 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package vidyalaya.Components;
 
 import vidyalaya.Model.ModuleData;
 import vidyalaya.Utils.CallbackFn;
+import vidyalaya.Utils.UIUtils;
 
 /**
  *
  * @author trish
  */
-public class CourseCard extends javax.swing.JFrame {
+public class CourseCard extends javax.swing.JPanel {
 
     CallbackFn onEditClick, onDeleteClick;
 
     /**
-     * Creates new form CourseCard
+     * Creates new form CourseCard1
      *
      * @param module
      * @param onEditClick
@@ -28,6 +29,11 @@ public class CourseCard extends javax.swing.JFrame {
         courseCode.setText(String.valueOf(module.getCode()));
         this.onEditClick = onEditClick;
         this.onDeleteClick = onDeleteClick;
+
+        UIUtils.setCustomFont(courseTitleHeader, 15f);
+        UIUtils.setCustomFont(courseTitle, 17f);
+        UIUtils.setCustomFont(courseCodeHeader, 15f);
+        UIUtils.setCustomFont(courseCode, 17f);
     }
 
     /**
@@ -46,8 +52,6 @@ public class CourseCard extends javax.swing.JFrame {
         courseCode = new javax.swing.JLabel();
         editButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         pnlCourse.setBackground(new java.awt.Color(255, 255, 255));
         pnlCourse.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(222, 222, 222)));
@@ -99,13 +103,13 @@ public class CourseCard extends javax.swing.JFrame {
                 .addGroup(pnlCourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(courseTitle)
                     .addComponent(courseTitleHeader))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 264, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 184, Short.MAX_VALUE)
                 .addGroup(pnlCourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlCourseLayout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addComponent(courseCode))
                     .addComponent(courseCodeHeader))
-                .addGap(336, 336, 336)
+                .addGap(385, 385, 385)
                 .addComponent(editButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -129,20 +133,16 @@ public class CourseCard extends javax.swing.JFrame {
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pnlCourse, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(pnlCourse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(pnlCourse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void onEditButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onEditButtonActionPerformed

@@ -72,6 +72,29 @@ public class ModuleDAOImplementation implements ModuleDAO {
     }
 
     @Override
+    public ModuleData getModuleByCode(int moduleCode) throws Exception {
+        Connection dbConnection = mysql.openConnection();
+
+        final String query = "SELECT * FROM module WHERE code = ? LIMIT 1";
+
+        try (PreparedStatement statement = dbConnection.prepareStatement(query)) {
+            statement.setInt(1, moduleCode);
+
+            try (ResultSet data = statement.executeQuery()) {
+                if (data.next()) {
+                    return new ModuleData(data);
+                } else {
+                    return null;
+                }
+            }
+        } catch (SQLException ex) {
+            throw ex;
+        } finally {
+            mysql.closeConnection(dbConnection);
+        }
+    }
+
+    @Override
     public void updateModule(int moduleCode, ModuleData moduleModel) throws Exception {
         Connection dbConnection = mysql.openConnection();
 

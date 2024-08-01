@@ -4,14 +4,14 @@
  */
 package vidyalaya.View.Dashboard.Admin;
 
+import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import javax.swing.BoxLayout;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+
 import vidyalaya.Components.CourseCard;
+import vidyalaya.Components.Modals.EditCourseForm;
+import vidyalaya.Controller.Courses.CoursesController;
 
 import vidyalaya.Model.AdminData;
 import vidyalaya.Model.ModuleData;
@@ -26,11 +26,15 @@ import vidyalaya.Utils.UIUtils;
  */
 public class CoursesScreen extends javax.swing.JFrame {
 
+    CoursesController coursesController;
+
     /**
      * Creates new form CoursesScreen
      */
     public CoursesScreen() {
         initComponents();
+        coursesController = new CoursesController(this);
+        initializeGrid();
 
         setTitle("Courses - Vidyalaya Admin");
         setSize(1400, 954);
@@ -54,18 +58,30 @@ public class CoursesScreen extends javax.swing.JFrame {
         UIUtils.setCustomFont(menuLogout, 17f);
         UIUtils.setCustomFont(jLabel3, 23f);
         UIUtils.setCustomFont(createCourseBtn, 17f);
-//        UIUtils.setCustomFont(courseTitleHeader, 15f);
-//        UIUtils.setCustomFont(courseTitleHeader1, 15f);
-//        UIUtils.setCustomFont(courseTitle, 17f);
-//        UIUtils.setCustomFont(courseTitle1, 17f);
-//        UIUtils.setCustomFont(courseCodeHeader, 15f);
-//        UIUtils.setCustomFont(courseCodeHeader1, 15f);
-//        UIUtils.setCustomFont(courseCode, 17f);
-//        UIUtils.setCustomFont(courseCode1, 17f);
 
         AdminData currentUser = AdminSession.getCurrentUser();
         lblName.setText(currentUser.getName());
         lblId.setText(currentUser.getUsername());
+    }
+
+    private void initializeGrid() {
+        coursesController.modulesList.forEach((x) -> addGrid(x));
+        var grid = new GridLayout(0, 1);
+        grid.setHgap(10);
+        grid.setVgap(10);
+        pnlCourses.setLayout(grid);
+    }
+
+    private void addGrid(ModuleData data) {
+        var temp = new CourseCard(data,
+                () -> {
+                    new EditCourseForm(data.getCode()).setVisible(true);
+                    System.out.println("Edit for: " + data.getCode());
+                },
+                () -> {
+                    coursesController.deleteCourseByCode(data.getCode());
+                });
+        pnlCourses.add(temp);
     }
 
     public void addCreateCourseListener(ActionListener listener) {
@@ -175,6 +191,7 @@ public class CoursesScreen extends javax.swing.JFrame {
         createCourse = new javax.swing.JPanel();
         createCourseBtn = new javax.swing.JLabel();
         iconUsers1 = new javax.swing.JLabel();
+        pnlCourses = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -522,6 +539,19 @@ public class CoursesScreen extends javax.swing.JFrame {
                 .addGap(0, 12, Short.MAX_VALUE))
         );
 
+        pnlCourses.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout pnlCoursesLayout = new javax.swing.GroupLayout(pnlCourses);
+        pnlCourses.setLayout(pnlCoursesLayout);
+        pnlCoursesLayout.setHorizontalGroup(
+            pnlCoursesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1063, Short.MAX_VALUE)
+        );
+        pnlCoursesLayout.setVerticalGroup(
+            pnlCoursesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 501, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout pnlCenterLayout = new javax.swing.GroupLayout(pnlCenter);
         pnlCenter.setLayout(pnlCenterLayout);
         pnlCenterLayout.setHorizontalGroup(
@@ -529,7 +559,9 @@ public class CoursesScreen extends javax.swing.JFrame {
             .addGroup(pnlCenterLayout.createSequentialGroup()
                 .addComponent(pnlSideNav, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(pnlRight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnlRight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pnlCourses, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(48, Short.MAX_VALUE))
         );
         pnlCenterLayout.setVerticalGroup(
@@ -538,6 +570,8 @@ public class CoursesScreen extends javax.swing.JFrame {
             .addGroup(pnlCenterLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pnlRight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlCourses, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -631,6 +665,7 @@ public class CoursesScreen extends javax.swing.JFrame {
     private javax.swing.JPanel navSettings;
     private javax.swing.JPanel navUsers;
     private javax.swing.JPanel pnlCenter;
+    private javax.swing.JPanel pnlCourses;
     private javax.swing.JPanel pnlNav;
     private javax.swing.JPanel pnlRight;
     private javax.swing.JPanel pnlSideNav;
