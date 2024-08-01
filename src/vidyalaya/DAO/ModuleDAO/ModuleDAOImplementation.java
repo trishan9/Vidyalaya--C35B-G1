@@ -34,7 +34,7 @@ public class ModuleDAOImplementation implements ModuleDAO {
         statement.setString(2, moduleModel.getName());
 
         try {
-            boolean doesExist = checkIfModuleExists(dbConnection, "name", moduleModel.getName());
+            boolean doesExist = checkIfModuleExists(dbConnection, "name", moduleModel.getName(), moduleModel.getAdminId());
             if (doesExist) {
                 throw new Exception("Course with name " + moduleModel.getName() + " already exists");
             }
@@ -139,10 +139,11 @@ public class ModuleDAOImplementation implements ModuleDAO {
         }
     }
 
-    private boolean checkIfModuleExists(Connection dbConnection, String columnName, String value) throws SQLException {
+    private boolean checkIfModuleExists(Connection dbConnection, String columnName, String value, int adminId) throws SQLException {
         final boolean data;
-        try (PreparedStatement statement = dbConnection.prepareStatement("SELECT COUNT(code) as count FROM module" + " WHERE " + columnName + " = ? LIMIT 1")) {
-            statement.setString(1, value);
+        try (PreparedStatement statement = dbConnection.prepareStatement("SELECT COUNT(code) as count FROM module" + " WHERE admin_id = ? AND " + columnName + " = ? LIMIT 1")) {
+            statement.setInt(1, adminId);
+            statement.setString(2, value);
             final ResultSet response = statement.executeQuery();
             data = (response.next() && response.getInt("count") > 0);
         }
