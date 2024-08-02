@@ -4,9 +4,16 @@
  */
 package vidyalaya.View.Dashboard.Student;
 
+import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import vidyalaya.Components.CourseCard;
+import vidyalaya.Components.CourseCardUser;
+import vidyalaya.Components.Modals.EditCourseForm;
+import vidyalaya.Controller.Courses.Admin.CoursesController;
+import vidyalaya.Controller.Courses.Student.MyCoursesController;
+import vidyalaya.Model.ModuleData;
 
 import vidyalaya.Model.StudentData;
 
@@ -20,11 +27,15 @@ import vidyalaya.Utils.UIUtils;
  */
 public class MyCoursesScreen extends javax.swing.JFrame {
 
+    MyCoursesController myCoursesController;
+
     /**
      * Creates new form CoursesScreen
      */
     public MyCoursesScreen() {
         initComponents();
+        myCoursesController = new MyCoursesController(this);
+        initializeGrid();
 
         setTitle("My Courses - Vidyalaya");
         setSize(1400, 954);
@@ -47,18 +58,27 @@ public class MyCoursesScreen extends javax.swing.JFrame {
         UIUtils.setCustomFont(menuSettings, 17f);
         UIUtils.setCustomFont(menuLogout, 17f);
         UIUtils.setCustomFont(jLabel3, 23f);
-//        UIUtils.setCustomFont(courseTitleHeader, 15f);
-//        UIUtils.setCustomFont(courseTitleHeader1, 15f);
-//        UIUtils.setCustomFont(courseTitle, 17f);
-//        UIUtils.setCustomFont(courseTitle1, 17f);
-//        UIUtils.setCustomFont(courseCodeHeader, 15f);
-//        UIUtils.setCustomFont(courseCodeHeader1, 15f);
-//        UIUtils.setCustomFont(courseCode, 17f);
-//        UIUtils.setCustomFont(courseCode1, 17f);
 
         StudentData currentUser = StudentSession.getCurrentUser();
         lblName.setText(currentUser.getName());
         lblId.setText(currentUser.getStudentId());
+    }
+
+    private void initializeGrid() {
+        myCoursesController.modulesList.forEach((x) -> addGrid(x));
+        var grid = new GridLayout(0, 1);
+        grid.setHgap(10);
+        grid.setVgap(10);
+        pnlCourses.setLayout(grid);
+    }
+
+    private void addGrid(ModuleData data) {
+        var temp = new CourseCardUser(data,
+                "STUDENT",
+                () -> {
+                    System.out.println("Accessing Materials of: " + data.getCode());
+                });
+        pnlCourses.add(temp);
     }
 
     public void addRoutineRedirectListener(ActionListener listener) {
@@ -144,6 +164,7 @@ public class MyCoursesScreen extends javax.swing.JFrame {
         iconLogout = new javax.swing.JLabel();
         pnlRight = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
+        pnlCourses = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -409,7 +430,7 @@ public class MyCoursesScreen extends javax.swing.JFrame {
         pnlRight.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel3.setText("My Courses S");
+        jLabel3.setText("My Courses");
 
         javax.swing.GroupLayout pnlRightLayout = new javax.swing.GroupLayout(pnlRight);
         pnlRight.setLayout(pnlRightLayout);
@@ -428,6 +449,19 @@ public class MyCoursesScreen extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        pnlCourses.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout pnlCoursesLayout = new javax.swing.GroupLayout(pnlCourses);
+        pnlCourses.setLayout(pnlCoursesLayout);
+        pnlCoursesLayout.setHorizontalGroup(
+            pnlCoursesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1063, Short.MAX_VALUE)
+        );
+        pnlCoursesLayout.setVerticalGroup(
+            pnlCoursesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 501, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout pnlCenterLayout = new javax.swing.GroupLayout(pnlCenter);
         pnlCenter.setLayout(pnlCenterLayout);
         pnlCenterLayout.setHorizontalGroup(
@@ -435,8 +469,10 @@ public class MyCoursesScreen extends javax.swing.JFrame {
             .addGroup(pnlCenterLayout.createSequentialGroup()
                 .addComponent(pnlSideNav, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(pnlRight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnlRight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pnlCourses, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         pnlCenterLayout.setVerticalGroup(
             pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -444,6 +480,8 @@ public class MyCoursesScreen extends javax.swing.JFrame {
             .addGroup(pnlCenterLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pnlRight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(pnlCourses, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -535,6 +573,7 @@ public class MyCoursesScreen extends javax.swing.JFrame {
     private javax.swing.JPanel navRoutine;
     private javax.swing.JPanel navSettings;
     private javax.swing.JPanel pnlCenter;
+    private javax.swing.JPanel pnlCourses;
     private javax.swing.JPanel pnlNav;
     private javax.swing.JPanel pnlRight;
     private javax.swing.JPanel pnlSideNav;

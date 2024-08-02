@@ -49,7 +49,7 @@ public class RoutineController {
         @Override
         public void actionPerformed(ActionEvent e) {
             MyCoursesScreen coursesView = new MyCoursesScreen();
-            vidyalaya.Controller.Student.MyCoursesController coursesController = new vidyalaya.Controller.Student.MyCoursesController(coursesView);
+            vidyalaya.Controller.Courses.Student.MyCoursesController coursesController = new vidyalaya.Controller.Courses.Student.MyCoursesController(coursesView);
             close();
             coursesController.open();
         }

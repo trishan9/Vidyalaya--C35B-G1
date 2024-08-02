@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package vidyalaya.Controller.Courses;
+package vidyalaya.Controller.Courses.Admin;
 
 import javax.swing.JOptionPane;
 import java.awt.event.ActionEvent;
@@ -23,6 +23,7 @@ import vidyalaya.DAO.ModuleDAO.ModuleDAO;
 import vidyalaya.DAO.ModuleDAO.ModuleDAOImplementation;
 
 import vidyalaya.Model.ModuleData;
+import vidyalaya.SessionManagement.AdminSession;
 
 import vidyalaya.View.AdminLogin;
 import vidyalaya.View.Dashboard.Admin.AttendanceScreen;
@@ -56,7 +57,7 @@ public class CoursesController {
 
     public final void getModulesList() {
         try {
-            modulesList = moduleDAO.getAllModules();
+            modulesList = moduleDAO.getAllModules(AdminSession.getCurrentUser().getId());
         } catch (Exception ex) {
             modulesList = new ArrayList<>();
         }
@@ -77,7 +78,7 @@ public class CoursesController {
                 moduleDAO.deleteModule(moduleCode);
 
                 vidyalaya.View.Dashboard.Admin.CoursesScreen coursesView = new vidyalaya.View.Dashboard.Admin.CoursesScreen();
-                vidyalaya.Controller.Courses.CoursesController coursesController = new vidyalaya.Controller.Courses.CoursesController(coursesView);
+                vidyalaya.Controller.Courses.Admin.CoursesController coursesController = new vidyalaya.Controller.Courses.Admin.CoursesController(coursesView);
                 UIUtils.closeAllFrames();
                 coursesController.open();
                 UIUtils.info(coursesView, "Course deleted successfully!");

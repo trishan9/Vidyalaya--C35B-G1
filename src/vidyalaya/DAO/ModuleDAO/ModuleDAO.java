@@ -16,7 +16,7 @@ public interface ModuleDAO {
         
     public void createModule(ModuleData moduleModel) throws Exception;
             
-    public List<ModuleData> getAllModules() throws Exception;
+    public List<ModuleData> getAllModules(int adminId) throws Exception;
     
     public ModuleData getModuleByCode(int moduleCode) throws Exception;
     

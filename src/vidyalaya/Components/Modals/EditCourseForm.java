@@ -5,7 +5,7 @@
 package vidyalaya.Components.Modals;
 
 import java.awt.event.ActionListener;
-import vidyalaya.Controller.Courses.EditCourseController;
+import vidyalaya.Controller.Courses.Admin.EditCourseController;
 import vidyalaya.Model.ModuleData;
 import vidyalaya.Utils.UIUtils;
 

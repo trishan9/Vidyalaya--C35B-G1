@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import vidyalaya.Controller.Courses.CoursesController;
+import vidyalaya.Controller.Courses.Admin.CoursesController;
 
 import vidyalaya.DAO.AuthDAO.AuthDAO;
 import vidyalaya.DAO.AuthDAO.AuthDAOImplementation;

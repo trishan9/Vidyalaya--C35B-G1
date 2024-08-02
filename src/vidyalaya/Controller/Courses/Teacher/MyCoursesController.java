@@ -2,15 +2,22 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package vidyalaya.Controller.Teacher;
+package vidyalaya.Controller.Courses.Teacher;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import vidyalaya.Controller.UserLoginController;
 
-import vidyalaya.DAO.AuthDAO.AuthDAO;
-import vidyalaya.DAO.AuthDAO.AuthDAOImplementation;
+import vidyalaya.DAO.ModuleDAO.ModuleDAO;
+import vidyalaya.DAO.ModuleDAO.ModuleDAOImplementation;
+
+import vidyalaya.Model.ModuleData;
+
+import vidyalaya.SessionManagement.TeacherSession;
 
 import vidyalaya.View.Dashboard.Teacher.AttendanceScreen;
 import vidyalaya.View.Dashboard.Teacher.NoticesScreen;
@@ -25,8 +32,9 @@ import vidyalaya.View.UserLogin;
  */
 public class MyCoursesController {
 
-    private final AuthDAO authDAO = new AuthDAOImplementation();
+    private final ModuleDAO moduleDAO = new ModuleDAOImplementation();
     private final MyCoursesScreen userView;
+    public List<ModuleData> modulesList = new ArrayList<>();
 
     public MyCoursesController(MyCoursesScreen userView) {
         this.userView = userView;
@@ -35,6 +43,15 @@ public class MyCoursesController {
         userView.addAttendanceRedirectListener(new AttendanceRedirectListener());
         userView.addSettingsRedirectListener(new SettingsRedirectListener());
         userView.addLogoutListener(new LogoutListener());
+        getModulesList();
+    }
+
+    public final void getModulesList() {
+        try {
+            modulesList = moduleDAO.getAllModules(TeacherSession.getCurrentUser().getAdminId());
+        } catch (Exception ex) {
+            modulesList = new ArrayList<>();
+        }
     }
 
     public void open() {

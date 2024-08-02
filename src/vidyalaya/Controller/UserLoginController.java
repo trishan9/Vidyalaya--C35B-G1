@@ -89,14 +89,14 @@ public class UserLoginController {
 
     public void redirectToStudentDashboard() {
         vidyalaya.View.Dashboard.Student.MyCoursesScreen myCoursesView = new vidyalaya.View.Dashboard.Student.MyCoursesScreen();
-        vidyalaya.Controller.Student.MyCoursesController myCoursesController = new vidyalaya.Controller.Student.MyCoursesController(myCoursesView);
+        vidyalaya.Controller.Courses.Student.MyCoursesController myCoursesController = new vidyalaya.Controller.Courses.Student.MyCoursesController(myCoursesView);
         close();
         myCoursesController.open();
     }
 
     public void redirectToTeacherDashboard() {
         vidyalaya.View.Dashboard.Teacher.MyCoursesScreen myCoursesView = new vidyalaya.View.Dashboard.Teacher.MyCoursesScreen();
-        vidyalaya.Controller.Teacher.MyCoursesController myCoursesController = new vidyalaya.Controller.Teacher.MyCoursesController(myCoursesView);
+        vidyalaya.Controller.Courses.Teacher.MyCoursesController myCoursesController = new vidyalaya.Controller.Courses.Teacher.MyCoursesController(myCoursesView);
         close();
         myCoursesController.open();
     }

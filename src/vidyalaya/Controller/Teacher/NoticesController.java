@@ -50,7 +50,7 @@ public class NoticesController {
         @Override
         public void actionPerformed(ActionEvent e) {
             MyCoursesScreen coursesView = new MyCoursesScreen();
-            vidyalaya.Controller.Teacher.MyCoursesController coursesController = new vidyalaya.Controller.Teacher.MyCoursesController(coursesView);
+            vidyalaya.Controller.Courses.Teacher.MyCoursesController coursesController = new vidyalaya.Controller.Courses.Teacher.MyCoursesController(coursesView);
             close();
             coursesController.open();
         }

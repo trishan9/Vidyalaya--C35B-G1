@@ -9,13 +9,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import vidyalaya.Model.ModuleData;
-
-import vidyalaya.SessionManagement.AdminSession;
 
 /**
  *
@@ -49,11 +47,11 @@ public class ModuleDAOImplementation implements ModuleDAO {
     }
 
     @Override
-    public List<ModuleData> getAllModules() throws Exception {
+    public List<ModuleData> getAllModules(int adminId) throws Exception {
         Connection dbConnection = mysql.openConnection();
 
         final PreparedStatement statement = dbConnection.prepareStatement("SELECT * FROM module WHERE admin_id = ?");
-        statement.setInt(1, AdminSession.getCurrentUser().getId());
+        statement.setInt(1, adminId);
 
         try {
             List<ModuleData> moduleData = new ArrayList<>();

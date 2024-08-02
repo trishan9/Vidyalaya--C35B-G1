@@ -11,7 +11,7 @@ import java.awt.event.MouseEvent;
 
 import vidyalaya.Components.CourseCard;
 import vidyalaya.Components.Modals.EditCourseForm;
-import vidyalaya.Controller.Courses.CoursesController;
+import vidyalaya.Controller.Courses.Admin.CoursesController;
 
 import vidyalaya.Model.AdminData;
 import vidyalaya.Model.ModuleData;
