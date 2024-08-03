@@ -19,6 +19,8 @@ public class CreateRoutineForm extends javax.swing.JFrame {
     public CreateRoutineForm() {
         initComponents();
 
+        timePicker1.setEditor(txtTimeEditor);
+
         setTitle("Add New User - Vidyalaya Admin");
         setLocationRelativeTo(null);
         setResizable(false);
@@ -36,8 +38,10 @@ public class CreateRoutineForm extends javax.swing.JFrame {
         UIUtils.setCustomFont(label4, 16f);
         UIUtils.setCustomFont(module, 16f);
         UIUtils.setCustomFont(weekday, 16f);
-
+        UIUtils.setCustomFont(txtTimeEditor, 16f);
+        UIUtils.setCustomFont(txtContent, 16f);        
         UIUtils.setCustomFont(createRoutineBtn, 16f);
+
     }
 
     public void addCreateRoutineListener(ActionListener listener) {
@@ -62,7 +66,7 @@ public class CreateRoutineForm extends javax.swing.JFrame {
      * @return the txtTime
      */
     public javax.swing.JTextField getTimeField() {
-        return txtTime;
+        return txtTimeEditor;
     }
 
     /**
@@ -81,10 +85,10 @@ public class CreateRoutineForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        timePicker1 = new raven.datetime.component.time.TimePicker();
         jPanel1 = new javax.swing.JPanel();
         label = new javax.swing.JLabel();
         label2 = new javax.swing.JLabel();
-        txtTime = new javax.swing.JTextField();
         label3 = new javax.swing.JLabel();
         createRoutineBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -93,6 +97,7 @@ public class CreateRoutineForm extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         weekday = new javax.swing.JComboBox<>();
         txtContent = new javax.swing.JTextField();
+        txtTimeEditor = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -102,13 +107,6 @@ public class CreateRoutineForm extends javax.swing.JFrame {
         label.setText("Weekday");
 
         label2.setText("Time");
-
-        txtTime.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(222, 222, 222), 2, true));
-        txtTime.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTimeActionPerformed(evt);
-            }
-        });
 
         label3.setText("Details");
 
@@ -152,19 +150,19 @@ public class CreateRoutineForm extends javax.swing.JFrame {
             .addComponent(jSeparator1)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtContent, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtContent, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
                     .addComponent(label4)
                     .addComponent(jLabel1)
                     .addComponent(label)
-                    .addComponent(txtTime, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(label2)
-                    .addComponent(createRoutineBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(createRoutineBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
                     .addComponent(label3)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(weekday, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(module, 0, 529, Short.MAX_VALUE)))
-                .addContainerGap(14, Short.MAX_VALUE))
+                        .addComponent(module, 0, 529, Short.MAX_VALUE))
+                    .addComponent(txtTimeEditor, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,8 +181,8 @@ public class CreateRoutineForm extends javax.swing.JFrame {
                 .addComponent(module, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtTime, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtTimeEditor, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -212,11 +210,8 @@ public class CreateRoutineForm extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTimeActionPerformed
 
     private void createRoutineBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createRoutineBtnActionPerformed
         // TODO add your handling code here:
@@ -276,8 +271,9 @@ public class CreateRoutineForm extends javax.swing.JFrame {
     private javax.swing.JLabel label3;
     private javax.swing.JLabel label4;
     private javax.swing.JComboBox<String> module;
+    private raven.datetime.component.time.TimePicker timePicker1;
     private javax.swing.JTextField txtContent;
-    private javax.swing.JTextField txtTime;
+    private javax.swing.JFormattedTextField txtTimeEditor;
     private javax.swing.JComboBox<String> weekday;
     // End of variables declaration//GEN-END:variables
 }

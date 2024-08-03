@@ -18,6 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import raven.datetime.component.time.TimePicker;
 
 /**
  *
@@ -60,6 +61,10 @@ public class UIUtils {
 
     public static void setCustomFont(JComboBox comobobox, float size) {
         comobobox.setFont(new DMSans(size).getFont());
+    }
+
+    public static void setCustomFont(TimePicker timePicker, float size) {
+        timePicker.setFont(new DMSans(size).getFont());
     }
 
     public static void setCursorPointer(JLabel label) {

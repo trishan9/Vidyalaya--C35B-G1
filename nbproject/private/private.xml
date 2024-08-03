@@ -2,33 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Controller/Notices/Teacher/NoticesController.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Controller/Attendance/Teacher/AttendanceController.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Controller/AdminLoginController.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/DAO/RoutineDAO/RoutineDAO.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Controller/Attendance/Student/AttendanceController.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Controller/Courses/Admin/CoursesController.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/DAO/RoutineDAO/RoutineDAOImplementation.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Controller/Courses/Admin/EditCourseController.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Controller/Routine/Teacher/RoutineController.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Controller/Courses/Teacher/MyCoursesController.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Controller/Routine/Admin/CreateRoutineController.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Controller/Users/UsersController.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Controller/Settings/Teacher/SettingsController.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Components/Modals/EditCourseForm.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Controller/Settings/Admin/SettingsController.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Controller/Courses/Student/MyCoursesController.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Controller/Routine/Admin/RoutineController.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/View/Dashboard/Admin/CoursesScreen.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Controller/Routine/Student/RoutineController.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Database/Database.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Model/RoutineData.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Controller/Attendance/Admin/AttendanceController.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Controller/Notices/Student/NoticesController.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Controller/Settings/Student/SettingsController.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/View/Dashboard/Admin/RoutineScreen.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Database/MySqlConnection.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

@@ -32,27 +32,27 @@ import vidyalaya.SessionManagement.AdminSession;
  * @author trishan9
  */
 public class CreateRoutineController {
-    
+
     private final ModuleDAO moduleDAO = new ModuleDAOImplementation();
     private final RoutineDAO routineDAO = new RoutineDAOImplementation();
     private final CreateRoutineForm userView;
     public List<ModuleData> modulesList = new ArrayList<>();
-    
+
     public CreateRoutineController(CreateRoutineForm userView) {
         this.userView = userView;
         userView.addCreateRoutineListener(new CreateRoutineListener());
         getModulesList();
         populateComboBox(userView.getModule(), modulesList);
     }
-    
+
     public void open() {
         this.userView.setVisible(true);
     }
-    
+
     public void close() {
         this.userView.dispose();
     }
-    
+
     private void populateComboBox(JComboBox<ModuleData> combo, List<ModuleData> modulesList) {
         DefaultComboBoxModel<ModuleData> model = new DefaultComboBoxModel<>();
         for (ModuleData module : modulesList) {
@@ -60,7 +60,7 @@ public class CreateRoutineController {
         }
         combo.setModel(model);
     }
-    
+
     public final void getModulesList() {
         try {
             modulesList = moduleDAO.getAllModules(AdminSession.getCurrentUser().getId());
@@ -68,9 +68,9 @@ public class CreateRoutineController {
             modulesList = new ArrayList<>();
         }
     }
-    
+
     class CreateRoutineListener implements ActionListener {
-        
+
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
@@ -80,19 +80,15 @@ public class CreateRoutineController {
                 String time = userView.getTimeField().getText();
                 String details = userView.getContentField().getText();
                 String content = time + " - " + details;
-                
+
                 RoutineData routine = new RoutineData(weekday, moduleCode, content);
                 routineDAO.createRoutine(routine);
-                
-                System.out.println(weekday);
-                System.out.println(time);
-                System.out.println(content);
 
-//                vidyalaya.View.Dashboard.Admin.RoutineScreen routineView = new vidyalaya.View.Dashboard.Admin.RoutineScreen();
-//                vidyalaya.Controller.Routine.Admin.RoutineController routineController = new vidyalaya.Controller.Routine.Admin.RoutineController(routineView);
-//                UIUtils.closeAllFrames();
-//                routineController.open();
-//                UIUtils.info(routineView, "Routine created successfully");
+                vidyalaya.View.Dashboard.Admin.RoutineScreen routineView = new vidyalaya.View.Dashboard.Admin.RoutineScreen();
+                vidyalaya.Controller.Routine.Admin.RoutineController routineController = new vidyalaya.Controller.Routine.Admin.RoutineController(routineView);
+                UIUtils.closeAllFrames();
+                routineController.open();
+                UIUtils.info(routineView, "Routine created successfully");
             } catch (Exception ex) {
                 Logger.getLogger(CreateRoutineController.class.getName()).log(Level.SEVERE, null, ex);
                 UIUtils.error(userView, ex.getMessage());
