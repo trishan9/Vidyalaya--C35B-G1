@@ -14,16 +14,19 @@ import java.sql.SQLException;
 public class RoutineData {
 
     private int id;
+    private String weekday;
     private int module_code;
     private String routine_content;
 
-    public RoutineData(int module_code, String routine_content) {
+    public RoutineData(String weekday, int module_code, String routine_content) {
+        this.weekday = weekday;
         this.module_code = module_code;
         this.routine_content = routine_content;
     }
 
     public RoutineData(ResultSet result) throws SQLException {
         this.id = result.getInt("id");
+        this.weekday = result.getString("weekday");
         this.module_code = result.getInt("module_code");
         this.routine_content = result.getString("routine_content");
     }
@@ -34,6 +37,14 @@ public class RoutineData {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getWeekday() {
+        return weekday;
+    }
+
+    public void setWeekday(String weekday) {
+        this.weekday = weekday;
     }
 
     public int getModuleCode() {

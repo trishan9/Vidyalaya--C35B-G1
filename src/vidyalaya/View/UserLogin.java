@@ -34,6 +34,9 @@ public class UserLogin extends javax.swing.JFrame {
         UIUtils.setCustomFont(pwLabel, 16f);
         UIUtils.setCustomFont(signinBtn, 16f);
 
+        UIUtils.setCustomFont(txtUsername, 16f);        
+        UIUtils.setCustomFont(txtPassword, 16f);
+
     }
 
     public void addUserLoginListener(ActionListener listener) {

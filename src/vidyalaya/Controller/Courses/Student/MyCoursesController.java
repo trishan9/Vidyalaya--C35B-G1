@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import vidyalaya.Controller.UserLoginController;
+import vidyalaya.Controller.Users.UserLoginController;
 
 import vidyalaya.DAO.ModuleDAO.ModuleDAO;
 import vidyalaya.DAO.ModuleDAO.ModuleDAOImplementation;
@@ -18,6 +18,8 @@ import vidyalaya.DAO.ModuleDAO.ModuleDAOImplementation;
 import vidyalaya.Model.ModuleData;
 
 import vidyalaya.SessionManagement.StudentSession;
+
+import vidyalaya.Utils.UIUtils;
 
 import vidyalaya.View.Dashboard.Student.AttendanceScreen;
 import vidyalaya.View.Dashboard.Student.NoticesScreen;
@@ -67,8 +69,8 @@ public class MyCoursesController {
         @Override
         public void actionPerformed(ActionEvent e) {
             RoutineScreen routineView = new RoutineScreen();
-            vidyalaya.Controller.Student.RoutineController routineController = new vidyalaya.Controller.Student.RoutineController(routineView);
-            close();
+            vidyalaya.Controller.Routine.Student.RoutineController routineController = new vidyalaya.Controller.Routine.Student.RoutineController(routineView);
+            UIUtils.closeAllFrames();
             routineController.open();
         }
     }
@@ -78,8 +80,8 @@ public class MyCoursesController {
         @Override
         public void actionPerformed(ActionEvent e) {
             NoticesScreen noticesView = new NoticesScreen();
-            vidyalaya.Controller.Student.NoticesController noticesController = new vidyalaya.Controller.Student.NoticesController(noticesView);
-            close();
+            vidyalaya.Controller.Notices.Student.NoticesController noticesController = new vidyalaya.Controller.Notices.Student.NoticesController(noticesView);
+            UIUtils.closeAllFrames();
             noticesController.open();
         }
     }
@@ -89,8 +91,8 @@ public class MyCoursesController {
         @Override
         public void actionPerformed(ActionEvent e) {
             AttendanceScreen attendanceView = new AttendanceScreen();
-            vidyalaya.Controller.Student.AttendanceController attendanceController = new vidyalaya.Controller.Student.AttendanceController(attendanceView);
-            close();
+            vidyalaya.Controller.Attendance.Student.AttendanceController attendanceController = new vidyalaya.Controller.Attendance.Student.AttendanceController(attendanceView);
+            UIUtils.closeAllFrames();
             attendanceController.open();
         }
     }
@@ -100,8 +102,8 @@ public class MyCoursesController {
         @Override
         public void actionPerformed(ActionEvent e) {
             SettingsScreen settingsView = new SettingsScreen();
-            vidyalaya.Controller.Student.SettingsController settingsController = new vidyalaya.Controller.Student.SettingsController(settingsView);
-            close();
+            vidyalaya.Controller.Settings.Student.SettingsController settingsController = new vidyalaya.Controller.Settings.Student.SettingsController(settingsView);
+            UIUtils.closeAllFrames();
             settingsController.open();
         }
     }
@@ -112,7 +114,7 @@ public class MyCoursesController {
         public void actionPerformed(ActionEvent e) {
             UserLogin studentLoginView = new UserLogin();
             UserLoginController studentLoginController = new UserLoginController(studentLoginView);
-            close();
+            UIUtils.closeAllFrames();
             studentLoginController.open();
         }
     }

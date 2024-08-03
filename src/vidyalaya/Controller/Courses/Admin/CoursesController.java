@@ -105,8 +105,8 @@ public class CoursesController {
         @Override
         public void actionPerformed(ActionEvent e) {
             RoutineScreen routineView = new RoutineScreen();
-            vidyalaya.Controller.Admin.RoutineController routineController = new vidyalaya.Controller.Admin.RoutineController(routineView);
-            close();
+            vidyalaya.Controller.Routine.Admin.RoutineController routineController = new vidyalaya.Controller.Routine.Admin.RoutineController(routineView);
+            UIUtils.closeAllFrames();;
             routineController.open();
         }
     }
@@ -116,8 +116,8 @@ public class CoursesController {
         @Override
         public void actionPerformed(ActionEvent e) {
             NoticesScreen noticesView = new NoticesScreen();
-            vidyalaya.Controller.Admin.NoticesController noticesController = new vidyalaya.Controller.Admin.NoticesController(noticesView);
-            close();
+            vidyalaya.Controller.Notices.Admin.NoticesController noticesController = new vidyalaya.Controller.Notices.Admin.NoticesController(noticesView);
+            UIUtils.closeAllFrames();;
             noticesController.open();
         }
     }
@@ -127,8 +127,8 @@ public class CoursesController {
         @Override
         public void actionPerformed(ActionEvent e) {
             AttendanceScreen attendanceView = new AttendanceScreen();
-            vidyalaya.Controller.Admin.AttendanceController attendanceController = new vidyalaya.Controller.Admin.AttendanceController(attendanceView);
-            close();
+            vidyalaya.Controller.Attendance.Admin.AttendanceController attendanceController = new vidyalaya.Controller.Attendance.Admin.AttendanceController(attendanceView);
+            UIUtils.closeAllFrames();;
             attendanceController.open();
         }
     }
@@ -138,8 +138,8 @@ public class CoursesController {
         @Override
         public void actionPerformed(ActionEvent e) {
             UsersScreen usersView = new UsersScreen();
-            vidyalaya.Controller.Admin.UsersController usersController = new vidyalaya.Controller.Admin.UsersController(usersView);
-            close();
+            vidyalaya.Controller.Users.UsersController usersController = new vidyalaya.Controller.Users.UsersController(usersView);
+            UIUtils.closeAllFrames();;
             usersController.open();
         }
     }
@@ -149,8 +149,8 @@ public class CoursesController {
         @Override
         public void actionPerformed(ActionEvent e) {
             SettingsScreen settingsView = new SettingsScreen();
-            vidyalaya.Controller.Admin.SettingsController settingsController = new vidyalaya.Controller.Admin.SettingsController(settingsView);
-            close();
+            vidyalaya.Controller.Settings.Admin.SettingsController settingsController = new vidyalaya.Controller.Settings.Admin.SettingsController(settingsView);
+            UIUtils.closeAllFrames();;
             settingsController.open();
         }
     }
@@ -161,7 +161,7 @@ public class CoursesController {
         public void actionPerformed(ActionEvent e) {
             AdminLogin adminLoginView = new AdminLogin();
             AdminLoginController adminLoginController = new AdminLoginController(adminLoginView);
-            close();
+            UIUtils.closeAllFrames();;
             adminLoginController.open();
         }
     }

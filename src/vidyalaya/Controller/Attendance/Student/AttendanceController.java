@@ -2,22 +2,24 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package vidyalaya.Controller.Teacher;
+package vidyalaya.Controller.Attendance.Student;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import vidyalaya.Controller.UserLoginController;
+import vidyalaya.Controller.Users.UserLoginController;
 
 import vidyalaya.DAO.AuthDAO.AuthDAO;
 import vidyalaya.DAO.AuthDAO.AuthDAOImplementation;
 
+import vidyalaya.Utils.UIUtils;
+
 import vidyalaya.View.UserLogin;
-import vidyalaya.View.Dashboard.Teacher.AttendanceScreen;
-import vidyalaya.View.Dashboard.Teacher.MyCoursesScreen;
-import vidyalaya.View.Dashboard.Teacher.NoticesScreen;
-import vidyalaya.View.Dashboard.Teacher.RoutineScreen;
-import vidyalaya.View.Dashboard.Teacher.SettingsScreen;
+import vidyalaya.View.Dashboard.Student.AttendanceScreen;
+import vidyalaya.View.Dashboard.Student.MyCoursesScreen;
+import vidyalaya.View.Dashboard.Student.NoticesScreen;
+import vidyalaya.View.Dashboard.Student.RoutineScreen;
+import vidyalaya.View.Dashboard.Student.SettingsScreen;
 
 /**
  *
@@ -50,8 +52,8 @@ public class AttendanceController {
         @Override
         public void actionPerformed(ActionEvent e) {
             MyCoursesScreen coursesView = new MyCoursesScreen();
-            vidyalaya.Controller.Courses.Teacher.MyCoursesController coursesController = new vidyalaya.Controller.Courses.Teacher.MyCoursesController(coursesView);
-            close();
+            vidyalaya.Controller.Courses.Student.MyCoursesController coursesController = new vidyalaya.Controller.Courses.Student.MyCoursesController(coursesView);
+            UIUtils.closeAllFrames();
             coursesController.open();
         }
     }
@@ -61,8 +63,8 @@ public class AttendanceController {
         @Override
         public void actionPerformed(ActionEvent e) {
             RoutineScreen routineView = new RoutineScreen();
-            vidyalaya.Controller.Teacher.RoutineController routineController = new vidyalaya.Controller.Teacher.RoutineController(routineView);
-            close();
+            vidyalaya.Controller.Routine.Student.RoutineController routineController = new vidyalaya.Controller.Routine.Student.RoutineController(routineView);
+            UIUtils.closeAllFrames();
             routineController.open();
         }
     }
@@ -72,8 +74,8 @@ public class AttendanceController {
         @Override
         public void actionPerformed(ActionEvent e) {
             NoticesScreen noticesView = new NoticesScreen();
-            vidyalaya.Controller.Teacher.NoticesController noticesController = new vidyalaya.Controller.Teacher.NoticesController(noticesView);
-            close();
+            vidyalaya.Controller.Notices.Student.NoticesController noticesController = new vidyalaya.Controller.Notices.Student.NoticesController(noticesView);
+            UIUtils.closeAllFrames();
             noticesController.open();
         }
     }
@@ -83,8 +85,8 @@ public class AttendanceController {
         @Override
         public void actionPerformed(ActionEvent e) {
             SettingsScreen settingsView = new SettingsScreen();
-            vidyalaya.Controller.Teacher.SettingsController settingsController = new vidyalaya.Controller.Teacher.SettingsController(settingsView);
-            close();
+            vidyalaya.Controller.Settings.Student.SettingsController settingsController = new vidyalaya.Controller.Settings.Student.SettingsController(settingsView);
+            UIUtils.closeAllFrames();
             settingsController.open();
         }
     }
@@ -95,7 +97,7 @@ public class AttendanceController {
         public void actionPerformed(ActionEvent e) {
             UserLogin userLoginView = new UserLogin();
             UserLoginController userLoginController = new UserLoginController(userLoginView);
-            close();
+            UIUtils.closeAllFrames();
             userLoginController.open();
         }
     }

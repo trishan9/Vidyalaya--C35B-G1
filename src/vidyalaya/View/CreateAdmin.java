@@ -41,6 +41,11 @@ public class CreateAdmin extends javax.swing.JFrame {
         UIUtils.setCursorPointer(signIn);
         UIUtils.setCursorPointer(signupBtn);
 
+        UIUtils.setCustomFont(txtName, 16f);
+        UIUtils.setCustomFont(txtInsName, 16f);
+        UIUtils.setCustomFont(txtEmail, 16f);
+        UIUtils.setCustomFont(txtPassword, 16f);
+
     }
 
     public void addSignInRedirectListener(ActionListener listener) {

@@ -42,6 +42,9 @@ public class AdminLogin extends javax.swing.JFrame {
 
         UIUtils.setCursorPointer(signUp);
         UIUtils.setCursorPointer(signInAsUser);
+        
+        UIUtils.setCustomFont(txtUsername, 16f);
+        UIUtils.setCustomFont(txtPassword, 16f);
     }
 
     public void addSignUpRedirectListener(ActionListener listener) {

@@ -47,10 +47,20 @@ public class RoutineScreen extends javax.swing.JFrame {
         UIUtils.setCustomFont(menuSettings, 17f);
         UIUtils.setCustomFont(menuLogout, 17f);
         UIUtils.setCustomFont(jLabel3, 23f);
+        UIUtils.setCustomFont(createRoutineBtn, 17f);
 
         AdminData currentUser = AdminSession.getCurrentUser();
         lblName.setText(currentUser.getName());
         lblId.setText(currentUser.getUsername());
+    }
+
+    public void addCreateRoutineListener(ActionListener listener) {
+        createRoutineBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                listener.actionPerformed(null);
+            }
+        });
     }
 
     public void addCoursesRedirectListener(ActionListener listener) {
@@ -148,6 +158,9 @@ public class RoutineScreen extends javax.swing.JFrame {
         iconLogout = new javax.swing.JLabel();
         pnlRight = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
+        createRoutine = new javax.swing.JPanel();
+        createRoutineBtn = new javax.swing.JLabel();
+        iconUsers1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -441,6 +454,35 @@ public class RoutineScreen extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel3.setText("Routine");
 
+        createRoutine.setBackground(new java.awt.Color(24, 97, 191));
+        createRoutine.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
+        createRoutine.setForeground(new java.awt.Color(255, 255, 255));
+        createRoutine.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        createRoutine.setPreferredSize(new java.awt.Dimension(100, 52));
+
+        createRoutineBtn.setForeground(new java.awt.Color(255, 255, 255));
+        createRoutineBtn.setText("Create Routine");
+
+        iconUsers1.setBackground(new java.awt.Color(24, 97, 191));
+        iconUsers1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vidyalaya/Assets/icons/Create.png"))); // NOI18N
+
+        javax.swing.GroupLayout createRoutineLayout = new javax.swing.GroupLayout(createRoutine);
+        createRoutine.setLayout(createRoutineLayout);
+        createRoutineLayout.setHorizontalGroup(
+            createRoutineLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(createRoutineLayout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addComponent(iconUsers1)
+                .addGap(18, 18, 18)
+                .addComponent(createRoutineBtn)
+                .addContainerGap(63, Short.MAX_VALUE))
+        );
+        createRoutineLayout.setVerticalGroup(
+            createRoutineLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(iconUsers1, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+            .addComponent(createRoutineBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout pnlRightLayout = new javax.swing.GroupLayout(pnlRight);
         pnlRight.setLayout(pnlRightLayout);
         pnlRightLayout.setHorizontalGroup(
@@ -448,14 +490,19 @@ public class RoutineScreen extends javax.swing.JFrame {
             .addGroup(pnlRightLayout.createSequentialGroup()
                 .addGap(0, 0, 0)
                 .addComponent(jLabel3)
-                .addGap(970, 970, 970))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 788, Short.MAX_VALUE)
+                .addComponent(createRoutine, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         pnlRightLayout.setVerticalGroup(
             pnlRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlRightLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
+            .addGroup(pnlRightLayout.createSequentialGroup()
+                .addComponent(createRoutine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout pnlCenterLayout = new javax.swing.GroupLayout(pnlCenter);
@@ -466,7 +513,7 @@ public class RoutineScreen extends javax.swing.JFrame {
                 .addComponent(pnlSideNav, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(pnlRight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 79, Short.MAX_VALUE))
+                .addGap(0, 50, Short.MAX_VALUE))
         );
         pnlCenterLayout.setVerticalGroup(
             pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -531,6 +578,8 @@ public class RoutineScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel createRoutine;
+    private javax.swing.JLabel createRoutineBtn;
     private javax.swing.JLabel iconAttendance;
     private javax.swing.JLabel iconCourses;
     private javax.swing.JLabel iconLogout;
@@ -538,6 +587,7 @@ public class RoutineScreen extends javax.swing.JFrame {
     private javax.swing.JLabel iconRoutine;
     private javax.swing.JLabel iconSettings;
     private javax.swing.JLabel iconUsers;
+    private javax.swing.JLabel iconUsers1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

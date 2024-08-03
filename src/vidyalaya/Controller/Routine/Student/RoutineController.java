@@ -2,38 +2,40 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package vidyalaya.Controller.Teacher;
+package vidyalaya.Controller.Routine.Student;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import vidyalaya.Controller.UserLoginController;
+import vidyalaya.Controller.Users.UserLoginController;
 
 import vidyalaya.DAO.AuthDAO.AuthDAO;
 import vidyalaya.DAO.AuthDAO.AuthDAOImplementation;
 
+import vidyalaya.Utils.UIUtils;
+
 import vidyalaya.View.UserLogin;
-import vidyalaya.View.Dashboard.Teacher.AttendanceScreen;
-import vidyalaya.View.Dashboard.Teacher.MyCoursesScreen;
-import vidyalaya.View.Dashboard.Teacher.NoticesScreen;
-import vidyalaya.View.Dashboard.Teacher.RoutineScreen;
-import vidyalaya.View.Dashboard.Teacher.SettingsScreen;
+import vidyalaya.View.Dashboard.Student.AttendanceScreen;
+import vidyalaya.View.Dashboard.Student.MyCoursesScreen;
+import vidyalaya.View.Dashboard.Student.NoticesScreen;
+import vidyalaya.View.Dashboard.Student.RoutineScreen;
+import vidyalaya.View.Dashboard.Student.SettingsScreen;
 
 /**
  *
  * @author trish
  */
-public class SettingsController {
-        
+public class RoutineController {
+    
     private final AuthDAO authDAO = new AuthDAOImplementation();
-    private final SettingsScreen userView;
+    private final RoutineScreen userView;
 
-    public SettingsController(SettingsScreen userView) {
+    public RoutineController(RoutineScreen userView) {
         this.userView = userView;
         userView.addCoursesRedirectListener(new CoursesRedirectListener());
-        userView.addRoutineRedirectListener(new RoutineRedirectListener());
         userView.addNoticesRedirectListener(new NoticesRedirectListener());
         userView.addAttendanceRedirectListener(new AttendanceRedirectListener());
+        userView.addSettingsRedirectListener(new SettingsRedirectListener());
         userView.addLogoutListener(new LogoutListener());
     }
 
@@ -46,24 +48,12 @@ public class SettingsController {
     }
 
     class CoursesRedirectListener implements ActionListener {
-
         @Override
         public void actionPerformed(ActionEvent e) {
             MyCoursesScreen coursesView = new MyCoursesScreen();
-            vidyalaya.Controller.Courses.Teacher.MyCoursesController coursesController = new vidyalaya.Controller.Courses.Teacher.MyCoursesController(coursesView);
-            close();
+            vidyalaya.Controller.Courses.Student.MyCoursesController coursesController = new vidyalaya.Controller.Courses.Student.MyCoursesController(coursesView);
+            UIUtils.closeAllFrames();
             coursesController.open();
-        }
-    }
-
-    class RoutineRedirectListener implements ActionListener {
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            RoutineScreen routineView = new RoutineScreen();
-            vidyalaya.Controller.Teacher.RoutineController routineController = new vidyalaya.Controller.Teacher.RoutineController(routineView);
-            close();
-            routineController.open();
         }
     }
 
@@ -72,8 +62,8 @@ public class SettingsController {
         @Override
         public void actionPerformed(ActionEvent e) {
             NoticesScreen noticesView = new NoticesScreen();
-            vidyalaya.Controller.Teacher.NoticesController noticesController = new vidyalaya.Controller.Teacher.NoticesController(noticesView);
-            close();
+            vidyalaya.Controller.Notices.Student.NoticesController noticesController = new vidyalaya.Controller.Notices.Student.NoticesController(noticesView);
+            UIUtils.closeAllFrames();
             noticesController.open();
         }
     }
@@ -83,9 +73,20 @@ public class SettingsController {
         @Override
         public void actionPerformed(ActionEvent e) {
             AttendanceScreen attendanceView = new AttendanceScreen();
-            vidyalaya.Controller.Teacher.AttendanceController attendanceController = new vidyalaya.Controller.Teacher.AttendanceController(attendanceView);
-            close();
+            vidyalaya.Controller.Attendance.Student.AttendanceController attendanceController = new vidyalaya.Controller.Attendance.Student.AttendanceController(attendanceView);
+            UIUtils.closeAllFrames();
             attendanceController.open();
+        }
+    }
+
+    class SettingsRedirectListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            SettingsScreen settingsView = new SettingsScreen();
+            vidyalaya.Controller.Settings.Student.SettingsController settingsController = new vidyalaya.Controller.Settings.Student.SettingsController(settingsView);
+            UIUtils.closeAllFrames();
+            settingsController.open();
         }
     }
 
@@ -95,7 +96,7 @@ public class SettingsController {
         public void actionPerformed(ActionEvent e) {
             UserLogin userLoginView = new UserLogin();
             UserLoginController userLoginController = new UserLoginController(userLoginView);
-            close();
+            UIUtils.closeAllFrames();
             userLoginController.open();
         }
     }

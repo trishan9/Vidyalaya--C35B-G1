@@ -16,6 +16,8 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 /**
  *
@@ -42,6 +44,14 @@ public class UIUtils {
 
     public static void setCustomFont(JLabel label, float size) {
         label.setFont(new DMSans(size).getFont());
+    }
+
+    public static void setCustomFont(JTextField txt, float size) {
+        txt.setFont(new DMSans(size).getFont());
+    }
+
+    public static void setCustomFont(JPasswordField password, float size) {
+        password.setFont(new DMSans(size).getFont());
     }
 
     public static void setCustomFont(JButton button, float size) {
