@@ -76,7 +76,6 @@ public class CoursesScreen extends javax.swing.JFrame {
         var temp = new CourseCard(data,
                 () -> {
                     new EditCourseForm(data.getCode()).setVisible(true);
-                    System.out.println("Edit for: " + data.getCode());
                 },
                 () -> {
                     coursesController.deleteCourseByCode(data.getCode());

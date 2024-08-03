@@ -5,8 +5,13 @@
 package vidyalaya.Components.Modals;
 
 import java.awt.event.ActionListener;
+
+import vidyalaya.Components.ComboBoxMultiSelection;
+
 import vidyalaya.Controller.Courses.Admin.EditCourseController;
+
 import vidyalaya.Model.ModuleData;
+
 import vidyalaya.Utils.UIUtils;
 
 /**
@@ -19,12 +24,14 @@ public class EditCourseForm extends javax.swing.JFrame {
 
     /**
      * Creates new form CreateNewUserForm
+     *
+     * @param moduleCode
      */
     public EditCourseForm(int moduleCode) {
         initComponents();
         coursesController = new EditCourseController(moduleCode, this);
 
-        setTitle("Create Course - Vidyalaya Admin");
+        setTitle("Edit Course - Vidyalaya Admin");
         setLocationRelativeTo(null);
         setResizable(false);
 
@@ -37,7 +44,7 @@ public class EditCourseForm extends javax.swing.JFrame {
         UIUtils.setCustomFont(jLabel1, 25f);
         UIUtils.setCustomFont(label, 16f);
         UIUtils.setCustomFont(editCourseBtn, 16f);
-        
+
         ModuleData data = coursesController.getModuleByCode();
         txtName.setText(data.getName());
     }
@@ -51,6 +58,13 @@ public class EditCourseForm extends javax.swing.JFrame {
      */
     public javax.swing.JTextField getNameField() {
         return txtName;
+    }
+
+    /**
+     * @return the comboBoxMultiSelection1
+     */
+    public ComboBoxMultiSelection getTeachersField() {
+        return comboBoxMultiSelection1;
     }
 
     /**
@@ -68,9 +82,10 @@ public class EditCourseForm extends javax.swing.JFrame {
         editCourseBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        label1 = new javax.swing.JLabel();
+        comboBoxMultiSelection1 = new vidyalaya.Components.ComboBoxMultiSelection();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(77, 215, 131));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(222, 222, 222), 2, true));
@@ -99,19 +114,24 @@ public class EditCourseForm extends javax.swing.JFrame {
         jSeparator1.setBackground(new java.awt.Color(222, 222, 222));
         jSeparator1.setForeground(new java.awt.Color(222, 222, 222));
 
+        label1.setText("Teacher(s)");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jSeparator1)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(label1)
                     .addComponent(jLabel1)
                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(label)
-                    .addComponent(editCourseBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(editCourseBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
+                        .addComponent(comboBoxMultiSelection1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(14, Short.MAX_VALUE))
-            .addComponent(jSeparator1)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,9 +144,13 @@ public class EditCourseForm extends javax.swing.JFrame {
                 .addComponent(label, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addGap(26, 26, 26)
+                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(comboBoxMultiSelection1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
                 .addComponent(editCourseBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -142,8 +166,8 @@ public class EditCourseForm extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -157,14 +181,15 @@ public class EditCourseForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_editCourseBtnActionPerformed
 
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private vidyalaya.Components.ComboBoxMultiSelection comboBoxMultiSelection1;
     private javax.swing.JButton editCourseBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel label;
+    private javax.swing.JLabel label1;
     private javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables
 }

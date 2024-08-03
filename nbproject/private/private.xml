@@ -4,12 +4,11 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/DAO/ModuleDAO/ModuleDAOImplementation.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Controller/CreateNewUserController.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Components/Modals/CreateNewUserForm.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Controller/CreateCourseController.java</file>
+            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Components/ComboBoxMultiSelection.java</file>
+            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Controller/Courses/Admin/CoursesController.java</file>
             <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/View/Dashboard/Admin/CoursesScreen.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/View/Dashboard/Admin/UsersScreen.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Components/Modals/CreateCourseForm.java</file>
+            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Controller/Courses/Admin/EditCourseController.java</file>
+            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/DAO/AuthDAO/AuthDAOImplementation.java</file>
             <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/DAO/ModuleDAO/ModuleDAO.java</file>
         </group>
     </open-files>

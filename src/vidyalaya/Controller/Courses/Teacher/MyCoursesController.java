@@ -34,7 +34,7 @@ public class MyCoursesController {
 
     private final ModuleDAO moduleDAO = new ModuleDAOImplementation();
     private final MyCoursesScreen userView;
-    public List<ModuleData> modulesList = new ArrayList<>();
+    public List<ModuleData> myModulesList = new ArrayList<>();
 
     public MyCoursesController(MyCoursesScreen userView) {
         this.userView = userView;
@@ -43,14 +43,14 @@ public class MyCoursesController {
         userView.addAttendanceRedirectListener(new AttendanceRedirectListener());
         userView.addSettingsRedirectListener(new SettingsRedirectListener());
         userView.addLogoutListener(new LogoutListener());
-        getModulesList();
+        getMyModulesList();
     }
 
-    public final void getModulesList() {
+    public final void getMyModulesList() {
         try {
-            modulesList = moduleDAO.getAllModules(TeacherSession.getCurrentUser().getAdminId());
+            myModulesList = moduleDAO.getAllTeacherModules(TeacherSession.getCurrentUser().getId());
         } catch (Exception ex) {
-            modulesList = new ArrayList<>();
+            myModulesList = new ArrayList<>();
         }
     }
 

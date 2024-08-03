@@ -7,15 +7,24 @@ package vidyalaya.Controller.Courses.Admin;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
+
 import vidyalaya.Components.Modals.EditCourseForm;
 
+import vidyalaya.DAO.AuthDAO.AuthDAO;
+import vidyalaya.DAO.AuthDAO.AuthDAOImplementation;
 import vidyalaya.DAO.ModuleDAO.ModuleDAO;
 import vidyalaya.DAO.ModuleDAO.ModuleDAOImplementation;
 
 import vidyalaya.Model.AdminData;
 import vidyalaya.Model.ModuleData;
+import vidyalaya.Model.TeacherData;
 
 import vidyalaya.SessionManagement.AdminSession;
 
@@ -28,13 +37,36 @@ import vidyalaya.Utils.UIUtils;
 public class EditCourseController {
 
     private final ModuleDAO moduleDAO = new ModuleDAOImplementation();
+    private final AuthDAO authDAO = new AuthDAOImplementation();
     private final EditCourseForm userView;
     private final int moduleCode;
+    public List<TeacherData> teachersList = new ArrayList<>();
+    public List<TeacherData> moduleTeachersList = new ArrayList<>();
 
     public EditCourseController(int moduleCode, EditCourseForm userView) {
         this.userView = userView;
         this.moduleCode = moduleCode;
         userView.addEditCourseListener(new EditCourseListener());
+        getTeachersList();
+        getModuleTeachersList();
+        populateComboBox(userView.getTeachersField(), teachersList);
+        userView.getTeachersField().setSelectedItems(moduleTeachersList);
+    }
+
+    public final void getTeachersList() {
+        try {
+            teachersList = authDAO.getAllTeachers();
+        } catch (Exception ex) {
+            teachersList = new ArrayList<>();
+        }
+    }
+
+    public final void getModuleTeachersList() {
+        try {
+            moduleTeachersList = moduleDAO.getAllModuleTeachers(moduleCode);
+        } catch (Exception ex) {
+            moduleTeachersList = new ArrayList<>();
+        }
     }
 
     public void open() {
@@ -56,17 +88,36 @@ public class EditCourseController {
         }
     }
 
+    private void populateComboBox(JComboBox<TeacherData> combo, List<TeacherData> teachersList) {
+        DefaultComboBoxModel<TeacherData> model = new DefaultComboBoxModel<>();
+        for (TeacherData teacher : teachersList) {
+            model.addElement(teacher);
+        }
+        combo.setModel(model);
+    }
+
     class EditCourseListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
                 String name = userView.getNameField().getText();
+                List<TeacherData> selectedTeachers = userView.getTeachersField().getSelectedItems();
 
                 AdminData currentAdmin = AdminSession.getCurrentUser();
 
                 ModuleData course = new ModuleData(currentAdmin.getId(), name);
                 moduleDAO.updateModule(moduleCode, course);
+                
+                moduleDAO.deleteModuleTeachers(moduleCode);
+
+                selectedTeachers.forEach((teacher) -> {
+                    try {
+                        moduleDAO.createOrUpdateModuleTeacher(moduleCode, teacher.getId());
+                    } catch (Exception ex) {
+                        Logger.getLogger(EditCourseController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                });
 
                 vidyalaya.View.Dashboard.Admin.CoursesScreen coursesView = new vidyalaya.View.Dashboard.Admin.CoursesScreen();
                 vidyalaya.Controller.Courses.Admin.CoursesController coursesController = new vidyalaya.Controller.Courses.Admin.CoursesController(coursesView);

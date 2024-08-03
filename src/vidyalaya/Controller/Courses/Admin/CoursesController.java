@@ -96,6 +96,7 @@ public class CoursesController {
             CreateCourseForm createCourseView = new CreateCourseForm();
             CreateCourseController createCourseController = new CreateCourseController(createCourseView);
             createCourseController.open();
+            System.out.println("Course created");
         }
     }
 

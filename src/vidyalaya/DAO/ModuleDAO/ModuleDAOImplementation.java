@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import vidyalaya.Model.ModuleData;
+import vidyalaya.Model.TeacherData;
 
 /**
  *
@@ -70,6 +71,59 @@ public class ModuleDAOImplementation implements ModuleDAO {
     }
 
     @Override
+    public List<TeacherData> getAllModuleTeachers(int moduleCode) throws Exception {
+        Connection dbConnection = mysql.openConnection();
+
+        final String sql = "SELECT t.* FROM teacher t "
+                + "JOIN module_teacher mt ON t.id = mt.teacher_id "
+                + "WHERE mt.module_code = ?";
+        final PreparedStatement statement = dbConnection.prepareStatement(sql);
+        statement.setInt(1, moduleCode);
+
+        try {
+            List<TeacherData> teacherDataList = new ArrayList<>();
+            try (ResultSet data = statement.executeQuery()) {
+                while (data.next()) {
+                    teacherDataList.add(new TeacherData(data));
+                }
+            }
+            return teacherDataList;
+        } catch (SQLException ex) {
+            throw ex;
+        } finally {
+            statement.close();
+            mysql.closeConnection(dbConnection);
+        }
+    }
+
+    @Override
+    public List<ModuleData> getAllTeacherModules(int teacherId) throws Exception {
+        Connection dbConnection = mysql.openConnection();
+
+        final String sql = "SELECT m.* FROM module m "
+                + "JOIN module_teacher mt ON m.code = mt.module_code "
+                + "WHERE mt.teacher_id = ?";
+        final PreparedStatement statement = dbConnection.prepareStatement(sql);
+        statement.setInt(1, teacherId);
+
+        try {
+            List<ModuleData> moduleDataList = new ArrayList<>();
+            try (ResultSet data = statement.executeQuery()) {
+                while (data.next()) {
+                    ModuleData module = new ModuleData(data);
+                    moduleDataList.add(module);
+                }
+            }
+            statement.close();
+            return moduleDataList;
+        } catch (SQLException ex) {
+            throw ex;
+        } finally {
+            mysql.closeConnection(dbConnection);
+        }
+    }
+
+    @Override
     public ModuleData getModuleByCode(int moduleCode) throws Exception {
         Connection dbConnection = mysql.openConnection();
 
@@ -116,6 +170,31 @@ public class ModuleDAOImplementation implements ModuleDAO {
     }
 
     @Override
+    public void createOrUpdateModuleTeacher(int moduleCode, int teacherId) throws Exception {
+        Connection dbConnection = mysql.openConnection();
+
+        final PreparedStatement statement = dbConnection.prepareStatement("INSERT INTO module_teacher (teacher_id, module_code) VALUES (?, ?) "
+                + "ON DUPLICATE KEY UPDATE teacher_id = VALUES(teacher_id)");
+
+        statement.setInt(1, teacherId);
+        statement.setInt(2, moduleCode);
+
+        try {
+            boolean doesExist = checkIfModuleExists(dbConnection, "code", moduleCode);
+            if (!doesExist) {
+                throw new Exception("Course with code " + moduleCode + " doesn't exist");
+            }
+
+            statement.executeUpdate();
+            statement.close();
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            mysql.closeConnection(dbConnection);
+        }
+    }
+
+    @Override
     public void deleteModule(int moduleCode) throws Exception {
         Connection dbConnection = mysql.openConnection();
 
@@ -131,6 +210,25 @@ public class ModuleDAOImplementation implements ModuleDAO {
             statement.executeUpdate();
             statement.close();
         } catch (Exception ex) {
+            throw ex;
+        } finally {
+            mysql.closeConnection(dbConnection);
+        }
+    }
+
+    @Override
+    public void deleteModuleTeachers(int moduleCode) throws Exception {
+        Connection dbConnection = mysql.openConnection();
+
+        final PreparedStatement statement = dbConnection.prepareStatement(
+                "DELETE FROM module_teacher WHERE module_code = ?");
+
+        statement.setInt(1, moduleCode);
+
+        try {
+            statement.executeUpdate();
+            statement.close();
+        } catch (SQLException ex) {
             throw ex;
         } finally {
             mysql.closeConnection(dbConnection);

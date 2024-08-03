@@ -62,9 +62,9 @@ public class MyCoursesScreen extends javax.swing.JFrame {
         lblName.setText(currentUser.getName());
         lblId.setText(currentUser.getTeacherId());
     }
-    
-        private void initializeGrid() {
-        myCoursesController.modulesList.forEach((x) -> addGrid(x));
+
+    private void initializeGrid() {
+        myCoursesController.myModulesList.forEach((x) -> addGrid(x));
         var grid = new GridLayout(0, 1);
         grid.setHgap(10);
         grid.setVgap(10);
