@@ -6,12 +6,18 @@ package vidyalaya.Controller.Routine.Admin;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import vidyalaya.Components.Modals.CreateRoutineForm;
 
 import vidyalaya.Controller.AdminLoginController;
 
-import vidyalaya.DAO.AuthDAO.AuthDAO;
-import vidyalaya.DAO.AuthDAO.AuthDAOImplementation;
+import vidyalaya.DAO.RoutineDAO.RoutineDAO;
+import vidyalaya.DAO.RoutineDAO.RoutineDAOImplementation;
+import vidyalaya.Model.RoutineData;
+import vidyalaya.SessionManagement.AdminSession;
 
 import vidyalaya.Utils.UIUtils;
 
@@ -29,8 +35,9 @@ import vidyalaya.View.Dashboard.Admin.UsersScreen;
  */
 public class RoutineController {
 
-    private final AuthDAO authDAO = new AuthDAOImplementation();
+    private final RoutineDAO routineDAO = new RoutineDAOImplementation();
     private final RoutineScreen userView;
+    public List<RoutineData> routinesList = new ArrayList<>();
 
     public RoutineController(RoutineScreen userView) {
         this.userView = userView;
@@ -41,6 +48,15 @@ public class RoutineController {
         userView.addUsersRedirectListener(new UsersRedirectListener());
         userView.addSettingsRedirectListener(new SettingsRedirectListener());
         userView.addLogoutListener(new LogoutListener());
+        getModulesList();
+    }
+
+    public final void getModulesList() {
+        try {
+            routinesList = routineDAO.getAllRoutines(AdminSession.getCurrentUser().getId());
+        } catch (Exception ex) {
+            routinesList = new ArrayList<>();
+        }
     }
 
     public void open() {
@@ -52,6 +68,7 @@ public class RoutineController {
     }
 
     class CreateRoutineListener implements ActionListener {
+
         @Override
         public void actionPerformed(ActionEvent e) {
             CreateRoutineForm createRoutineView = new CreateRoutineForm();

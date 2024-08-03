@@ -4,9 +4,13 @@
  */
 package vidyalaya.View.Dashboard.Student;
 
+import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import vidyalaya.Components.RoutineCardUser;
+import vidyalaya.Controller.Routine.Student.RoutineController;
+import vidyalaya.Model.RoutineData;
 
 import vidyalaya.Model.StudentData;
 
@@ -20,11 +24,15 @@ import vidyalaya.Utils.UIUtils;
  */
 public class RoutineScreen extends javax.swing.JFrame {
 
+    RoutineController routineController;
+
     /**
      * Creates new form RoutineScreen
      */
     public RoutineScreen() {
         initComponents();
+        routineController = new RoutineController(this);
+        initializeGrid();
 
         setTitle("Routine - Vidyalaya");
         setSize(1400, 954);
@@ -50,6 +58,19 @@ public class RoutineScreen extends javax.swing.JFrame {
         StudentData currentUser = StudentSession.getCurrentUser();
         lblName.setText(currentUser.getName());
         lblId.setText(currentUser.getStudentId());
+    }
+
+    private void initializeGrid() {
+        routineController.myRoutinesList.forEach((x) -> addGrid(x));
+        var grid = new GridLayout(0, 1);
+        grid.setHgap(10);
+        grid.setVgap(10);
+        pnlRoutines.setLayout(grid);
+    }
+
+    private void addGrid(RoutineData data) {
+        var temp = new RoutineCardUser(data);
+        pnlRoutines.add(temp);
     }
 
     public void addCoursesRedirectListener(ActionListener listener) {
@@ -135,6 +156,7 @@ public class RoutineScreen extends javax.swing.JFrame {
         iconLogout = new javax.swing.JLabel();
         pnlRight = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
+        pnlRoutines = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -397,7 +419,7 @@ public class RoutineScreen extends javax.swing.JFrame {
         pnlRight.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel3.setText("Routine S");
+        jLabel3.setText("Routine");
 
         javax.swing.GroupLayout pnlRightLayout = new javax.swing.GroupLayout(pnlRight);
         pnlRight.setLayout(pnlRightLayout);
@@ -416,6 +438,19 @@ public class RoutineScreen extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        pnlRoutines.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout pnlRoutinesLayout = new javax.swing.GroupLayout(pnlRoutines);
+        pnlRoutines.setLayout(pnlRoutinesLayout);
+        pnlRoutinesLayout.setHorizontalGroup(
+            pnlRoutinesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1063, Short.MAX_VALUE)
+        );
+        pnlRoutinesLayout.setVerticalGroup(
+            pnlRoutinesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 501, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout pnlCenterLayout = new javax.swing.GroupLayout(pnlCenter);
         pnlCenter.setLayout(pnlCenterLayout);
         pnlCenterLayout.setHorizontalGroup(
@@ -423,8 +458,10 @@ public class RoutineScreen extends javax.swing.JFrame {
             .addGroup(pnlCenterLayout.createSequentialGroup()
                 .addComponent(pnlSideNav, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(pnlRight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 59, Short.MAX_VALUE))
+                .addGroup(pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnlRight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pnlRoutines, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 69, Short.MAX_VALUE))
         );
         pnlCenterLayout.setVerticalGroup(
             pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -432,6 +469,8 @@ public class RoutineScreen extends javax.swing.JFrame {
             .addGroup(pnlCenterLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pnlRight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(pnlRoutines, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -517,6 +556,7 @@ public class RoutineScreen extends javax.swing.JFrame {
     private javax.swing.JPanel pnlCenter;
     private javax.swing.JPanel pnlNav;
     private javax.swing.JPanel pnlRight;
+    private javax.swing.JPanel pnlRoutines;
     private javax.swing.JPanel pnlSideNav;
     // End of variables declaration//GEN-END:variables
 }

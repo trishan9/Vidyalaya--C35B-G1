@@ -4,11 +4,15 @@
  */
 package vidyalaya.View.Dashboard.Admin;
 
+import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import vidyalaya.Components.RoutineCard;
+import vidyalaya.Controller.Routine.Admin.RoutineController;
 
 import vidyalaya.Model.AdminData;
+import vidyalaya.Model.RoutineData;
 
 import vidyalaya.SessionManagement.AdminSession;
 
@@ -20,11 +24,15 @@ import vidyalaya.Utils.UIUtils;
  */
 public class RoutineScreen extends javax.swing.JFrame {
 
+    RoutineController routineController;
+
     /**
      * Creates new form RoutineScreen
      */
     public RoutineScreen() {
         initComponents();
+        routineController = new RoutineController(this);
+        initializeGrid();
 
         setTitle("Routine - Vidyalaya Admin");
         setSize(1400, 954);
@@ -52,6 +60,27 @@ public class RoutineScreen extends javax.swing.JFrame {
         AdminData currentUser = AdminSession.getCurrentUser();
         lblName.setText(currentUser.getName());
         lblId.setText(currentUser.getUsername());
+    }
+
+    private void initializeGrid() {
+        routineController.routinesList.forEach((x) -> addGrid(x));
+        var grid = new GridLayout(0, 1);
+        grid.setHgap(10);
+        grid.setVgap(10);
+        pnlRoutines.setLayout(grid);
+    }
+
+    private void addGrid(RoutineData data) {
+        var temp = new RoutineCard(data,
+                () -> {
+//                    new EditCourseForm(data.getCode()).setVisible(true);
+                    System.out.println("Editing: " + data.getId());
+                },
+                () -> {
+//                    coursesController.deleteCourseByCode(data.getCode());
+                    System.out.println("Deleting: " + data.getId());
+                });
+        pnlRoutines.add(temp);
     }
 
     public void addCreateRoutineListener(ActionListener listener) {
@@ -161,6 +190,7 @@ public class RoutineScreen extends javax.swing.JFrame {
         createRoutine = new javax.swing.JPanel();
         createRoutineBtn = new javax.swing.JLabel();
         iconUsers1 = new javax.swing.JLabel();
+        pnlRoutines = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -505,6 +535,19 @@ public class RoutineScreen extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
+        pnlRoutines.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout pnlRoutinesLayout = new javax.swing.GroupLayout(pnlRoutines);
+        pnlRoutines.setLayout(pnlRoutinesLayout);
+        pnlRoutinesLayout.setHorizontalGroup(
+            pnlRoutinesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        pnlRoutinesLayout.setVerticalGroup(
+            pnlRoutinesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 501, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout pnlCenterLayout = new javax.swing.GroupLayout(pnlCenter);
         pnlCenter.setLayout(pnlCenterLayout);
         pnlCenterLayout.setHorizontalGroup(
@@ -512,7 +555,9 @@ public class RoutineScreen extends javax.swing.JFrame {
             .addGroup(pnlCenterLayout.createSequentialGroup()
                 .addComponent(pnlSideNav, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(pnlRight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(pnlRight, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlRoutines, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 50, Short.MAX_VALUE))
         );
         pnlCenterLayout.setVerticalGroup(
@@ -521,6 +566,8 @@ public class RoutineScreen extends javax.swing.JFrame {
             .addGroup(pnlCenterLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pnlRight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlRoutines, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -612,6 +659,7 @@ public class RoutineScreen extends javax.swing.JFrame {
     private javax.swing.JPanel pnlCenter;
     private javax.swing.JPanel pnlNav;
     private javax.swing.JPanel pnlRight;
+    private javax.swing.JPanel pnlRoutines;
     private javax.swing.JPanel pnlSideNav;
     // End of variables declaration//GEN-END:variables
 }
