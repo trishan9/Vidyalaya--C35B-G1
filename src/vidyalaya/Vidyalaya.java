@@ -4,11 +4,12 @@
  */
 package vidyalaya;
 
+import com.formdev.flatlaf.FlatLaf;
+import com.formdev.flatlaf.themes.FlatMacLightLaf;
+
 import vidyalaya.Controller.AdminLoginController;
-import vidyalaya.Controller.UserLoginController;
 
 import vidyalaya.View.AdminLogin;
-import vidyalaya.View.UserLogin;
 
 /**
  *
@@ -20,13 +21,22 @@ public class Vidyalaya {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        AdminLogin userView = new AdminLogin();
-        AdminLoginController userController = new AdminLoginController(userView);
-        userController.open();
+        // Set FlatLaf as the Look and Feel
+        try {
+            FlatLaf.registerCustomDefaultsSource("vidyalaya");
+            FlatMacLightLaf.setup();
+        } catch (Exception ex) {
+            System.err.println("Failed to initialize FlatLaf");
+        }
 
-//        UserLogin userView = new UserLogin();
-//        UserLoginController userController = new UserLoginController(userView);
-//        userController.open();
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                AdminLogin userView = new AdminLogin();
+                AdminLoginController userController = new AdminLoginController(userView);
+                userController.open();
+            }
+        });
     }
 
 }
