@@ -7,12 +7,17 @@ package vidyalaya.Controller.Notices.Student;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import vidyalaya.Controller.Users.UserLoginController;
-
-import vidyalaya.DAO.AuthDAO.AuthDAO;
-import vidyalaya.DAO.AuthDAO.AuthDAOImplementation;
+import java.util.ArrayList;
+import java.util.List;
 
 import vidyalaya.Utils.Utils;
+
+import vidyalaya.Controller.Users.UserLoginController;
+
+import vidyalaya.DAO.NoticeDAO.NoticeDAO;
+import vidyalaya.DAO.NoticeDAO.NoticeDAOImplementation;
+import vidyalaya.Model.NoticeData;
+import vidyalaya.SessionManagement.StudentSession;
 
 import vidyalaya.View.UserLogin;
 import vidyalaya.View.Dashboard.Student.AttendanceScreen;
@@ -27,8 +32,9 @@ import vidyalaya.View.Dashboard.Student.SettingsScreen;
  */
 public class NoticesController {
 
-    private final AuthDAO authDAO = new AuthDAOImplementation();
+    private final NoticeDAO noticeDAO = new NoticeDAOImplementation();
     private final NoticesScreen userView;
+    public List<NoticeData> myNoticesList = new ArrayList<>();
 
     public NoticesController(NoticesScreen userView) {
         this.userView = userView;
@@ -37,6 +43,15 @@ public class NoticesController {
         userView.addAttendanceRedirectListener(new AttendanceRedirectListener());
         userView.addSettingsRedirectListener(new SettingsRedirectListener());
         userView.addLogoutListener(new LogoutListener());
+        getMyNoticesList();
+    }
+
+    public final void getMyNoticesList() {
+        try {
+            myNoticesList = noticeDAO.getNoticesByType(StudentSession.getCurrentUser().getAdminId(), "student");
+        } catch (Exception ex) {
+            myNoticesList = new ArrayList<>();
+        }
     }
 
     public void open() {
@@ -57,7 +72,7 @@ public class NoticesController {
             coursesController.open();
         }
     }
-    
+
     class RoutineRedirectListener implements ActionListener {
 
         @Override

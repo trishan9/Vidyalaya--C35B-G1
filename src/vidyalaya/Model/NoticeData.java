@@ -19,13 +19,15 @@ public class NoticeData {
     private String title;
     private String content;
     private String notice_type;
+    private String effective_date;
     private Timestamp created_at;
 
-    public NoticeData(int admin_id, String title, String content, String notice_type) {
+    public NoticeData(int admin_id, String title, String content, String notice_type, String effective_date) {
         this.admin_id = admin_id;
         this.title = title;
         this.content = content;
         this.notice_type = notice_type;
+        this.effective_date = effective_date;
     }
 
     public NoticeData(ResultSet result) throws SQLException {
@@ -34,6 +36,7 @@ public class NoticeData {
         this.title = result.getString("title");
         this.content = result.getString("content");
         this.notice_type = result.getString("notice_type");
+        this.effective_date = result.getString("effective_date");
         this.created_at = result.getTimestamp("created_at");
     }
 
@@ -75,6 +78,14 @@ public class NoticeData {
 
     public void setNoticeType(String notice_type) {
         this.notice_type = notice_type;
+    }
+
+    public String getEffectiveDate() {
+        return effective_date;
+    }
+
+    public void setEffectiveDate(String effective_date) {
+        this.effective_date = effective_date;
     }
 
     public Timestamp getCreatedAt() {

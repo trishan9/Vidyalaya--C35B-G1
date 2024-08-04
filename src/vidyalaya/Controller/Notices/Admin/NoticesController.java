@@ -4,15 +4,27 @@
  */
 package vidyalaya.Controller.Notices.Admin;
 
+import javax.swing.JOptionPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import vidyalaya.Controller.AdminLoginController;
-
-import vidyalaya.DAO.AuthDAO.AuthDAO;
-import vidyalaya.DAO.AuthDAO.AuthDAOImplementation;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import vidyalaya.Utils.Utils;
+
+import vidyalaya.Components.Modals.CreateNoticeForm;
+
+import vidyalaya.Controller.AdminLoginController;
+
+import vidyalaya.DAO.NoticeDAO.NoticeDAO;
+import vidyalaya.DAO.NoticeDAO.NoticeDAOImplementation;
+
+import vidyalaya.Model.NoticeData;
+
+import vidyalaya.SessionManagement.AdminSession;
 
 import vidyalaya.View.AdminLogin;
 import vidyalaya.View.Dashboard.Admin.AttendanceScreen;
@@ -28,17 +40,28 @@ import vidyalaya.View.Dashboard.Admin.UsersScreen;
  */
 public class NoticesController {
 
-    private final AuthDAO authDAO = new AuthDAOImplementation();
+    private final NoticeDAO noticeDAO = new NoticeDAOImplementation();
     private final NoticesScreen userView;
+    public List<NoticeData> noticesList = new ArrayList<>();
 
     public NoticesController(NoticesScreen userView) {
         this.userView = userView;
+        userView.addCreateNoticeListener(new CreateNoticeListener());
         userView.addCoursesRedirectListener(new CoursesRedirectListener());
         userView.addRoutineRedirectListener(new RoutineRedirectListener());
         userView.addAttendanceRedirectListener(new AttendanceRedirectListener());
         userView.addUsersRedirectListener(new UsersRedirectListener());
         userView.addSettingsRedirectListener(new SettingsRedirectListener());
         userView.addLogoutListener(new LogoutListener());
+        getNoticesList();
+    }
+
+    public final void getNoticesList() {
+        try {
+            noticesList = noticeDAO.getAllNotices(AdminSession.getCurrentUser().getId());
+        } catch (Exception ex) {
+            noticesList = new ArrayList<>();
+        }
     }
 
     public void open() {
@@ -47,6 +70,34 @@ public class NoticesController {
 
     public void close() {
         this.userView.dispose();
+    }
+
+    class CreateNoticeListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            CreateNoticeForm createNoticeView = new CreateNoticeForm();
+            CreateNoticeController createNoticeController = new CreateNoticeController(createNoticeView);
+            createNoticeController.open();
+        }
+    }
+
+    public final void deleteNoticeById(int noticeId) {
+        try {
+            int result = Utils.confirm(userView, "Are you sure you want to delete this notice?");
+            if (result == JOptionPane.YES_OPTION) {
+                noticeDAO.deleteNotice(noticeId);
+
+                vidyalaya.View.Dashboard.Admin.NoticesScreen noticesView = new vidyalaya.View.Dashboard.Admin.NoticesScreen();
+                vidyalaya.Controller.Notices.Admin.NoticesController noticesController = new vidyalaya.Controller.Notices.Admin.NoticesController(noticesView);
+                Utils.closeAllFrames();
+                noticesController.open();
+                Utils.info(noticesView, "Notice deleted successfully!");
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(NoticesController.class.getName()).log(Level.SEVERE, null, ex);
+            Utils.error(userView, ex.getMessage());
+        }
     }
 
     class CoursesRedirectListener implements ActionListener {
@@ -59,7 +110,7 @@ public class NoticesController {
             coursesController.open();
         }
     }
-    
+
     class RoutineRedirectListener implements ActionListener {
 
         @Override

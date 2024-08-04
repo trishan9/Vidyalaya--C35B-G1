@@ -9,9 +9,18 @@ import java.awt.Frame;
 import java.awt.Image;
 import java.awt.event.MouseListener;
 
+import java.sql.Timestamp;
+
 import javax.imageio.ImageIO;
 import java.io.IOException;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
+import raven.datetime.component.time.TimePicker;
 
 import javax.swing.JFrame;
 import javax.swing.JButton;
@@ -20,8 +29,8 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import raven.datetime.component.time.TimePicker;
 
 /**
  *
@@ -60,8 +69,8 @@ public class Utils {
         }
         return str.substring(index + 1);
     }
-    
-        public static LocalTime parseTimeString(String timeString) {
+
+    public static LocalTime parseTimeString(String timeString) {
         String[] timeComponents = timeString.split("[: ]");
         int hour = Integer.parseInt(timeComponents[0]);
         int minute = Integer.parseInt(timeComponents[1]);
@@ -76,11 +85,70 @@ public class Utils {
         return LocalTime.of(hour, minute);
     }
 
+    public static LocalDate parseDateString(String dateString) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        try {
+            return LocalDate.parse(dateString, formatter);
+        } catch (DateTimeParseException ex) {
+            System.err.println("Invalid date format: " + dateString);
+            throw ex;
+        }
+    }
+
+    public static String parseTimestampAndCalculateDifference(Timestamp timestamp) {
+        LocalDateTime dateTime = timestamp.toLocalDateTime();
+
+        LocalDateTime now = LocalDateTime.now();
+
+        long minutes = ChronoUnit.MINUTES.between(dateTime, now);
+        long hours = ChronoUnit.HOURS.between(dateTime, now);
+        long days = ChronoUnit.DAYS.between(dateTime, now);
+        long months = ChronoUnit.MONTHS.between(dateTime, now);
+
+        if (minutes < 60) {
+            return minutes + " minutes ago";
+        } else if (hours < 24) {
+            return hours + " hours ago";
+        } else if (days < 30) {
+            return days + " days ago";
+        } else {
+            return months + " months ago";
+        }
+    }
+
+    public static String truncateString(String str) {
+        if (str.length() > 28) {
+            return str.substring(0, 28) + "...";
+        } else {
+            return str;
+        }
+    }
+
+    public static void handleButtonVisibility(String str, JButton button) {
+        if (str.length() <= 28) {
+            button.setVisible(false);
+        } else {
+            button.setVisible(true);
+        }
+    }
+
+    public static String capitalize(String str) {
+        if (str == null || str.isEmpty()) {
+            return str;
+        }
+
+        return Character.toUpperCase(str.charAt(0)) + str.substring(1).toLowerCase();
+    }
+
     public static void setCustomFont(JLabel label, float size) {
         label.setFont(new DMSans(size).getFont());
     }
 
     public static void setCustomFont(JTextField txt, float size) {
+        txt.setFont(new DMSans(size).getFont());
+    }
+
+    public static void setCustomFont(JTextArea txt, float size) {
         txt.setFont(new DMSans(size).getFont());
     }
 

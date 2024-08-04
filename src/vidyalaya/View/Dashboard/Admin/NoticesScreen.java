@@ -4,11 +4,19 @@
  */
 package vidyalaya.View.Dashboard.Admin;
 
+import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import vidyalaya.Components.Modals.EditNoticeForm;
+import vidyalaya.Components.Modals.SeeMoreView;
+import vidyalaya.Components.NoticeCard;
+
+import vidyalaya.Controller.Notices.Admin.NoticesController;
+
 import vidyalaya.Model.AdminData;
+import vidyalaya.Model.NoticeData;
 
 import vidyalaya.SessionManagement.AdminSession;
 
@@ -19,13 +27,17 @@ import vidyalaya.Utils.Utils;
  * @author trish
  */
 public class NoticesScreen extends javax.swing.JFrame {
+    
+    NoticesController noticesController;
 
     /**
      * Creates new form NoticesScreen
      */
     public NoticesScreen() {
         initComponents();
-
+        noticesController = new NoticesController(this);
+        initializeGrid();
+        
         setTitle("Notices - Vidyalaya Admin");
         setSize(1400, 954);
         setLocationRelativeTo(null);
@@ -47,12 +59,46 @@ public class NoticesScreen extends javax.swing.JFrame {
         Utils.setCustomFont(menuSettings, 17f);
         Utils.setCustomFont(menuLogout, 17f);
         Utils.setCustomFont(jLabel3, 23f);
-
+        Utils.setCustomFont(createNoticeBtn, 17f);
+        
         AdminData currentUser = AdminSession.getCurrentUser();
         lblName.setText(currentUser.getName());
         lblId.setText(currentUser.getUsername());
     }
-
+    
+    private void initializeGrid() {
+        noticesController.noticesList.forEach((x) -> addGrid(x));
+        var grid = new GridLayout(0, 1);
+        grid.setHgap(10);
+        grid.setVgap(10);
+        pnlNotices.setLayout(grid);
+    }
+    
+    private void addGrid(NoticeData data) {
+        var temp = new NoticeCard(data,
+                () -> {
+                    new SeeMoreView(data.getTitle(), String.format("<HTML>%s</HTML>\n", data.getContent())).setVisible(true);
+                },
+                () -> {
+                    new EditNoticeForm(data.getId()).setVisible(true);
+                },
+                () -> {
+                    noticesController.deleteNoticeById(data.getId());
+                });
+        pnlNotices.add(temp);
+    }
+    
+    public void addCreateNoticeListener(ActionListener listener) {
+        Utils.removeAllMouseListeners(createNoticeBtn);
+        
+        createNoticeBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                listener.actionPerformed(null);
+            }
+        });
+    }
+    
     public void addCoursesRedirectListener(ActionListener listener) {
         Utils.removeAllMouseListeners(menuCourses);
         
@@ -63,7 +109,7 @@ public class NoticesScreen extends javax.swing.JFrame {
             }
         });
     }
-
+    
     public void addRoutineRedirectListener(ActionListener listener) {
         Utils.removeAllMouseListeners(menuRoutine);
         
@@ -74,7 +120,7 @@ public class NoticesScreen extends javax.swing.JFrame {
             }
         });
     }
-
+    
     public void addAttendanceRedirectListener(ActionListener listener) {
         Utils.removeAllMouseListeners(menuAttendance);
         
@@ -85,7 +131,7 @@ public class NoticesScreen extends javax.swing.JFrame {
             }
         });
     }
-
+    
     public void addUsersRedirectListener(ActionListener listener) {
         Utils.removeAllMouseListeners(menuUsers);
         
@@ -96,7 +142,7 @@ public class NoticesScreen extends javax.swing.JFrame {
             }
         });
     }
-
+    
     public void addSettingsRedirectListener(ActionListener listener) {
         Utils.removeAllMouseListeners(menuSettings);
         
@@ -107,7 +153,7 @@ public class NoticesScreen extends javax.swing.JFrame {
             }
         });
     }
-
+    
     public void addLogoutListener(ActionListener listener) {
         Utils.removeAllMouseListeners(menuLogout);
         
@@ -160,6 +206,10 @@ public class NoticesScreen extends javax.swing.JFrame {
         iconLogout = new javax.swing.JLabel();
         pnlRight = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
+        createNotice = new javax.swing.JPanel();
+        createNoticeBtn = new javax.swing.JLabel();
+        iconUsers1 = new javax.swing.JLabel();
+        pnlNotices = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -453,6 +503,35 @@ public class NoticesScreen extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel3.setText("Notices");
 
+        createNotice.setBackground(new java.awt.Color(24, 97, 191));
+        createNotice.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
+        createNotice.setForeground(new java.awt.Color(255, 255, 255));
+        createNotice.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        createNotice.setPreferredSize(new java.awt.Dimension(100, 52));
+
+        createNoticeBtn.setForeground(new java.awt.Color(255, 255, 255));
+        createNoticeBtn.setText("Create Notice");
+
+        iconUsers1.setBackground(new java.awt.Color(24, 97, 191));
+        iconUsers1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vidyalaya/Assets/icons/Create.png"))); // NOI18N
+
+        javax.swing.GroupLayout createNoticeLayout = new javax.swing.GroupLayout(createNotice);
+        createNotice.setLayout(createNoticeLayout);
+        createNoticeLayout.setHorizontalGroup(
+            createNoticeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(createNoticeLayout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addComponent(iconUsers1)
+                .addGap(18, 18, 18)
+                .addComponent(createNoticeBtn)
+                .addContainerGap(69, Short.MAX_VALUE))
+        );
+        createNoticeLayout.setVerticalGroup(
+            createNoticeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(iconUsers1, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+            .addComponent(createNoticeBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout pnlRightLayout = new javax.swing.GroupLayout(pnlRight);
         pnlRight.setLayout(pnlRightLayout);
         pnlRightLayout.setHorizontalGroup(
@@ -460,14 +539,31 @@ public class NoticesScreen extends javax.swing.JFrame {
             .addGroup(pnlRightLayout.createSequentialGroup()
                 .addGap(0, 0, 0)
                 .addComponent(jLabel3)
-                .addGap(970, 970, 970))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 794, Short.MAX_VALUE)
+                .addComponent(createNotice, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         pnlRightLayout.setVerticalGroup(
             pnlRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlRightLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel3)
+                .addGroup(pnlRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(createNotice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        pnlNotices.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout pnlNoticesLayout = new javax.swing.GroupLayout(pnlNotices);
+        pnlNotices.setLayout(pnlNoticesLayout);
+        pnlNoticesLayout.setHorizontalGroup(
+            pnlNoticesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1077, Short.MAX_VALUE)
+        );
+        pnlNoticesLayout.setVerticalGroup(
+            pnlNoticesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 501, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout pnlCenterLayout = new javax.swing.GroupLayout(pnlCenter);
@@ -477,8 +573,10 @@ public class NoticesScreen extends javax.swing.JFrame {
             .addGroup(pnlCenterLayout.createSequentialGroup()
                 .addComponent(pnlSideNav, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(pnlRight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 82, Short.MAX_VALUE))
+                .addGroup(pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnlRight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pnlNotices, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 47, Short.MAX_VALUE))
         );
         pnlCenterLayout.setVerticalGroup(
             pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -486,6 +584,8 @@ public class NoticesScreen extends javax.swing.JFrame {
             .addGroup(pnlCenterLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pnlRight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(pnlNotices, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -543,6 +643,8 @@ public class NoticesScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel createNotice;
+    private javax.swing.JLabel createNoticeBtn;
     private javax.swing.JLabel iconAttendance;
     private javax.swing.JLabel iconCourses;
     private javax.swing.JLabel iconLogout;
@@ -550,6 +652,7 @@ public class NoticesScreen extends javax.swing.JFrame {
     private javax.swing.JLabel iconRoutine;
     private javax.swing.JLabel iconSettings;
     private javax.swing.JLabel iconUsers;
+    private javax.swing.JLabel iconUsers1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -573,6 +676,7 @@ public class NoticesScreen extends javax.swing.JFrame {
     private javax.swing.JPanel navUsers;
     private javax.swing.JPanel pnlCenter;
     private javax.swing.JPanel pnlNav;
+    private javax.swing.JPanel pnlNotices;
     private javax.swing.JPanel pnlRight;
     private javax.swing.JPanel pnlSideNav;
     // End of variables declaration//GEN-END:variables
