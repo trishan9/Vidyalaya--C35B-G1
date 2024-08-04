@@ -27,10 +27,11 @@ public class RoutineDAOImplementation implements RoutineDAO {
     public void createRoutine(RoutineData routineModel) throws Exception {
         Connection dbConnection = mysql.openConnection();
 
-        final PreparedStatement statement = dbConnection.prepareStatement("INSERT INTO routine (weekday, module_code, routine_content) VALUES (?, ?, ?)");
+        final PreparedStatement statement = dbConnection.prepareStatement("INSERT INTO routine (weekday, module_code, time, routine_content) VALUES (?, ?, ?, ?)");
         statement.setString(1, routineModel.getWeekday());
         statement.setInt(2, routineModel.getModuleCode());
-        statement.setString(3, routineModel.getRoutineContent());
+        statement.setString(3, routineModel.getTime());
+        statement.setString(4, routineModel.getRoutineContent());
 
         try {
             statement.execute();
@@ -118,11 +119,12 @@ public class RoutineDAOImplementation implements RoutineDAO {
     public void updateRoutine(int routineId, RoutineData routineModel) throws Exception {
         Connection dbConnection = mysql.openConnection();
 
-        final PreparedStatement statement = dbConnection.prepareStatement("UPDATE routine SET weekday = ?, module_code = ?, routine_content = ? WHERE id = ?");
+        final PreparedStatement statement = dbConnection.prepareStatement("UPDATE routine SET weekday = ?, module_code = ?, time = ?, routine_content = ? WHERE id = ?");
         statement.setString(1, routineModel.getWeekday());
         statement.setInt(2, routineModel.getModuleCode());
-        statement.setString(3, routineModel.getRoutineContent());
-        statement.setInt(4, routineId);
+        statement.setString(3, routineModel.getTime());
+        statement.setString(4, routineModel.getRoutineContent());
+        statement.setInt(5, routineId);
 
         try {
             statement.executeUpdate();

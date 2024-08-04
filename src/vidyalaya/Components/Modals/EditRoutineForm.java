@@ -5,23 +5,30 @@
 package vidyalaya.Components.Modals;
 
 import java.awt.event.ActionListener;
+import raven.datetime.component.time.TimePicker;
+import vidyalaya.Controller.Routine.Admin.EditRoutineController;
 import vidyalaya.Utils.Utils;
 
 /**
  *
  * @author trish
  */
-public class CreateRoutineForm extends javax.swing.JFrame {
+public class EditRoutineForm extends javax.swing.JFrame {
+
+    EditRoutineController routineController;
 
     /**
-     * Creates new form CreateRoutineForm
+     * Creates new form EditRoutineForm
+     *
+     * @param routineId
      */
-    public CreateRoutineForm() {
+    public EditRoutineForm(int routineId) {
         initComponents();
+        routineController = new EditRoutineController(routineId, this);
 
         timePicker1.setEditor(txtTimeEditor);
 
-        setTitle("Create Routine - Vidyalaya Admin");
+        setTitle("Edit Routine - Vidyalaya Admin");
         setLocationRelativeTo(null);
         setResizable(false);
 
@@ -39,13 +46,13 @@ public class CreateRoutineForm extends javax.swing.JFrame {
         Utils.setCustomFont(module, 16f);
         Utils.setCustomFont(weekday, 16f);
         Utils.setCustomFont(txtTimeEditor, 16f);
-        Utils.setCustomFont(txtContent, 16f);        
-        Utils.setCustomFont(createRoutineBtn, 16f);
+        Utils.setCustomFont(txtContent, 16f);
+        Utils.setCustomFont(editRoutineBtn, 16f);
 
     }
 
-    public void addCreateRoutineListener(ActionListener listener) {
-        createRoutineBtn.addActionListener(listener);
+    public void addEditRoutineListener(ActionListener listener) {
+        editRoutineBtn.addActionListener(listener);
     }
 
     /**
@@ -65,8 +72,15 @@ public class CreateRoutineForm extends javax.swing.JFrame {
     /**
      * @return the txtTime
      */
-    public javax.swing.JTextField getTimeField() {
+    public javax.swing.JFormattedTextField getTimeField() {
         return txtTimeEditor;
+    }
+
+    /**
+     * @return the timePicker1
+     */
+    public TimePicker getTimePicker() {
+        return timePicker1;
     }
 
     /**
@@ -90,7 +104,7 @@ public class CreateRoutineForm extends javax.swing.JFrame {
         label = new javax.swing.JLabel();
         label2 = new javax.swing.JLabel();
         label3 = new javax.swing.JLabel();
-        createRoutineBtn = new javax.swing.JButton();
+        editRoutineBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         label4 = new javax.swing.JLabel();
         module = new javax.swing.JComboBox<>();
@@ -110,17 +124,17 @@ public class CreateRoutineForm extends javax.swing.JFrame {
 
         label3.setText("Details");
 
-        createRoutineBtn.setBackground(new java.awt.Color(77, 215, 131));
-        createRoutineBtn.setText("Create Routine");
-        createRoutineBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
-        createRoutineBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        createRoutineBtn.addActionListener(new java.awt.event.ActionListener() {
+        editRoutineBtn.setBackground(new java.awt.Color(77, 215, 131));
+        editRoutineBtn.setText("Update Routine");
+        editRoutineBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
+        editRoutineBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        editRoutineBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                createRoutineBtnActionPerformed(evt);
+                editRoutineBtnActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("Create Routine");
+        jLabel1.setText("Edit Routine");
 
         label4.setText("Module");
 
@@ -156,11 +170,10 @@ public class CreateRoutineForm extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(label)
                     .addComponent(label2)
-                    .addComponent(createRoutineBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
+                    .addComponent(editRoutineBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
                     .addComponent(label3)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(weekday, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(module, 0, 529, Short.MAX_VALUE))
+                    .addComponent(weekday, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(module, javax.swing.GroupLayout.Alignment.TRAILING, 0, 530, Short.MAX_VALUE)
                     .addComponent(txtTimeEditor, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
@@ -188,7 +201,7 @@ public class CreateRoutineForm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtContent, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
-                .addComponent(createRoutineBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(editRoutineBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(40, Short.MAX_VALUE))
         );
 
@@ -213,9 +226,9 @@ public class CreateRoutineForm extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void createRoutineBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createRoutineBtnActionPerformed
+    private void editRoutineBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editRoutineBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_createRoutineBtnActionPerformed
+    }//GEN-LAST:event_editRoutineBtnActionPerformed
 
     private void moduleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moduleActionPerformed
         // TODO add your handling code here:
@@ -225,44 +238,8 @@ public class CreateRoutineForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtContentActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CreateRoutineForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CreateRoutineForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CreateRoutineForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CreateRoutineForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CreateRoutineForm().setVisible(true);
-            }
-        });
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton createRoutineBtn;
+    private javax.swing.JButton editRoutineBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;

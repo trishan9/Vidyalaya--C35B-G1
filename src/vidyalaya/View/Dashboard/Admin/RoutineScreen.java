@@ -9,7 +9,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import vidyalaya.Components.Modals.EditRoutineForm;
 import vidyalaya.Components.RoutineCard;
+
 import vidyalaya.Controller.Routine.Admin.RoutineController;
 
 import vidyalaya.Model.AdminData;
@@ -74,12 +76,11 @@ public class RoutineScreen extends javax.swing.JFrame {
     private void addGrid(RoutineData data) {
         var temp = new RoutineCard(data,
                 () -> {
-//                    new EditCourseForm(data.getCode()).setVisible(true);
+                    new EditRoutineForm(data.getId()).setVisible(true);
                     System.out.println("Editing: " + data.getId());
                 },
                 () -> {
-//                    coursesController.deleteCourseByCode(data.getCode());
-                    System.out.println("Deleting: " + data.getId());
+                    routineController.deleteRoutineById(data.getId());
                 });
         pnlRoutines.add(temp);
     }

@@ -6,6 +6,7 @@ package vidyalaya.Controller.Routine.Admin;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,9 +15,7 @@ import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 
-import vidyalaya.Utils.Utils;
-
-import vidyalaya.Components.Modals.CreateRoutineForm;
+import vidyalaya.Components.Modals.EditRoutineForm;
 
 import vidyalaya.DAO.ModuleDAO.ModuleDAO;
 import vidyalaya.DAO.ModuleDAO.ModuleDAOImplementation;
@@ -25,32 +24,47 @@ import vidyalaya.DAO.RoutineDAO.RoutineDAOImplementation;
 
 import vidyalaya.Model.ModuleData;
 import vidyalaya.Model.RoutineData;
+
 import vidyalaya.SessionManagement.AdminSession;
+
+import vidyalaya.Utils.Utils;
 
 /**
  *
  * @author trishan9
  */
-public class CreateRoutineController {
+public class EditRoutineController {
 
     private final ModuleDAO moduleDAO = new ModuleDAOImplementation();
     private final RoutineDAO routineDAO = new RoutineDAOImplementation();
-    private final CreateRoutineForm userView;
+    private final EditRoutineForm userView;
+    private final int routineId;
     public List<ModuleData> modulesList = new ArrayList<>();
+    public RoutineData currentRoutine;
 
-    public CreateRoutineController(CreateRoutineForm userView) {
+    public EditRoutineController(int routineId, EditRoutineForm userView) {
         this.userView = userView;
-        userView.addCreateRoutineListener(new CreateRoutineListener());
-        getModulesList();
-        populateComboBox(userView.getModule(), modulesList);
-    }
+        this.routineId = routineId;
 
-    public void open() {
-        this.userView.setVisible(true);
-    }
+        try {
+            userView.addEditRoutineListener(new EditRoutineListener());
+            getModulesList();
+            getCurrentRoutine();
 
-    public void close() {
-        this.userView.dispose();
+            populateComboBox(userView.getModule(), modulesList);
+
+            userView.getWeekday().setSelectedItem(currentRoutine.getWeekday());
+            userView.getModule().setSelectedItem(new ModuleDAOImplementation().getModuleByCode(currentRoutine.getModuleCode()));
+
+            String timeString = currentRoutine.getTime();
+            userView.getTimeField().setValue(timeString);
+            userView.getTimePicker().setSelectedTime(Utils.parseTimeString(timeString));
+
+            String details = Utils.getSecondPartAfterFirstSplitter(currentRoutine.getRoutineContent(), "-").strip();
+            userView.getContentField().setText(details);
+        } catch (Exception ex){
+            Logger.getLogger(EditRoutineController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     private void populateComboBox(JComboBox<ModuleData> combo, List<ModuleData> modulesList) {
@@ -69,7 +83,26 @@ public class CreateRoutineController {
         }
     }
 
-    class CreateRoutineListener implements ActionListener {
+    public void open() {
+        this.userView.setVisible(true);
+    }
+
+    public void close() {
+        this.userView.dispose();
+    }
+
+    public final void getCurrentRoutine() {
+        try {
+            RoutineData data = routineDAO.getRoutineById(routineId);
+            currentRoutine = data;
+        } catch (Exception ex) {
+            Logger.getLogger(EditRoutineController.class.getName()).log(Level.SEVERE, null, ex);
+            Utils.error(userView, ex.getMessage());
+            currentRoutine = null;
+        }
+    }
+
+    class EditRoutineListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -82,15 +115,15 @@ public class CreateRoutineController {
                 String content = time + " - " + details;
 
                 RoutineData routine = new RoutineData(weekday, moduleCode, time, content);
-                routineDAO.createRoutine(routine);
+                routineDAO.updateRoutine(routineId, routine);
 
                 vidyalaya.View.Dashboard.Admin.RoutineScreen routineView = new vidyalaya.View.Dashboard.Admin.RoutineScreen();
                 vidyalaya.Controller.Routine.Admin.RoutineController routineController = new vidyalaya.Controller.Routine.Admin.RoutineController(routineView);
                 Utils.closeAllFrames();
                 routineController.open();
-                Utils.info(routineView, "Routine created successfully");
+                Utils.info(routineView, "Routine updated successfully");
             } catch (Exception ex) {
-                Logger.getLogger(CreateRoutineController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(EditRoutineController.class.getName()).log(Level.SEVERE, null, ex);
                 Utils.error(userView, ex.getMessage());
             }
         }

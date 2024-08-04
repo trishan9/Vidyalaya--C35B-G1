@@ -71,10 +71,10 @@
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <Component id="label" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="label2" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="createRoutineBtn" alignment="1" pref="530" max="32767" attributes="0"/>
+                      <Component id="editRoutineBtn" alignment="1" pref="530" max="32767" attributes="0"/>
                       <Component id="label3" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="weekday" alignment="1" max="32767" attributes="0"/>
-                      <Component id="module" alignment="1" pref="529" max="32767" attributes="0"/>
+                      <Component id="module" alignment="1" pref="530" max="32767" attributes="0"/>
                       <Component id="txtTimeEditor" alignment="1" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace pref="18" max="32767" attributes="0"/>
@@ -105,7 +105,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="txtContent" min="-2" pref="52" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                  <Component id="createRoutineBtn" min="-2" pref="54" max="-2" attributes="0"/>
+                  <Component id="editRoutineBtn" min="-2" pref="54" max="-2" attributes="0"/>
                   <EmptySpace pref="40" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -127,12 +127,12 @@
             <Property name="text" type="java.lang.String" value="Details"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="createRoutineBtn">
+        <Component class="javax.swing.JButton" name="editRoutineBtn">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="83" green="d7" red="4d" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Create Routine"/>
+            <Property name="text" type="java.lang.String" value="Update Routine"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                 <LineBorder roundedCorners="true">
@@ -145,12 +145,12 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="createRoutineBtnActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editRoutineBtnActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Create Routine"/>
+            <Property name="text" type="java.lang.String" value="Edit Routine"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="label4">

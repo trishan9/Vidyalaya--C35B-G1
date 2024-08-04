@@ -11,6 +11,7 @@ import java.awt.event.MouseListener;
 
 import javax.imageio.ImageIO;
 import java.io.IOException;
+import java.time.LocalTime;
 
 import javax.swing.JFrame;
 import javax.swing.JButton;
@@ -50,6 +51,29 @@ public class Utils {
         for (MouseListener ml : mouseListeners) {
             component.removeMouseListener(ml);
         }
+    }
+
+    public static String getSecondPartAfterFirstSplitter(String str, String splitter) {
+        int index = str.indexOf(splitter);
+        if (index == -1) {
+            return str;
+        }
+        return str.substring(index + 1);
+    }
+    
+        public static LocalTime parseTimeString(String timeString) {
+        String[] timeComponents = timeString.split("[: ]");
+        int hour = Integer.parseInt(timeComponents[0]);
+        int minute = Integer.parseInt(timeComponents[1]);
+        String period = timeComponents[2];
+
+        if (period.equalsIgnoreCase("PM") && hour != 12) {
+            hour += 12;
+        } else if (period.equalsIgnoreCase("AM") && hour == 12) {
+            hour = 0;
+        }
+
+        return LocalTime.of(hour, minute);
     }
 
     public static void setCustomFont(JLabel label, float size) {

@@ -6,9 +6,12 @@ package vidyalaya.Controller.Routine.Admin;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import vidyalaya.Components.Modals.CreateRoutineForm;
 
@@ -65,6 +68,24 @@ public class RoutineController {
 
     public void close() {
         this.userView.dispose();
+    }
+
+    public final void deleteRoutineById(int routineId) {
+        try {
+            int result = Utils.confirm(userView, "Are you sure you want to delete this routine?");
+            if (result == JOptionPane.YES_OPTION) {
+                routineDAO.deleteRoutine(routineId);
+
+                vidyalaya.View.Dashboard.Admin.RoutineScreen routineView = new vidyalaya.View.Dashboard.Admin.RoutineScreen();
+                vidyalaya.Controller.Routine.Admin.RoutineController routineController = new vidyalaya.Controller.Routine.Admin.RoutineController(routineView);
+                Utils.closeAllFrames();
+                routineController.open();
+                Utils.info(routineView, "Routine deleted successfully!");
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(RoutineController.class.getName()).log(Level.SEVERE, null, ex);
+            Utils.error(userView, ex.getMessage());
+        }
     }
 
     class CreateRoutineListener implements ActionListener {

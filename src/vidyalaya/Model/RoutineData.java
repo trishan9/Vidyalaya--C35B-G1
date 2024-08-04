@@ -16,11 +16,13 @@ public class RoutineData {
     private int id;
     private String weekday;
     private int module_code;
+    private String time;
     private String routine_content;
 
-    public RoutineData(String weekday, int module_code, String routine_content) {
+    public RoutineData(String weekday, int module_code, String time, String routine_content) {
         this.weekday = weekday;
         this.module_code = module_code;
+        this.time = time;
         this.routine_content = routine_content;
     }
 
@@ -28,6 +30,7 @@ public class RoutineData {
         this.id = result.getInt("id");
         this.weekday = result.getString("weekday");
         this.module_code = result.getInt("module_code");
+        this.time = result.getString("time");
         this.routine_content = result.getString("routine_content");
     }
 
@@ -53,6 +56,14 @@ public class RoutineData {
 
     public void setModuleCode(int module_code) {
         this.module_code = module_code;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public String getRoutineContent() {
