@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 import vidyalaya.DAO.ModuleDAO.ModuleDAOImplementation;
 import vidyalaya.Model.RoutineData;
 import vidyalaya.Utils.CallbackFn;
-import vidyalaya.Utils.UIUtils;
+import vidyalaya.Utils.Utils;
 
 /**
  *
@@ -35,11 +35,11 @@ public class RoutineCard extends javax.swing.JPanel {
             this.onEditClick = onEditClick;
             this.onDeleteClick = onDeleteClick;
             
-            UIUtils.setCustomFont(courseTitleHeader, 15f);
-            UIUtils.setCustomFont(courseTitle, 17f);
-            UIUtils.setCustomFont(detailsHeader, 15f);
-            UIUtils.setCustomFont(weekday, 15f);
-            UIUtils.setCustomFont(details, 17f);
+            Utils.setCustomFont(courseTitleHeader, 15f);
+            Utils.setCustomFont(courseTitle, 17f);
+            Utils.setCustomFont(detailsHeader, 15f);
+            Utils.setCustomFont(weekday, 15f);
+            Utils.setCustomFont(details, 17f);
         } catch (Exception ex) {
             Logger.getLogger(RoutineCard.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -114,30 +114,36 @@ public class RoutineCard extends javax.swing.JPanel {
             .addGroup(pnlRoutineLayout.createSequentialGroup()
                 .addGap(0, 0, 0)
                 .addGroup(pnlRoutineLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(courseTitle)
-                    .addComponent(courseTitleHeader)
-                    .addComponent(weekday))
-                .addGap(194, 194, 194)
-                .addGroup(pnlRoutineLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(details)
                     .addGroup(pnlRoutineLayout.createSequentialGroup()
-                        .addGap(81, 81, 81)
-                        .addComponent(detailsHeader)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(weekday)
+                        .addGap(460, 460, 460))
+                    .addGroup(pnlRoutineLayout.createSequentialGroup()
+                        .addGroup(pnlRoutineLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlRoutineLayout.createSequentialGroup()
+                                .addComponent(courseTitleHeader)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(courseTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 392, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnlRoutineLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlRoutineLayout.createSequentialGroup()
+                                .addGap(84, 84, 84)
+                                .addComponent(detailsHeader))
+                            .addComponent(details, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(106, 106, 106)))
                 .addComponent(editButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         pnlRoutineLayout.setVerticalGroup(
             pnlRoutineLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlRoutineLayout.createSequentialGroup()
-                .addGroup(pnlRoutineLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlRoutineLayout.createSequentialGroup()
+                .addGroup(pnlRoutineLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pnlRoutineLayout.createSequentialGroup()
-                        .addGap(21, 21, 21)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(detailsHeader)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(details))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlRoutineLayout.createSequentialGroup()
+                    .addGroup(pnlRoutineLayout.createSequentialGroup()
                         .addComponent(weekday, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnlRoutineLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)

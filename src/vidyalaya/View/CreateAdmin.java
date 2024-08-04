@@ -5,7 +5,7 @@
 package vidyalaya.View;
 
 import java.awt.event.ActionListener;
-import vidyalaya.Utils.UIUtils;
+import vidyalaya.Utils.Utils;
 
 /**
  *
@@ -25,26 +25,26 @@ public class CreateAdmin extends javax.swing.JFrame {
         setResizable(false);
 
         // Load the icon image
-        UIUtils.setFrameIcon(this, "/vidyalaya/Assets/logo.png");
+        Utils.setFrameIcon(this, "/vidyalaya/Assets/logo.png");
 
         // Custom Font Setting 
-        UIUtils.setCustomFont(jLabelHead, 25f);
-        UIUtils.setCustomFont(createMessage, 25f);
-        UIUtils.setCustomFont(label, 16f);
-        UIUtils.setCustomFont(label1, 16f);
-        UIUtils.setCustomFont(label2, 16f);
-        UIUtils.setCustomFont(label3, 16f);
-        UIUtils.setCustomFont(label4, 14f);
-        UIUtils.setCustomFont(signIn, 14f);
-        UIUtils.setCustomFont(signupBtn, 16f);
+        Utils.setCustomFont(jLabelHead, 25f);
+        Utils.setCustomFont(createMessage, 25f);
+        Utils.setCustomFont(label, 16f);
+        Utils.setCustomFont(label1, 16f);
+        Utils.setCustomFont(label2, 16f);
+        Utils.setCustomFont(label3, 16f);
+        Utils.setCustomFont(label4, 14f);
+        Utils.setCustomFont(signIn, 14f);
+        Utils.setCustomFont(signupBtn, 16f);
 
-        UIUtils.setCursorPointer(signIn);
-        UIUtils.setCursorPointer(signupBtn);
+        Utils.setCursorPointer(signIn);
+        Utils.setCursorPointer(signupBtn);
 
-        UIUtils.setCustomFont(txtName, 16f);
-        UIUtils.setCustomFont(txtInsName, 16f);
-        UIUtils.setCustomFont(txtEmail, 16f);
-        UIUtils.setCustomFont(txtPassword, 16f);
+        Utils.setCustomFont(txtName, 16f);
+        Utils.setCustomFont(txtInsName, 16f);
+        Utils.setCustomFont(txtEmail, 16f);
+        Utils.setCustomFont(txtPassword, 16f);
 
     }
 

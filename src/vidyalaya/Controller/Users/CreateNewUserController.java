@@ -18,7 +18,7 @@ import vidyalaya.Model.AdminData;
 import vidyalaya.Model.StudentData;
 import vidyalaya.Model.TeacherData;
 import vidyalaya.SessionManagement.AdminSession;
-import vidyalaya.Utils.UIUtils;
+import vidyalaya.Utils.Utils;
 
 /**
  *
@@ -67,11 +67,11 @@ public class CreateNewUserController {
                         break;
                 }
 
-                UIUtils.info(userView, user_type + " created successfully with name: " + name);
+                Utils.info(userView, user_type + " created successfully with name: " + name);
                 close();
             } catch (Exception ex) {
                 Logger.getLogger(CreateNewUserController.class.getName()).log(Level.SEVERE, null, ex);
-                UIUtils.error(userView, ex.getMessage());
+                Utils.error(userView, ex.getMessage());
             }
         }
     }

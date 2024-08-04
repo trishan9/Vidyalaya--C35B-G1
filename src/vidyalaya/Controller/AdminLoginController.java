@@ -17,7 +17,7 @@ import vidyalaya.DAO.AuthDAO.AuthDAO;
 import vidyalaya.DAO.AuthDAO.AuthDAOImplementation;
 
 import vidyalaya.Model.LoginRequest;
-import vidyalaya.Utils.UIUtils;
+import vidyalaya.Utils.Utils;
 
 import vidyalaya.View.AdminLogin;
 import vidyalaya.View.CreateAdmin;
@@ -76,10 +76,10 @@ public class AdminLoginController {
                 authDAO.loginAdmin(admin);
 
                 redirectToAdminDashboard();
-                UIUtils.info(new CoursesScreen(), "Logged in sucessfully!");
+                Utils.info(new CoursesScreen(), "Logged in sucessfully!");
             } catch (Exception ex) {
                 Logger.getLogger(AdminLoginController.class.getName()).log(Level.SEVERE, null, ex);
-                UIUtils.error(userView, ex.getMessage());
+                Utils.error(userView, ex.getMessage());
             }
         }
     }

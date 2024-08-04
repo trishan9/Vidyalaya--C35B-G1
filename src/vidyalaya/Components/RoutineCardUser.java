@@ -8,7 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import vidyalaya.DAO.ModuleDAO.ModuleDAOImplementation;
 import vidyalaya.Model.RoutineData;
-import vidyalaya.Utils.UIUtils;
+import vidyalaya.Utils.Utils;
 
 /**
  *
@@ -28,11 +28,11 @@ public class RoutineCardUser extends javax.swing.JPanel {
             details.setText(routine.getRoutineContent());
             weekday.setText(routine.getWeekday());
 
-            UIUtils.setCustomFont(courseTitleHeader, 15f);
-            UIUtils.setCustomFont(courseTitle, 17f);
-            UIUtils.setCustomFont(detailsHeader, 15f);
-            UIUtils.setCustomFont(weekday, 15f);
-            UIUtils.setCustomFont(details, 17f);
+            Utils.setCustomFont(courseTitleHeader, 15f);
+            Utils.setCustomFont(courseTitle, 17f);
+            Utils.setCustomFont(detailsHeader, 15f);
+            Utils.setCustomFont(weekday, 15f);
+            Utils.setCustomFont(details, 17f);
         } catch (Exception ex) {
             Logger.getLogger(RoutineCardUser.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -88,7 +88,7 @@ public class RoutineCardUser extends javax.swing.JPanel {
                         .addGroup(pnlRoutineLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(courseTitle)
                             .addComponent(courseTitleHeader))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 533, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 555, Short.MAX_VALUE)
                         .addGroup(pnlRoutineLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(details)
                             .addComponent(detailsHeader)))))

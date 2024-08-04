@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 
-import vidyalaya.Utils.UIUtils;
+import vidyalaya.Utils.Utils;
 
 import vidyalaya.Components.Modals.CreateRoutineForm;
 
@@ -86,12 +86,12 @@ public class CreateRoutineController {
 
                 vidyalaya.View.Dashboard.Admin.RoutineScreen routineView = new vidyalaya.View.Dashboard.Admin.RoutineScreen();
                 vidyalaya.Controller.Routine.Admin.RoutineController routineController = new vidyalaya.Controller.Routine.Admin.RoutineController(routineView);
-                UIUtils.closeAllFrames();
+                Utils.closeAllFrames();
                 routineController.open();
-                UIUtils.info(routineView, "Routine created successfully");
+                Utils.info(routineView, "Routine created successfully");
             } catch (Exception ex) {
                 Logger.getLogger(CreateRoutineController.class.getName()).log(Level.SEVERE, null, ex);
-                UIUtils.error(userView, ex.getMessage());
+                Utils.error(userView, ex.getMessage());
             }
         }
     }

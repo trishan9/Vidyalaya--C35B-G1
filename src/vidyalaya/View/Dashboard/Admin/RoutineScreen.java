@@ -8,6 +8,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 import vidyalaya.Components.RoutineCard;
 import vidyalaya.Controller.Routine.Admin.RoutineController;
 
@@ -16,7 +17,7 @@ import vidyalaya.Model.RoutineData;
 
 import vidyalaya.SessionManagement.AdminSession;
 
-import vidyalaya.Utils.UIUtils;
+import vidyalaya.Utils.Utils;
 
 /**
  *
@@ -40,22 +41,22 @@ public class RoutineScreen extends javax.swing.JFrame {
         setResizable(false);
 
         // Load the icon image
-        UIUtils.setFrameIcon(this, "/vidyalaya/Assets/logo.png");
+        Utils.setFrameIcon(this, "/vidyalaya/Assets/logo.png");
 
         // Custom Font Setting 
-        UIUtils.setCustomFont(jLabelHead, 25f);
-        UIUtils.setCustomFont(lblName, 14f);
-        UIUtils.setCustomFont(lblId, 14f);
-        UIUtils.setCustomFont(lblRole, 14f);
-        UIUtils.setCustomFont(menuCourses, 17f);
-        UIUtils.setCustomFont(menuRoutine, 17f);
-        UIUtils.setCustomFont(menuNotices, 17f);
-        UIUtils.setCustomFont(menuAttendance, 17f);
-        UIUtils.setCustomFont(menuUsers, 17f);
-        UIUtils.setCustomFont(menuSettings, 17f);
-        UIUtils.setCustomFont(menuLogout, 17f);
-        UIUtils.setCustomFont(jLabel3, 23f);
-        UIUtils.setCustomFont(createRoutineBtn, 17f);
+        Utils.setCustomFont(jLabelHead, 25f);
+        Utils.setCustomFont(lblName, 14f);
+        Utils.setCustomFont(lblId, 14f);
+        Utils.setCustomFont(lblRole, 14f);
+        Utils.setCustomFont(menuCourses, 17f);
+        Utils.setCustomFont(menuRoutine, 17f);
+        Utils.setCustomFont(menuNotices, 17f);
+        Utils.setCustomFont(menuAttendance, 17f);
+        Utils.setCustomFont(menuUsers, 17f);
+        Utils.setCustomFont(menuSettings, 17f);
+        Utils.setCustomFont(menuLogout, 17f);
+        Utils.setCustomFont(jLabel3, 23f);
+        Utils.setCustomFont(createRoutineBtn, 17f);
 
         AdminData currentUser = AdminSession.getCurrentUser();
         lblName.setText(currentUser.getName());
@@ -84,6 +85,8 @@ public class RoutineScreen extends javax.swing.JFrame {
     }
 
     public void addCreateRoutineListener(ActionListener listener) {
+        Utils.removeAllMouseListeners(createRoutineBtn);
+
         createRoutineBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -93,6 +96,8 @@ public class RoutineScreen extends javax.swing.JFrame {
     }
 
     public void addCoursesRedirectListener(ActionListener listener) {
+        Utils.removeAllMouseListeners(menuCourses);
+
         menuCourses.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -102,6 +107,8 @@ public class RoutineScreen extends javax.swing.JFrame {
     }
 
     public void addNoticesRedirectListener(ActionListener listener) {
+        Utils.removeAllMouseListeners(menuNotices);
+
         menuNotices.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -111,6 +118,8 @@ public class RoutineScreen extends javax.swing.JFrame {
     }
 
     public void addAttendanceRedirectListener(ActionListener listener) {
+        Utils.removeAllMouseListeners(menuAttendance);
+
         menuAttendance.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -120,6 +129,8 @@ public class RoutineScreen extends javax.swing.JFrame {
     }
 
     public void addUsersRedirectListener(ActionListener listener) {
+        Utils.removeAllMouseListeners(menuUsers);
+
         menuUsers.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -129,6 +140,8 @@ public class RoutineScreen extends javax.swing.JFrame {
     }
 
     public void addSettingsRedirectListener(ActionListener listener) {
+        Utils.removeAllMouseListeners(menuSettings);
+
         menuSettings.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -138,6 +151,8 @@ public class RoutineScreen extends javax.swing.JFrame {
     }
 
     public void addLogoutListener(ActionListener listener) {
+        Utils.removeAllMouseListeners(menuLogout);
+
         menuLogout.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {

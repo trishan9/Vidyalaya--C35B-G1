@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import vidyalaya.Utils.UIUtils;
+import vidyalaya.Utils.Utils;
 
 import vidyalaya.Components.Modals.CreateCourseForm;
 
@@ -58,12 +58,12 @@ public class CreateCourseController {
 
                 vidyalaya.View.Dashboard.Admin.CoursesScreen coursesView = new vidyalaya.View.Dashboard.Admin.CoursesScreen();
                 vidyalaya.Controller.Courses.Admin.CoursesController coursesController = new vidyalaya.Controller.Courses.Admin.CoursesController(coursesView);
-                UIUtils.closeAllFrames();
+                Utils.closeAllFrames();
                 coursesController.open();
-                UIUtils.info(coursesView, "Course created successfully: " + name);
+                Utils.info(coursesView, "Course created successfully: " + name);
             } catch (Exception ex) {
                 Logger.getLogger(CreateCourseController.class.getName()).log(Level.SEVERE, null, ex);
-                UIUtils.error(userView, ex.getMessage());
+                Utils.error(userView, ex.getMessage());
             }
         }
     }

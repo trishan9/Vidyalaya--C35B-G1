@@ -5,7 +5,7 @@
 package vidyalaya.Components.Modals;
 
 import java.awt.event.ActionListener;
-import vidyalaya.Utils.UIUtils;
+import vidyalaya.Utils.Utils;
 
 /**
  *
@@ -24,14 +24,14 @@ public class CreateCourseForm extends javax.swing.JFrame {
         setResizable(false);
 
         // Load the icon image
-        UIUtils.setFrameIcon(this, "/vidyalaya/Assets/logo.png");
+        Utils.setFrameIcon(this, "/vidyalaya/Assets/logo.png");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         // Custom Font Setting 
-        UIUtils.setCustomFont(jLabel1, 25f);
-        UIUtils.setCustomFont(label, 16f);
-        UIUtils.setCustomFont(createCourseBtn, 16f);
+        Utils.setCustomFont(jLabel1, 25f);
+        Utils.setCustomFont(label, 16f);
+        Utils.setCustomFont(createCourseBtn, 16f);
     }
 
     public void addCreateCourseListener(ActionListener listener) {

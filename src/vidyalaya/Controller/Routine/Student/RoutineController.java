@@ -18,7 +18,7 @@ import vidyalaya.DAO.RoutineDAO.RoutineDAOImplementation;
 import vidyalaya.Model.RoutineData;
 import vidyalaya.SessionManagement.StudentSession;
 
-import vidyalaya.Utils.UIUtils;
+import vidyalaya.Utils.Utils;
 
 import vidyalaya.View.UserLogin;
 import vidyalaya.View.Dashboard.Student.AttendanceScreen;
@@ -69,7 +69,7 @@ public class RoutineController {
         public void actionPerformed(ActionEvent e) {
             MyCoursesScreen coursesView = new MyCoursesScreen();
             vidyalaya.Controller.Courses.Student.MyCoursesController coursesController = new vidyalaya.Controller.Courses.Student.MyCoursesController(coursesView);
-            UIUtils.closeAllFrames();
+            Utils.closeAllFrames();
             coursesController.open();
         }
     }
@@ -80,7 +80,7 @@ public class RoutineController {
         public void actionPerformed(ActionEvent e) {
             NoticesScreen noticesView = new NoticesScreen();
             vidyalaya.Controller.Notices.Student.NoticesController noticesController = new vidyalaya.Controller.Notices.Student.NoticesController(noticesView);
-            UIUtils.closeAllFrames();
+            Utils.closeAllFrames();
             noticesController.open();
         }
     }
@@ -91,7 +91,7 @@ public class RoutineController {
         public void actionPerformed(ActionEvent e) {
             AttendanceScreen attendanceView = new AttendanceScreen();
             vidyalaya.Controller.Attendance.Student.AttendanceController attendanceController = new vidyalaya.Controller.Attendance.Student.AttendanceController(attendanceView);
-            UIUtils.closeAllFrames();
+            Utils.closeAllFrames();
             attendanceController.open();
         }
     }
@@ -102,7 +102,7 @@ public class RoutineController {
         public void actionPerformed(ActionEvent e) {
             SettingsScreen settingsView = new SettingsScreen();
             vidyalaya.Controller.Settings.Student.SettingsController settingsController = new vidyalaya.Controller.Settings.Student.SettingsController(settingsView);
-            UIUtils.closeAllFrames();
+            Utils.closeAllFrames();
             settingsController.open();
         }
     }
@@ -113,7 +113,7 @@ public class RoutineController {
         public void actionPerformed(ActionEvent e) {
             UserLogin userLoginView = new UserLogin();
             UserLoginController userLoginController = new UserLoginController(userLoginView);
-            UIUtils.closeAllFrames();
+            Utils.closeAllFrames();
             userLoginController.open();
         }
     }

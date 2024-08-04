@@ -13,7 +13,7 @@ import vidyalaya.Controller.AdminLoginController;
 import vidyalaya.DAO.AuthDAO.AuthDAO;
 import vidyalaya.DAO.AuthDAO.AuthDAOImplementation;
 
-import vidyalaya.Utils.UIUtils;
+import vidyalaya.Utils.Utils;
 
 import vidyalaya.View.AdminLogin;
 import vidyalaya.View.Dashboard.Admin.AttendanceScreen;
@@ -67,7 +67,7 @@ public class UsersController {
         public void actionPerformed(ActionEvent e) {
             CoursesScreen coursesView = new CoursesScreen();
             vidyalaya.Controller.Courses.Admin.CoursesController coursesController = new vidyalaya.Controller.Courses.Admin.CoursesController(coursesView);
-            UIUtils.closeAllFrames();
+            Utils.closeAllFrames();
             coursesController.open();
         }
     }
@@ -78,7 +78,7 @@ public class UsersController {
         public void actionPerformed(ActionEvent e) {
             RoutineScreen routineView = new RoutineScreen();
             vidyalaya.Controller.Routine.Admin.RoutineController routineController = new vidyalaya.Controller.Routine.Admin.RoutineController(routineView);
-            UIUtils.closeAllFrames();
+            Utils.closeAllFrames();
             routineController.open();
         }
     }
@@ -89,7 +89,7 @@ public class UsersController {
         public void actionPerformed(ActionEvent e) {
             NoticesScreen noticesView = new NoticesScreen();
             vidyalaya.Controller.Notices.Admin.NoticesController noticesController = new vidyalaya.Controller.Notices.Admin.NoticesController(noticesView);
-            UIUtils.closeAllFrames();
+            Utils.closeAllFrames();
             noticesController.open();
         }
     }
@@ -100,7 +100,7 @@ public class UsersController {
         public void actionPerformed(ActionEvent e) {
             AttendanceScreen attendanceView = new AttendanceScreen();
             vidyalaya.Controller.Attendance.Admin.AttendanceController attendanceController = new vidyalaya.Controller.Attendance.Admin.AttendanceController(attendanceView);
-            UIUtils.closeAllFrames();
+            Utils.closeAllFrames();
             attendanceController.open();
         }
     }
@@ -111,7 +111,7 @@ public class UsersController {
         public void actionPerformed(ActionEvent e) {
             SettingsScreen settingsView = new SettingsScreen();
             vidyalaya.Controller.Settings.Admin.SettingsController settingsController = new vidyalaya.Controller.Settings.Admin.SettingsController(settingsView);
-            UIUtils.closeAllFrames();
+            Utils.closeAllFrames();
             settingsController.open();
         }
     }
@@ -122,7 +122,7 @@ public class UsersController {
         public void actionPerformed(ActionEvent e) {
             AdminLogin adminLoginView = new AdminLogin();
             AdminLoginController adminLoginController = new AdminLoginController(adminLoginView);
-            UIUtils.closeAllFrames();
+            Utils.closeAllFrames();
             adminLoginController.open();
         }
     }

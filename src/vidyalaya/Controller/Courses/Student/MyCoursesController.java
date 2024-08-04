@@ -19,7 +19,7 @@ import vidyalaya.Model.ModuleData;
 
 import vidyalaya.SessionManagement.StudentSession;
 
-import vidyalaya.Utils.UIUtils;
+import vidyalaya.Utils.Utils;
 
 import vidyalaya.View.Dashboard.Student.AttendanceScreen;
 import vidyalaya.View.Dashboard.Student.NoticesScreen;
@@ -70,7 +70,7 @@ public class MyCoursesController {
         public void actionPerformed(ActionEvent e) {
             RoutineScreen routineView = new RoutineScreen();
             vidyalaya.Controller.Routine.Student.RoutineController routineController = new vidyalaya.Controller.Routine.Student.RoutineController(routineView);
-            UIUtils.closeAllFrames();
+            Utils.closeAllFrames();
             routineController.open();
         }
     }
@@ -81,7 +81,7 @@ public class MyCoursesController {
         public void actionPerformed(ActionEvent e) {
             NoticesScreen noticesView = new NoticesScreen();
             vidyalaya.Controller.Notices.Student.NoticesController noticesController = new vidyalaya.Controller.Notices.Student.NoticesController(noticesView);
-            UIUtils.closeAllFrames();
+            Utils.closeAllFrames();
             noticesController.open();
         }
     }
@@ -92,7 +92,7 @@ public class MyCoursesController {
         public void actionPerformed(ActionEvent e) {
             AttendanceScreen attendanceView = new AttendanceScreen();
             vidyalaya.Controller.Attendance.Student.AttendanceController attendanceController = new vidyalaya.Controller.Attendance.Student.AttendanceController(attendanceView);
-            UIUtils.closeAllFrames();
+            Utils.closeAllFrames();
             attendanceController.open();
         }
     }
@@ -103,7 +103,7 @@ public class MyCoursesController {
         public void actionPerformed(ActionEvent e) {
             SettingsScreen settingsView = new SettingsScreen();
             vidyalaya.Controller.Settings.Student.SettingsController settingsController = new vidyalaya.Controller.Settings.Student.SettingsController(settingsView);
-            UIUtils.closeAllFrames();
+            Utils.closeAllFrames();
             settingsController.open();
         }
     }
@@ -114,7 +114,7 @@ public class MyCoursesController {
         public void actionPerformed(ActionEvent e) {
             UserLogin studentLoginView = new UserLogin();
             UserLoginController studentLoginController = new UserLoginController(studentLoginView);
-            UIUtils.closeAllFrames();
+            Utils.closeAllFrames();
             studentLoginController.open();
         }
     }

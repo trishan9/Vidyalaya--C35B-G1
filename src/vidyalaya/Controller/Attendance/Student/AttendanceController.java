@@ -12,7 +12,7 @@ import vidyalaya.Controller.Users.UserLoginController;
 import vidyalaya.DAO.AuthDAO.AuthDAO;
 import vidyalaya.DAO.AuthDAO.AuthDAOImplementation;
 
-import vidyalaya.Utils.UIUtils;
+import vidyalaya.Utils.Utils;
 
 import vidyalaya.View.UserLogin;
 import vidyalaya.View.Dashboard.Student.AttendanceScreen;
@@ -53,7 +53,7 @@ public class AttendanceController {
         public void actionPerformed(ActionEvent e) {
             MyCoursesScreen coursesView = new MyCoursesScreen();
             vidyalaya.Controller.Courses.Student.MyCoursesController coursesController = new vidyalaya.Controller.Courses.Student.MyCoursesController(coursesView);
-            UIUtils.closeAllFrames();
+            Utils.closeAllFrames();
             coursesController.open();
         }
     }
@@ -64,7 +64,7 @@ public class AttendanceController {
         public void actionPerformed(ActionEvent e) {
             RoutineScreen routineView = new RoutineScreen();
             vidyalaya.Controller.Routine.Student.RoutineController routineController = new vidyalaya.Controller.Routine.Student.RoutineController(routineView);
-            UIUtils.closeAllFrames();
+            Utils.closeAllFrames();
             routineController.open();
         }
     }
@@ -75,7 +75,7 @@ public class AttendanceController {
         public void actionPerformed(ActionEvent e) {
             NoticesScreen noticesView = new NoticesScreen();
             vidyalaya.Controller.Notices.Student.NoticesController noticesController = new vidyalaya.Controller.Notices.Student.NoticesController(noticesView);
-            UIUtils.closeAllFrames();
+            Utils.closeAllFrames();
             noticesController.open();
         }
     }
@@ -86,7 +86,7 @@ public class AttendanceController {
         public void actionPerformed(ActionEvent e) {
             SettingsScreen settingsView = new SettingsScreen();
             vidyalaya.Controller.Settings.Student.SettingsController settingsController = new vidyalaya.Controller.Settings.Student.SettingsController(settingsView);
-            UIUtils.closeAllFrames();
+            Utils.closeAllFrames();
             settingsController.open();
         }
     }
@@ -97,7 +97,7 @@ public class AttendanceController {
         public void actionPerformed(ActionEvent e) {
             UserLogin userLoginView = new UserLogin();
             UserLoginController userLoginController = new UserLoginController(userLoginView);
-            UIUtils.closeAllFrames();
+            Utils.closeAllFrames();
             userLoginController.open();
         }
     }

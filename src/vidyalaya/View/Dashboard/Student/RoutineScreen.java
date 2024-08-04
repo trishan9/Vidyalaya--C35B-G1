@@ -16,7 +16,7 @@ import vidyalaya.Model.StudentData;
 
 import vidyalaya.SessionManagement.StudentSession;
 
-import vidyalaya.Utils.UIUtils;
+import vidyalaya.Utils.Utils;
 
 /**
  *
@@ -40,20 +40,20 @@ public class RoutineScreen extends javax.swing.JFrame {
         setResizable(false);
 
         // Load the icon image
-        UIUtils.setFrameIcon(this, "/vidyalaya/Assets/logo.png");
+        Utils.setFrameIcon(this, "/vidyalaya/Assets/logo.png");
 
         // Custom Font Setting 
-        UIUtils.setCustomFont(jLabelHead, 25f);
-        UIUtils.setCustomFont(lblName, 14f);
-        UIUtils.setCustomFont(lblId, 14f);
-        UIUtils.setCustomFont(lblRole, 14f);
-        UIUtils.setCustomFont(menuCourses, 17f);
-        UIUtils.setCustomFont(menuRoutine, 17f);
-        UIUtils.setCustomFont(menuNotices, 17f);
-        UIUtils.setCustomFont(menuAttendance, 17f);
-        UIUtils.setCustomFont(menuSettings, 17f);
-        UIUtils.setCustomFont(menuLogout, 17f);
-        UIUtils.setCustomFont(jLabel3, 23f);
+        Utils.setCustomFont(jLabelHead, 25f);
+        Utils.setCustomFont(lblName, 14f);
+        Utils.setCustomFont(lblId, 14f);
+        Utils.setCustomFont(lblRole, 14f);
+        Utils.setCustomFont(menuCourses, 17f);
+        Utils.setCustomFont(menuRoutine, 17f);
+        Utils.setCustomFont(menuNotices, 17f);
+        Utils.setCustomFont(menuAttendance, 17f);
+        Utils.setCustomFont(menuSettings, 17f);
+        Utils.setCustomFont(menuLogout, 17f);
+        Utils.setCustomFont(jLabel3, 23f);
 
         StudentData currentUser = StudentSession.getCurrentUser();
         lblName.setText(currentUser.getName());
@@ -444,7 +444,7 @@ public class RoutineScreen extends javax.swing.JFrame {
         pnlRoutines.setLayout(pnlRoutinesLayout);
         pnlRoutinesLayout.setHorizontalGroup(
             pnlRoutinesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1063, Short.MAX_VALUE)
+            .addGap(0, 1097, Short.MAX_VALUE)
         );
         pnlRoutinesLayout.setVerticalGroup(
             pnlRoutinesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -461,7 +461,7 @@ public class RoutineScreen extends javax.swing.JFrame {
                 .addGroup(pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pnlRight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pnlRoutines, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 69, Short.MAX_VALUE))
+                .addGap(0, 35, Short.MAX_VALUE))
         );
         pnlCenterLayout.setVerticalGroup(
             pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

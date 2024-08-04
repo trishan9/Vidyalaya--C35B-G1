@@ -5,7 +5,7 @@
 package vidyalaya.View;
 
 import java.awt.event.ActionListener;
-import vidyalaya.Utils.UIUtils;
+import vidyalaya.Utils.Utils;
 
 /**
  *
@@ -25,17 +25,17 @@ public class UserLogin extends javax.swing.JFrame {
         setResizable(false);
 
         // Load the icon image
-        UIUtils.setFrameIcon(this, "/vidyalaya/Assets/logo.png");
+        Utils.setFrameIcon(this, "/vidyalaya/Assets/logo.png");
 
         // Custom Font Setting 
-        UIUtils.setCustomFont(jLabelHead, 25f);
-        UIUtils.setCustomFont(createMessage, 25f);
-        UIUtils.setCustomFont(label, 16f);
-        UIUtils.setCustomFont(pwLabel, 16f);
-        UIUtils.setCustomFont(signinBtn, 16f);
+        Utils.setCustomFont(jLabelHead, 25f);
+        Utils.setCustomFont(createMessage, 25f);
+        Utils.setCustomFont(label, 16f);
+        Utils.setCustomFont(pwLabel, 16f);
+        Utils.setCustomFont(signinBtn, 16f);
 
-        UIUtils.setCustomFont(txtUsername, 16f);        
-        UIUtils.setCustomFont(txtPassword, 16f);
+        Utils.setCustomFont(txtUsername, 16f);        
+        Utils.setCustomFont(txtPassword, 16f);
 
     }
 

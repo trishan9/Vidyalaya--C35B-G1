@@ -6,7 +6,7 @@ package vidyalaya.Components;
 
 import vidyalaya.Model.ModuleData;
 import vidyalaya.Utils.CallbackFn;
-import vidyalaya.Utils.UIUtils;
+import vidyalaya.Utils.Utils;
 
 /**
  *
@@ -29,11 +29,11 @@ public class CourseCardUser extends javax.swing.JPanel {
         courseCode.setText(String.valueOf(module.getCode()));
         this.onClick = onClick;
 
-        UIUtils.setCustomFont(courseTitleHeader, 15f);
-        UIUtils.setCustomFont(courseTitle, 17f);
-        UIUtils.setCustomFont(courseCodeHeader, 15f);
-        UIUtils.setCustomFont(courseCode, 17f);
-        UIUtils.setCustomFont(accessMaterialsBtn, 17f);
+        Utils.setCustomFont(courseTitleHeader, 15f);
+        Utils.setCustomFont(courseTitle, 17f);
+        Utils.setCustomFont(courseCodeHeader, 15f);
+        Utils.setCustomFont(courseCode, 17f);
+        Utils.setCustomFont(accessMaterialsBtn, 17f);
         
         if(userType.equals("TEACHER")){
             accessMaterialsBtn.setText("Manage Materials");

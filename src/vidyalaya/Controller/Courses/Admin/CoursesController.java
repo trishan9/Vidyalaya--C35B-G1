@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import vidyalaya.Utils.UIUtils;
+import vidyalaya.Utils.Utils;
 
 import vidyalaya.Components.Modals.CreateCourseForm;
 
@@ -73,19 +73,19 @@ public class CoursesController {
 
     public final void deleteCourseByCode(int moduleCode) {
         try {
-            int result = UIUtils.confirm(userView, "Are you sure you want to delete this course?");
+            int result = Utils.confirm(userView, "Are you sure you want to delete this course?");
             if (result == JOptionPane.YES_OPTION) {
                 moduleDAO.deleteModule(moduleCode);
 
                 vidyalaya.View.Dashboard.Admin.CoursesScreen coursesView = new vidyalaya.View.Dashboard.Admin.CoursesScreen();
                 vidyalaya.Controller.Courses.Admin.CoursesController coursesController = new vidyalaya.Controller.Courses.Admin.CoursesController(coursesView);
-                UIUtils.closeAllFrames();
+                Utils.closeAllFrames();
                 coursesController.open();
-                UIUtils.info(coursesView, "Course deleted successfully!");
+                Utils.info(coursesView, "Course deleted successfully!");
             }
         } catch (Exception ex) {
             Logger.getLogger(CoursesController.class.getName()).log(Level.SEVERE, null, ex);
-            UIUtils.error(userView, ex.getMessage());
+            Utils.error(userView, ex.getMessage());
         }
     }
 
@@ -105,7 +105,7 @@ public class CoursesController {
         public void actionPerformed(ActionEvent e) {
             RoutineScreen routineView = new RoutineScreen();
             vidyalaya.Controller.Routine.Admin.RoutineController routineController = new vidyalaya.Controller.Routine.Admin.RoutineController(routineView);
-            UIUtils.closeAllFrames();
+            Utils.closeAllFrames();
             routineController.open();
         }
     }
@@ -116,7 +116,7 @@ public class CoursesController {
         public void actionPerformed(ActionEvent e) {
             NoticesScreen noticesView = new NoticesScreen();
             vidyalaya.Controller.Notices.Admin.NoticesController noticesController = new vidyalaya.Controller.Notices.Admin.NoticesController(noticesView);
-            UIUtils.closeAllFrames();
+            Utils.closeAllFrames();
             noticesController.open();
         }
     }
@@ -127,7 +127,7 @@ public class CoursesController {
         public void actionPerformed(ActionEvent e) {
             AttendanceScreen attendanceView = new AttendanceScreen();
             vidyalaya.Controller.Attendance.Admin.AttendanceController attendanceController = new vidyalaya.Controller.Attendance.Admin.AttendanceController(attendanceView);
-            UIUtils.closeAllFrames();
+            Utils.closeAllFrames();
             attendanceController.open();
         }
     }
@@ -138,7 +138,7 @@ public class CoursesController {
         public void actionPerformed(ActionEvent e) {
             UsersScreen usersView = new UsersScreen();
             vidyalaya.Controller.Users.UsersController usersController = new vidyalaya.Controller.Users.UsersController(usersView);
-            UIUtils.closeAllFrames();
+            Utils.closeAllFrames();
             usersController.open();
         }
     }
@@ -149,7 +149,7 @@ public class CoursesController {
         public void actionPerformed(ActionEvent e) {
             SettingsScreen settingsView = new SettingsScreen();
             vidyalaya.Controller.Settings.Admin.SettingsController settingsController = new vidyalaya.Controller.Settings.Admin.SettingsController(settingsView);
-            UIUtils.closeAllFrames();
+            Utils.closeAllFrames();
             settingsController.open();
         }
     }
@@ -160,7 +160,7 @@ public class CoursesController {
         public void actionPerformed(ActionEvent e) {
             AdminLogin adminLoginView = new AdminLogin();
             AdminLoginController adminLoginController = new AdminLoginController(adminLoginView);
-            UIUtils.closeAllFrames();
+            Utils.closeAllFrames();
             adminLoginController.open();
         }
     }

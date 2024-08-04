@@ -14,7 +14,7 @@ import vidyalaya.DAO.AuthDAO.AuthDAO;
 import vidyalaya.DAO.AuthDAO.AuthDAOImplementation;
 
 import vidyalaya.Model.LoginRequest;
-import vidyalaya.Utils.UIUtils;
+import vidyalaya.Utils.Utils;
 
 import vidyalaya.View.UserLogin;
 
@@ -65,7 +65,7 @@ public class UserLoginController {
                 handleLogin(user, userType);
             } catch (Exception ex) {
                 Logger.getLogger(UserLoginController.class.getName()).log(Level.SEVERE, null, ex);
-                UIUtils.error(userView, ex.getMessage());
+                Utils.error(userView, ex.getMessage());
             }
         }
     }
@@ -75,12 +75,12 @@ public class UserLoginController {
             case "student":
                 authDAO.loginStudent(user);
                 redirectToStudentDashboard();
-                UIUtils.info(new vidyalaya.View.Dashboard.Student.MyCoursesScreen(), "Logged in successfully as student!");
+                Utils.info(new vidyalaya.View.Dashboard.Student.MyCoursesScreen(), "Logged in successfully as student!");
                 break;
             case "teacher":
                 authDAO.loginTeacher(user);
                 redirectToTeacherDashboard();
-                UIUtils.info(new vidyalaya.View.Dashboard.Teacher.MyCoursesScreen(), "Logged in successfully as teacher!");
+                Utils.info(new vidyalaya.View.Dashboard.Teacher.MyCoursesScreen(), "Logged in successfully as teacher!");
                 break;
             default:
                 throw new IllegalArgumentException("Invalid user type: " + userType);

@@ -6,7 +6,7 @@ package vidyalaya.Components;
 
 import vidyalaya.Model.ModuleData;
 import vidyalaya.Utils.CallbackFn;
-import vidyalaya.Utils.UIUtils;
+import vidyalaya.Utils.Utils;
 
 /**
  *
@@ -30,10 +30,10 @@ public class CourseCard extends javax.swing.JPanel {
         this.onEditClick = onEditClick;
         this.onDeleteClick = onDeleteClick;
 
-        UIUtils.setCustomFont(courseTitleHeader, 15f);
-        UIUtils.setCustomFont(courseTitle, 17f);
-        UIUtils.setCustomFont(courseCodeHeader, 15f);
-        UIUtils.setCustomFont(courseCode, 17f);
+        Utils.setCustomFont(courseTitleHeader, 15f);
+        Utils.setCustomFont(courseTitle, 17f);
+        Utils.setCustomFont(courseCodeHeader, 15f);
+        Utils.setCustomFont(courseCode, 17f);
     }
 
     /**

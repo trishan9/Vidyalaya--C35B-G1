@@ -17,7 +17,7 @@ import vidyalaya.View.AdminLogin;
 import vidyalaya.View.CreateAdmin;
 
 import vidyalaya.Model.AdminData;
-import vidyalaya.Utils.UIUtils;
+import vidyalaya.Utils.Utils;
 
 /**
  *
@@ -63,11 +63,11 @@ public class CreateAdminController {
                 AdminData admin = new AdminData(name, email, institution_name, password);
                 authDAO.registerAdmin(admin);
 
-                UIUtils.info(userView, "Admin created successfully with name: " + name);
+                Utils.info(userView, "Admin created successfully with name: " + name);
                 redirectToAdminLogin();
             } catch (Exception ex) {
                 Logger.getLogger(CreateAdminController.class.getName()).log(Level.SEVERE, null, ex);
-                UIUtils.error(userView, ex.getMessage());
+                Utils.error(userView, ex.getMessage());
             }
         }
     }

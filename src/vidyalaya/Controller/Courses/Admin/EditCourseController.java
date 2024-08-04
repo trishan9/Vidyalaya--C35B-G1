@@ -28,7 +28,7 @@ import vidyalaya.Model.TeacherData;
 
 import vidyalaya.SessionManagement.AdminSession;
 
-import vidyalaya.Utils.UIUtils;
+import vidyalaya.Utils.Utils;
 
 /**
  *
@@ -83,7 +83,7 @@ public class EditCourseController {
             return data;
         } catch (Exception ex) {
             Logger.getLogger(EditCourseController.class.getName()).log(Level.SEVERE, null, ex);
-            UIUtils.error(userView, ex.getMessage());
+            Utils.error(userView, ex.getMessage());
             return null;
         }
     }
@@ -121,12 +121,12 @@ public class EditCourseController {
 
                 vidyalaya.View.Dashboard.Admin.CoursesScreen coursesView = new vidyalaya.View.Dashboard.Admin.CoursesScreen();
                 vidyalaya.Controller.Courses.Admin.CoursesController coursesController = new vidyalaya.Controller.Courses.Admin.CoursesController(coursesView);
-                UIUtils.closeAllFrames();
+                Utils.closeAllFrames();
                 coursesController.open();
-                UIUtils.info(coursesView, "Course updated successfully");
+                Utils.info(coursesView, "Course updated successfully");
             } catch (Exception ex) {
                 Logger.getLogger(EditCourseController.class.getName()).log(Level.SEVERE, null, ex);
-                UIUtils.error(userView, ex.getMessage());
+                Utils.error(userView, ex.getMessage());
             }
         }
     }

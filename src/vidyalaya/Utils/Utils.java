@@ -7,6 +7,7 @@ package vidyalaya.Utils;
 import java.awt.Cursor;
 import java.awt.Frame;
 import java.awt.Image;
+import java.awt.event.MouseListener;
 
 import javax.imageio.ImageIO;
 import java.io.IOException;
@@ -14,6 +15,7 @@ import java.io.IOException;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
@@ -24,7 +26,7 @@ import raven.datetime.component.time.TimePicker;
  *
  * @author trishan9
  */
-public class UIUtils {
+public class Utils {
 
     public static void setFrameIcon(JFrame frame, String path) {
         try {
@@ -40,6 +42,13 @@ public class UIUtils {
 
         for (Frame frame : frames) {
             frame.dispose();
+        }
+    }
+
+    public static void removeAllMouseListeners(JComponent component) {
+        MouseListener[] mouseListeners = component.getMouseListeners();
+        for (MouseListener ml : mouseListeners) {
+            component.removeMouseListener(ml);
         }
     }
 
