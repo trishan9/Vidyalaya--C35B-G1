@@ -5,6 +5,7 @@
 package vidyalaya.Components.Modals;
 
 import java.awt.event.ActionListener;
+
 import vidyalaya.Utils.Utils;
 
 /**
@@ -14,7 +15,7 @@ import vidyalaya.Utils.Utils;
 public class CreateCourseForm extends javax.swing.JFrame {
 
     /**
-     * Creates new form CreateNewUserForm
+     * Creates new form CreateCourseForm
      */
     public CreateCourseForm() {
         initComponents();

@@ -7,12 +7,10 @@ package vidyalaya.Controller.Attendance.Teacher;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import vidyalaya.Controller.Users.UserLoginController;
+import vidyalaya.Utils.Utils;
 
 import vidyalaya.DAO.AuthDAO.AuthDAO;
 import vidyalaya.DAO.AuthDAO.AuthDAOImplementation;
-
-import vidyalaya.Utils.Utils;
 
 import vidyalaya.View.UserLogin;
 import vidyalaya.View.Dashboard.Teacher.AttendanceScreen;
@@ -20,6 +18,8 @@ import vidyalaya.View.Dashboard.Teacher.MyCoursesScreen;
 import vidyalaya.View.Dashboard.Teacher.NoticesScreen;
 import vidyalaya.View.Dashboard.Teacher.RoutineScreen;
 import vidyalaya.View.Dashboard.Teacher.SettingsScreen;
+
+import vidyalaya.Controller.Users.UserLoginController;
 
 /**
  *

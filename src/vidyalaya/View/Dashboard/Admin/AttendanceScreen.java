@@ -8,11 +8,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import vidyalaya.Utils.Utils;
+
 import vidyalaya.Model.AdminData;
 
 import vidyalaya.SessionManagement.AdminSession;
-
-import vidyalaya.Utils.Utils;
 
 /**
  *
@@ -55,7 +55,7 @@ public class AttendanceScreen extends javax.swing.JFrame {
 
     public void addCoursesRedirectListener(ActionListener listener) {
         Utils.removeAllMouseListeners(menuCourses);
-        
+
         menuCourses.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -66,7 +66,7 @@ public class AttendanceScreen extends javax.swing.JFrame {
 
     public void addRoutineRedirectListener(ActionListener listener) {
         Utils.removeAllMouseListeners(menuRoutine);
-        
+
         menuRoutine.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -77,7 +77,7 @@ public class AttendanceScreen extends javax.swing.JFrame {
 
     public void addNoticesRedirectListener(ActionListener listener) {
         Utils.removeAllMouseListeners(menuNotices);
-        
+
         menuNotices.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -88,7 +88,7 @@ public class AttendanceScreen extends javax.swing.JFrame {
 
     public void addUsersRedirectListener(ActionListener listener) {
         Utils.removeAllMouseListeners(menuUsers);
-        
+
         menuUsers.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -99,7 +99,7 @@ public class AttendanceScreen extends javax.swing.JFrame {
 
     public void addSettingsRedirectListener(ActionListener listener) {
         Utils.removeAllMouseListeners(menuSettings);
-        
+
         menuSettings.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -110,7 +110,7 @@ public class AttendanceScreen extends javax.swing.JFrame {
 
     public void addLogoutListener(ActionListener listener) {
         Utils.removeAllMouseListeners(menuLogout);
-        
+
         menuLogout.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {

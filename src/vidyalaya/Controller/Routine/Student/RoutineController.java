@@ -10,15 +10,13 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import vidyalaya.Controller.Users.UserLoginController;
-
-import vidyalaya.DAO.RoutineDAO.RoutineDAO;
-import vidyalaya.DAO.RoutineDAO.RoutineDAOImplementation;
+import vidyalaya.Utils.Utils;
 
 import vidyalaya.Model.RoutineData;
 import vidyalaya.SessionManagement.StudentSession;
 
-import vidyalaya.Utils.Utils;
+import vidyalaya.DAO.RoutineDAO.RoutineDAO;
+import vidyalaya.DAO.RoutineDAO.RoutineDAOImplementation;
 
 import vidyalaya.View.UserLogin;
 import vidyalaya.View.Dashboard.Student.AttendanceScreen;
@@ -26,6 +24,8 @@ import vidyalaya.View.Dashboard.Student.MyCoursesScreen;
 import vidyalaya.View.Dashboard.Student.NoticesScreen;
 import vidyalaya.View.Dashboard.Student.RoutineScreen;
 import vidyalaya.View.Dashboard.Student.SettingsScreen;
+
+import vidyalaya.Controller.Users.UserLoginController;
 
 /**
  *
@@ -44,10 +44,10 @@ public class RoutineController {
         userView.addAttendanceRedirectListener(new AttendanceRedirectListener());
         userView.addSettingsRedirectListener(new SettingsRedirectListener());
         userView.addLogoutListener(new LogoutListener());
-        getMyModulesList();
+        getMyRoutinesList();
     }
 
-    public final void getMyModulesList() {
+    public final void getMyRoutinesList() {
         try {
             myRoutinesList = routineDAO.getAllRoutines(StudentSession.getCurrentUser().getAdminId());
         } catch (Exception ex) {

@@ -6,11 +6,11 @@ package vidyalaya.Components.Modals;
 
 import java.awt.event.ActionListener;
 
+import vidyalaya.Model.ModuleData;
+
 import vidyalaya.Components.ComboBoxMultiSelection;
 
 import vidyalaya.Controller.Courses.Admin.EditCourseController;
-
-import vidyalaya.Model.ModuleData;
 
 import vidyalaya.Utils.Utils;
 
@@ -23,7 +23,7 @@ public class EditCourseForm extends javax.swing.JFrame {
     EditCourseController coursesController;
 
     /**
-     * Creates new form CreateNewUserForm
+     * Creates new form EditCourseForm
      *
      * @param moduleCode
      */

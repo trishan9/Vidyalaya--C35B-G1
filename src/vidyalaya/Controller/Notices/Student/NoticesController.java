@@ -12,12 +12,11 @@ import java.util.List;
 
 import vidyalaya.Utils.Utils;
 
-import vidyalaya.Controller.Users.UserLoginController;
+import vidyalaya.Model.NoticeData;
+import vidyalaya.SessionManagement.StudentSession;
 
 import vidyalaya.DAO.NoticeDAO.NoticeDAO;
 import vidyalaya.DAO.NoticeDAO.NoticeDAOImplementation;
-import vidyalaya.Model.NoticeData;
-import vidyalaya.SessionManagement.StudentSession;
 
 import vidyalaya.View.UserLogin;
 import vidyalaya.View.Dashboard.Student.AttendanceScreen;
@@ -25,6 +24,8 @@ import vidyalaya.View.Dashboard.Student.MyCoursesScreen;
 import vidyalaya.View.Dashboard.Student.NoticesScreen;
 import vidyalaya.View.Dashboard.Student.RoutineScreen;
 import vidyalaya.View.Dashboard.Student.SettingsScreen;
+
+import vidyalaya.Controller.Users.UserLoginController;
 
 /**
  *

@@ -8,18 +8,16 @@ import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import vidyalaya.Components.CourseCard;
-import vidyalaya.Components.CourseCardUser;
-import vidyalaya.Components.Modals.EditCourseForm;
-import vidyalaya.Controller.Courses.Admin.CoursesController;
-import vidyalaya.Controller.Courses.Student.MyCoursesController;
-import vidyalaya.Model.ModuleData;
-
-import vidyalaya.Model.StudentData;
-
-import vidyalaya.SessionManagement.StudentSession;
 
 import vidyalaya.Utils.Utils;
+
+import vidyalaya.Model.ModuleData;
+import vidyalaya.Model.StudentData;
+import vidyalaya.SessionManagement.StudentSession;
+
+import vidyalaya.Components.CourseCardUser;
+
+import vidyalaya.Controller.Courses.Student.MyCoursesController;
 
 /**
  *
@@ -30,7 +28,7 @@ public class MyCoursesScreen extends javax.swing.JFrame {
     MyCoursesController myCoursesController;
 
     /**
-     * Creates new form CoursesScreen
+     * Creates new form MyCoursesScreen
      */
     public MyCoursesScreen() {
         initComponents();

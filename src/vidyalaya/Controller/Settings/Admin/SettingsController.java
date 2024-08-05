@@ -7,12 +7,10 @@ package vidyalaya.Controller.Settings.Admin;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import vidyalaya.Controller.AdminLoginController;
+import vidyalaya.Utils.Utils;
 
 import vidyalaya.DAO.AuthDAO.AuthDAO;
 import vidyalaya.DAO.AuthDAO.AuthDAOImplementation;
-
-import vidyalaya.Utils.Utils;
 
 import vidyalaya.View.AdminLogin;
 import vidyalaya.View.Dashboard.Admin.AttendanceScreen;
@@ -22,12 +20,14 @@ import vidyalaya.View.Dashboard.Admin.RoutineScreen;
 import vidyalaya.View.Dashboard.Admin.SettingsScreen;
 import vidyalaya.View.Dashboard.Admin.UsersScreen;
 
+import vidyalaya.Controller.AdminLoginController;
+
 /**
  *
  * @author trish
  */
 public class SettingsController {
-        
+
     private final AuthDAO authDAO = new AuthDAOImplementation();
     private final SettingsScreen userView;
 

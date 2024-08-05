@@ -6,19 +6,17 @@ package vidyalaya.Controller.Routine.Teacher;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import vidyalaya.Controller.Users.UserLoginController;
+import vidyalaya.Utils.Utils;
 
-import vidyalaya.DAO.AuthDAO.AuthDAO;
-import vidyalaya.DAO.AuthDAO.AuthDAOImplementation;
-import vidyalaya.DAO.RoutineDAO.RoutineDAO;
-import vidyalaya.DAO.RoutineDAO.RoutineDAOImplementation;
 import vidyalaya.Model.RoutineData;
 import vidyalaya.SessionManagement.TeacherSession;
 
-import vidyalaya.Utils.Utils;
+import vidyalaya.DAO.RoutineDAO.RoutineDAO;
+import vidyalaya.DAO.RoutineDAO.RoutineDAOImplementation;
 
 import vidyalaya.View.UserLogin;
 import vidyalaya.View.Dashboard.Teacher.AttendanceScreen;
@@ -26,6 +24,8 @@ import vidyalaya.View.Dashboard.Teacher.MyCoursesScreen;
 import vidyalaya.View.Dashboard.Teacher.NoticesScreen;
 import vidyalaya.View.Dashboard.Teacher.RoutineScreen;
 import vidyalaya.View.Dashboard.Teacher.SettingsScreen;
+
+import vidyalaya.Controller.Users.UserLoginController;
 
 /**
  *
@@ -44,7 +44,7 @@ public class RoutineController {
         userView.addAttendanceRedirectListener(new AttendanceRedirectListener());
         userView.addSettingsRedirectListener(new SettingsRedirectListener());
         userView.addLogoutListener(new LogoutListener());
-        getMyModulesList();
+        getMyRoutinesList();
     }
 
     public void open() {
@@ -55,7 +55,7 @@ public class RoutineController {
         this.userView.dispose();
     }
 
-    public final void getMyModulesList() {
+    public final void getMyRoutinesList() {
         try {
             myRoutinesList = routineDAO.getAllRoutinesByTeacher(TeacherSession.getCurrentUser().getId());
         } catch (Exception ex) {

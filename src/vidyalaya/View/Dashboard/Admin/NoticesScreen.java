@@ -9,25 +9,24 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import vidyalaya.Utils.Utils;
+
+import vidyalaya.Model.AdminData;
+import vidyalaya.Model.NoticeData;
+import vidyalaya.SessionManagement.AdminSession;
+
 import vidyalaya.Components.Modals.EditNoticeForm;
 import vidyalaya.Components.Modals.SeeMoreView;
 import vidyalaya.Components.NoticeCard;
 
 import vidyalaya.Controller.Notices.Admin.NoticesController;
 
-import vidyalaya.Model.AdminData;
-import vidyalaya.Model.NoticeData;
-
-import vidyalaya.SessionManagement.AdminSession;
-
-import vidyalaya.Utils.Utils;
-
 /**
  *
  * @author trish
  */
 public class NoticesScreen extends javax.swing.JFrame {
-    
+
     NoticesController noticesController;
 
     /**
@@ -37,7 +36,7 @@ public class NoticesScreen extends javax.swing.JFrame {
         initComponents();
         noticesController = new NoticesController(this);
         initializeGrid();
-        
+
         setTitle("Notices - Vidyalaya Admin");
         setSize(1400, 954);
         setLocationRelativeTo(null);
@@ -60,12 +59,12 @@ public class NoticesScreen extends javax.swing.JFrame {
         Utils.setCustomFont(menuLogout, 17f);
         Utils.setCustomFont(jLabel3, 23f);
         Utils.setCustomFont(createNoticeBtn, 17f);
-        
+
         AdminData currentUser = AdminSession.getCurrentUser();
         lblName.setText(currentUser.getName());
         lblId.setText(currentUser.getUsername());
     }
-    
+
     private void initializeGrid() {
         noticesController.noticesList.forEach((x) -> addGrid(x));
         var grid = new GridLayout(0, 1);
@@ -73,7 +72,7 @@ public class NoticesScreen extends javax.swing.JFrame {
         grid.setVgap(10);
         pnlNotices.setLayout(grid);
     }
-    
+
     private void addGrid(NoticeData data) {
         var temp = new NoticeCard(data,
                 () -> {
@@ -87,10 +86,10 @@ public class NoticesScreen extends javax.swing.JFrame {
                 });
         pnlNotices.add(temp);
     }
-    
+
     public void addCreateNoticeListener(ActionListener listener) {
         Utils.removeAllMouseListeners(createNoticeBtn);
-        
+
         createNoticeBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -98,10 +97,10 @@ public class NoticesScreen extends javax.swing.JFrame {
             }
         });
     }
-    
+
     public void addCoursesRedirectListener(ActionListener listener) {
         Utils.removeAllMouseListeners(menuCourses);
-        
+
         menuCourses.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -109,10 +108,10 @@ public class NoticesScreen extends javax.swing.JFrame {
             }
         });
     }
-    
+
     public void addRoutineRedirectListener(ActionListener listener) {
         Utils.removeAllMouseListeners(menuRoutine);
-        
+
         menuRoutine.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -120,10 +119,10 @@ public class NoticesScreen extends javax.swing.JFrame {
             }
         });
     }
-    
+
     public void addAttendanceRedirectListener(ActionListener listener) {
         Utils.removeAllMouseListeners(menuAttendance);
-        
+
         menuAttendance.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -131,10 +130,10 @@ public class NoticesScreen extends javax.swing.JFrame {
             }
         });
     }
-    
+
     public void addUsersRedirectListener(ActionListener listener) {
         Utils.removeAllMouseListeners(menuUsers);
-        
+
         menuUsers.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -142,10 +141,10 @@ public class NoticesScreen extends javax.swing.JFrame {
             }
         });
     }
-    
+
     public void addSettingsRedirectListener(ActionListener listener) {
         Utils.removeAllMouseListeners(menuSettings);
-        
+
         menuSettings.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -153,10 +152,10 @@ public class NoticesScreen extends javax.swing.JFrame {
             }
         });
     }
-    
+
     public void addLogoutListener(ActionListener listener) {
         Utils.removeAllMouseListeners(menuLogout);
-        
+
         menuLogout.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {

@@ -4,11 +4,11 @@
  */
 package vidyalaya.DAO.AuthDAO;
 
-import vidyalaya.Database.MySqlConnection;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import vidyalaya.Database.MySqlConnection;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,6 @@ import vidyalaya.Model.AdminData;
 import vidyalaya.Model.LoginRequest;
 import vidyalaya.Model.StudentData;
 import vidyalaya.Model.TeacherData;
-import vidyalaya.Model.UserTypeEnum;
 
 import vidyalaya.SessionManagement.AdminSession;
 import vidyalaya.SessionManagement.StudentSession;
@@ -203,7 +202,7 @@ public class AuthDAOImplementation implements AuthDAO {
         try {
             List<StudentData> studentData = new ArrayList<>();
             try (ResultSet data = statement.executeQuery()) {
-                while(data.next()){
+                while (data.next()) {
                     studentData.add(new StudentData(data));
                 }
             }
@@ -226,7 +225,7 @@ public class AuthDAOImplementation implements AuthDAO {
         try {
             List<TeacherData> teacherData = new ArrayList<>();
             try (ResultSet data = statement.executeQuery()) {
-                while(data.next()){
+                while (data.next()) {
                     teacherData.add(new TeacherData(data));
                 }
             }
@@ -240,20 +239,10 @@ public class AuthDAOImplementation implements AuthDAO {
     }
 
     @Override
-    public void deleteUser(int userId, UserTypeEnum userType) throws Exception {
+    public void deleteUser(int userId, String userType) throws Exception {
         Connection dbConnection = mysql.openConnection();
 
-        String tableName;
-        switch (userType) {
-            case TEACHER:
-                tableName = "teacher";
-                break;
-            case STUDENT:
-                tableName = "student";
-                break;
-            default:
-                throw new Exception("Invalid user type");
-        }
+        String tableName = userType;
 
         final PreparedStatement statement = dbConnection.prepareStatement("DELETE FROM " + tableName + " WHERE id = ?");
         statement.setInt(1, userId);

@@ -6,9 +6,11 @@ package vidyalaya.Components;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import vidyalaya.Utils.Utils;
+
 import vidyalaya.DAO.ModuleDAO.ModuleDAOImplementation;
 import vidyalaya.Model.RoutineData;
-import vidyalaya.Utils.Utils;
 
 /**
  *
@@ -17,7 +19,7 @@ import vidyalaya.Utils.Utils;
 public class RoutineCardUser extends javax.swing.JPanel {
 
     /**
-     * Creates new form CourseCard1
+     * Creates new form RoutineCardUser
      *
      * @param routine
      */

@@ -8,11 +8,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import vidyalaya.Model.StudentData;
-
-import vidyalaya.SessionManagement.StudentSession;
-
 import vidyalaya.Utils.Utils;
+
+import vidyalaya.Model.StudentData;
+import vidyalaya.SessionManagement.StudentSession;
 
 /**
  *
@@ -21,7 +20,7 @@ import vidyalaya.Utils.Utils;
 public class SettingsScreen extends javax.swing.JFrame {
 
     /**
-     * Creates new form UsersScreen
+     * Creates new form SettingsScreen
      */
     public SettingsScreen() {
         initComponents();

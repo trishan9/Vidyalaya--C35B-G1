@@ -9,19 +9,6 @@ import java.awt.Frame;
 import java.awt.Image;
 import java.awt.event.MouseListener;
 
-import java.sql.Timestamp;
-
-import javax.imageio.ImageIO;
-import java.io.IOException;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.time.temporal.ChronoUnit;
-import raven.datetime.component.time.TimePicker;
-
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -31,6 +18,19 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+
+import java.sql.Timestamp;
+
+import java.io.IOException;
+import javax.imageio.ImageIO;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
+import raven.datetime.component.time.TimePicker;
 
 /**
  *
@@ -43,7 +43,7 @@ public class Utils {
             Image icon = ImageIO.read(frame.getClass().getResource(path));
             frame.setIconImage(icon);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e);
         }
     }
 

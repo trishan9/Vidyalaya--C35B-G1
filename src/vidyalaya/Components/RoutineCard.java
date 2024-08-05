@@ -6,10 +6,12 @@ package vidyalaya.Components;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import vidyalaya.DAO.ModuleDAO.ModuleDAOImplementation;
-import vidyalaya.Model.RoutineData;
+
 import vidyalaya.Utils.CallbackFn;
 import vidyalaya.Utils.Utils;
+
+import vidyalaya.DAO.ModuleDAO.ModuleDAOImplementation;
+import vidyalaya.Model.RoutineData;
 
 /**
  *
@@ -34,7 +36,7 @@ public class RoutineCard extends javax.swing.JPanel {
             weekday.setText(routine.getWeekday());
             this.onEditClick = onEditClick;
             this.onDeleteClick = onDeleteClick;
-            
+
             Utils.setCustomFont(courseTitleHeader, 15f);
             Utils.setCustomFont(courseTitle, 17f);
             Utils.setCustomFont(detailsHeader, 15f);

@@ -4,16 +4,16 @@
  */
 package vidyalaya.DAO.RoutineDAO;
 
-import vidyalaya.Model.RoutineData;
-
-import vidyalaya.Database.MySqlConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import vidyalaya.Database.MySqlConnection;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import vidyalaya.Model.RoutineData;
 
 /**
  *

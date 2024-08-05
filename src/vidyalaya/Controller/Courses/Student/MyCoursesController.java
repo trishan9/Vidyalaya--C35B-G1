@@ -10,16 +10,13 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import vidyalaya.Controller.Users.UserLoginController;
+import vidyalaya.Utils.Utils;
+
+import vidyalaya.Model.ModuleData;
+import vidyalaya.SessionManagement.StudentSession;
 
 import vidyalaya.DAO.ModuleDAO.ModuleDAO;
 import vidyalaya.DAO.ModuleDAO.ModuleDAOImplementation;
-
-import vidyalaya.Model.ModuleData;
-
-import vidyalaya.SessionManagement.StudentSession;
-
-import vidyalaya.Utils.Utils;
 
 import vidyalaya.View.Dashboard.Student.AttendanceScreen;
 import vidyalaya.View.Dashboard.Student.NoticesScreen;
@@ -27,6 +24,8 @@ import vidyalaya.View.Dashboard.Student.RoutineScreen;
 import vidyalaya.View.Dashboard.Student.SettingsScreen;
 import vidyalaya.View.Dashboard.Student.MyCoursesScreen;
 import vidyalaya.View.UserLogin;
+
+import vidyalaya.Controller.Users.UserLoginController;
 
 /**
  *

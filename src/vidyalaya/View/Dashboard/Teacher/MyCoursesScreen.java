@@ -9,16 +9,15 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import vidyalaya.Components.CourseCardUser;
-
-import vidyalaya.Controller.Courses.Teacher.MyCoursesController;
+import vidyalaya.Utils.Utils;
 
 import vidyalaya.Model.ModuleData;
 import vidyalaya.Model.TeacherData;
-
 import vidyalaya.SessionManagement.TeacherSession;
 
-import vidyalaya.Utils.Utils;
+import vidyalaya.Components.CourseCardUser;
+
+import vidyalaya.Controller.Courses.Teacher.MyCoursesController;
 
 /**
  *
@@ -29,7 +28,7 @@ public class MyCoursesScreen extends javax.swing.JFrame {
     MyCoursesController myCoursesController;
 
     /**
-     * Creates new form CoursesScreen
+     * Creates new form MyCoursesScreen
      */
     public MyCoursesScreen() {
         initComponents();

@@ -13,16 +13,12 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import vidyalaya.Components.Modals.CreateRoutineForm;
+import vidyalaya.Utils.Utils;
 
-import vidyalaya.Controller.AdminLoginController;
-
-import vidyalaya.DAO.RoutineDAO.RoutineDAO;
-import vidyalaya.DAO.RoutineDAO.RoutineDAOImplementation;
 import vidyalaya.Model.RoutineData;
 import vidyalaya.SessionManagement.AdminSession;
-
-import vidyalaya.Utils.Utils;
+import vidyalaya.DAO.RoutineDAO.RoutineDAO;
+import vidyalaya.DAO.RoutineDAO.RoutineDAOImplementation;
 
 import vidyalaya.View.AdminLogin;
 import vidyalaya.View.Dashboard.Admin.AttendanceScreen;
@@ -31,6 +27,9 @@ import vidyalaya.View.Dashboard.Admin.NoticesScreen;
 import vidyalaya.View.Dashboard.Admin.RoutineScreen;
 import vidyalaya.View.Dashboard.Admin.SettingsScreen;
 import vidyalaya.View.Dashboard.Admin.UsersScreen;
+import vidyalaya.Components.Modals.CreateRoutineForm;
+
+import vidyalaya.Controller.AdminLoginController;
 
 /**
  *
@@ -51,10 +50,10 @@ public class RoutineController {
         userView.addUsersRedirectListener(new UsersRedirectListener());
         userView.addSettingsRedirectListener(new SettingsRedirectListener());
         userView.addLogoutListener(new LogoutListener());
-        getModulesList();
+        getRoutinesList();
     }
 
-    public final void getModulesList() {
+    public final void getRoutinesList() {
         try {
             routinesList = routineDAO.getAllRoutines(AdminSession.getCurrentUser().getId());
         } catch (Exception ex) {

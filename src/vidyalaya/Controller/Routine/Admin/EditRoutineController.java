@@ -6,28 +6,26 @@ package vidyalaya.Controller.Routine.Admin;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 
-import vidyalaya.Components.Modals.EditRoutineForm;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import vidyalaya.Utils.Utils;
+
+import vidyalaya.Model.ModuleData;
+import vidyalaya.Model.RoutineData;
+import vidyalaya.SessionManagement.AdminSession;
 
 import vidyalaya.DAO.ModuleDAO.ModuleDAO;
 import vidyalaya.DAO.ModuleDAO.ModuleDAOImplementation;
 import vidyalaya.DAO.RoutineDAO.RoutineDAO;
 import vidyalaya.DAO.RoutineDAO.RoutineDAOImplementation;
 
-import vidyalaya.Model.ModuleData;
-import vidyalaya.Model.RoutineData;
-
-import vidyalaya.SessionManagement.AdminSession;
-
-import vidyalaya.Utils.Utils;
+import vidyalaya.Components.Modals.EditRoutineForm;
 
 /**
  *
@@ -62,7 +60,7 @@ public class EditRoutineController {
 
             String details = Utils.getSecondPartAfterFirstSplitter(currentRoutine.getRoutineContent(), "-").strip();
             userView.getContentField().setText(details);
-        } catch (Exception ex){
+        } catch (Exception ex) {
             Logger.getLogger(EditRoutineController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

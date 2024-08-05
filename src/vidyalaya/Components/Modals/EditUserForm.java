@@ -13,7 +13,7 @@ import vidyalaya.Utils.Utils;
 public class EditUserForm extends javax.swing.JFrame {
 
     /**
-     * Creates new form CreateNewUserForm
+     * Creates new form EditUserForm
      */
     public EditUserForm() {
         initComponents();

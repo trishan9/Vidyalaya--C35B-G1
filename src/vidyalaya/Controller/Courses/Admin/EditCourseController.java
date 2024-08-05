@@ -7,28 +7,27 @@ package vidyalaya.Controller.Courses.Admin;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 
-import vidyalaya.Components.Modals.EditCourseForm;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import vidyalaya.Utils.Utils;
+
+import vidyalaya.Model.AdminData;
+import vidyalaya.Model.ModuleData;
+import vidyalaya.Model.TeacherData;
+import vidyalaya.SessionManagement.AdminSession;
 
 import vidyalaya.DAO.AuthDAO.AuthDAO;
 import vidyalaya.DAO.AuthDAO.AuthDAOImplementation;
 import vidyalaya.DAO.ModuleDAO.ModuleDAO;
 import vidyalaya.DAO.ModuleDAO.ModuleDAOImplementation;
 
-import vidyalaya.Model.AdminData;
-import vidyalaya.Model.ModuleData;
-import vidyalaya.Model.TeacherData;
-
-import vidyalaya.SessionManagement.AdminSession;
-
-import vidyalaya.Utils.Utils;
+import vidyalaya.Components.Modals.EditCourseForm;
 
 /**
  *
@@ -108,7 +107,7 @@ public class EditCourseController {
 
                 ModuleData course = new ModuleData(currentAdmin.getId(), name);
                 moduleDAO.updateModule(moduleCode, course);
-                
+
                 moduleDAO.deleteModuleTeachers(moduleCode);
 
                 selectedTeachers.forEach((teacher) -> {

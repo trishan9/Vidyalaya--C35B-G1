@@ -4,11 +4,11 @@
  */
 package vidyalaya.DAO.NoticeDAO;
 
-import vidyalaya.Database.MySqlConnection;
 import java.sql.PreparedStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.ResultSet;
+import vidyalaya.Database.MySqlConnection;
 
 import java.util.ArrayList;
 import java.util.List;

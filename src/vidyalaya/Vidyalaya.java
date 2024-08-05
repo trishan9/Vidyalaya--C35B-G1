@@ -7,9 +7,9 @@ package vidyalaya;
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 
-import vidyalaya.Controller.AdminLoginController;
-
 import vidyalaya.View.AdminLogin;
+
+import vidyalaya.Controller.AdminLoginController;
 
 /**
  *

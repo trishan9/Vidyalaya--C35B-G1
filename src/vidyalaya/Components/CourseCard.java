@@ -5,6 +5,7 @@
 package vidyalaya.Components;
 
 import vidyalaya.Model.ModuleData;
+
 import vidyalaya.Utils.CallbackFn;
 import vidyalaya.Utils.Utils;
 
@@ -17,7 +18,7 @@ public class CourseCard extends javax.swing.JPanel {
     CallbackFn onEditClick, onDeleteClick;
 
     /**
-     * Creates new form CourseCard1
+     * Creates new form CourseCard
      *
      * @param module
      * @param onEditClick
