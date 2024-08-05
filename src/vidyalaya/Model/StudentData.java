@@ -11,7 +11,7 @@ import java.sql.SQLException;
  *
  * @author trishan9
  */
-public class StudentData {
+public class StudentData implements UserData {
 
     private int id;
     private String student_id;
@@ -27,6 +27,12 @@ public class StudentData {
         this.password = password;
     }
 
+    public StudentData(int admin_id, String name, String email) {
+        this.admin_id = admin_id;
+        this.name = name;
+        this.email = email;
+    }
+
     public StudentData(ResultSet result) throws SQLException {
         this.id = result.getInt("id");
         this.student_id = result.getString("student_id");
@@ -36,6 +42,7 @@ public class StudentData {
         this.password = result.getString("password");
     }
 
+    @Override
     public int getId() {
         return id;
     }
@@ -52,6 +59,7 @@ public class StudentData {
         this.student_id = student_id;
     }
 
+    @Override
     public int getAdminId() {
         return admin_id;
     }
@@ -60,6 +68,7 @@ public class StudentData {
         this.admin_id = admin_id;
     }
 
+    @Override
     public String getName() {
         return name;
     }
@@ -68,6 +77,7 @@ public class StudentData {
         this.name = name;
     }
 
+    @Override
     public String getEmail() {
         return email;
     }

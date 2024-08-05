@@ -6,8 +6,17 @@ package vidyalaya.Controller.Users;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import vidyalaya.Utils.Utils;
+
+import vidyalaya.Model.StudentData;
+import vidyalaya.Model.TeacherData;
 
 import vidyalaya.DAO.AuthDAO.AuthDAO;
 import vidyalaya.DAO.AuthDAO.AuthDAOImplementation;
@@ -31,6 +40,8 @@ public class UsersController {
 
     private final AuthDAO authDAO = new AuthDAOImplementation();
     private final UsersScreen userView;
+    public List<StudentData> studentsList = new ArrayList<>();
+    public List<TeacherData> teachersList = new ArrayList<>();
 
     public UsersController(UsersScreen userView) {
         this.userView = userView;
@@ -41,6 +52,24 @@ public class UsersController {
         userView.addAttendanceRedirectListener(new AttendanceRedirectListener());
         userView.addSettingsRedirectListener(new SettingsRedirectListener());
         userView.addLogoutListener(new LogoutListener());
+        getStudentsList();
+        getTeachersList();
+    }
+
+    public final void getStudentsList() {
+        try {
+            studentsList = authDAO.getAllStudents();
+        } catch (Exception ex) {
+            studentsList = new ArrayList<>();
+        }
+    }
+
+    public final void getTeachersList() {
+        try {
+            teachersList = authDAO.getAllTeachers();
+        } catch (Exception ex) {
+            teachersList = new ArrayList<>();
+        }
     }
 
     public void open() {
@@ -49,6 +78,24 @@ public class UsersController {
 
     public void close() {
         this.userView.dispose();
+    }
+
+    public final void deleteUserById(int userId, String userType) {
+        try {
+            int result = Utils.confirm(userView, "Are you sure you want to delete this user?");
+            if (result == JOptionPane.YES_OPTION) {
+                authDAO.deleteUser(userId, userType);
+
+                vidyalaya.View.Dashboard.Admin.UsersScreen usersView = new vidyalaya.View.Dashboard.Admin.UsersScreen();
+                vidyalaya.Controller.Users.UsersController usersController = new vidyalaya.Controller.Users.UsersController(usersView);
+                Utils.closeAllFrames();
+                usersController.open();
+                Utils.info(usersView, "User deleted successfully!");
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(UsersController.class.getName()).log(Level.SEVERE, null, ex);
+            Utils.error(userView, ex.getMessage());
+        }
     }
 
     class CreateNewUserListener implements ActionListener {

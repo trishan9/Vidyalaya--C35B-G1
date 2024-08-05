@@ -6,13 +6,14 @@ package vidyalaya.Model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import java.util.Objects;
 
 /**
  *
  * @author trishan9
  */
-public class TeacherData {
+public class TeacherData implements UserData {
 
     private int id;
     private String teacher_id;
@@ -28,6 +29,12 @@ public class TeacherData {
         this.password = password;
     }
 
+    public TeacherData(int admin_id, String name, String email) {
+        this.admin_id = admin_id;
+        this.name = name;
+        this.email = email;
+    }
+
     public TeacherData(ResultSet result) throws SQLException {
         this.id = result.getInt("id");
         this.teacher_id = result.getString("teacher_id");
@@ -37,6 +44,7 @@ public class TeacherData {
         this.password = result.getString("password");
     }
 
+    @Override
     public int getId() {
         return id;
     }
@@ -53,6 +61,7 @@ public class TeacherData {
         this.teacher_id = teacher_id;
     }
 
+    @Override
     public int getAdminId() {
         return admin_id;
     }
@@ -61,6 +70,7 @@ public class TeacherData {
         this.admin_id = admin_id;
     }
 
+    @Override
     public String getName() {
         return name;
     }
@@ -69,6 +79,7 @@ public class TeacherData {
         this.name = name;
     }
 
+    @Override
     public String getEmail() {
         return email;
     }

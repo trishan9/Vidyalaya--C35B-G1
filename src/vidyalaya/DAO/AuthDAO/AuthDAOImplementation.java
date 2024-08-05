@@ -239,6 +239,101 @@ public class AuthDAOImplementation implements AuthDAO {
     }
 
     @Override
+    public void updateTeacher(int teacherId, TeacherData teacher) throws Exception {
+        Connection dbConnection = mysql.openConnection();
+
+        final PreparedStatement statement = dbConnection.prepareStatement("UPDATE teacher SET name = ?, email = ? WHERE id = ?");
+        statement.setString(1, teacher.getName());
+        statement.setString(2, teacher.getEmail());
+        statement.setInt(3, teacherId);
+
+        try {
+            boolean doesExist = checkIfUserExistsById(dbConnection, "teacher", teacherId);
+            if (!doesExist) {
+                throw new Exception("Teacher doesn't exist");
+            }
+
+            statement.executeUpdate();
+            statement.close();
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            mysql.closeConnection(dbConnection);
+        }
+    }
+
+    @Override
+    public void updateStudent(int studentId, StudentData student) throws Exception {
+        Connection dbConnection = mysql.openConnection();
+
+        final PreparedStatement statement = dbConnection.prepareStatement("UPDATE student SET name = ?, email = ? WHERE id  = ?");
+        statement.setString(1, student.getName());
+        statement.setString(2, student.getEmail());
+        statement.setInt(3, studentId);
+
+        try {
+            boolean doesExist = checkIfUserExistsById(dbConnection, "student", studentId);
+            if (!doesExist) {
+                throw new Exception("Student doesn't exist");
+            }
+
+            statement.executeUpdate();
+            statement.close();
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            mysql.closeConnection(dbConnection);
+        }
+    }
+
+    @Override
+    public void updateAdmin(int adminId, AdminData admin) throws Exception {
+        Connection dbConnection = mysql.openConnection();
+
+        final PreparedStatement statement = dbConnection.prepareStatement("UPDATE admin SET name = ?, email = ?, institution_name = ? WHERE id  = ?");
+        statement.setString(1, admin.getName());
+        statement.setString(2, admin.getEmail());
+        statement.setString(3, admin.getInstitutionName());
+        statement.setInt(4, adminId);
+
+        try {
+            boolean doesExist = checkIfUserExistsById(dbConnection, "admin", adminId);
+            if (!doesExist) {
+                throw new Exception("Admin doesn't exist");
+            }
+
+            statement.executeUpdate();
+            statement.close();
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            mysql.closeConnection(dbConnection);
+        }
+    }
+
+    @Override
+    public void changePassword(String userType, int userId, String newPassword) throws Exception {
+        Connection dbConnection = mysql.openConnection();
+        String tableName = userType;
+
+        final PreparedStatement statement = dbConnection.prepareStatement("UPDATE " + tableName + " SET password = ? WHERE id = ?");
+        statement.setString(1, newPassword);
+        statement.setInt(2, userId);
+        try {
+            boolean doesExist = checkIfUserExistsById(dbConnection, tableName, userId);
+            if (!doesExist) {
+                throw new Exception("User with ID " + userId + " doesn't exist in " + tableName + " table");
+            }
+            statement.executeUpdate();
+            statement.close();
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            mysql.closeConnection(dbConnection);
+        }
+    }
+
+    @Override
     public void deleteUser(int userId, String userType) throws Exception {
         Connection dbConnection = mysql.openConnection();
 
@@ -258,6 +353,52 @@ public class AuthDAOImplementation implements AuthDAO {
         } catch (Exception ex) {
             throw ex;
         } finally {
+            mysql.closeConnection(dbConnection);
+        }
+    }
+
+    @Override
+    public StudentData getStudentById(int studentId) throws Exception {
+        Connection dbConnection = mysql.openConnection();
+
+        final PreparedStatement statement = dbConnection.prepareStatement("SELECT * FROM student WHERE id = ? LIMIT 1");
+        statement.setInt(1, studentId);
+
+        try {
+            final ResultSet response = statement.executeQuery();
+            if (response.next()) {
+                StudentData studentData = new StudentData(response);
+                return studentData;
+            } else {
+                throw new Exception("Student with ID " + studentId + " doesn't exist");
+            }
+        } catch (SQLException ex) {
+            throw ex;
+        } finally {
+            statement.close();
+            mysql.closeConnection(dbConnection);
+        }
+    }
+
+    @Override
+    public TeacherData getTeacherById(int teacherId) throws Exception {
+        Connection dbConnection = mysql.openConnection();
+
+        final PreparedStatement statement = dbConnection.prepareStatement("SELECT * FROM teacher WHERE id = ? LIMIT 1");
+        statement.setInt(1, teacherId);
+
+        try {
+            final ResultSet response = statement.executeQuery();
+            if (response.next()) {
+                TeacherData teacherData = new TeacherData(response);
+                return teacherData;
+            } else {
+                throw new Exception("Teacher with ID " + teacherId + " doesn't exist");
+            }
+        } catch (SQLException ex) {
+            throw ex;
+        } finally {
+            statement.close();
             mysql.closeConnection(dbConnection);
         }
     }

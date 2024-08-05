@@ -4,6 +4,7 @@
  */
 package vidyalaya.View.Dashboard.Admin;
 
+import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -11,7 +12,14 @@ import java.awt.event.MouseEvent;
 import vidyalaya.Utils.Utils;
 
 import vidyalaya.Model.AdminData;
+import vidyalaya.Model.StudentData;
+import vidyalaya.Model.TeacherData;
 import vidyalaya.SessionManagement.AdminSession;
+
+import vidyalaya.Components.Modals.EditUserForm;
+import vidyalaya.Components.UserCard;
+
+import vidyalaya.Controller.Users.UsersController;
 
 /**
  *
@@ -19,11 +27,15 @@ import vidyalaya.SessionManagement.AdminSession;
  */
 public class UsersScreen extends javax.swing.JFrame {
 
+    UsersController usersController;
+
     /**
      * Creates new form UsersScreen
      */
     public UsersScreen() {
         initComponents();
+        usersController = new UsersController(this);
+        initializeGrid();
 
         setTitle("Users - Vidyalaya Admin");
         setSize(1400, 954);
@@ -46,11 +58,46 @@ public class UsersScreen extends javax.swing.JFrame {
         Utils.setCustomFont(menuSettings, 17f);
         Utils.setCustomFont(menuLogout, 17f);
         Utils.setCustomFont(jLabel3, 23f);
+        Utils.setCustomFont(jLabel4, 19f);
+        Utils.setCustomFont(jLabel5, 19f);
         Utils.setCustomFont(addNewUserBtn, 17f);
 
         AdminData currentUser = AdminSession.getCurrentUser();
         lblName.setText(currentUser.getName());
         lblId.setText(currentUser.getUsername());
+    }
+
+    private void initializeGrid() {
+        usersController.studentsList.forEach((x) -> addGrid(x));
+        usersController.teachersList.forEach((x) -> addGrid(x));
+        var grid = new GridLayout(0, 1);
+        grid.setHgap(10);
+        grid.setVgap(10);
+        pnlStudents.setLayout(grid);
+        pnlTeachers.setLayout(grid);
+
+    }
+
+    private void addGrid(StudentData data) {
+        var temp = new UserCard(data,
+                () -> {
+                    new EditUserForm(data.getId(), "student").setVisible(true);
+                },
+                () -> {
+                    usersController.deleteUserById(data.getId(), "student");
+                });
+        pnlStudents.add(temp);
+    }
+
+    private void addGrid(TeacherData data) {
+        var temp = new UserCard(data,
+                () -> {
+                    new EditUserForm(data.getId(), "teacher").setVisible(true);
+                },
+                () -> {
+                    usersController.deleteUserById(data.getId(), "teacher");
+                });
+        pnlTeachers.add(temp);
     }
 
     public void addCreateNewUserListener(ActionListener listener) {
@@ -174,6 +221,12 @@ public class UsersScreen extends javax.swing.JFrame {
         addNewUser = new javax.swing.JPanel();
         addNewUserBtn = new javax.swing.JLabel();
         iconUsers1 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        pnlStudents = new javax.swing.JPanel();
+        pnlTeachers = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -459,7 +512,7 @@ public class UsersScreen extends javax.swing.JFrame {
                 .addComponent(navSettings, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(80, 80, 80)
                 .addComponent(logOut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(124, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pnlRight.setBackground(new java.awt.Color(255, 255, 255));
@@ -513,6 +566,60 @@ public class UsersScreen extends javax.swing.JFrame {
             .addComponent(addNewUserBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        jLabel4.setText("Students");
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        jLabel5.setText("Teachers");
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(565, 0, -1, -1));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 3, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(544, 0, -1, 792));
+
+        pnlStudents.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout pnlStudentsLayout = new javax.swing.GroupLayout(pnlStudents);
+        pnlStudents.setLayout(pnlStudentsLayout);
+        pnlStudentsLayout.setHorizontalGroup(
+            pnlStudentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 526, Short.MAX_VALUE)
+        );
+        pnlStudentsLayout.setVerticalGroup(
+            pnlStudentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 501, Short.MAX_VALUE)
+        );
+
+        jPanel2.add(pnlStudents, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 45, -1, -1));
+
+        pnlTeachers.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout pnlTeachersLayout = new javax.swing.GroupLayout(pnlTeachers);
+        pnlTeachers.setLayout(pnlTeachersLayout);
+        pnlTeachersLayout.setHorizontalGroup(
+            pnlTeachersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 526, Short.MAX_VALUE)
+        );
+        pnlTeachersLayout.setVerticalGroup(
+            pnlTeachersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 501, Short.MAX_VALUE)
+        );
+
+        jPanel2.add(pnlTeachers, new org.netbeans.lib.awtextra.AbsoluteConstraints(565, 45, -1, -1));
+
         javax.swing.GroupLayout pnlCenterLayout = new javax.swing.GroupLayout(pnlCenter);
         pnlCenter.setLayout(pnlCenterLayout);
         pnlCenterLayout.setHorizontalGroup(
@@ -520,20 +627,26 @@ public class UsersScreen extends javax.swing.JFrame {
             .addGroup(pnlCenterLayout.createSequentialGroup()
                 .addComponent(pnlSideNav, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(pnlRight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 558, Short.MAX_VALUE)
-                .addComponent(addNewUser, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40))
+                .addGroup(pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlCenterLayout.createSequentialGroup()
+                        .addComponent(pnlRight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 558, Short.MAX_VALUE)
+                        .addComponent(addNewUser, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40))
+                    .addGroup(pnlCenterLayout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         pnlCenterLayout.setVerticalGroup(
             pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlSideNav, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlSideNav, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(pnlCenterLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pnlRight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addNewUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -603,7 +716,11 @@ public class UsersScreen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabelHead;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblId;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblRole;
@@ -625,5 +742,7 @@ public class UsersScreen extends javax.swing.JFrame {
     private javax.swing.JPanel pnlNav;
     private javax.swing.JPanel pnlRight;
     private javax.swing.JPanel pnlSideNav;
+    private javax.swing.JPanel pnlStudents;
+    private javax.swing.JPanel pnlTeachers;
     // End of variables declaration//GEN-END:variables
 }

@@ -33,13 +33,17 @@ public interface AuthDAO {
 
     public List<TeacherData> getAllTeachers() throws Exception;
 
-//    public void updateTeacher(int teacherId, TeacherData teacher) throws Exception;
-//
-//    public void updateStudent(int studentId, StudentData student) throws Exception;
-//
-//    public void updateAdmin(int adminId, AdminData admin) throws Exception;
-//
-//    public void changePassword(String userType, int userId, String newPassword) throws Exception;
+    public void updateTeacher(int teacherId, TeacherData teacher) throws Exception;
+
+    public void updateStudent(int studentId, StudentData student) throws Exception;
+
+    public void updateAdmin(int adminId, AdminData admin) throws Exception;
+
+    public void changePassword(String userType, int userId, String newPassword) throws Exception;
 
     public void deleteUser(int userId, String userType) throws Exception;
+
+    public StudentData getStudentById(int studentId) throws Exception;
+
+    public TeacherData getTeacherById(int teacherId) throws Exception;
 }
