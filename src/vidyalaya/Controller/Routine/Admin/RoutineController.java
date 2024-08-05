@@ -79,11 +79,11 @@ public class RoutineController {
                 vidyalaya.Controller.Routine.Admin.RoutineController routineController = new vidyalaya.Controller.Routine.Admin.RoutineController(routineView);
                 Utils.closeAllFrames();
                 routineController.open();
-                Utils.info(routineView, "Routine deleted successfully!");
+                Utils.success("Routine deleted successfully!");
             }
         } catch (Exception ex) {
             Logger.getLogger(RoutineController.class.getName()).log(Level.SEVERE, null, ex);
-            Utils.error(userView, ex.getMessage());
+            Utils.error(ex.getMessage());
         }
     }
 

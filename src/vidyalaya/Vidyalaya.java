@@ -6,10 +6,13 @@ package vidyalaya;
 
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
+import java.awt.Font;
+import javax.swing.UIManager;
 
 import vidyalaya.View.AdminLogin;
 
 import vidyalaya.Controller.AdminLoginController;
+import vidyalaya.Utils.DMSans;
 
 /**
  *
@@ -25,6 +28,7 @@ public class Vidyalaya {
         try {
             FlatLaf.registerCustomDefaultsSource("vidyalaya");
             FlatMacLightLaf.setup();
+            UIManager.put("defaultFont", new DMSans(16f).getFont());
         } catch (Exception ex) {
             System.err.println("Failed to initialize FlatLaf");
         }

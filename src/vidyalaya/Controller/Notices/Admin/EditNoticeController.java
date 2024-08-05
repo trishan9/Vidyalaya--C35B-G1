@@ -60,7 +60,7 @@ public class EditNoticeController {
             currentNotice = data;
         } catch (Exception ex) {
             Logger.getLogger(EditNoticeController.class.getName()).log(Level.SEVERE, null, ex);
-            Utils.error(userView, ex.getMessage());
+            Utils.error(ex.getMessage());
             currentNotice = null;
         }
     }
@@ -83,10 +83,10 @@ public class EditNoticeController {
                 vidyalaya.Controller.Notices.Admin.NoticesController noticesController = new vidyalaya.Controller.Notices.Admin.NoticesController(noticesView);
                 Utils.closeAllFrames();
                 noticesController.open();
-                Utils.info(noticesView, "Notice updated successfully");
+                Utils.success("Notice updated successfully");
             } catch (Exception ex) {
                 Logger.getLogger(EditNoticeController.class.getName()).log(Level.SEVERE, null, ex);
-                Utils.error(userView, ex.getMessage());
+                Utils.error(ex.getMessage());
             }
         }
     }

@@ -59,10 +59,10 @@ public class CreateCourseController {
                 vidyalaya.Controller.Courses.Admin.CoursesController coursesController = new vidyalaya.Controller.Courses.Admin.CoursesController(coursesView);
                 Utils.closeAllFrames();
                 coursesController.open();
-                Utils.info(coursesView, "Course created successfully: " + name);
+                Utils.success("Course created successfully: " + name);
             } catch (Exception ex) {
                 Logger.getLogger(CreateCourseController.class.getName()).log(Level.SEVERE, null, ex);
-                Utils.error(userView, ex.getMessage());
+                Utils.error(ex.getMessage());
             }
         }
     }

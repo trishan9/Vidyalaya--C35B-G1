@@ -8,6 +8,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import raven.toast.Notifications;
 
 import vidyalaya.Utils.Utils;
 
@@ -35,16 +36,16 @@ public class CoursesScreen extends javax.swing.JFrame {
         initComponents();
         coursesController = new CoursesController(this);
         initializeGrid();
+        
+        Notifications.getInstance().setJFrame(this);
 
         setTitle("Courses - Vidyalaya Admin");
         setSize(1400, 954);
         setLocationRelativeTo(null);
         setResizable(false);
 
-        // Load the icon image
         Utils.setFrameIcon(this, "/vidyalaya/Assets/logo.png");
 
-        // Custom Font Setting 
         Utils.setCustomFont(jLabelHead, 25f);
         Utils.setCustomFont(lblName, 14f);
         Utils.setCustomFont(lblId, 14f);
@@ -498,7 +499,7 @@ public class CoursesScreen extends javax.swing.JFrame {
 
         pnlRight.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel3.setFont(jLabel3.getFont().deriveFont((float)25));
         jLabel3.setText("Courses");
 
         createCourse.setBackground(new java.awt.Color(24, 97, 191));
@@ -575,7 +576,7 @@ public class CoursesScreen extends javax.swing.JFrame {
                 .addGroup(pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pnlRight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pnlCourses, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
         pnlCenterLayout.setVerticalGroup(
             pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

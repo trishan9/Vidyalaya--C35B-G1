@@ -81,11 +81,11 @@ public class CoursesController {
                 vidyalaya.Controller.Courses.Admin.CoursesController coursesController = new vidyalaya.Controller.Courses.Admin.CoursesController(coursesView);
                 Utils.closeAllFrames();
                 coursesController.open();
-                Utils.info(coursesView, "Course deleted successfully!");
+                Utils.success("Course deleted successfully!");
             }
         } catch (Exception ex) {
             Logger.getLogger(CoursesController.class.getName()).log(Level.SEVERE, null, ex);
-            Utils.error(userView, ex.getMessage());
+            Utils.error(ex.getMessage());
         }
     }
 

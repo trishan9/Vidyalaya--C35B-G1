@@ -64,11 +64,11 @@ public class CreateAdminController {
                 AdminData admin = new AdminData(name, email, institution_name, password);
                 authDAO.registerAdmin(admin);
 
-                Utils.info(userView, "Admin created successfully with name: " + name);
+                Utils.success("Admin created successfully: " + name);
                 redirectToAdminLogin();
             } catch (Exception ex) {
                 Logger.getLogger(CreateAdminController.class.getName()).log(Level.SEVERE, null, ex);
-                Utils.error(userView, ex.getMessage());
+                Utils.error(ex.getMessage());
             }
         }
     }

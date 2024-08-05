@@ -88,10 +88,10 @@ public class CreateRoutineController {
                 vidyalaya.Controller.Routine.Admin.RoutineController routineController = new vidyalaya.Controller.Routine.Admin.RoutineController(routineView);
                 Utils.closeAllFrames();
                 routineController.open();
-                Utils.info(routineView, "Routine created successfully");
+                Utils.success("Routine created successfully");
             } catch (Exception ex) {
                 Logger.getLogger(CreateRoutineController.class.getName()).log(Level.SEVERE, null, ex);
-                Utils.error(userView, ex.getMessage());
+                Utils.error(ex.getMessage());
             }
         }
     }

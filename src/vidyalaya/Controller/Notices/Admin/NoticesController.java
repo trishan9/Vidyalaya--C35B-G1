@@ -90,11 +90,11 @@ public class NoticesController {
                 vidyalaya.Controller.Notices.Admin.NoticesController noticesController = new vidyalaya.Controller.Notices.Admin.NoticesController(noticesView);
                 Utils.closeAllFrames();
                 noticesController.open();
-                Utils.info(noticesView, "Notice deleted successfully!");
+                Utils.success("Notice deleted successfully!");
             }
         } catch (Exception ex) {
             Logger.getLogger(NoticesController.class.getName()).log(Level.SEVERE, null, ex);
-            Utils.error(userView, ex.getMessage());
+            Utils.error(ex.getMessage());
         }
     }
 

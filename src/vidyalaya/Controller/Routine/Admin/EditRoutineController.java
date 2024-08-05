@@ -95,7 +95,7 @@ public class EditRoutineController {
             currentRoutine = data;
         } catch (Exception ex) {
             Logger.getLogger(EditRoutineController.class.getName()).log(Level.SEVERE, null, ex);
-            Utils.error(userView, ex.getMessage());
+            Utils.error(ex.getMessage());
             currentRoutine = null;
         }
     }
@@ -119,10 +119,10 @@ public class EditRoutineController {
                 vidyalaya.Controller.Routine.Admin.RoutineController routineController = new vidyalaya.Controller.Routine.Admin.RoutineController(routineView);
                 Utils.closeAllFrames();
                 routineController.open();
-                Utils.info(routineView, "Routine updated successfully");
+                Utils.success("Routine updated successfully");
             } catch (Exception ex) {
                 Logger.getLogger(EditRoutineController.class.getName()).log(Level.SEVERE, null, ex);
-                Utils.error(userView, ex.getMessage());
+                Utils.error(ex.getMessage());
             }
         }
     }

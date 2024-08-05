@@ -60,10 +60,10 @@ public class CreateNoticeController {
                 vidyalaya.Controller.Notices.Admin.NoticesController noticesController = new vidyalaya.Controller.Notices.Admin.NoticesController(noticesView);
                 Utils.closeAllFrames();
                 noticesController.open();
-                Utils.info(noticesView, "Notice created successfully");
+                Utils.success("Notice created successfully");
             } catch (Exception ex) {
                 Logger.getLogger(CreateNoticeController.class.getName()).log(Level.SEVERE, null, ex);
-                Utils.error(userView, ex.getMessage());
+                Utils.error(ex.getMessage());
             }
         }
     }

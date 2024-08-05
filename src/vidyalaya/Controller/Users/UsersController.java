@@ -90,11 +90,11 @@ public class UsersController {
                 vidyalaya.Controller.Users.UsersController usersController = new vidyalaya.Controller.Users.UsersController(usersView);
                 Utils.closeAllFrames();
                 usersController.open();
-                Utils.info(usersView, "User deleted successfully!");
+                Utils.success("User deleted successfully!");
             }
         } catch (Exception ex) {
             Logger.getLogger(UsersController.class.getName()).log(Level.SEVERE, null, ex);
-            Utils.error(userView, ex.getMessage());
+            Utils.error(ex.getMessage());
         }
     }
 

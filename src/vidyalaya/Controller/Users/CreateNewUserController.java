@@ -73,10 +73,10 @@ public class CreateNewUserController {
                 vidyalaya.Controller.Users.UsersController usersController = new vidyalaya.Controller.Users.UsersController(usersView);
                 Utils.closeAllFrames();
                 usersController.open();
-                Utils.info(usersView, user_type + " created successfully: " + name);
+                Utils.success(user_type + " created successfully: " + name);
             } catch (Exception ex) {
                 Logger.getLogger(CreateNewUserController.class.getName()).log(Level.SEVERE, null, ex);
-                Utils.error(userView, ex.getMessage());
+                Utils.error(ex.getMessage());
             }
         }
     }

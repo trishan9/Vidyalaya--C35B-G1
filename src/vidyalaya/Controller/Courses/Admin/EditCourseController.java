@@ -82,7 +82,7 @@ public class EditCourseController {
             return data;
         } catch (Exception ex) {
             Logger.getLogger(EditCourseController.class.getName()).log(Level.SEVERE, null, ex);
-            Utils.error(userView, ex.getMessage());
+            Utils.error(ex.getMessage());
             return null;
         }
     }
@@ -122,10 +122,10 @@ public class EditCourseController {
                 vidyalaya.Controller.Courses.Admin.CoursesController coursesController = new vidyalaya.Controller.Courses.Admin.CoursesController(coursesView);
                 Utils.closeAllFrames();
                 coursesController.open();
-                Utils.info(coursesView, "Course updated successfully");
+                Utils.success("Course updated successfully");
             } catch (Exception ex) {
                 Logger.getLogger(EditCourseController.class.getName()).log(Level.SEVERE, null, ex);
-                Utils.error(userView, ex.getMessage());
+                Utils.error(ex.getMessage());
             }
         }
     }

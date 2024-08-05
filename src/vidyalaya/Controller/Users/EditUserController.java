@@ -71,7 +71,7 @@ public class EditUserController {
             }
         } catch (Exception ex) {
             Logger.getLogger(EditUserController.class.getName()).log(Level.SEVERE, null, ex);
-            Utils.error(userView, ex.getMessage());
+            Utils.error(ex.getMessage());
             currentUser = null;
         }
     }
@@ -104,10 +104,10 @@ public class EditUserController {
                 vidyalaya.Controller.Users.UsersController usersController = new vidyalaya.Controller.Users.UsersController(usersView);
                 Utils.closeAllFrames();
                 usersController.open();
-                Utils.info(usersView, user_type + " updated successfully!");
+                Utils.success(user_type + " updated successfully!");
             } catch (Exception ex) {
                 Logger.getLogger(EditUserController.class.getName()).log(Level.SEVERE, null, ex);
-                Utils.error(userView, ex.getMessage());
+                Utils.error(ex.getMessage());
             }
         }
     }

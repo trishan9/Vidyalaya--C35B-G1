@@ -77,10 +77,10 @@ public class AdminLoginController {
                 authDAO.loginAdmin(admin);
 
                 redirectToAdminDashboard();
-                Utils.info(new CoursesScreen(), "Logged in sucessfully!");
+                Utils.success("Logged in sucessfully!");
             } catch (Exception ex) {
                 Logger.getLogger(AdminLoginController.class.getName()).log(Level.SEVERE, null, ex);
-                Utils.error(userView, ex.getMessage());
+                Utils.error(ex.getMessage());
             }
         }
     }

@@ -30,7 +30,9 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
+
 import raven.datetime.component.time.TimePicker;
+import raven.toast.Notifications;
 
 /**
  *
@@ -180,12 +182,20 @@ public class Utils {
         JOptionPane.showMessageDialog(userView, message, "Alert", JOptionPane.WARNING_MESSAGE);
     }
 
-    public static void error(JFrame userView, String message) {
-        JOptionPane.showMessageDialog(userView, message, "Error", JOptionPane.ERROR_MESSAGE);
+    public static void error(String message) {
+        Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, message);
     }
 
-    public static void info(JFrame userView, String message) {
-        JOptionPane.showMessageDialog(userView, message, "Success", JOptionPane.INFORMATION_MESSAGE);
+    public static void success(String message) {
+        Notifications.getInstance().show(Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, message);
+    }
+
+    public static void info(String message) {
+        Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, message);
+    }
+
+    public static void warning(String message) {
+        Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, message);
     }
 
     public static int confirm(JFrame userView, String message) {

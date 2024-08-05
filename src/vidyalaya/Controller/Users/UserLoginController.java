@@ -66,7 +66,7 @@ public class UserLoginController {
                 handleLogin(user, userType);
             } catch (Exception ex) {
                 Logger.getLogger(UserLoginController.class.getName()).log(Level.SEVERE, null, ex);
-                Utils.error(userView, ex.getMessage());
+                Utils.error(ex.getMessage());
             }
         }
     }
@@ -76,12 +76,12 @@ public class UserLoginController {
             case "student":
                 authDAO.loginStudent(user);
                 redirectToStudentDashboard();
-                Utils.info(new vidyalaya.View.Dashboard.Student.MyCoursesScreen(), "Logged in successfully as student!");
+                Utils.success("Logged in successfully as student!");
                 break;
             case "teacher":
                 authDAO.loginTeacher(user);
                 redirectToTeacherDashboard();
-                Utils.info(new vidyalaya.View.Dashboard.Teacher.MyCoursesScreen(), "Logged in successfully as teacher!");
+                Utils.success("Logged in successfully as teacher!");
                 break;
             default:
                 throw new IllegalArgumentException("Invalid user type: " + userType);
