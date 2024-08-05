@@ -32,6 +32,7 @@ public class CreateCourseForm extends javax.swing.JFrame {
         // Custom Font Setting 
         Utils.setCustomFont(jLabel1, 25f);
         Utils.setCustomFont(label, 16f);
+        Utils.setCustomFont(txtName, 16f);
         Utils.setCustomFont(createCourseBtn, 16f);
     }
 
