@@ -40,6 +40,7 @@ public class SettingsController {
     public SettingsController(SettingsScreen userView) {
         this.userView = userView;
         userView.addUpdateProfileListener(new UpdateProfileListener());
+        userView.addChangePasswordListener(new ChangePasswordListener());
         userView.addCoursesRedirectListener(new CoursesRedirectListener());
         userView.addRoutineRedirectListener(new RoutineRedirectListener());
         userView.addNoticesRedirectListener(new NoticesRedirectListener());
@@ -80,6 +81,37 @@ public class SettingsController {
                     Utils.closeAllFrames();
                     settingsController.open();
                     Utils.success("Profile updated successfully");
+                }
+
+            } catch (Exception ex) {
+                Logger.getLogger(SettingsController.class.getName()).log(Level.SEVERE, null, ex);
+                Utils.error(ex.getMessage());
+            }
+        }
+    }
+
+    class ChangePasswordListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                String oldPassword = new String(userView.getCurrentPasswordField().getPassword());
+                String newPassword = new String(userView.getNewPasswordField().getPassword());
+
+                String currentPassword = AdminSession.getCurrentUser().getPassword();
+
+                if (!oldPassword.equals(currentPassword)) {
+                    Utils.warning("The current password you entered does not match our records. Please ensure you have entered the correct password.");
+                } else if (newPassword.equals(currentPassword)) {
+                    Utils.info("No changes detected. The new password is the same as the current password.");
+                } else {
+                    authDAO.changePassword("admin", AdminSession.getCurrentUser().getId(), newPassword);
+
+                    vidyalaya.View.Dashboard.Admin.SettingsScreen settingsView = new vidyalaya.View.Dashboard.Admin.SettingsScreen();
+                    vidyalaya.Controller.Settings.Admin.SettingsController settingsController = new vidyalaya.Controller.Settings.Admin.SettingsController(settingsView);
+                    Utils.closeAllFrames();
+                    settingsController.open();
+                    Utils.success("Password updated successfully");
                 }
 
             } catch (Exception ex) {
