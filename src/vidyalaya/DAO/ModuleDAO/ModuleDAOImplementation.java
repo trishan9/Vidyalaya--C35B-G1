@@ -13,8 +13,10 @@ import vidyalaya.Database.MySqlConnection;
 import java.util.ArrayList;
 import java.util.List;
 
+import vidyalaya.Model.MaterialData;
 import vidyalaya.Model.ModuleData;
 import vidyalaya.Model.TeacherData;
+import vidyalaya.SessionManagement.TeacherSession;
 
 /**
  *
@@ -224,6 +226,91 @@ public class ModuleDAOImplementation implements ModuleDAO {
                 "DELETE FROM module_teacher WHERE module_code = ?");
 
         statement.setInt(1, moduleCode);
+
+        try {
+            statement.executeUpdate();
+            statement.close();
+        } catch (SQLException ex) {
+            throw ex;
+        } finally {
+            mysql.closeConnection(dbConnection);
+        }
+    }
+
+    @Override
+    public void createMaterial(MaterialData materialData) throws Exception {
+        Connection dbConnection = mysql.openConnection();
+
+        final String query = "INSERT INTO material (module_code, uploader_id, material_title, material_text) VALUES (?, ?, ?, ?)";
+        final PreparedStatement statement = dbConnection.prepareStatement(query);
+        statement.setInt(1, materialData.getModuleCode());
+        statement.setInt(2, TeacherSession.getCurrentUser().getId());
+        statement.setString(3, materialData.getMaterialTitle());
+        statement.setString(4, materialData.getMaterialText());
+
+        try {
+            statement.executeUpdate();
+            statement.close();
+        } catch (SQLException ex) {
+            throw ex;
+        } finally {
+            mysql.closeConnection(dbConnection);
+        }
+    }
+
+    @Override
+    public List<MaterialData> getAllMaterials(int moduleCode) throws Exception {
+        Connection dbConnection = mysql.openConnection();
+
+        final String query = "SELECT * FROM material WHERE module_code = ?";
+        final PreparedStatement statement = dbConnection.prepareStatement(query);
+        statement.setInt(1, moduleCode);
+
+        try {
+            List<MaterialData> materials = new ArrayList<>();
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                materials.add(new MaterialData(result));
+            }
+            statement.close();
+            return materials;
+        } catch (SQLException ex) {
+            throw ex;
+        } finally {
+            mysql.closeConnection(dbConnection);
+        }
+    }
+
+    @Override
+    public void updateMaterial(int materialId, MaterialData materialData) throws Exception {
+        Connection dbConnection = mysql.openConnection();
+
+        final String query = "UPDATE material SET material_title = ?, material_text = ? WHERE id = ?";
+        final PreparedStatement statement = dbConnection.prepareStatement(query);
+        statement.setString(1, materialData.getMaterialTitle());
+        statement.setString(2, materialData.getMaterialText());
+        statement.setInt(3, materialId);
+
+        try {
+            int rowsUpdated = statement.executeUpdate();
+            if (rowsUpdated == 0) {
+                throw new Exception("Material not found or you do not have permission to update this material");
+            }
+            statement.close();
+        } catch (SQLException ex) {
+            throw ex;
+        } finally {
+            mysql.closeConnection(dbConnection);
+        }
+    }
+
+    @Override
+    public void deleteMaterial(int materialId) throws Exception {
+        Connection dbConnection = mysql.openConnection();
+
+        final String query = "DELETE FROM material WHERE id = ?";
+        final PreparedStatement statement = dbConnection.prepareStatement(query);
+        statement.setInt(1, materialId);
 
         try {
             statement.executeUpdate();
