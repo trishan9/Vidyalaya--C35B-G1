@@ -74,7 +74,7 @@ public class MyCoursesScreen extends javax.swing.JFrame {
         var temp = new CourseCardUser(data,
                 "STUDENT",
                 () -> {
-                    System.out.println("Accessing Materials of: " + data.getCode());
+                    new MaterialScreen(data).setVisible(true);
                 });
         pnlCourses.add(temp);
     }
