@@ -6,7 +6,7 @@ package vidyalaya;
 
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
-import java.awt.Font;
+
 import javax.swing.UIManager;
 
 import vidyalaya.View.AdminLogin;

@@ -23,11 +23,11 @@ public interface AuthDAO {
 
     public StudentData loginStudent(LoginRequest loginModel) throws Exception;
 
-    public void registerAdmin(AdminData registerModel) throws Exception;
+    public AdminData registerAdmin(AdminData registerModel) throws Exception;
 
-    public void registerTeacher(TeacherData registerModel) throws Exception;
+    public TeacherData registerTeacher(TeacherData registerModel) throws Exception;
 
-    public void registerStudent(StudentData registerModel) throws Exception;
+    public StudentData registerStudent(StudentData registerModel) throws Exception;
 
     public List<StudentData> getAllStudents() throws Exception;
 

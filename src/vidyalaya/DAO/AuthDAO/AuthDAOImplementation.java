@@ -50,11 +50,12 @@ public class AuthDAOImplementation implements AuthDAO {
                 AdminSession.setCurrentUser(adminData);
                 return adminData;
             }
-            statement.close();
+
             throw new Exception("Password is invalid, Please try again!");
         } catch (Exception ex) {
             throw ex;
         } finally {
+            statement.close();
             mysql.closeConnection(dbConnection);
         }
     }
@@ -79,11 +80,12 @@ public class AuthDAOImplementation implements AuthDAO {
                 TeacherSession.setCurrentUser(teacherData);
                 return teacherData;
             }
-            statement.close();
+
             throw new Exception("Password is invalid, Please try again!");
         } catch (Exception ex) {
             throw ex;
         } finally {
+            statement.close();
             mysql.closeConnection(dbConnection);
         }
     }
@@ -108,17 +110,18 @@ public class AuthDAOImplementation implements AuthDAO {
                 StudentSession.setCurrentUser(studentData);
                 return studentData;
             }
-            statement.close();
+
             throw new Exception("Password is invalid, Please try again!");
         } catch (Exception ex) {
             throw ex;
         } finally {
+            statement.close();
             mysql.closeConnection(dbConnection);
         }
     }
 
     @Override
-    public void registerAdmin(AdminData registerModel) throws Exception {
+    public AdminData registerAdmin(AdminData registerModel) throws Exception {
         Connection dbConnection = mysql.openConnection();
 
         final PreparedStatement statement = dbConnection.prepareStatement("INSERT INTO admin (name,email,institution_name,password) VALUES (?,?,?,?)");
@@ -134,16 +137,18 @@ public class AuthDAOImplementation implements AuthDAO {
             }
 
             statement.execute();
-            statement.close();
+            return getLastInsertedAdmin(dbConnection);
+
         } catch (Exception ex) {
             throw ex;
         } finally {
+            statement.close();
             mysql.closeConnection(dbConnection);
         }
     }
 
     @Override
-    public void registerTeacher(TeacherData registerModel) throws Exception {
+    public TeacherData registerTeacher(TeacherData registerModel) throws Exception {
         Connection dbConnection = mysql.openConnection();
 
         final PreparedStatement statement = dbConnection.prepareStatement("INSERT INTO teacher (admin_id,name,email,password) VALUES (?,?,?,?)");
@@ -159,16 +164,17 @@ public class AuthDAOImplementation implements AuthDAO {
             }
 
             statement.execute();
-            statement.close();
+            return getLastInsertedTeacher(dbConnection);
         } catch (Exception ex) {
             throw ex;
         } finally {
+            statement.close();
             mysql.closeConnection(dbConnection);
         }
     }
 
     @Override
-    public void registerStudent(StudentData registerModel) throws Exception {
+    public StudentData registerStudent(StudentData registerModel) throws Exception {
         Connection dbConnection = mysql.openConnection();
 
         final PreparedStatement statement = dbConnection.prepareStatement("INSERT INTO student (admin_id,name,email,password) VALUES (?,?,?,?)");
@@ -184,10 +190,11 @@ public class AuthDAOImplementation implements AuthDAO {
             }
 
             statement.execute();
-            statement.close();
+            return getLastInsertedStudent(dbConnection);
         } catch (Exception ex) {
             throw ex;
         } finally {
+            statement.close();
             mysql.closeConnection(dbConnection);
         }
     }
@@ -400,6 +407,44 @@ public class AuthDAOImplementation implements AuthDAO {
         } finally {
             statement.close();
             mysql.closeConnection(dbConnection);
+        }
+    }
+
+    private AdminData getLastInsertedAdmin(Connection dbConnection) throws SQLException {
+        final PreparedStatement selectStatement = dbConnection.prepareStatement("SELECT * FROM admin ORDER BY id DESC LIMIT 1");
+
+        ResultSet resultSet = selectStatement.executeQuery();
+        if (resultSet.next()) {
+            AdminData admin = new AdminData(resultSet);
+            return admin;
+        } else {
+            throw new SQLException("Admin not found.");
+        }
+    }
+
+    private StudentData getLastInsertedStudent(Connection dbConnection) throws SQLException {
+        final PreparedStatement selectStatement = dbConnection.prepareStatement("SELECT * FROM student WHERE admin_id = ? ORDER BY id DESC LIMIT 1");
+        selectStatement.setInt(1, AdminSession.getCurrentUser().getId());
+
+        ResultSet resultSet = selectStatement.executeQuery();
+        if (resultSet.next()) {
+            StudentData student = new StudentData(resultSet);
+            return student;
+        } else {
+            throw new SQLException("Student not found.");
+        }
+    }
+
+    private TeacherData getLastInsertedTeacher(Connection dbConnection) throws SQLException {
+        final PreparedStatement selectStatement = dbConnection.prepareStatement("SELECT * FROM teacher WHERE admin_id = ? ORDER BY id DESC LIMIT 1");
+        selectStatement.setInt(1, AdminSession.getCurrentUser().getId());
+
+        ResultSet resultSet = selectStatement.executeQuery();
+        if (resultSet.next()) {
+            TeacherData teacher = new TeacherData(resultSet);
+            return teacher;
+        } else {
+            throw new SQLException("Teacher not found.");
         }
     }
 
