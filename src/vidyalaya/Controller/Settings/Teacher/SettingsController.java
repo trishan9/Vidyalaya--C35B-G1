@@ -7,7 +7,13 @@ package vidyalaya.Controller.Settings.Teacher;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import vidyalaya.Utils.Utils;
+
+import vidyalaya.Model.TeacherData;
+import vidyalaya.SessionManagement.TeacherSession;
 
 import vidyalaya.DAO.AuthDAO.AuthDAO;
 import vidyalaya.DAO.AuthDAO.AuthDAOImplementation;
@@ -32,6 +38,7 @@ public class SettingsController {
 
     public SettingsController(SettingsScreen userView) {
         this.userView = userView;
+        userView.addUpdateProfileListener(new UpdateProfileListener());
         userView.addCoursesRedirectListener(new CoursesRedirectListener());
         userView.addRoutineRedirectListener(new RoutineRedirectListener());
         userView.addNoticesRedirectListener(new NoticesRedirectListener());
@@ -45,6 +52,37 @@ public class SettingsController {
 
     public void close() {
         this.userView.dispose();
+    }
+
+    class UpdateProfileListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                String name = userView.getNameField().getText();
+                String emailAddress = userView.getEmailField().getText();
+
+                String currentName = TeacherSession.getCurrentUser().getName();
+                String currenEmailAddress = TeacherSession.getCurrentUser().getEmail();
+
+                if (name.equals(currentName) && emailAddress.equals(currenEmailAddress)) {
+                    Utils.info("No changes detected. The name, and email address are the same as the current values.");
+                } else {
+                    TeacherData teacher = new TeacherData(name, emailAddress);
+                    authDAO.updateTeacher(TeacherSession.getCurrentUser().getId(), teacher);
+
+                    vidyalaya.View.Dashboard.Teacher.SettingsScreen settingsView = new vidyalaya.View.Dashboard.Teacher.SettingsScreen();
+                    vidyalaya.Controller.Settings.Teacher.SettingsController settingsController = new vidyalaya.Controller.Settings.Teacher.SettingsController(settingsView);
+                    Utils.closeAllFrames();
+                    settingsController.open();
+                    Utils.success("Profile updated successfully");
+                }
+
+            } catch (Exception ex) {
+                Logger.getLogger(vidyalaya.Controller.Settings.Admin.SettingsController.class.getName()).log(Level.SEVERE, null, ex);
+                Utils.error(ex.getMessage());
+            }
+        }
     }
 
     class CoursesRedirectListener implements ActionListener {

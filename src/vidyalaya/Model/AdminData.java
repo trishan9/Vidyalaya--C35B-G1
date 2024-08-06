@@ -29,6 +29,13 @@ public class AdminData {
         this.is_admin = true;
     }
 
+    public AdminData(String name, String email, String institution_name) {
+        this.name = name;
+        this.email = email;
+        this.institution_name = institution_name;
+        this.is_admin = true;
+    }
+
     public AdminData(ResultSet result) throws SQLException {
         this.id = result.getInt("id");
         this.name = result.getString("name");
