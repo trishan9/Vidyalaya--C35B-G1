@@ -3,11 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Vidyalaya.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Controller/CreateAdminController.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/View/CreateAdmin.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Services/MailService.java</file>
-            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Model/ModelMessage.java</file>
+            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/View/Dashboard/Admin/AttendanceScreen.java</file>
+            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Components/MaterialCardUser.java</file>
+            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Components/Material.java</file>
+            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/Components/MaterialCard.java</file>
+            <file>file:/C:/Users/trish/code/CALL2-C35B-G1/src/vidyalaya/View/Dashboard/Admin/CoursesScreen.java</file>
         </group>
     </open-files>
 </project-private>

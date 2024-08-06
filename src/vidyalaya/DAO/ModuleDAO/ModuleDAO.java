@@ -5,6 +5,7 @@
 package vidyalaya.DAO.ModuleDAO;
 
 import java.util.List;
+import vidyalaya.Model.MaterialData;
 
 import vidyalaya.Model.ModuleData;
 import vidyalaya.Model.TeacherData;
@@ -32,4 +33,13 @@ public interface ModuleDAO {
     public void deleteModuleTeachers(int moduleCode) throws Exception;
 
     public void deleteModule(int moduleCode) throws Exception;
+
+    public void createMaterial(MaterialData materialData) throws Exception;
+
+    public List<MaterialData> getAllMaterials(int moduleCode) throws Exception;
+
+    public void updateMaterial(int materialId, MaterialData materialData) throws Exception;
+
+    public void deleteMaterial(int materialId) throws Exception;
+
 }
