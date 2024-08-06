@@ -24,6 +24,7 @@ import vidyalaya.DAO.ModuleDAO.ModuleDAOImplementation;
 import vidyalaya.Components.MaterialPopup;
 import vidyalaya.Components.MaterialCard;
 import vidyalaya.Components.Modals.CreateMaterialForm;
+import vidyalaya.Components.Modals.EditMaterialForm;
 
 /**
  *
@@ -81,7 +82,7 @@ public class MaterialScreen extends javax.swing.JFrame {
                     GlassPanePopup.showPopup(new MaterialPopup(data));
                 },
                 () -> {
-                    System.out.println("Edit: " + data.getId());
+                    new EditMaterialForm(data).setVisible(true);
                 },
                 () -> {
                     try {

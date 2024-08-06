@@ -28,6 +28,11 @@ public class MaterialData {
         this.material_text = material_text;
     }
 
+    public MaterialData(String material_title, String material_text) {
+        this.material_title = material_title;
+        this.material_text = material_text;
+    }
+
     public MaterialData(ResultSet result) throws SQLException {
         this.id = result.getInt("id");
         this.module_code = result.getInt("module_code");
