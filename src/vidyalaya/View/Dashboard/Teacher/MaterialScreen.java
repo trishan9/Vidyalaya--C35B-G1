@@ -9,6 +9,7 @@ import java.awt.GridLayout;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 import vidyalaya.Utils.Utils;
 
@@ -83,7 +84,21 @@ public class MaterialScreen extends javax.swing.JFrame {
                     System.out.println("Edit: " + data.getId());
                 },
                 () -> {
-                    System.out.println("Delete: " + data.getId());
+                    try {
+                        ModuleDAO moduleDAO = new ModuleDAOImplementation();
+                        int result = Utils.confirm(this, "Are you sure you want to delete this material?");
+                        if (result == JOptionPane.YES_OPTION) {
+                            moduleDAO.deleteMaterial(data.getId());
+
+                            vidyalaya.View.Dashboard.Teacher.MyCoursesScreen coursesView = new vidyalaya.View.Dashboard.Teacher.MyCoursesScreen();
+                            vidyalaya.Controller.Courses.Teacher.MyCoursesController coursesController = new vidyalaya.Controller.Courses.Teacher.MyCoursesController(coursesView);
+                            Utils.closeAllFrames();
+                            coursesController.open();
+                            Utils.success("Material deleted successfully!");
+                        }
+                    } catch (Exception ex) {
+                        Utils.error(ex.getMessage());
+                    }
                 });
         pnlMaterials.add(temp);
     }
