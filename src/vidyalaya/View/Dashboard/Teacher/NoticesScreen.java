@@ -79,6 +79,8 @@ public class NoticesScreen extends javax.swing.JFrame {
     }
 
     public void addCoursesRedirectListener(ActionListener listener) {
+        Utils.removeAllMouseListeners(menuCourses);
+        
         menuCourses.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -88,6 +90,8 @@ public class NoticesScreen extends javax.swing.JFrame {
     }
 
     public void addRoutineRedirectListener(ActionListener listener) {
+        Utils.removeAllMouseListeners(menuRoutine);
+        
         menuRoutine.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -97,6 +101,8 @@ public class NoticesScreen extends javax.swing.JFrame {
     }
 
     public void addAttendanceRedirectListener(ActionListener listener) {
+        Utils.removeAllMouseListeners(menuAttendance);
+        
         menuAttendance.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -106,6 +112,8 @@ public class NoticesScreen extends javax.swing.JFrame {
     }
 
     public void addSettingsRedirectListener(ActionListener listener) {
+        Utils.removeAllMouseListeners(menuSettings);
+        
         menuSettings.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -115,6 +123,8 @@ public class NoticesScreen extends javax.swing.JFrame {
     }
 
     public void addLogoutListener(ActionListener listener) {
+        Utils.removeAllMouseListeners(menuLogout);
+        
         menuLogout.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
