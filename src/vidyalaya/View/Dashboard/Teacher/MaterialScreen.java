@@ -22,6 +22,7 @@ import vidyalaya.DAO.ModuleDAO.ModuleDAOImplementation;
 
 import vidyalaya.Components.MaterialPopup;
 import vidyalaya.Components.MaterialCard;
+import vidyalaya.Components.Modals.CreateMaterialForm;
 
 /**
  *
@@ -103,7 +104,7 @@ public class MaterialScreen extends javax.swing.JFrame {
         createCourse = new javax.swing.JPanel();
         createMaterialBtn = new javax.swing.JLabel();
         iconUsers1 = new javax.swing.JLabel();
-        editButton = new javax.swing.JButton();
+        backButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -136,6 +137,11 @@ public class MaterialScreen extends javax.swing.JFrame {
 
         createMaterialBtn.setForeground(new java.awt.Color(255, 255, 255));
         createMaterialBtn.setText("Create Material");
+        createMaterialBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                createMaterialBtnMouseClicked(evt);
+            }
+        });
 
         iconUsers1.setBackground(new java.awt.Color(24, 97, 191));
         iconUsers1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vidyalaya/Assets/icons/Create.png"))); // NOI18N
@@ -172,18 +178,17 @@ public class MaterialScreen extends javax.swing.JFrame {
             .addComponent(createCourse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(courseTitle)
-                .addContainerGap())
+                .addComponent(courseTitle))
         );
 
-        editButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vidyalaya/Assets/icons/Left.png"))); // NOI18N
-        editButton.setBorder(null);
-        editButton.setBorderPainted(false);
-        editButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        editButton.setFocusPainted(false);
-        editButton.addActionListener(new java.awt.event.ActionListener() {
+        backButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vidyalaya/Assets/icons/Left.png"))); // NOI18N
+        backButton.setBorder(null);
+        backButton.setBorderPainted(false);
+        backButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        backButton.setFocusPainted(false);
+        backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editButtonActionPerformed(evt);
+                backButtonActionPerformed(evt);
             }
         });
 
@@ -200,14 +205,14 @@ public class MaterialScreen extends javax.swing.JFrame {
                             .addComponent(pnlMaterials, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addComponent(editButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(59, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addComponent(editButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
@@ -229,16 +234,21 @@ public class MaterialScreen extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
         this.dispose();
-    }//GEN-LAST:event_editButtonActionPerformed
+    }//GEN-LAST:event_backButtonActionPerformed
+
+    private void createMaterialBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createMaterialBtnMouseClicked
+        // TODO add your handling code here:
+        new CreateMaterialForm(this.moduleCode).setVisible(true);
+    }//GEN-LAST:event_createMaterialBtnMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backButton;
     private javax.swing.JLabel courseTitle;
     private javax.swing.JPanel createCourse;
     private javax.swing.JLabel createMaterialBtn;
-    private javax.swing.JButton editButton;
     private javax.swing.JLabel iconUsers1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
