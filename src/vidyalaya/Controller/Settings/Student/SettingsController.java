@@ -7,7 +7,13 @@ package vidyalaya.Controller.Settings.Student;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import vidyalaya.Utils.Utils;
+
+import vidyalaya.Model.StudentData;
+import vidyalaya.SessionManagement.StudentSession;
 
 import vidyalaya.DAO.AuthDAO.AuthDAO;
 import vidyalaya.DAO.AuthDAO.AuthDAOImplementation;
@@ -32,6 +38,8 @@ public class SettingsController {
 
     public SettingsController(SettingsScreen userView) {
         this.userView = userView;
+        userView.addUpdateProfileListener(new UpdateProfileListener());
+        userView.addChangePasswordListener(new ChangePasswordListener());
         userView.addCoursesRedirectListener(new CoursesRedirectListener());
         userView.addRoutineRedirectListener(new RoutineRedirectListener());
         userView.addNoticesRedirectListener(new NoticesRedirectListener());
@@ -45,6 +53,68 @@ public class SettingsController {
 
     public void close() {
         this.userView.dispose();
+    }
+
+    class UpdateProfileListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                String name = userView.getNameField().getText();
+                String emailAddress = userView.getEmailField().getText();
+
+                String currentName = StudentSession.getCurrentUser().getName();
+                String currenEmailAddress = StudentSession.getCurrentUser().getEmail();
+
+                if (name.equals(currentName) && emailAddress.equals(currenEmailAddress)) {
+                    Utils.info("No changes detected. The name, and email address are the same as the current values.");
+                } else {
+                    StudentData student = new StudentData(name, emailAddress);
+                    authDAO.updateStudent(StudentSession.getCurrentUser().getId(), student);
+
+                    vidyalaya.View.Dashboard.Student.SettingsScreen settingsView = new vidyalaya.View.Dashboard.Student.SettingsScreen();
+                    vidyalaya.Controller.Settings.Student.SettingsController settingsController = new vidyalaya.Controller.Settings.Student.SettingsController(settingsView);
+                    Utils.closeAllFrames();
+                    settingsController.open();
+                    Utils.success("Profile updated successfully");
+                }
+
+            } catch (Exception ex) {
+                Logger.getLogger(SettingsController.class.getName()).log(Level.SEVERE, null, ex);
+                Utils.error(ex.getMessage());
+            }
+        }
+    }
+
+    class ChangePasswordListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                String oldPassword = new String(userView.getCurrentPasswordField().getPassword());
+                String newPassword = new String(userView.getNewPasswordField().getPassword());
+
+                String currentPassword = StudentSession.getCurrentUser().getPassword();
+
+                if (!oldPassword.equals(currentPassword)) {
+                    Utils.warning("The current password you entered does not match our records. Please ensure you have entered the correct password.");
+                } else if (newPassword.equals(currentPassword)) {
+                    Utils.info("No changes detected. The new password is the same as the current password.");
+                } else {
+                    authDAO.changePassword("student", StudentSession.getCurrentUser().getId(), newPassword);
+
+                    vidyalaya.View.Dashboard.Student.SettingsScreen settingsView = new vidyalaya.View.Dashboard.Student.SettingsScreen();
+                    vidyalaya.Controller.Settings.Student.SettingsController settingsController = new vidyalaya.Controller.Settings.Student.SettingsController(settingsView);
+                    Utils.closeAllFrames();
+                    settingsController.open();
+                    Utils.success("Password updated successfully");
+                }
+
+            } catch (Exception ex) {
+                Logger.getLogger(SettingsController.class.getName()).log(Level.SEVERE, null, ex);
+                Utils.error(ex.getMessage());
+            }
+        }
     }
 
     class CoursesRedirectListener implements ActionListener {

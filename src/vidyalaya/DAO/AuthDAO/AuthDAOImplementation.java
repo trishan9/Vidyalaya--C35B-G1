@@ -262,6 +262,9 @@ public class AuthDAOImplementation implements AuthDAO {
 
             statement.executeUpdate();
             statement.close();
+
+            TeacherData updatedTeacher = getTeacherById(teacherId);
+            TeacherSession.setCurrentUser(updatedTeacher);
         } catch (Exception ex) {
             throw ex;
         } finally {
@@ -286,6 +289,9 @@ public class AuthDAOImplementation implements AuthDAO {
 
             statement.executeUpdate();
             statement.close();
+
+            StudentData updatedStudent = getStudentById(studentId);
+            StudentSession.setCurrentUser(updatedStudent);
         } catch (Exception ex) {
             throw ex;
         } finally {
@@ -311,6 +317,9 @@ public class AuthDAOImplementation implements AuthDAO {
 
             statement.executeUpdate();
             statement.close();
+
+            AdminData updatedAdmin = getAdminById(adminId);
+            AdminSession.setCurrentUser(updatedAdmin);
         } catch (Exception ex) {
             throw ex;
         } finally {
@@ -401,6 +410,28 @@ public class AuthDAOImplementation implements AuthDAO {
                 return teacherData;
             } else {
                 throw new Exception("Teacher with ID " + teacherId + " doesn't exist");
+            }
+        } catch (SQLException ex) {
+            throw ex;
+        } finally {
+            statement.close();
+            mysql.closeConnection(dbConnection);
+        }
+    }
+
+    private AdminData getAdminById(int adminId) throws Exception {
+        Connection dbConnection = mysql.openConnection();
+
+        final PreparedStatement statement = dbConnection.prepareStatement("SELECT * FROM admin WHERE id = ? LIMIT 1");
+        statement.setInt(1, adminId);
+
+        try {
+            final ResultSet response = statement.executeQuery();
+            if (response.next()) {
+                AdminData adminData = new AdminData(response);
+                return adminData;
+            } else {
+                throw new Exception("Admin with ID " + adminId + " doesn't exist");
             }
         } catch (SQLException ex) {
             throw ex;

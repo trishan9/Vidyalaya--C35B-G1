@@ -33,6 +33,11 @@ public class StudentData implements UserData {
         this.email = email;
     }
 
+    public StudentData(String name, String email) {
+        this.name = name;
+        this.email = email;
+    }
+
     public StudentData(ResultSet result) throws SQLException {
         this.id = result.getInt("id");
         this.student_id = result.getString("student_id");

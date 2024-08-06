@@ -35,6 +35,11 @@ public class TeacherData implements UserData {
         this.email = email;
     }
 
+    public TeacherData(String name, String email) {
+        this.name = name;
+        this.email = email;
+    }
+
     public TeacherData(ResultSet result) throws SQLException {
         this.id = result.getInt("id");
         this.teacher_id = result.getString("teacher_id");
