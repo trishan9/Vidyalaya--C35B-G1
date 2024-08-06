@@ -8,6 +8,8 @@ import java.awt.Cursor;
 import java.awt.Frame;
 import java.awt.Image;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 
 import javax.swing.JFrame;
 import javax.swing.JButton;
@@ -131,6 +133,24 @@ public class Utils {
             button.setVisible(false);
         } else {
             button.setVisible(true);
+        }
+    }
+
+    public static byte[] bufferedImageToByteArray(BufferedImage image) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        try {
+            ImageIO.write(image, "png", baos);
+            baos.flush();
+            return baos.toByteArray();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            try {
+                baos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
