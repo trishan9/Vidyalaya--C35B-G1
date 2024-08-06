@@ -19,7 +19,7 @@ import vidyalaya.Model.MaterialData;
 public class MaterialPopup extends javax.swing.JPanel {
 
     /**
-     * Creates new form Material
+     * Creates new form MaterialPopup
      *
      * @param material
      */
