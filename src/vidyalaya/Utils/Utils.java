@@ -7,6 +7,8 @@ package vidyalaya.Utils;
 import java.awt.Cursor;
 import java.awt.Frame;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
@@ -32,6 +34,8 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
+import javax.swing.Timer;
+import javax.swing.JPanel;
 
 import raven.datetime.component.time.TimePicker;
 import raven.toast.Notifications;
@@ -152,6 +156,18 @@ public class Utils {
                 e.printStackTrace();
             }
         }
+    }
+
+    public static void hidePanelAfterDelay(final JPanel panel) {
+        Timer timer = new Timer(5000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panel.setVisible(false);
+            }
+        });
+
+        timer.setRepeats(false);
+        timer.start();
     }
 
     public static String capitalize(String str) {

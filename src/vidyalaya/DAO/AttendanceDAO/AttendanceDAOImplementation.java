@@ -7,7 +7,6 @@ package vidyalaya.DAO.AttendanceDAO;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -35,11 +34,12 @@ public class AttendanceDAOImplementation implements AttendanceDAO {
         );
         checkStatement.setInt(1, studentId);
         checkStatement.setInt(2, courseId);
-        checkStatement.setDate(3, (java.sql.Date) attendanceDate);
+        checkStatement.setDate(3, new java.sql.Date(attendanceDate.getTime()));
 
         ResultSet result = checkStatement.executeQuery();
         if (result.next()) {
-            Utils.warning("Attendance already marked for today.");
+            Utils.warning("Attendance already marked!");
+            return;
         } else {
             final PreparedStatement insertStatement = dbConnection.prepareStatement(
                     "INSERT INTO attendance (admin_id, student_id, module_code, attendance_date) VALUES (?, ?, ?, ?)"
@@ -47,7 +47,7 @@ public class AttendanceDAOImplementation implements AttendanceDAO {
             insertStatement.setInt(1, TeacherSession.getCurrentUser().getAdminId());
             insertStatement.setInt(2, studentId);
             insertStatement.setInt(3, courseId);
-            insertStatement.setDate(4, (java.sql.Date) attendanceDate);
+            insertStatement.setDate(4, new java.sql.Date(attendanceDate.getTime()));
             insertStatement.executeUpdate();
             Utils.success("Attendance marked successfully.");
         }
@@ -219,8 +219,8 @@ public class AttendanceDAOImplementation implements AttendanceDAO {
         );
         statement.setInt(1, studentId);
         statement.setInt(2, courseId);
-        statement.setDate(3, (java.sql.Date) startDate);
-        statement.setDate(4, (java.sql.Date) endDate);
+        statement.setDate(3, new java.sql.Date(startDate.getTime()));
+        statement.setDate(4, new java.sql.Date(endDate.getTime()));
 
         List<AttendanceData> attendanceList = new ArrayList<>();
         ResultSet result = statement.executeQuery();

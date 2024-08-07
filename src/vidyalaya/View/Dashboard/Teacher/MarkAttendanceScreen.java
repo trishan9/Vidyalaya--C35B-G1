@@ -15,13 +15,22 @@ import com.google.zxing.NotFoundException;
 import com.google.zxing.Result;
 import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.common.HybridBinarizer;
+
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
+
+import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
+
+import raven.toast.Notifications;
+
+import vidyalaya.DAO.AttendanceDAO.AttendanceDAO;
+import vidyalaya.DAO.AttendanceDAO.AttendanceDAOImplementation;
 import vidyalaya.DAO.AuthDAO.AuthDAO;
 import vidyalaya.DAO.AuthDAO.AuthDAOImplementation;
+
 import vidyalaya.Utils.Utils;
 
 import vidyalaya.Model.ModuleData;
@@ -32,7 +41,7 @@ import vidyalaya.Model.StudentData;
  * @author trish
  */
 public class MarkAttendanceScreen extends javax.swing.JFrame implements Runnable, ThreadFactory {
-
+    
     int moduleCode;
     private WebcamPanel panel = null;
     private Webcam webcam = null;
@@ -48,42 +57,41 @@ public class MarkAttendanceScreen extends javax.swing.JFrame implements Runnable
     public MarkAttendanceScreen(ModuleData module) {
         initComponents();
         this.moduleCode = module.getCode();
-
+        
         String courseName = module.getName();
         courseTitle.setText(courseName);
-
+        
         initWebCam();
-
+        
         setTitle("Mark Attendance - " + courseName);
         setSize(1400, 954);
         setLocationRelativeTo(null);
         setResizable(false);
-
-//        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
+        
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         Utils.setFrameIcon(this, "/vidyalaya/Assets/logo.png");
-
+        
         Utils.setCustomFont(courseTitle, 23f);
-
+        jPanel6.setVisible(false);
     }
-
+    
     private void initWebCam() {
         webcam = Webcam.getDefault();
         if (webcam != null) {
             Dimension[] resolutions = webcam.getViewSizes();
             Dimension maxResolution = resolutions[resolutions.length - 1];
-
+            
             if (webcam.isOpen()) {
                 webcam.close();
             }
-
+            
             webcam.setViewSize(maxResolution);
             webcam.open();
-
+            
             panel = new WebcamPanel(webcam);
             panel.setPreferredSize(maxResolution);
             panel.setFPSDisplayed(true);
-
+            
             pnlWebcam.add(panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 689, 518));
             executor.execute(this);
             executor.shutdown();
@@ -247,7 +255,10 @@ public class MarkAttendanceScreen extends javax.swing.JFrame implements Runnable
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
-        this.dispose();
+        AttendanceScreen attendanceView = new AttendanceScreen();
+        vidyalaya.Controller.Attendance.Teacher.AttendanceController attendanceController = new vidyalaya.Controller.Attendance.Teacher.AttendanceController(attendanceView);
+        Utils.closeAllFrames();
+        attendanceController.open();
     }//GEN-LAST:event_backButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -278,13 +289,14 @@ public class MarkAttendanceScreen extends javax.swing.JFrame implements Runnable
 
     @Override
     public void run() {
-        do {
+        while (running) {
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException ex) {
-
+                Thread.currentThread().interrupt(); // Restore interrupted status
+                break;
             }
-
+            
             try {
                 Result result = null;
                 BufferedImage image = null;
@@ -293,16 +305,17 @@ public class MarkAttendanceScreen extends javax.swing.JFrame implements Runnable
                         continue;
                     }
                 }
-
+                
                 LuminanceSource source = new BufferedImageLuminanceSource(image);
                 BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
-
+                
                 try {
                     result = new MultiFormatReader().decode(bitmap);
                 } catch (NotFoundException ex) {
-
+                    // QR code not found, continue the loop
+                    continue;
                 }
-
+                
                 if (result != null) {
                     String jsonString = result.getText();
                     Gson gson = new Gson();
@@ -310,23 +323,56 @@ public class MarkAttendanceScreen extends javax.swing.JFrame implements Runnable
                     }.getType();
                     student = gson.fromJson(jsonString, type);
                 }
-
-                if (student.getEmail() != null) {
+                
+                if (student != null && student.getEmail() != null) {
                     AuthDAO authDAO = new AuthDAOImplementation();
                     StudentData currentStudent = authDAO.getStudentById(student.getId());
-                    System.out.println(currentStudent.getId());
+                    
+                    jPanel6.setVisible(true);
+                    stdId2.setText(currentStudent.getStudentId());
+                    stdName2.setText(currentStudent.getName());
+                    stdEmail2.setText(currentStudent.getEmail());
+                    
+                    Utils.hidePanelAfterDelay(jPanel6);
+                    
+                    AttendanceDAO attendanceDAO = new AttendanceDAOImplementation();
+                    attendanceDAO.markAttendance(currentStudent.getId(), moduleCode, new Date());
+                    student = null;
+                } else if (student != null && student.getEmail() == null) {
+                    Utils.error("Invalid QR Code!");
+                    student = null;
                 }
-
+                
             } catch (Exception ex) {
-
+                System.out.println(ex.getMessage());
             }
-        } while (true);
+        }
     }
-
+    
     @Override
     public Thread newThread(Runnable r) {
         Thread t = new Thread(r, "My Thread");
         t.setDaemon(true);
         return t;
+    }
+    
+    @Override
+    public void dispose() {
+        running = false;
+        panel = null;
+        
+        if (webcam != null && webcam.isOpen()) {
+            webcam.close();
+            webcam = null; // Release the reference
+        }
+        
+        if (executor != null && !executor.isShutdown()) {
+            executor.shutdownNow();
+            executor = null;
+        }
+        
+        Notifications.getInstance().clearAll();
+        
+        super.dispose();
     }
 }
