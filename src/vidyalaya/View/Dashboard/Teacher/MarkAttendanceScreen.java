@@ -59,7 +59,7 @@ public class MarkAttendanceScreen extends javax.swing.JFrame implements Runnable
         setLocationRelativeTo(null);
         setResizable(false);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+//        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         Utils.setFrameIcon(this, "/vidyalaya/Assets/logo.png");
 
