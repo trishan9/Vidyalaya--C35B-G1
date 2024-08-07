@@ -4,14 +4,20 @@
  */
 package vidyalaya.View.Dashboard.Teacher;
 
+import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import vidyalaya.Utils.Utils;
 
+import vidyalaya.Model.ModuleData;
 import vidyalaya.Model.TeacherData;
 import vidyalaya.SessionManagement.TeacherSession;
+
+import vidyalaya.Components.CourseCardUser;
+
+import vidyalaya.Controller.Attendance.Teacher.AttendanceController;
 
 /**
  *
@@ -19,11 +25,15 @@ import vidyalaya.SessionManagement.TeacherSession;
  */
 public class AttendanceScreen extends javax.swing.JFrame {
 
+    AttendanceController attendanceController;
+
     /**
      * Creates new form AttendanceScreen
      */
     public AttendanceScreen() {
         initComponents();
+        attendanceController = new AttendanceController(this);
+        initializeGrid();
 
         setTitle("Attendance - Vidyalaya Teacher");
         setSize(1400, 954);
@@ -51,9 +61,26 @@ public class AttendanceScreen extends javax.swing.JFrame {
         lblId.setText(currentUser.getTeacherId());
     }
 
+    private void initializeGrid() {
+        attendanceController.myModulesList.forEach((x) -> addGrid(x));
+        var grid = new GridLayout(0, 1);
+        grid.setHgap(10);
+        grid.setVgap(10);
+        pnlCourses.setLayout(grid);
+    }
+
+    private void addGrid(ModuleData data) {
+        var temp = new CourseCardUser(data,
+                "ATTENDANCE",
+                () -> {
+                    new MarkAttendanceScreen(data).setVisible(true);
+                });
+        pnlCourses.add(temp);
+    }
+
     public void addCoursesRedirectListener(ActionListener listener) {
         Utils.removeAllMouseListeners(menuLogout);
-        
+
         menuCourses.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -64,7 +91,7 @@ public class AttendanceScreen extends javax.swing.JFrame {
 
     public void addRoutineRedirectListener(ActionListener listener) {
         Utils.removeAllMouseListeners(menuRoutine);
-        
+
         menuRoutine.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -75,7 +102,7 @@ public class AttendanceScreen extends javax.swing.JFrame {
 
     public void addNoticesRedirectListener(ActionListener listener) {
         Utils.removeAllMouseListeners(menuNotices);
-        
+
         menuNotices.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -86,7 +113,7 @@ public class AttendanceScreen extends javax.swing.JFrame {
 
     public void addSettingsRedirectListener(ActionListener listener) {
         Utils.removeAllMouseListeners(menuSettings);
-        
+
         menuSettings.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -97,7 +124,7 @@ public class AttendanceScreen extends javax.swing.JFrame {
 
     public void addLogoutListener(ActionListener listener) {
         Utils.removeAllMouseListeners(menuLogout);
-        
+
         menuLogout.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -144,6 +171,7 @@ public class AttendanceScreen extends javax.swing.JFrame {
         iconLogout = new javax.swing.JLabel();
         pnlRight = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
+        pnlCourses = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -425,6 +453,19 @@ public class AttendanceScreen extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        pnlCourses.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout pnlCoursesLayout = new javax.swing.GroupLayout(pnlCourses);
+        pnlCourses.setLayout(pnlCoursesLayout);
+        pnlCoursesLayout.setHorizontalGroup(
+            pnlCoursesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1063, Short.MAX_VALUE)
+        );
+        pnlCoursesLayout.setVerticalGroup(
+            pnlCoursesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 501, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout pnlCenterLayout = new javax.swing.GroupLayout(pnlCenter);
         pnlCenter.setLayout(pnlCenterLayout);
         pnlCenterLayout.setHorizontalGroup(
@@ -432,7 +473,9 @@ public class AttendanceScreen extends javax.swing.JFrame {
             .addGroup(pnlCenterLayout.createSequentialGroup()
                 .addComponent(pnlSideNav, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(pnlRight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnlRight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pnlCourses, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 40, Short.MAX_VALUE))
         );
         pnlCenterLayout.setVerticalGroup(
@@ -441,6 +484,8 @@ public class AttendanceScreen extends javax.swing.JFrame {
             .addGroup(pnlCenterLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pnlRight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(pnlCourses, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -524,6 +569,7 @@ public class AttendanceScreen extends javax.swing.JFrame {
     private javax.swing.JPanel navRoutine;
     private javax.swing.JPanel navSettings;
     private javax.swing.JPanel pnlCenter;
+    private javax.swing.JPanel pnlCourses;
     private javax.swing.JPanel pnlNav;
     private javax.swing.JPanel pnlRight;
     private javax.swing.JPanel pnlSideNav;

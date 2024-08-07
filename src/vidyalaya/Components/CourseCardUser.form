@@ -58,7 +58,7 @@
                       <Component id="courseCodeHeader" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="277" max="-2" attributes="0"/>
-                  <Component id="accessMaterialsBtn" min="-2" pref="232" max="-2" attributes="0"/>
+                  <Component id="actionBtn" min="-2" pref="232" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -79,7 +79,7 @@
                               <Component id="courseTitle" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <Component id="accessMaterialsBtn" alignment="0" max="32767" attributes="0"/>
+                      <Component id="actionBtn" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace pref="23" max="32767" attributes="0"/>
               </Group>
@@ -125,7 +125,7 @@
             <Property name="text" type="java.lang.String" value="200"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="accessMaterialsBtn">
+        <Component class="javax.swing.JButton" name="actionBtn">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="d4" green="f1" red="c1" type="rgb"/>

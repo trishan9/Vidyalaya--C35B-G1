@@ -34,10 +34,18 @@ public class CourseCardUser extends javax.swing.JPanel {
         Utils.setCustomFont(courseTitle, 17f);
         Utils.setCustomFont(courseCodeHeader, 15f);
         Utils.setCustomFont(courseCode, 17f);
-        Utils.setCustomFont(accessMaterialsBtn, 17f);
-        
-        if(userType.equals("TEACHER")){
-            accessMaterialsBtn.setText("Manage Materials");
+        Utils.setCustomFont(actionBtn, 17f);
+
+        switch (userType) {
+            case "TEACHER":
+                actionBtn.setText("Manage Materials");
+                break;
+            case "ATTENDANCE":
+                actionBtn.setText("Mark Attendance");
+                break;
+            default:
+                actionBtn.setText("Access Materials");
+                break;
         }
     }
 
@@ -55,7 +63,7 @@ public class CourseCardUser extends javax.swing.JPanel {
         courseTitle = new javax.swing.JLabel();
         courseCodeHeader = new javax.swing.JLabel();
         courseCode = new javax.swing.JLabel();
-        accessMaterialsBtn = new javax.swing.JButton();
+        actionBtn = new javax.swing.JButton();
 
         pnlCourse.setBackground(new java.awt.Color(255, 255, 255));
         pnlCourse.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(222, 222, 222)));
@@ -74,13 +82,13 @@ public class CourseCardUser extends javax.swing.JPanel {
         courseCode.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         courseCode.setText("200");
 
-        accessMaterialsBtn.setBackground(new java.awt.Color(193, 241, 212));
-        accessMaterialsBtn.setText("Access Materials");
-        accessMaterialsBtn.setBorder(null);
-        accessMaterialsBtn.setBorderPainted(false);
-        accessMaterialsBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        accessMaterialsBtn.setFocusPainted(false);
-        accessMaterialsBtn.addActionListener(new java.awt.event.ActionListener() {
+        actionBtn.setBackground(new java.awt.Color(193, 241, 212));
+        actionBtn.setText("Access Materials");
+        actionBtn.setBorder(null);
+        actionBtn.setBorderPainted(false);
+        actionBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        actionBtn.setFocusPainted(false);
+        actionBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 onMaterialsBtnActionPerformed(evt);
             }
@@ -102,7 +110,7 @@ public class CourseCardUser extends javax.swing.JPanel {
                         .addComponent(courseCode))
                     .addComponent(courseCodeHeader))
                 .addGap(277, 277, 277)
-                .addComponent(accessMaterialsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(actionBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         pnlCourseLayout.setVerticalGroup(
             pnlCourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -118,7 +126,7 @@ public class CourseCardUser extends javax.swing.JPanel {
                             .addComponent(courseTitleHeader)
                             .addGap(10, 10, 10)
                             .addComponent(courseTitle)))
-                    .addComponent(accessMaterialsBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(actionBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
@@ -141,7 +149,7 @@ public class CourseCardUser extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton accessMaterialsBtn;
+    private javax.swing.JButton actionBtn;
     private javax.swing.JLabel courseCode;
     private javax.swing.JLabel courseCodeHeader;
     private javax.swing.JLabel courseTitle;

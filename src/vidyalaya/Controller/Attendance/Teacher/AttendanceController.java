@@ -6,11 +6,16 @@ package vidyalaya.Controller.Attendance.Teacher;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import vidyalaya.Utils.Utils;
 
-import vidyalaya.DAO.AuthDAO.AuthDAO;
-import vidyalaya.DAO.AuthDAO.AuthDAOImplementation;
+import vidyalaya.Model.ModuleData;
+import vidyalaya.SessionManagement.TeacherSession;
+
+import vidyalaya.DAO.ModuleDAO.ModuleDAO;
+import vidyalaya.DAO.ModuleDAO.ModuleDAOImplementation;
 
 import vidyalaya.View.UserLogin;
 import vidyalaya.View.Dashboard.Teacher.AttendanceScreen;
@@ -27,8 +32,9 @@ import vidyalaya.Controller.Users.UserLoginController;
  */
 public class AttendanceController {
 
-    private final AuthDAO authDAO = new AuthDAOImplementation();
+    private final ModuleDAO moduleDAO = new ModuleDAOImplementation();
     private final AttendanceScreen userView;
+    public List<ModuleData> myModulesList = new ArrayList<>();
 
     public AttendanceController(AttendanceScreen userView) {
         this.userView = userView;
@@ -37,6 +43,15 @@ public class AttendanceController {
         userView.addNoticesRedirectListener(new NoticesRedirectListener());
         userView.addSettingsRedirectListener(new SettingsRedirectListener());
         userView.addLogoutListener(new LogoutListener());
+        getMyModulesList();
+    }
+
+    public final void getMyModulesList() {
+        try {
+            myModulesList = moduleDAO.getAllTeacherModules(TeacherSession.getCurrentUser().getId());
+        } catch (Exception ex) {
+            myModulesList = new ArrayList<>();
+        }
     }
 
     public void open() {
