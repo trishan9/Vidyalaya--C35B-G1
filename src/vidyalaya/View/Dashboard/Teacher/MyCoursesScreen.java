@@ -32,7 +32,7 @@ public class MyCoursesScreen extends javax.swing.JFrame {
      */
     public MyCoursesScreen() {
         initComponents();
-        myCoursesController = new vidyalaya.Controller.Courses.Teacher.MyCoursesController(this);
+        myCoursesController = new MyCoursesController(this);
         initializeGrid();
 
         setTitle("My Courses - Vidyalaya Teacher");
@@ -81,7 +81,7 @@ public class MyCoursesScreen extends javax.swing.JFrame {
 
     public void addRoutineRedirectListener(ActionListener listener) {
         Utils.removeAllMouseListeners(menuRoutine);
-        
+
         menuRoutine.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -92,7 +92,7 @@ public class MyCoursesScreen extends javax.swing.JFrame {
 
     public void addNoticesRedirectListener(ActionListener listener) {
         Utils.removeAllMouseListeners(menuNotices);
-        
+
         menuNotices.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -103,7 +103,7 @@ public class MyCoursesScreen extends javax.swing.JFrame {
 
     public void addAttendanceRedirectListener(ActionListener listener) {
         Utils.removeAllMouseListeners(menuAttendance);
-        
+
         menuAttendance.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -114,7 +114,7 @@ public class MyCoursesScreen extends javax.swing.JFrame {
 
     public void addSettingsRedirectListener(ActionListener listener) {
         Utils.removeAllMouseListeners(menuSettings);
-        
+
         menuSettings.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -125,7 +125,7 @@ public class MyCoursesScreen extends javax.swing.JFrame {
 
     public void addLogoutListener(ActionListener listener) {
         Utils.removeAllMouseListeners(menuLogout);
-        
+
         menuLogout.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
