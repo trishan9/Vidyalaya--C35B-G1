@@ -30,6 +30,7 @@ import vidyalaya.Model.StudentData;
 import vidyalaya.SessionManagement.StudentSession;
 
 import vidyalaya.Components.CustomScrollbar;
+import vidyalaya.Services.QRCodeService;
 
 /**
  *
@@ -799,23 +800,14 @@ public class SettingsScreen extends javax.swing.JFrame {
 
     BufferedImage image = null;
     private void generateQrBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateQrBtnActionPerformed
-        try {
-            // TODO add your handling code here:
-            StudentData currentUser = StudentSession.getCurrentUser();
+        // TODO add your handling code here:
+        StudentData currentUser = StudentSession.getCurrentUser();
 
-            Gson gson = new Gson();
-            String jsonData = gson.toJson(currentUser);
+        Gson gson = new Gson();
+        String jsonData = gson.toJson(currentUser);
 
-            BitMatrix bitMatrix = new MultiFormatWriter().encode(jsonData, BarcodeFormat.QR_CODE, 322, 286);
-            image = MatrixToImageWriter.toBufferedImage(bitMatrix);
-            lblImage.setIcon(new ImageIcon(image));
-            Utils.success("QR Code Generated Succesfully!");
-
-        } catch (Exception ex) {
-            Logger.getLogger(SettingsScreen.class.getName()).log(Level.SEVERE, null, ex);
-            Utils.error(ex.getMessage());
-        }
-
+        image = new QRCodeService().generateQRCode(jsonData);
+        lblImage.setIcon(new ImageIcon(image));
     }//GEN-LAST:event_generateQrBtnActionPerformed
 
     private void saveQrBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveQrBtnActionPerformed
