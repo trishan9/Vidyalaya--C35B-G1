@@ -24,24 +24,24 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 
+import vidyalaya.Utils.Utils;
+
 import raven.toast.Notifications;
+
+import vidyalaya.Model.ModuleData;
+import vidyalaya.Model.StudentData;
 
 import vidyalaya.DAO.AttendanceDAO.AttendanceDAO;
 import vidyalaya.DAO.AttendanceDAO.AttendanceDAOImplementation;
 import vidyalaya.DAO.AuthDAO.AuthDAO;
 import vidyalaya.DAO.AuthDAO.AuthDAOImplementation;
 
-import vidyalaya.Utils.Utils;
-
-import vidyalaya.Model.ModuleData;
-import vidyalaya.Model.StudentData;
-
 /**
  *
  * @author trish
  */
 public class MarkAttendanceScreen extends javax.swing.JFrame implements Runnable, ThreadFactory {
-    
+
     int moduleCode;
     private WebcamPanel panel = null;
     private Webcam webcam = null;
@@ -57,41 +57,41 @@ public class MarkAttendanceScreen extends javax.swing.JFrame implements Runnable
     public MarkAttendanceScreen(ModuleData module) {
         initComponents();
         this.moduleCode = module.getCode();
-        
+
         String courseName = module.getName();
         courseTitle.setText(courseName);
-        
+
         initWebCam();
-        
+
         setTitle("Mark Attendance - " + courseName);
         setSize(1400, 954);
         setLocationRelativeTo(null);
         setResizable(false);
-        
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         Utils.setFrameIcon(this, "/vidyalaya/Assets/logo.png");
-        
+
         Utils.setCustomFont(courseTitle, 23f);
         jPanel6.setVisible(false);
     }
-    
+
     private void initWebCam() {
         webcam = Webcam.getDefault();
         if (webcam != null) {
             Dimension[] resolutions = webcam.getViewSizes();
             Dimension maxResolution = resolutions[resolutions.length - 1];
-            
+
             if (webcam.isOpen()) {
                 webcam.close();
             }
-            
+
             webcam.setViewSize(maxResolution);
             webcam.open();
-            
+
             panel = new WebcamPanel(webcam);
             panel.setPreferredSize(maxResolution);
             panel.setFPSDisplayed(true);
-            
+
             pnlWebcam.add(panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 689, 518));
             executor.execute(this);
             executor.shutdown();
@@ -293,10 +293,10 @@ public class MarkAttendanceScreen extends javax.swing.JFrame implements Runnable
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException ex) {
-                Thread.currentThread().interrupt(); // Restore interrupted status
+                Thread.currentThread().interrupt();
                 break;
             }
-            
+
             try {
                 Result result = null;
                 BufferedImage image = null;
@@ -305,17 +305,16 @@ public class MarkAttendanceScreen extends javax.swing.JFrame implements Runnable
                         continue;
                     }
                 }
-                
+
                 LuminanceSource source = new BufferedImageLuminanceSource(image);
                 BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
-                
+
                 try {
                     result = new MultiFormatReader().decode(bitmap);
                 } catch (NotFoundException ex) {
-                    // QR code not found, continue the loop
                     continue;
                 }
-                
+
                 if (result != null) {
                     String jsonString = result.getText();
                     Gson gson = new Gson();
@@ -323,18 +322,18 @@ public class MarkAttendanceScreen extends javax.swing.JFrame implements Runnable
                     }.getType();
                     student = gson.fromJson(jsonString, type);
                 }
-                
+
                 if (student != null && student.getEmail() != null) {
                     AuthDAO authDAO = new AuthDAOImplementation();
                     StudentData currentStudent = authDAO.getStudentById(student.getId());
-                    
+
                     jPanel6.setVisible(true);
                     stdId2.setText(currentStudent.getStudentId());
                     stdName2.setText(currentStudent.getName());
                     stdEmail2.setText(currentStudent.getEmail());
-                    
+
                     Utils.hidePanelAfterDelay(jPanel6);
-                    
+
                     AttendanceDAO attendanceDAO = new AttendanceDAOImplementation();
                     attendanceDAO.markAttendance(currentStudent.getId(), moduleCode, new Date());
                     student = null;
@@ -342,37 +341,37 @@ public class MarkAttendanceScreen extends javax.swing.JFrame implements Runnable
                     Utils.error("Invalid QR Code!");
                     student = null;
                 }
-                
+
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
             }
         }
     }
-    
+
     @Override
     public Thread newThread(Runnable r) {
         Thread t = new Thread(r, "My Thread");
         t.setDaemon(true);
         return t;
     }
-    
+
     @Override
     public void dispose() {
         running = false;
         panel = null;
-        
+
         if (webcam != null && webcam.isOpen()) {
             webcam.close();
-            webcam = null; // Release the reference
+            webcam = null;
         }
-        
+
         if (executor != null && !executor.isShutdown()) {
             executor.shutdownNow();
             executor = null;
         }
-        
+
         Notifications.getInstance().clearAll();
-        
+
         super.dispose();
     }
 }

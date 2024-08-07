@@ -22,6 +22,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.Timer;
+import javax.swing.JPanel;
 
 import java.sql.Timestamp;
 
@@ -34,8 +36,6 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
-import javax.swing.Timer;
-import javax.swing.JPanel;
 
 import raven.datetime.component.time.TimePicker;
 import raven.toast.Notifications;

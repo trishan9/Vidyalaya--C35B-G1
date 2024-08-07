@@ -7,15 +7,17 @@ package vidyalaya.DAO.AttendanceDAO;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
+import vidyalaya.Database.MySqlConnection;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import vidyalaya.Database.MySqlConnection;
+import vidyalaya.Utils.Utils;
+
 import vidyalaya.Model.AttendanceData;
 import vidyalaya.SessionManagement.AdminSession;
 import vidyalaya.SessionManagement.StudentSession;
 import vidyalaya.SessionManagement.TeacherSession;
-import vidyalaya.Utils.Utils;
 
 /**
  *
