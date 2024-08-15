@@ -128,7 +128,7 @@ public class CreateAdmin extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabelHead)
-                .addContainerGap(1216, Short.MAX_VALUE))
+                .addContainerGap(1215, Short.MAX_VALUE))
         );
         pnlNavLayout.setVerticalGroup(
             pnlNavLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
