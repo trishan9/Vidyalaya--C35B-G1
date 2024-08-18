@@ -119,7 +119,8 @@ public class RoutineDAOImplementation implements RoutineDAO {
     public void updateRoutine(int routineId, RoutineData routineModel) throws Exception {
         Connection dbConnection = mysql.openConnection();
 
-        final PreparedStatement statement = dbConnection.prepareStatement("UPDATE routine SET weekday = ?, module_code = ?, time = ?, routine_content = ? WHERE id = ?");
+        final PreparedStatement statement = dbConnection.prepareStatement("UPDATE routine SET weekday = ?, module_code = ?, "
+                + "time = ?, routine_content = ? WHERE id = ?");
         statement.setString(1, routineModel.getWeekday());
         statement.setInt(2, routineModel.getModuleCode());
         statement.setString(3, routineModel.getTime());
