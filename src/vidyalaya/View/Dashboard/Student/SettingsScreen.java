@@ -12,6 +12,8 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import javax.swing.JScrollBar;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import java.io.File;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,12 +21,6 @@ import java.util.logging.Logger;
 import vidyalaya.Utils.Utils;
 
 import com.google.gson.Gson;
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.MultiFormatWriter;
-import com.google.zxing.client.j2se.MatrixToImageWriter;
-import com.google.zxing.common.BitMatrix;
-import java.io.File;
-import javax.swing.JFileChooser;
 
 import vidyalaya.Model.StudentData;
 import vidyalaya.SessionManagement.StudentSession;
