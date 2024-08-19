@@ -28,7 +28,6 @@ import javax.swing.JPanel;
 import java.sql.Timestamp;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import javax.imageio.ImageIO;
 
 import java.time.LocalDate;
@@ -37,7 +36,6 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
-import java.util.Date;
 
 import raven.datetime.component.time.TimePicker;
 import raven.toast.Notifications;
