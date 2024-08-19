@@ -8,21 +8,22 @@ import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import vidyalaya.Components.CourseAttendanceCard;
-import vidyalaya.DAO.AttendanceDAO.AttendanceDAO;
+import vidyalaya.Utils.Utils;
+
 import vidyalaya.DAO.AttendanceDAO.AttendanceDAOImplementation;
 import vidyalaya.DAO.ModuleDAO.ModuleDAO;
 import vidyalaya.DAO.ModuleDAO.ModuleDAOImplementation;
-import vidyalaya.Model.AttendanceData;
-import vidyalaya.Model.ModuleData;
 
-import vidyalaya.Utils.Utils;
+import vidyalaya.Model.ModuleData;
 
 import vidyalaya.Model.StudentData;
 import vidyalaya.SessionManagement.StudentSession;
+
+import vidyalaya.Components.CourseAttendanceCard;
 
 /**
  *
@@ -74,14 +75,12 @@ public class AttendanceScreen extends javax.swing.JFrame {
             int totalAbsentDays = attendanceDAO.getStudentAbsentDaysAcrossAllCourses();
             int totalPresentDays = totalTaughtDays - totalAbsentDays;
             double attendancePer = ((double) totalPresentDays / totalTaughtDays) * 100;
-            System.out.println(totalPresentDays);
-            System.out.println(totalAbsentDays);
 
             presentDays.setText("" + totalPresentDays);
             absentDays.setText("" + totalAbsentDays);
             attendancePercentage.setText(attendancePer + "%");
         } catch (Exception ex) {
-            Logger.getLogger(AttendanceScreen.class.getName()).log(Level.SEVERE, null, ex);
+            Utils.error(ex.getMessage());
         }
     }
 
