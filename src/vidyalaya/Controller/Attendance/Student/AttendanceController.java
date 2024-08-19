@@ -37,6 +37,7 @@ public class AttendanceController {
         userView.addNoticesRedirectListener(new NoticesRedirectListener());
         userView.addSettingsRedirectListener(new SettingsRedirectListener());
         userView.addLogoutListener(new LogoutListener());
+        
     }
 
     public void open() {

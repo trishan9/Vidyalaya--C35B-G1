@@ -4,7 +4,6 @@
  */
 package vidyalaya.DAO.AttendanceDAO;
 
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -28,7 +27,5 @@ public interface AttendanceDAO {
 
     public int getTotalAbsentDaysAcrossAllCourses() throws Exception;
 
-    public int getStudentTaughtDaysAcrossAllCourses(int studentId) throws Exception;
-
-    public int getStudentAbsentDaysAcrossAllCourses(int studentId) throws Exception;
+    public int getStudentAbsentDaysAcrossAllCourses() throws Exception;
 }

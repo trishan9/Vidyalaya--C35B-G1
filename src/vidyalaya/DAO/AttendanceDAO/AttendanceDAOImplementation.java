@@ -150,6 +150,26 @@ public class AttendanceDAOImplementation implements AttendanceDAO {
         return totalDays;
     }
 
+    public int getTotalTaughtDaysAcrossAllCourses(int adminId) throws Exception {
+        Connection dbConnection = mysql.openConnection();
+
+        final PreparedStatement statement = dbConnection.prepareStatement(
+                "SELECT COUNT(DISTINCT attendance_date) AS total_days "
+                + "FROM attendance WHERE admin_id = ?"
+        );
+        statement.setInt(1, adminId);
+
+        int totalDays = 0;
+        ResultSet result = statement.executeQuery();
+        if (result.next()) {
+            totalDays = result.getInt("total_days");
+        }
+
+        statement.close();
+        dbConnection.close();
+        return totalDays;
+    }
+
     @Override
     public int getTotalAbsentDaysAcrossAllCourses() throws Exception {
         int totalTaughtDays = getTotalTaughtDaysAcrossAllCourses();
@@ -169,34 +189,17 @@ public class AttendanceDAOImplementation implements AttendanceDAO {
 
         statement.close();
         dbConnection.close();
-        return totalTaughtDays - attendedDays;
-    }
-
-    @Override
-    public int getStudentTaughtDaysAcrossAllCourses(int studentId) throws Exception {
-        Connection dbConnection = mysql.openConnection();
-
-        final PreparedStatement statement = dbConnection.prepareStatement(
-                "SELECT COUNT(DISTINCT attendance_date) AS total_days "
-                + "FROM attendance WHERE admin_id = ? AND student_id = ?"
-        );
-        statement.setInt(1, StudentSession.getCurrentUser().getAdminId());
-        statement.setInt(2, StudentSession.getCurrentUser().getId());
-
-        int totalDays = 0;
-        ResultSet result = statement.executeQuery();
-        if (result.next()) {
-            totalDays = result.getInt("total_days");
+        
+        int absentDays = totalTaughtDays - attendedDays;
+        if (absentDays < 0) {
+            return 0;
         }
-
-        statement.close();
-        dbConnection.close();
-        return totalDays;
+        return absentDays;
     }
 
     @Override
-    public int getStudentAbsentDaysAcrossAllCourses(int studentId) throws Exception {
-        int totalTaughtDays = getTotalTaughtDaysAcrossAllCourses();
+    public int getStudentAbsentDaysAcrossAllCourses() throws Exception {
+        int totalTaughtDays = getTotalTaughtDaysAcrossAllCourses(StudentSession.getCurrentUser().getAdminId());
 
         Connection dbConnection = mysql.openConnection();
 
@@ -214,6 +217,11 @@ public class AttendanceDAOImplementation implements AttendanceDAO {
 
         statement.close();
         dbConnection.close();
-        return totalTaughtDays - attendedDays;
+
+        int absentDays = totalTaughtDays - attendedDays;
+        if (absentDays < 0) {
+            return 0;
+        }
+        return absentDays;
     }
 }
