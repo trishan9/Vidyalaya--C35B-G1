@@ -27,6 +27,7 @@ import vidyalaya.View.Dashboard.Admin.SettingsScreen;
 import vidyalaya.View.Dashboard.Admin.UsersScreen;
 
 import vidyalaya.Controller.AdminLoginController;
+import vidyalaya.View.Dashboard.Admin.DashboardScreen;
 
 /**
  *
@@ -41,6 +42,7 @@ public class SettingsController {
         this.userView = userView;
         userView.addUpdateProfileListener(new UpdateProfileListener());
         userView.addChangePasswordListener(new ChangePasswordListener());
+        userView.addDashboardRedirectListener(new DashboardRedirectListener());
         userView.addCoursesRedirectListener(new CoursesRedirectListener());
         userView.addRoutineRedirectListener(new RoutineRedirectListener());
         userView.addNoticesRedirectListener(new NoticesRedirectListener());
@@ -118,6 +120,17 @@ public class SettingsController {
                 Logger.getLogger(SettingsController.class.getName()).log(Level.SEVERE, null, ex);
                 Utils.error(ex.getMessage());
             }
+        }
+    }
+
+    class DashboardRedirectListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            DashboardScreen dashboardView = new DashboardScreen();
+            vidyalaya.Controller.Dashboard.DashboardController dashboardController = new vidyalaya.Controller.Dashboard.DashboardController(dashboardView);
+            Utils.closeAllFrames();
+            dashboardController.open();
         }
     }
 

@@ -32,6 +32,7 @@ import vidyalaya.View.Dashboard.Admin.UsersScreen;
 import vidyalaya.Components.Modals.CreateCourseForm;
 
 import vidyalaya.Controller.AdminLoginController;
+import vidyalaya.View.Dashboard.Admin.DashboardScreen;
 
 /**
  *
@@ -45,6 +46,7 @@ public class CoursesController {
 
     public CoursesController(CoursesScreen userView) {
         this.userView = userView;
+        userView.addDashboardRedirectListener(new DashboardRedirectListener());
         userView.addCreateCourseListener(new CreateCourseListener());
         userView.addRoutineRedirectListener(new RoutineRedirectListener());
         userView.addNoticesRedirectListener(new NoticesRedirectListener());
@@ -96,6 +98,17 @@ public class CoursesController {
             CreateCourseForm createCourseView = new CreateCourseForm();
             CreateCourseController createCourseController = new CreateCourseController(createCourseView);
             createCourseController.open();
+        }
+    }
+
+    class DashboardRedirectListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            DashboardScreen dashboardView = new DashboardScreen();
+            vidyalaya.Controller.Dashboard.DashboardController dashboardController = new vidyalaya.Controller.Dashboard.DashboardController(dashboardView);
+            Utils.closeAllFrames();
+            dashboardController.open();
         }
     }
 

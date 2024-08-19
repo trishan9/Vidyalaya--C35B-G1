@@ -24,6 +24,7 @@ import vidyalaya.View.UserLogin;
 
 import vidyalaya.Controller.Users.UserLoginController;
 import vidyalaya.Controller.Courses.Admin.CoursesController;
+import vidyalaya.View.Dashboard.Admin.DashboardScreen;
 
 /**
  *
@@ -100,9 +101,9 @@ public class AdminLoginController {
     }
 
     public void redirectToAdminDashboard() {
-        CoursesScreen coursesView = new CoursesScreen();
-        CoursesController coursesController = new CoursesController(coursesView);
+        DashboardScreen dashboardView = new DashboardScreen();
+        vidyalaya.Controller.Dashboard.DashboardController dashboardController = new vidyalaya.Controller.Dashboard.DashboardController(dashboardView);
         close();
-        coursesController.open();
+        dashboardController.open();
     }
 }

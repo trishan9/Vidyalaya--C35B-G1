@@ -163,24 +163,22 @@
                       <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="navRoutine1" pref="224" max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="navCourses" pref="224" max="32767" attributes="0"/>
-                              <Group type="102" attributes="0">
-                                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="lblName" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lblId" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lblRole" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                          <Component id="navCourses" pref="224" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="lblName" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblId" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblRole" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="navRoutine" alignment="1" pref="224" max="32767" attributes="0"/>
-                              <Component id="navNotices" alignment="1" pref="224" max="32767" attributes="0"/>
-                              <Component id="navAttendance" alignment="0" pref="224" max="32767" attributes="0"/>
-                              <Component id="navUsers" alignment="0" pref="224" max="32767" attributes="0"/>
-                              <Component id="navSettings" alignment="0" pref="224" max="32767" attributes="0"/>
-                              <Component id="logOut" alignment="0" min="-2" pref="145" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="navRoutine" alignment="1" pref="224" max="32767" attributes="0"/>
+                          <Component id="navNotices" alignment="1" pref="224" max="32767" attributes="0"/>
+                          <Component id="navAttendance" alignment="0" pref="224" max="32767" attributes="0"/>
+                          <Component id="navUsers" alignment="0" pref="224" max="32767" attributes="0"/>
+                          <Component id="navSettings" alignment="0" pref="224" max="32767" attributes="0"/>
+                          <Component id="logOut" alignment="0" min="-2" pref="145" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="19" max="32767" attributes="0"/>
                   </Group>
@@ -667,7 +665,7 @@
                           <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                           <Component id="iconRoutine1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="menuRoutine1" min="-2" max="-2" attributes="0"/>
+                          <Component id="menuDashboard" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -675,12 +673,12 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="iconRoutine1" alignment="0" pref="50" max="32767" attributes="0"/>
-                      <Component id="menuRoutine1" alignment="0" max="32767" attributes="0"/>
+                      <Component id="menuDashboard" alignment="0" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JLabel" name="menuRoutine1">
+                <Component class="javax.swing.JLabel" name="menuDashboard">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Dashboard"/>
                   </Properties>

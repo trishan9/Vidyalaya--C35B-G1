@@ -11,7 +11,9 @@ import java.sql.SQLException;
 import vidyalaya.Database.MySqlConnection;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import vidyalaya.Model.MaterialData;
 import vidyalaya.Model.ModuleData;
@@ -318,6 +320,34 @@ public class ModuleDAOImplementation implements ModuleDAO {
         } catch (SQLException ex) {
             throw ex;
         } finally {
+            mysql.closeConnection(dbConnection);
+        }
+    }
+
+    public Map<String, Integer> getModuleCounts(int adminId) throws Exception {
+        Connection dbConnection = mysql.openConnection();
+
+        final String sql = "SELECT "
+                + "(SELECT COUNT(*) FROM module m LEFT JOIN module_teacher mt ON m.code = mt.module_code WHERE mt.module_code IS NOT NULL AND m.admin_id = ?) AS modules_with_teacher, "
+                + "(SELECT COUNT(*) FROM module m LEFT JOIN module_teacher mt ON m.code = mt.module_code WHERE mt.module_code IS NULL AND m.admin_id = ?) AS modules_without_teacher";
+
+        final PreparedStatement statement = dbConnection.prepareStatement(sql);
+        statement.setInt(1, adminId);
+        statement.setInt(2, adminId);
+
+        try {
+            Map<String, Integer> moduleCounts = new HashMap<>();
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    moduleCounts.put("modules_with_teacher", resultSet.getInt("modules_with_teacher"));
+                    moduleCounts.put("modules_without_teacher", resultSet.getInt("modules_without_teacher"));
+                }
+            }
+            return moduleCounts;
+        } catch (SQLException ex) {
+            throw ex;
+        } finally {
+            statement.close();
             mysql.closeConnection(dbConnection);
         }
     }

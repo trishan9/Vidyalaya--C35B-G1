@@ -31,6 +31,7 @@ import vidyalaya.View.Dashboard.Admin.UsersScreen;
 import vidyalaya.Components.Modals.CreateNoticeForm;
 
 import vidyalaya.Controller.AdminLoginController;
+import vidyalaya.View.Dashboard.Admin.DashboardScreen;
 
 /**
  *
@@ -45,6 +46,7 @@ public class NoticesController {
     public NoticesController(NoticesScreen userView) {
         this.userView = userView;
         userView.addCreateNoticeListener(new CreateNoticeListener());
+        userView.addDashboardRedirectListener(new DashboardRedirectListener());
         userView.addCoursesRedirectListener(new CoursesRedirectListener());
         userView.addRoutineRedirectListener(new RoutineRedirectListener());
         userView.addAttendanceRedirectListener(new AttendanceRedirectListener());
@@ -95,6 +97,17 @@ public class NoticesController {
         } catch (Exception ex) {
             Logger.getLogger(NoticesController.class.getName()).log(Level.SEVERE, null, ex);
             Utils.error(ex.getMessage());
+        }
+    }
+    
+        class DashboardRedirectListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            DashboardScreen dashboardView = new DashboardScreen();
+            vidyalaya.Controller.Dashboard.DashboardController dashboardController = new vidyalaya.Controller.Dashboard.DashboardController(dashboardView);
+            Utils.closeAllFrames();
+            dashboardController.open();
         }
     }
 

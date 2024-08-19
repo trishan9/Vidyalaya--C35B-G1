@@ -2,19 +2,25 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package vidyalaya.Controller.Attendance.Admin;
+package vidyalaya.Controller.Dashboard;
 
+import vidyalaya.Controller.Courses.Admin.*;
+import javax.swing.JOptionPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JComboBox;
-import javax.swing.table.DefaultTableModel;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import vidyalaya.Utils.Utils;
+
+import vidyalaya.Model.ModuleData;
+import vidyalaya.SessionManagement.AdminSession;
+
+import vidyalaya.DAO.ModuleDAO.ModuleDAO;
+import vidyalaya.DAO.ModuleDAO.ModuleDAOImplementation;
 
 import vidyalaya.View.AdminLogin;
 import vidyalaya.View.Dashboard.Admin.AttendanceScreen;
@@ -24,42 +30,29 @@ import vidyalaya.View.Dashboard.Admin.RoutineScreen;
 import vidyalaya.View.Dashboard.Admin.SettingsScreen;
 import vidyalaya.View.Dashboard.Admin.UsersScreen;
 
+import vidyalaya.Components.Modals.CreateCourseForm;
+
 import vidyalaya.Controller.AdminLoginController;
-
-import vidyalaya.DAO.AttendanceDAO.AttendanceDAO;
-import vidyalaya.DAO.AttendanceDAO.AttendanceDAOImplementation;
-import vidyalaya.DAO.ModuleDAO.ModuleDAO;
-import vidyalaya.DAO.ModuleDAO.ModuleDAOImplementation;
-
-import vidyalaya.Model.AttendanceData;
-import vidyalaya.Model.ModuleData;
-
-import vidyalaya.SessionManagement.AdminSession;
 import vidyalaya.View.Dashboard.Admin.DashboardScreen;
 
 /**
  *
- * @author trish
+ * @author trishan9
  */
-public class AttendanceController {
+public class DashboardController {
 
-    private final AttendanceDAO attendanceDAO = new AttendanceDAOImplementation();
     private final ModuleDAO moduleDAO = new ModuleDAOImplementation();
-    private final AttendanceScreen userView;
-    public List<ModuleData> modulesList = new ArrayList<>();
+    private final DashboardScreen userView;
 
-    public AttendanceController(AttendanceScreen userView) {
+    public DashboardController(DashboardScreen userView) {
         this.userView = userView;
-        userView.addFetchAttendanceListener(new FetchAttendanceListener());
-        userView.addDashboardRedirectListener(new DashboardRedirectListener());
         userView.addCoursesRedirectListener(new CoursesRedirectListener());
         userView.addRoutineRedirectListener(new RoutineRedirectListener());
         userView.addNoticesRedirectListener(new NoticesRedirectListener());
+        userView.addAttendanceRedirectListener(new AttendanceRedirectListener());
         userView.addUsersRedirectListener(new UsersRedirectListener());
         userView.addSettingsRedirectListener(new SettingsRedirectListener());
         userView.addLogoutListener(new LogoutListener());
-        getModulesList();
-        populateComboBox(userView.getModule(), modulesList);
     }
 
     public void open() {
@@ -68,67 +61,6 @@ public class AttendanceController {
 
     public void close() {
         this.userView.dispose();
-    }
-
-    class FetchAttendanceListener implements ActionListener {
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            try {
-                DefaultTableModel oldModel = (DefaultTableModel) userView.getUserTable().getModel();
-                oldModel.setRowCount(0);
-                String date = userView.getDateField().getText();
-                String startDate = Utils.convertDateString(date.substring(0, 10));
-                String endDate = Utils.convertDateString(date.substring(14, 24));
-
-                ModuleData moduleData = (ModuleData) userView.getModule().getSelectedItem();
-                int moduleCode = moduleData.getCode();
-
-                List<AttendanceData> attendance = attendanceDAO.getAttendanceOfStudentAndCourseWithDateRange(moduleCode, startDate, endDate);
-
-                DefaultTableModel model = new DefaultTableModel();
-                model.addColumn("Student ID");
-                model.addColumn("Student Name");
-                model.addColumn("Module Code");
-                model.addColumn("Attendance Date");
-                for (AttendanceData data : attendance) {
-                    model.addRow(new Object[]{data.getStudentId(), data.getStudentName(), data.getModuleCode(), data.getAttendanceDate()});
-                }
-
-                userView.getUserTable().setDefaultEditor(Object.class, null);
-                userView.getUserTable().setModel(model);
-            } catch (Exception ex) {
-                Utils.error("Please select appropriate date range and module!");
-            }
-
-        }
-    }
-
-    private void populateComboBox(JComboBox<ModuleData> combo, List<ModuleData> modulesList) {
-        DefaultComboBoxModel<ModuleData> model = new DefaultComboBoxModel<>();
-        for (ModuleData module : modulesList) {
-            model.addElement(module);
-        }
-        combo.setModel(model);
-    }
-
-    public final void getModulesList() {
-        try {
-            modulesList = moduleDAO.getAllModules(AdminSession.getCurrentUser().getId());
-        } catch (Exception ex) {
-            modulesList = new ArrayList<>();
-        }
-    }
-
-    class DashboardRedirectListener implements ActionListener {
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            DashboardScreen dashboardView = new DashboardScreen();
-            vidyalaya.Controller.Dashboard.DashboardController dashboardController = new vidyalaya.Controller.Dashboard.DashboardController(dashboardView);
-            Utils.closeAllFrames();
-            dashboardController.open();
-        }
     }
 
     class CoursesRedirectListener implements ActionListener {
@@ -161,6 +93,17 @@ public class AttendanceController {
             vidyalaya.Controller.Notices.Admin.NoticesController noticesController = new vidyalaya.Controller.Notices.Admin.NoticesController(noticesView);
             Utils.closeAllFrames();
             noticesController.open();
+        }
+    }
+
+    class AttendanceRedirectListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            AttendanceScreen attendanceView = new AttendanceScreen();
+            vidyalaya.Controller.Attendance.Admin.AttendanceController attendanceController = new vidyalaya.Controller.Attendance.Admin.AttendanceController(attendanceView);
+            Utils.closeAllFrames();
+            attendanceController.open();
         }
     }
 
