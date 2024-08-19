@@ -4,12 +4,20 @@
  */
 package vidyalaya;
 
-import vidyalaya.View.CreateAdmin;
+import com.formdev.flatlaf.FlatLaf;
+import com.formdev.flatlaf.themes.FlatMacLightLaf;
+
+import javax.swing.UIManager;
+import org.apache.log4j.BasicConfigurator;
+
+import vidyalaya.View.AdminLogin;
+
+import vidyalaya.Controller.AdminLoginController;
+import vidyalaya.Utils.DMSans;
 
 /**
  *
  * @author trishan9
- * Rehan changes
  */
 public class Vidyalaya {
 
@@ -17,9 +25,24 @@ public class Vidyalaya {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-        CreateAdmin myAdmin = new CreateAdmin();
-        myAdmin.setVisible(true);
+        // Set FlatLaf as the Look and Feel
+        try {
+            FlatLaf.registerCustomDefaultsSource("vidyalaya");
+            FlatMacLightLaf.setup();
+            BasicConfigurator.configure();
+            UIManager.put("defaultFont", new DMSans(16f).getFont());
+        } catch (Exception ex) {
+            System.err.println("Failed to initialize FlatLaf");
+        }
+
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                AdminLogin userView = new AdminLogin();
+                AdminLoginController userController = new AdminLoginController(userView);
+                userController.open();
+            }
+        });
     }
-    
+
 }
