@@ -4,6 +4,7 @@
  */
 package vidyalaya.DAO.AttendanceDAO;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -17,7 +18,7 @@ public interface AttendanceDAO {
 
     public void markAttendance(int studentId, int courseId, Date attendanceDate) throws Exception;
 
-    public List<AttendanceData> viewAttendanceByStudentAndCourse(int studentId, int courseId) throws Exception;
+    public List<AttendanceData> getAttendanceOfStudentAndCourseWithDateRange(int courseId, String startDate, String endDate) throws Exception;
 
     public int getCourseTaughtDays(int courseId) throws Exception;
 
@@ -30,6 +31,4 @@ public interface AttendanceDAO {
     public int getStudentTaughtDaysAcrossAllCourses(int studentId) throws Exception;
 
     public int getStudentAbsentDaysAcrossAllCourses(int studentId) throws Exception;
-
-    public List<AttendanceData> getAttendanceOfStudentAndCourseWithDateRange(int studentId, int courseId, Date startDate, Date endDate) throws Exception;
 }
