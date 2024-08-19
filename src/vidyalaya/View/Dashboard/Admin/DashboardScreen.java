@@ -4,112 +4,117 @@
  */
 package vidyalaya.View.Dashboard.Admin;
 
-import java.awt.GridLayout;
+import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import raven.toast.Notifications;
+import vidyalaya.Components.Charts.PieChart;
+import vidyalaya.DAO.AuthDAO.AuthDAOImplementation;
+import vidyalaya.DAO.ModuleDAO.ModuleDAOImplementation;
 
 import vidyalaya.Utils.Utils;
 
 import vidyalaya.Model.AdminData;
-import vidyalaya.Model.RoutineData;
+import vidyalaya.Model.ModelChart;
+import vidyalaya.Model.ModelPieChart;
+import vidyalaya.Model.StudentData;
+import vidyalaya.Model.TeacherData;
 import vidyalaya.SessionManagement.AdminSession;
-
-import vidyalaya.Components.Modals.EditRoutineForm;
-import vidyalaya.Components.RoutineCard;
-
-import vidyalaya.Controller.Routine.Admin.RoutineController;
 
 /**
  *
- * @author trish
+ * @author trishan9
  */
-public class RoutineScreen extends javax.swing.JFrame {
-
-    RoutineController routineController;
+public class DashboardScreen extends javax.swing.JFrame {
 
     /**
-     * Creates new form RoutineScreen
+     * Creates new form DashboardScreen
      */
-    public RoutineScreen() {
-        initComponents();
-        routineController = new RoutineController(this);
-        initializeGrid();
+    public DashboardScreen() {
+        try {
+            initComponents();
 
-        setTitle("Routine - Vidyalaya Admin");
-        setSize(1400, 954);
-        setLocationRelativeTo(null);
-        setResizable(false);
+            AuthDAOImplementation authDAO = new AuthDAOImplementation();
+            ModuleDAOImplementation moduleDAO = new ModuleDAOImplementation();
+            List<StudentData> studentsList;
+            List<TeacherData> teachersList;
+            Map<String, Integer> moduleCounts = moduleDAO.getModuleCounts(AdminSession.getCurrentUser().getId());
 
-        // Load the icon image
-        Utils.setFrameIcon(this, "/vidyalaya/Assets/logo.png");
+            studentsList = authDAO.getAllStudents();
+            teachersList = authDAO.getAllTeachers();
 
-        // Custom Font Setting 
-        Utils.setCustomFont(jLabelHead, 25f);
-        Utils.setCustomFont(lblName, 14f);
-        Utils.setCustomFont(lblId, 14f);
-        Utils.setCustomFont(lblRole, 14f);
-        Utils.setCustomFont(menuCourses, 17f);
-        Utils.setCustomFont(menuRoutine, 17f);
-        Utils.setCustomFont(menuNotices, 17f);
-        Utils.setCustomFont(menuAttendance, 17f);
-        Utils.setCustomFont(menuUsers, 17f);
-        Utils.setCustomFont(menuSettings, 17f);
-        Utils.setCustomFont(menuLogout, 17f);
-        Utils.setCustomFont(jLabel3, 23f);
-        Utils.setCustomFont(createRoutineBtn, 17f);
+            pieChart1.setChartType(PieChart.PeiChartType.DONUT_CHART);
+            pieChart1.addData(new ModelPieChart("Teacher", teachersList.size(), new Color(23, 126, 238)));
+            pieChart1.addData(new ModelPieChart("Student", studentsList.size(), new Color(221, 65, 65)));
 
-        AdminData currentUser = AdminSession.getCurrentUser();
-        lblName.setText(currentUser.getName());
-        lblId.setText(currentUser.getUsername());
-    }
+            pieChart3.setChartType(PieChart.PeiChartType.DEFAULT);
+            pieChart3.addData(new ModelPieChart("With Teachers", moduleCounts.get("modules_with_teacher"), new Color(47, 157, 64)));
+            pieChart3.addData(new ModelPieChart("Without Teachers", moduleCounts.get("modules_without_teacher"), new Color(196, 151, 58)));
 
-    private void initializeGrid() {
-        routineController.routinesList.forEach((x) -> addGrid(x));
-        var grid = new GridLayout(0, 1);
-        grid.setHgap(10);
-        grid.setVgap(10);
-        pnlRoutines.setLayout(grid);
-    }
+            chart.setTitle("Chart Data");
+            chart.addLegend("Amount", Color.decode("#7b4397"), Color.decode("#dc2430"));
+            chart.addLegend("Cost", Color.decode("#e65c00"), Color.decode("#F9D423"));
+            chart.addLegend("Profit", Color.decode("#0099F7"), Color.decode("#F11712"));
+            chart.clear();
+            chart.addData(new ModelChart("January", new double[]{500, 50, 100}));
+            chart.addData(new ModelChart("February", new double[]{600, 300, 150}));
+            chart.addData(new ModelChart("March", new double[]{200, 50, 900}));
+            chart.addData(new ModelChart("April", new double[]{480, 700, 100}));
+            chart.addData(new ModelChart("May", new double[]{350, 540, 500}));
+            chart.addData(new ModelChart("June", new double[]{450, 800, 100}));
+            chart.start();
 
-    private void addGrid(RoutineData data) {
-        var temp = new RoutineCard(data,
-                () -> {
-                    new EditRoutineForm(data.getId()).setVisible(true);
-                    System.out.println("Editing: " + data.getId());
-                },
-                () -> {
-                    routineController.deleteRoutineById(data.getId());
-                });
-        pnlRoutines.add(temp);
-    }
+            Notifications.getInstance().setJFrame(this);
 
-    public void addCreateRoutineListener(ActionListener listener) {
-        Utils.removeAllMouseListeners(createRoutineBtn);
+            setTitle("Dashboard - Vidyalaya Admin");
+            setSize(1400, 954);
+            setLocationRelativeTo(null);
+            setResizable(false);
 
-        createRoutineBtn.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                listener.actionPerformed(null);
-            }
-        });
-    }
+            Utils.setFrameIcon(this, "/vidyalaya/Assets/logo.png");
 
-    public void addDashboardRedirectListener(ActionListener listener) {
-        Utils.removeAllMouseListeners(menuDashboard);
+            Utils.setCustomFont(jLabelHead, 25f);
+            Utils.setCustomFont(lblName, 14f);
+            Utils.setCustomFont(lblId, 14f);
+            Utils.setCustomFont(lblRole, 14f);
+            Utils.setCustomFont(menuCourses, 17f);
+            Utils.setCustomFont(menuRoutine, 17f);
+            Utils.setCustomFont(menuNotices, 17f);
+            Utils.setCustomFont(menuAttendance, 17f);
+            Utils.setCustomFont(menuUsers, 17f);
+            Utils.setCustomFont(menuSettings, 17f);
+            Utils.setCustomFont(menuLogout, 17f);
+            Utils.setCustomFont(jLabel3, 23f);
 
-        menuDashboard.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                listener.actionPerformed(null);
-            }
-        });
+            AdminData currentUser = AdminSession.getCurrentUser();
+            lblName.setText(currentUser.getName());
+            lblId.setText(currentUser.getUsername());
+        } catch (Exception ex) {
+            Logger.getLogger(DashboardScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void addCoursesRedirectListener(ActionListener listener) {
         Utils.removeAllMouseListeners(menuCourses);
 
         menuCourses.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                listener.actionPerformed(null);
+            }
+        });
+    }
+
+    public void addRoutineRedirectListener(ActionListener listener) {
+        Utils.removeAllMouseListeners(menuRoutine);
+
+        menuRoutine.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 listener.actionPerformed(null);
@@ -211,15 +216,19 @@ public class RoutineScreen extends javax.swing.JFrame {
         logOut = new javax.swing.JPanel();
         menuLogout = new javax.swing.JLabel();
         iconLogout = new javax.swing.JLabel();
-        navCourses1 = new javax.swing.JPanel();
-        menuDashboard = new javax.swing.JLabel();
-        iconCourses1 = new javax.swing.JLabel();
+        navRoutine1 = new javax.swing.JPanel();
+        menuRoutine1 = new javax.swing.JLabel();
+        iconRoutine1 = new javax.swing.JLabel();
         pnlRight = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        createRoutine = new javax.swing.JPanel();
-        createRoutineBtn = new javax.swing.JLabel();
-        iconUsers1 = new javax.swing.JLabel();
-        pnlRoutines = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        chart = new vidyalaya.Components.Charts.LineChart.CurveLineChart();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        pieChart1 = new vidyalaya.Components.Charts.PieChart();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        pieChart3 = new vidyalaya.Components.Charts.PieChart();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -227,7 +236,7 @@ public class RoutineScreen extends javax.swing.JFrame {
         pnlNav.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(222, 222, 222), 2));
         pnlNav.setPreferredSize(new java.awt.Dimension(835, 80));
 
-        jLabelHead.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
+        jLabelHead.setFont(new java.awt.Font("sansserif", 1, 25)); // NOI18N
         jLabelHead.setForeground(new java.awt.Color(0, 162, 100));
         jLabelHead.setText("Vidyalaya Admin");
 
@@ -242,14 +251,14 @@ public class RoutineScreen extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabelHead)
-                .addContainerGap(1134, Short.MAX_VALUE))
+                .addContainerGap(1130, Short.MAX_VALUE))
         );
         pnlNavLayout.setVerticalGroup(
             pnlNavLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlNavLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(jLabelHead)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlNavLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -264,10 +273,13 @@ public class RoutineScreen extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vidyalaya/Assets/User.png"))); // NOI18N
 
+        lblName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblName.setText("Trishan Wagle");
 
+        lblId.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblId.setText("sy-10000");
 
+        lblRole.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblRole.setForeground(new java.awt.Color(130, 130, 130));
         lblRole.setText("Admin");
 
@@ -297,7 +309,7 @@ public class RoutineScreen extends javax.swing.JFrame {
             .addComponent(menuCourses, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        navRoutine.setBackground(new java.awt.Color(77, 215, 131));
+        navRoutine.setBackground(new java.awt.Color(255, 255, 255));
         navRoutine.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
         navRoutine.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         navRoutine.setPreferredSize(new java.awt.Dimension(100, 52));
@@ -454,30 +466,30 @@ public class RoutineScreen extends javax.swing.JFrame {
             .addComponent(menuLogout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        navCourses1.setBackground(new java.awt.Color(255, 255, 255));
-        navCourses1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
-        navCourses1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        navCourses1.setPreferredSize(new java.awt.Dimension(100, 52));
+        navRoutine1.setBackground(new java.awt.Color(77, 215, 131));
+        navRoutine1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
+        navRoutine1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        navRoutine1.setPreferredSize(new java.awt.Dimension(100, 52));
 
-        menuDashboard.setText("Dashboard");
+        menuRoutine1.setText("Dashboard");
 
-        iconCourses1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vidyalaya/Assets/icons/Dashboard.png"))); // NOI18N
+        iconRoutine1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vidyalaya/Assets/icons/Dashboard.png"))); // NOI18N
 
-        javax.swing.GroupLayout navCourses1Layout = new javax.swing.GroupLayout(navCourses1);
-        navCourses1.setLayout(navCourses1Layout);
-        navCourses1Layout.setHorizontalGroup(
-            navCourses1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(navCourses1Layout.createSequentialGroup()
+        javax.swing.GroupLayout navRoutine1Layout = new javax.swing.GroupLayout(navRoutine1);
+        navRoutine1.setLayout(navRoutine1Layout);
+        navRoutine1Layout.setHorizontalGroup(
+            navRoutine1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(navRoutine1Layout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addComponent(iconCourses1)
+                .addComponent(iconRoutine1)
                 .addGap(18, 18, 18)
-                .addComponent(menuDashboard)
+                .addComponent(menuRoutine1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        navCourses1Layout.setVerticalGroup(
-            navCourses1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(iconCourses1, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-            .addComponent(menuDashboard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        navRoutine1Layout.setVerticalGroup(
+            navRoutine1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(iconRoutine1, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+            .addComponent(menuRoutine1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout pnlSideNavLayout = new javax.swing.GroupLayout(pnlSideNav);
@@ -487,8 +499,8 @@ public class RoutineScreen extends javax.swing.JFrame {
             .addGroup(pnlSideNavLayout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addGroup(pnlSideNavLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(navCourses1, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
-                    .addComponent(navCourses, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
+                    .addComponent(navRoutine1, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
+                    .addComponent(navCourses, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
                     .addGroup(pnlSideNavLayout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(50, 50, 50)
@@ -496,11 +508,11 @@ public class RoutineScreen extends javax.swing.JFrame {
                             .addComponent(lblName)
                             .addComponent(lblId)
                             .addComponent(lblRole)))
-                    .addComponent(navRoutine, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
-                    .addComponent(navNotices, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
-                    .addComponent(navAttendance, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
-                    .addComponent(navUsers, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
-                    .addComponent(navSettings, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
+                    .addComponent(navRoutine, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
+                    .addComponent(navNotices, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
+                    .addComponent(navAttendance, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
+                    .addComponent(navUsers, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
+                    .addComponent(navSettings, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
                     .addComponent(logOut, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
@@ -519,7 +531,7 @@ public class RoutineScreen extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblRole)))
                 .addGap(55, 55, 55)
-                .addComponent(navCourses1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(navRoutine1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(navCourses, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
@@ -534,41 +546,29 @@ public class RoutineScreen extends javax.swing.JFrame {
                 .addComponent(navSettings, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(60, 60, 60)
                 .addComponent(logOut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addContainerGap(3110, Short.MAX_VALUE))
         );
 
         pnlRight.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel3.setText("Routine");
+        jLabel3.setFont(jLabel3.getFont().deriveFont((float)25));
+        jLabel3.setText("Dashboard");
 
-        createRoutine.setBackground(new java.awt.Color(24, 97, 191));
-        createRoutine.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
-        createRoutine.setForeground(new java.awt.Color(255, 255, 255));
-        createRoutine.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        createRoutine.setPreferredSize(new java.awt.Dimension(100, 52));
-
-        createRoutineBtn.setForeground(new java.awt.Color(255, 255, 255));
-        createRoutineBtn.setText("Create Routine");
-
-        iconUsers1.setBackground(new java.awt.Color(24, 97, 191));
-        iconUsers1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vidyalaya/Assets/icons/Create.png"))); // NOI18N
-
-        javax.swing.GroupLayout createRoutineLayout = new javax.swing.GroupLayout(createRoutine);
-        createRoutine.setLayout(createRoutineLayout);
-        createRoutineLayout.setHorizontalGroup(
-            createRoutineLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(createRoutineLayout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(iconUsers1)
-                .addGap(18, 18, 18)
-                .addComponent(createRoutineBtn)
-                .addContainerGap(63, Short.MAX_VALUE))
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(chart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
-        createRoutineLayout.setVerticalGroup(
-            createRoutineLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(iconUsers1, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-            .addComponent(createRoutineBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(chart, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout pnlRightLayout = new javax.swing.GroupLayout(pnlRight);
@@ -577,33 +577,67 @@ public class RoutineScreen extends javax.swing.JFrame {
             pnlRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlRightLayout.createSequentialGroup()
                 .addGap(0, 0, 0)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 788, Short.MAX_VALUE)
-                .addComponent(createRoutine, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(pnlRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnlRightLayout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addContainerGap(943, Short.MAX_VALUE))))
         );
         pnlRightLayout.setVerticalGroup(
             pnlRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlRightLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3)
-                .addContainerGap(26, Short.MAX_VALUE))
-            .addGroup(pnlRightLayout.createSequentialGroup()
-                .addComponent(createRoutine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        pnlRoutines.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Distribution of Teachers and Students");
 
-        javax.swing.GroupLayout pnlRoutinesLayout = new javax.swing.GroupLayout(pnlRoutines);
-        pnlRoutines.setLayout(pnlRoutinesLayout);
-        pnlRoutinesLayout.setHorizontalGroup(
-            pnlRoutinesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1074, Short.MAX_VALUE)
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pieChart1, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
-        pnlRoutinesLayout.setVerticalGroup(
-            pnlRoutinesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 501, Short.MAX_VALUE)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(pieChart1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
+        );
+
+        jLabel6.setText("Courses - With Teachers v/s Without Teachers");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(pieChart3, javax.swing.GroupLayout.PREFERRED_SIZE, 475, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 23, Short.MAX_VALUE))))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(pieChart3, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout pnlCenterLayout = new javax.swing.GroupLayout(pnlCenter);
@@ -614,9 +648,14 @@ public class RoutineScreen extends javax.swing.JFrame {
                 .addComponent(pnlSideNav, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlRight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pnlRoutines, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 50, Short.MAX_VALUE))
+                    .addGroup(pnlCenterLayout.createSequentialGroup()
+                        .addComponent(pnlRight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(pnlCenterLayout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         pnlCenterLayout.setVerticalGroup(
             pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -624,8 +663,10 @@ public class RoutineScreen extends javax.swing.JFrame {
             .addGroup(pnlCenterLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pnlRight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlRoutines, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addGroup(pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -641,7 +682,8 @@ public class RoutineScreen extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(pnlNav, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(pnlCenter, javax.swing.GroupLayout.DEFAULT_SIZE, 874, Short.MAX_VALUE))
+                .addComponent(pnlCenter, javax.swing.GroupLayout.DEFAULT_SIZE, 3920, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
 
         pack();
@@ -664,63 +706,74 @@ public class RoutineScreen extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RoutineScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DashboardScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RoutineScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DashboardScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RoutineScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DashboardScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RoutineScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DashboardScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RoutineScreen().setVisible(true);
+                new DashboardScreen().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel createRoutine;
-    private javax.swing.JLabel createRoutineBtn;
+    private vidyalaya.Components.Charts.LineChart.CurveLineChart chart;
     private javax.swing.JLabel iconAttendance;
     private javax.swing.JLabel iconCourses;
-    private javax.swing.JLabel iconCourses1;
     private javax.swing.JLabel iconLogout;
     private javax.swing.JLabel iconNotices;
     private javax.swing.JLabel iconRoutine;
+    private javax.swing.JLabel iconRoutine1;
     private javax.swing.JLabel iconSettings;
     private javax.swing.JLabel iconUsers;
-    private javax.swing.JLabel iconUsers1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabelHead;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel lblId;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblRole;
     private javax.swing.JPanel logOut;
     private javax.swing.JLabel menuAttendance;
     private javax.swing.JLabel menuCourses;
-    private javax.swing.JLabel menuDashboard;
     private javax.swing.JLabel menuLogout;
     private javax.swing.JLabel menuNotices;
     private javax.swing.JLabel menuRoutine;
+    private javax.swing.JLabel menuRoutine1;
     private javax.swing.JLabel menuSettings;
     private javax.swing.JLabel menuUsers;
     private javax.swing.JPanel navAttendance;
     private javax.swing.JPanel navCourses;
-    private javax.swing.JPanel navCourses1;
     private javax.swing.JPanel navNotices;
     private javax.swing.JPanel navRoutine;
+    private javax.swing.JPanel navRoutine1;
     private javax.swing.JPanel navSettings;
     private javax.swing.JPanel navUsers;
+    private vidyalaya.Components.Charts.PieChart pieChart1;
+    private vidyalaya.Components.Charts.PieChart pieChart3;
     private javax.swing.JPanel pnlCenter;
     private javax.swing.JPanel pnlNav;
     private javax.swing.JPanel pnlRight;
-    private javax.swing.JPanel pnlRoutines;
     private javax.swing.JPanel pnlSideNav;
     // End of variables declaration//GEN-END:variables
 }

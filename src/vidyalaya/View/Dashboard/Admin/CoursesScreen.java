@@ -36,7 +36,7 @@ public class CoursesScreen extends javax.swing.JFrame {
         initComponents();
         coursesController = new CoursesController(this);
         initializeGrid();
-        
+
         Notifications.getInstance().setJFrame(this);
 
         setTitle("Courses - Vidyalaya Admin");
@@ -88,6 +88,17 @@ public class CoursesScreen extends javax.swing.JFrame {
         Utils.removeAllMouseListeners(createCourseBtn);
 
         createCourseBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                listener.actionPerformed(null);
+            }
+        });
+    }
+
+    public void addDashboardRedirectListener(ActionListener listener) {
+        Utils.removeAllMouseListeners(menuDashboard);
+
+        menuDashboard.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 listener.actionPerformed(null);
@@ -201,7 +212,7 @@ public class CoursesScreen extends javax.swing.JFrame {
         menuLogout = new javax.swing.JLabel();
         iconLogout = new javax.swing.JLabel();
         navRoutine1 = new javax.swing.JPanel();
-        menuRoutine1 = new javax.swing.JLabel();
+        menuDashboard = new javax.swing.JLabel();
         iconRoutine1 = new javax.swing.JLabel();
         pnlRight = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -451,7 +462,7 @@ public class CoursesScreen extends javax.swing.JFrame {
         navRoutine1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         navRoutine1.setPreferredSize(new java.awt.Dimension(100, 52));
 
-        menuRoutine1.setText("Dashboard");
+        menuDashboard.setText("Dashboard");
 
         iconRoutine1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vidyalaya/Assets/icons/Dashboard.png"))); // NOI18N
 
@@ -463,13 +474,13 @@ public class CoursesScreen extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addComponent(iconRoutine1)
                 .addGap(18, 18, 18)
-                .addComponent(menuRoutine1)
+                .addComponent(menuDashboard)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         navRoutine1Layout.setVerticalGroup(
             navRoutine1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(iconRoutine1, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-            .addComponent(menuRoutine1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(menuDashboard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout pnlSideNavLayout = new javax.swing.GroupLayout(pnlSideNav);
@@ -480,21 +491,20 @@ public class CoursesScreen extends javax.swing.JFrame {
                 .addGap(17, 17, 17)
                 .addGroup(pnlSideNavLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(navRoutine1, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
-                    .addGroup(pnlSideNavLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(navCourses, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
-                        .addGroup(pnlSideNavLayout.createSequentialGroup()
-                            .addComponent(jLabel1)
-                            .addGap(50, 50, 50)
-                            .addGroup(pnlSideNavLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(lblName)
-                                .addComponent(lblId)
-                                .addComponent(lblRole)))
-                        .addComponent(navRoutine, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
-                        .addComponent(navNotices, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
-                        .addComponent(navAttendance, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
-                        .addComponent(navUsers, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
-                        .addComponent(navSettings, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
-                        .addComponent(logOut, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(navCourses, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
+                    .addGroup(pnlSideNavLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(50, 50, 50)
+                        .addGroup(pnlSideNavLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblName)
+                            .addComponent(lblId)
+                            .addComponent(lblRole)))
+                    .addComponent(navRoutine, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
+                    .addComponent(navNotices, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
+                    .addComponent(navAttendance, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
+                    .addComponent(navUsers, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
+                    .addComponent(navSettings, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
+                    .addComponent(logOut, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
         pnlSideNavLayout.setVerticalGroup(
@@ -701,10 +711,10 @@ public class CoursesScreen extends javax.swing.JFrame {
     private javax.swing.JPanel logOut;
     private javax.swing.JLabel menuAttendance;
     private javax.swing.JLabel menuCourses;
+    private javax.swing.JLabel menuDashboard;
     private javax.swing.JLabel menuLogout;
     private javax.swing.JLabel menuNotices;
     private javax.swing.JLabel menuRoutine;
-    private javax.swing.JLabel menuRoutine1;
     private javax.swing.JLabel menuSettings;
     private javax.swing.JLabel menuUsers;
     private javax.swing.JPanel navAttendance;
