@@ -6,11 +6,17 @@ package vidyalaya.Controller.Attendance.Admin;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
+import javax.swing.table.DefaultTableModel;
 
 import vidyalaya.Utils.Utils;
-
-import vidyalaya.DAO.AuthDAO.AuthDAO;
-import vidyalaya.DAO.AuthDAO.AuthDAOImplementation;
 
 import vidyalaya.View.AdminLogin;
 import vidyalaya.View.Dashboard.Admin.AttendanceScreen;
@@ -22,23 +28,38 @@ import vidyalaya.View.Dashboard.Admin.UsersScreen;
 
 import vidyalaya.Controller.AdminLoginController;
 
+import vidyalaya.DAO.AttendanceDAO.AttendanceDAO;
+import vidyalaya.DAO.AttendanceDAO.AttendanceDAOImplementation;
+import vidyalaya.DAO.ModuleDAO.ModuleDAO;
+import vidyalaya.DAO.ModuleDAO.ModuleDAOImplementation;
+
+import vidyalaya.Model.AttendanceData;
+import vidyalaya.Model.ModuleData;
+
+import vidyalaya.SessionManagement.AdminSession;
+
 /**
  *
  * @author trish
  */
 public class AttendanceController {
 
-    private final AuthDAO authDAO = new AuthDAOImplementation();
+    private final AttendanceDAO attendanceDAO = new AttendanceDAOImplementation();
+    private final ModuleDAO moduleDAO = new ModuleDAOImplementation();
     private final AttendanceScreen userView;
+    public List<ModuleData> modulesList = new ArrayList<>();
 
     public AttendanceController(AttendanceScreen userView) {
         this.userView = userView;
+        userView.addFetchAttendanceListener(new FetchAttendanceListener());
         userView.addCoursesRedirectListener(new CoursesRedirectListener());
         userView.addRoutineRedirectListener(new RoutineRedirectListener());
         userView.addNoticesRedirectListener(new NoticesRedirectListener());
         userView.addUsersRedirectListener(new UsersRedirectListener());
         userView.addSettingsRedirectListener(new SettingsRedirectListener());
         userView.addLogoutListener(new LogoutListener());
+        getModulesList();
+        populateComboBox(userView.getModule(), modulesList);
     }
 
     public void open() {
@@ -47,6 +68,56 @@ public class AttendanceController {
 
     public void close() {
         this.userView.dispose();
+    }
+
+    class FetchAttendanceListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                DefaultTableModel oldModel = (DefaultTableModel) userView.getUserTable().getModel();
+                oldModel.setRowCount(0);
+                String date = userView.getDateField().getText();
+                String startDate = Utils.convertDateString(date.substring(0, 10));
+                String endDate = Utils.convertDateString(date.substring(14, 24));
+
+                ModuleData moduleData = (ModuleData) userView.getModule().getSelectedItem();
+                int moduleCode = moduleData.getCode();
+
+                List<AttendanceData> attendance = attendanceDAO.getAttendanceOfStudentAndCourseWithDateRange(moduleCode, startDate, endDate);
+
+                DefaultTableModel model = new DefaultTableModel();
+                model.addColumn("Student ID");
+                model.addColumn("Student Name");
+                model.addColumn("Module Code");
+                model.addColumn("Attendance Date");
+                for (AttendanceData data : attendance) {
+                    model.addRow(new Object[]{data.getStudentId(), data.getStudentName(), data.getModuleCode(), data.getAttendanceDate()});
+                }
+
+                userView.getUserTable().setDefaultEditor(Object.class, null);
+                userView.getUserTable().setModel(model);
+            } catch (Exception ex) {
+                Utils.error("Please select appropriate date range and module!");
+            }
+
+        }
+    }
+
+    private void populateComboBox(JComboBox<ModuleData> combo, List<ModuleData> modulesList) {
+        DefaultComboBoxModel<ModuleData> model = new DefaultComboBoxModel<>();
+        for (ModuleData module : modulesList) {
+            model.addElement(module);
+        }
+        combo.setModel(model);
+    }
+
+    public final void getModulesList() {
+        try {
+            modulesList = moduleDAO.getAllModules(AdminSession.getCurrentUser().getId());
+        } catch (Exception ex) {
+            modulesList = new ArrayList<>();
+        }
     }
 
     class CoursesRedirectListener implements ActionListener {

@@ -7,6 +7,9 @@ package vidyalaya.View.Dashboard.Admin;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.time.LocalDate;
+import raven.datetime.component.date.DatePicker;
+import raven.datetime.component.date.DateSelectionAble;
 
 import vidyalaya.Utils.Utils;
 
@@ -25,6 +28,10 @@ public class AttendanceScreen extends javax.swing.JFrame {
      */
     public AttendanceScreen() {
         initComponents();
+        datePicker1.setEditor(txtDateEditor);
+        datePicker1.setDateSelectionMode(DatePicker.DateSelectionMode.BETWEEN_DATE_SELECTED);
+        datePicker1.setUsePanelOption(true);
+        datePicker1.setDateSelectionAble((LocalDate localDate) -> !localDate.isAfter(LocalDate.now()));
 
         setTitle("Attendance - Vidyalaya Admin");
         setSize(1400, 954);
@@ -47,10 +54,43 @@ public class AttendanceScreen extends javax.swing.JFrame {
         Utils.setCustomFont(menuSettings, 17f);
         Utils.setCustomFont(menuLogout, 17f);
         Utils.setCustomFont(jLabel3, 23f);
+        Utils.setCustomFont(fetchAttendanceBtn, 14f);
 
         AdminData currentUser = AdminSession.getCurrentUser();
         lblName.setText(currentUser.getName());
         lblId.setText(currentUser.getUsername());
+    }
+
+    public void addFetchAttendanceListener(ActionListener listener) {
+        Utils.removeAllMouseListeners(fetchAttendanceBtn);
+
+        fetchAttendanceBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                listener.actionPerformed(null);
+            }
+        });
+    }
+
+    /**
+     * @return the userTable
+     */
+    public javax.swing.JTable getUserTable() {
+        return userTable;
+    }
+
+    /**
+     * @return the txtDateEditor
+     */
+    public javax.swing.JFormattedTextField getDateField() {
+        return txtDateEditor;
+    }
+
+    /**
+     * @return the module
+     */
+    public javax.swing.JComboBox getModule() {
+        return module;
     }
 
     public void addCoursesRedirectListener(ActionListener listener) {
@@ -128,6 +168,7 @@ public class AttendanceScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        datePicker1 = new raven.datetime.component.date.DatePicker();
         pnlNav = new javax.swing.JPanel();
         jLabelHead = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -160,6 +201,14 @@ public class AttendanceScreen extends javax.swing.JFrame {
         iconLogout = new javax.swing.JLabel();
         pnlRight = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        userTable = new javax.swing.JTable();
+        txtDateEditor = new javax.swing.JFormattedTextField();
+        module = new javax.swing.JComboBox<>();
+        label4 = new javax.swing.JLabel();
+        label5 = new javax.swing.JLabel();
+        createCourse = new javax.swing.JPanel();
+        fetchAttendanceBtn = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -470,6 +519,53 @@ public class AttendanceScreen extends javax.swing.JFrame {
                 .addContainerGap(7, Short.MAX_VALUE))
         );
 
+        userTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(userTable);
+
+        module.setFocusable(false);
+        module.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                moduleActionPerformed(evt);
+            }
+        });
+
+        label4.setText("Module");
+
+        label5.setText("Date Range");
+
+        createCourse.setBackground(new java.awt.Color(24, 97, 191));
+        createCourse.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
+        createCourse.setForeground(new java.awt.Color(255, 255, 255));
+        createCourse.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        createCourse.setPreferredSize(new java.awt.Dimension(100, 52));
+
+        fetchAttendanceBtn.setForeground(new java.awt.Color(255, 255, 255));
+        fetchAttendanceBtn.setText("Fetch Attendance");
+
+        javax.swing.GroupLayout createCourseLayout = new javax.swing.GroupLayout(createCourse);
+        createCourse.setLayout(createCourseLayout);
+        createCourseLayout.setHorizontalGroup(
+            createCourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, createCourseLayout.createSequentialGroup()
+                .addContainerGap(53, Short.MAX_VALUE)
+                .addComponent(fetchAttendanceBtn)
+                .addGap(30, 30, 30))
+        );
+        createCourseLayout.setVerticalGroup(
+            createCourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(createCourseLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(fetchAttendanceBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout pnlCenterLayout = new javax.swing.GroupLayout(pnlCenter);
         pnlCenter.setLayout(pnlCenterLayout);
         pnlCenterLayout.setHorizontalGroup(
@@ -477,16 +573,41 @@ public class AttendanceScreen extends javax.swing.JFrame {
             .addGroup(pnlCenterLayout.createSequentialGroup()
                 .addComponent(pnlSideNav, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(pnlRight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 699, Short.MAX_VALUE))
+                .addGroup(pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnlRight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1041, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnlCenterLayout.createSequentialGroup()
+                        .addGroup(pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(module, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(label4))
+                        .addGap(21, 21, 21)
+                        .addGroup(pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(label5)
+                            .addGroup(pnlCenterLayout.createSequentialGroup()
+                                .addComponent(txtDateEditor, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(createCourse, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(0, 91, Short.MAX_VALUE))
         );
         pnlCenterLayout.setVerticalGroup(
             pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlSideNav, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlSideNav, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(pnlCenterLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pnlRight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(label4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(label5, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtDateEditor, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(module, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(createCourse, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -506,6 +627,10 @@ public class AttendanceScreen extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void moduleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moduleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_moduleActionPerformed
 
     /**
      * @param args the command line arguments
@@ -543,6 +668,9 @@ public class AttendanceScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel createCourse;
+    private raven.datetime.component.date.DatePicker datePicker1;
+    private javax.swing.JLabel fetchAttendanceBtn;
     private javax.swing.JLabel iconAttendance;
     private javax.swing.JLabel iconCourses;
     private javax.swing.JLabel iconLogout;
@@ -554,6 +682,9 @@ public class AttendanceScreen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabelHead;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel label4;
+    private javax.swing.JLabel label5;
     private javax.swing.JLabel lblId;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblRole;
@@ -565,6 +696,7 @@ public class AttendanceScreen extends javax.swing.JFrame {
     private javax.swing.JLabel menuRoutine;
     private javax.swing.JLabel menuSettings;
     private javax.swing.JLabel menuUsers;
+    private javax.swing.JComboBox<String> module;
     private javax.swing.JPanel navAttendance;
     private javax.swing.JPanel navCourses;
     private javax.swing.JPanel navNotices;
@@ -575,5 +707,7 @@ public class AttendanceScreen extends javax.swing.JFrame {
     private javax.swing.JPanel pnlNav;
     private javax.swing.JPanel pnlRight;
     private javax.swing.JPanel pnlSideNav;
+    private javax.swing.JFormattedTextField txtDateEditor;
+    private javax.swing.JTable userTable;
     // End of variables declaration//GEN-END:variables
 }

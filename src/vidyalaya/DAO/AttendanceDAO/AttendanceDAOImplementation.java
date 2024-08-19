@@ -7,6 +7,7 @@ package vidyalaya.DAO.AttendanceDAO;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
+import java.time.LocalDate;
 import vidyalaya.Database.MySqlConnection;
 
 import java.util.ArrayList;
@@ -59,14 +60,18 @@ public class AttendanceDAOImplementation implements AttendanceDAO {
     }
 
     @Override
-    public List<AttendanceData> viewAttendanceByStudentAndCourse(int studentId, int courseId) throws Exception {
+    public List<AttendanceData> getAttendanceOfStudentAndCourseWithDateRange(int courseId, String startDate, String endDate) throws Exception {
         Connection dbConnection = mysql.openConnection();
 
         final PreparedStatement statement = dbConnection.prepareStatement(
-                "SELECT * FROM attendance WHERE student_id = ? AND module_code = ?"
+                "SELECT a.*, s.id as student_id, s.name as student_name "
+                + "FROM attendance a "
+                + "JOIN student s ON a.student_id = s.id "
+                + "WHERE a.module_code = ? AND a.attendance_date BETWEEN ? AND ?"
         );
-        statement.setInt(1, studentId);
-        statement.setInt(2, courseId);
+        statement.setInt(1, courseId);
+        statement.setString(2, startDate);
+        statement.setString(3, endDate);
 
         List<AttendanceData> attendanceList = new ArrayList<>();
         ResultSet result = statement.executeQuery();
@@ -210,28 +215,5 @@ public class AttendanceDAOImplementation implements AttendanceDAO {
         statement.close();
         dbConnection.close();
         return totalTaughtDays - attendedDays;
-    }
-
-    @Override
-    public List<AttendanceData> getAttendanceOfStudentAndCourseWithDateRange(int studentId, int courseId, Date startDate, Date endDate) throws Exception {
-        Connection dbConnection = mysql.openConnection();
-
-        final PreparedStatement statement = dbConnection.prepareStatement(
-                "SELECT * FROM attendance WHERE student_id = ? AND module_code = ? AND attendance_date BETWEEN ? AND ?"
-        );
-        statement.setInt(1, studentId);
-        statement.setInt(2, courseId);
-        statement.setDate(3, new java.sql.Date(startDate.getTime()));
-        statement.setDate(4, new java.sql.Date(endDate.getTime()));
-
-        List<AttendanceData> attendanceList = new ArrayList<>();
-        ResultSet result = statement.executeQuery();
-        while (result.next()) {
-            attendanceList.add(new AttendanceData(result));
-        }
-
-        statement.close();
-        dbConnection.close();
-        return attendanceList;
     }
 }

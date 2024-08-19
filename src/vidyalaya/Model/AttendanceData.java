@@ -18,13 +18,12 @@ public class AttendanceData {
     private int student_id;
     private int module_code;
     private Date attendance_date;
-    private boolean is_present;
+    private String student_name;
 
-    public AttendanceData(int student_id, int module_code, Date attendance_date, boolean is_present) {
+    public AttendanceData(int student_id, int module_code, Date attendance_date) {
         this.student_id = student_id;
         this.module_code = module_code;
         this.attendance_date = attendance_date;
-        this.is_present = is_present;
     }
 
     public AttendanceData(ResultSet result) throws SQLException {
@@ -32,7 +31,7 @@ public class AttendanceData {
         this.student_id = result.getInt("student_id");
         this.module_code = result.getInt("module_code");
         this.attendance_date = result.getDate("attendance_date");
-        this.is_present = result.getBoolean("is_present");
+        this.student_name = result.getString("student_name");
     }
 
     public int getId() {
@@ -67,11 +66,11 @@ public class AttendanceData {
         this.attendance_date = attendance_date;
     }
 
-    public boolean getIsPresent() {
-        return is_present;
+    public String getStudentName() {
+        return student_name;
     }
 
-    public void setIsPresent(boolean is_present) {
-        this.is_present = is_present;
+    public void setStudentName(String student_name) {
+        this.student_name = student_name;
     }
 }
