@@ -7,7 +7,6 @@ package vidyalaya.DAO.AttendanceDAO;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
-import java.time.LocalDate;
 import vidyalaya.Database.MySqlConnection;
 
 import java.util.ArrayList;
