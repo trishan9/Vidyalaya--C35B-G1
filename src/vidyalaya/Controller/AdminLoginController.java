@@ -72,6 +72,11 @@ public class AdminLoginController {
                 String username = userView.getUsernameField().getText();
                 String password = new String(userView.getPasswordField().getPassword());
 
+                if (username.isEmpty() || password.isEmpty()) {
+                    Utils.warning("All the fields are required!");
+                    return;
+                }
+
                 LoginRequest admin = new LoginRequest(username, password);
                 authDAO.loginAdmin(admin);
 

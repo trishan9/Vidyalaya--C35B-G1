@@ -64,6 +64,11 @@ public class CreateAdminController {
                 String institution_name = userView.getInstitutionNameField().getText();
                 String password = new String(userView.getPasswordField().getPassword());
 
+                if (name.isEmpty() || email.isEmpty() || institution_name.isEmpty() || password.isEmpty()) {
+                    Utils.warning("All the fields are required!");
+                    return;
+                }
+
                 AdminData admin = new AdminData(name, email, institution_name, password);
                 AdminData createdAdmin = authDAO.registerAdmin(admin);
 

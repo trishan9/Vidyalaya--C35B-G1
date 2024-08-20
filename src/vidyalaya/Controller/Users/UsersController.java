@@ -181,10 +181,13 @@ public class UsersController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            AdminLogin adminLoginView = new AdminLogin();
-            AdminLoginController adminLoginController = new AdminLoginController(adminLoginView);
-            Utils.closeAllFrames();
-            adminLoginController.open();
+            int result = Utils.confirm(userView, "Are you sure you want to logout?");
+            if (result == JOptionPane.YES_OPTION) {
+                AdminLogin adminLoginView = new AdminLogin();
+                AdminLoginController adminLoginController = new AdminLoginController(adminLoginView);
+                Utils.closeAllFrames();
+                adminLoginController.open();
+            }
         }
     }
 }
