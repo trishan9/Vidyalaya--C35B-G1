@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 import vidyalaya.Utils.Utils;
 
@@ -110,10 +111,13 @@ public class AttendanceController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            UserLogin userLoginView = new UserLogin();
-            UserLoginController userLoginController = new UserLoginController(userLoginView);
-            Utils.closeAllFrames();
-            userLoginController.open();
+            int result = Utils.confirm(userView, "Are you sure you want to logout?");
+            if (result == JOptionPane.YES_OPTION) {
+                UserLogin userLoginView = new UserLogin();
+                UserLoginController userLoginController = new UserLoginController(userLoginView);
+                Utils.closeAllFrames();
+                userLoginController.open();
+            }
         }
     }
 }

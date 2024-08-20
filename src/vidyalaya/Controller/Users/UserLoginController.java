@@ -48,6 +48,12 @@ public class UserLoginController {
             try {
                 String username = userView.getUsernameField().getText();
                 String password = new String(userView.getPasswordField().getPassword());
+
+                if (username.isEmpty() || password.isEmpty()) {
+                    Utils.warning("All the fields are required!");
+                    return;
+                }
+
                 String usernamePrefix = username.substring(0, 2);
                 String userType;
 

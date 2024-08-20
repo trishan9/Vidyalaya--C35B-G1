@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 import vidyalaya.Utils.Utils;
 
@@ -111,10 +112,13 @@ public class MyCoursesController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            UserLogin studentLoginView = new UserLogin();
-            UserLoginController studentLoginController = new UserLoginController(studentLoginView);
-            Utils.closeAllFrames();
-            studentLoginController.open();
+            int result = Utils.confirm(userView, "Are you sure you want to logout?");
+            if (result == JOptionPane.YES_OPTION) {
+                UserLogin studentLoginView = new UserLogin();
+                UserLoginController studentLoginController = new UserLoginController(studentLoginView);
+                Utils.closeAllFrames();
+                studentLoginController.open();
+            }
         }
     }
 }
