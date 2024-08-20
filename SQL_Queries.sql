@@ -1,5 +1,3 @@
-DROP DATABASE `Vidyalaya`;
-
 CREATE DATABASE `Vidyalaya`;
 
 USE `Vidyalaya`;
@@ -116,8 +114,6 @@ CREATE TABLE `routine` (
     FOREIGN KEY (module_code) REFERENCES module(code) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
-SELECT * FROM material;
-
 CREATE TABLE `material` (
     id INT NOT NULL AUTO_INCREMENT,
     module_code INT NOT NULL,
@@ -136,11 +132,9 @@ CREATE TABLE `attendance` (
     student_id INT NOT NULL,
     module_code INT NOT NULL,
     attendance_date DATE NOT NULL,
+    attended BOOLEAN NOT NULL DEFAULT 1,
     PRIMARY KEY (id),
     FOREIGN KEY (admin_id) REFERENCES admin(id),
     FOREIGN KEY (student_id) REFERENCES student(id) ON DELETE CASCADE,
     FOREIGN KEY (module_code) REFERENCES module(code) ON DELETE CASCADE
 ) ENGINE=InnoDB;
-
-TRUNCATE attendance;
-SELECT * from attendance;

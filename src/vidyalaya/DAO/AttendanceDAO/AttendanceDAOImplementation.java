@@ -7,11 +7,14 @@ package vidyalaya.DAO.AttendanceDAO;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
+import java.time.LocalDate;
 import vidyalaya.Database.MySqlConnection;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 import vidyalaya.Utils.Utils;
 
 import vidyalaya.Model.AttendanceData;
@@ -170,33 +173,6 @@ public class AttendanceDAOImplementation implements AttendanceDAO {
     }
 
     @Override
-    public int getTotalAbsentDaysAcrossAllCourses() throws Exception {
-        int totalTaughtDays = getTotalTaughtDaysAcrossAllCourses();
-
-        Connection dbConnection = mysql.openConnection();
-
-        final PreparedStatement statement = dbConnection.prepareStatement(
-                "SELECT COUNT(*) AS attended_days FROM attendance WHERE admin_id = ?"
-        );
-        statement.setInt(1, AdminSession.getCurrentUser().getId());
-
-        int attendedDays = 0;
-        ResultSet result = statement.executeQuery();
-        if (result.next()) {
-            attendedDays = result.getInt("attended_days");
-        }
-
-        statement.close();
-        dbConnection.close();
-        
-        int absentDays = totalTaughtDays - attendedDays;
-        if (absentDays < 0) {
-            return 0;
-        }
-        return absentDays;
-    }
-
-    @Override
     public int getStudentAbsentDaysAcrossAllCourses() throws Exception {
         int totalTaughtDays = getTotalTaughtDaysAcrossAllCourses(StudentSession.getCurrentUser().getAdminId());
 
@@ -222,5 +198,34 @@ public class AttendanceDAOImplementation implements AttendanceDAO {
             return 0;
         }
         return absentDays;
+    }
+
+    public Map<String, Integer> getLast7DaysAttendanceData() throws Exception {
+        Connection dbConnection = mysql.openConnection();
+
+        final PreparedStatement statement = dbConnection.prepareStatement(
+                "SELECT attendance_date, "
+                + "SUM(CASE WHEN attended = 1 THEN 1 ELSE 0 END) AS present_students "
+                + "FROM attendance "
+                + "WHERE attendance_date >= ? "
+                + "GROUP BY attendance_date "
+                + "ORDER BY attendance_date DESC"
+        );
+
+        LocalDate sevenDaysAgo = LocalDate.now().minusDays(7);
+        statement.setDate(1, java.sql.Date.valueOf(sevenDaysAgo).valueOf(sevenDaysAgo));
+
+        ResultSet result = statement.executeQuery();
+        Map<String, Integer> attendanceData = new TreeMap<>();
+
+        while (result.next()) {
+            String date = result.getDate("attendance_date").toString();
+            int presentStudents = result.getInt("present_students");
+            attendanceData.put(date, presentStudents);
+        }
+
+        statement.close();
+        dbConnection.close();
+        return attendanceData;
     }
 }

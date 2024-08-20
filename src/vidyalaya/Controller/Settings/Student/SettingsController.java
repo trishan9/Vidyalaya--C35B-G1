@@ -63,6 +63,11 @@ public class SettingsController {
                 String name = userView.getNameField().getText();
                 String emailAddress = userView.getEmailField().getText();
 
+                if (name.isEmpty() || emailAddress.isEmpty()) {
+                    Utils.warning("All the fields are required!");
+                    return;
+                }
+
                 String currentName = StudentSession.getCurrentUser().getName();
                 String currenEmailAddress = StudentSession.getCurrentUser().getEmail();
 
@@ -93,6 +98,11 @@ public class SettingsController {
             try {
                 String oldPassword = new String(userView.getCurrentPasswordField().getPassword());
                 String newPassword = new String(userView.getNewPasswordField().getPassword());
+
+                if (oldPassword.isEmpty() || newPassword.isEmpty()) {
+                    Utils.warning("All the fields are required!");
+                    return;
+                }
 
                 String currentPassword = StudentSession.getCurrentUser().getPassword();
 

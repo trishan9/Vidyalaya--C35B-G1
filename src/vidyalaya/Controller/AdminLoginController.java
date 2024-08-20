@@ -19,11 +19,9 @@ import vidyalaya.DAO.AuthDAO.AuthDAOImplementation;
 
 import vidyalaya.View.AdminLogin;
 import vidyalaya.View.CreateAdmin;
-import vidyalaya.View.Dashboard.Admin.CoursesScreen;
 import vidyalaya.View.UserLogin;
 
 import vidyalaya.Controller.Users.UserLoginController;
-import vidyalaya.Controller.Courses.Admin.CoursesController;
 import vidyalaya.View.Dashboard.Admin.DashboardScreen;
 
 /**

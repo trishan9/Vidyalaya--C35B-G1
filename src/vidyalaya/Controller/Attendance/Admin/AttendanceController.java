@@ -78,6 +78,10 @@ public class AttendanceController {
                 DefaultTableModel oldModel = (DefaultTableModel) userView.getUserTable().getModel();
                 oldModel.setRowCount(0);
                 String date = userView.getDateField().getText();
+                if (date.isEmpty()) {
+                    Utils.warning("Date range must be selected!");
+                    return;
+                }
                 String startDate = Utils.convertDateString(date.substring(0, 10));
                 String endDate = Utils.convertDateString(date.substring(14, 24));
 

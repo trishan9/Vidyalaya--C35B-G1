@@ -53,6 +53,11 @@ public class CreateNoticeController {
                 String noticeContent = userView.getContentField().getText();
                 int adminId = AdminSession.getCurrentUser().getId();
 
+                if (noticeType.isEmpty() || noticeTitle.isEmpty() || effectiveDate.isEmpty() || noticeContent.isEmpty()) {
+                    Utils.warning("All the fields are required!");
+                    return;
+                }
+
                 NoticeData notice = new NoticeData(adminId, noticeTitle, noticeContent, noticeType, effectiveDate);
                 noticeDAO.createNotice(notice);
 
