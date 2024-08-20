@@ -49,6 +49,10 @@ public class CreateCourseController {
         public void actionPerformed(ActionEvent e) {
             try {
                 String name = userView.getNameField().getText();
+                if (name.isEmpty()) {
+                    Utils.warning("Course Name field cannot be empty!");
+                    return;
+                }
 
                 AdminData currentAdmin = AdminSession.getCurrentUser();
 

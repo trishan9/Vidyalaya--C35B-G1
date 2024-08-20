@@ -9,9 +9,6 @@ import java.awt.event.ActionListener;
 
 import vidyalaya.Utils.Utils;
 
-import vidyalaya.DAO.AuthDAO.AuthDAO;
-import vidyalaya.DAO.AuthDAO.AuthDAOImplementation;
-
 import vidyalaya.View.UserLogin;
 import vidyalaya.View.Dashboard.Student.AttendanceScreen;
 import vidyalaya.View.Dashboard.Student.MyCoursesScreen;
@@ -27,7 +24,6 @@ import vidyalaya.Controller.Users.UserLoginController;
  */
 public class AttendanceController {
 
-    private final AuthDAO authDAO = new AuthDAOImplementation();
     private final AttendanceScreen userView;
 
     public AttendanceController(AttendanceScreen userView) {
@@ -37,7 +33,7 @@ public class AttendanceController {
         userView.addNoticesRedirectListener(new NoticesRedirectListener());
         userView.addSettingsRedirectListener(new SettingsRedirectListener());
         userView.addLogoutListener(new LogoutListener());
-        
+
     }
 
     public void open() {

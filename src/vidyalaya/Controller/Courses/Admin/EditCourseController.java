@@ -102,6 +102,10 @@ public class EditCourseController {
             try {
                 String name = userView.getNameField().getText();
                 List<TeacherData> selectedTeachers = userView.getTeachersField().getSelectedItems();
+                if (name.isEmpty() || selectedTeachers.isEmpty()) {
+                    Utils.warning("All the fields are required!");
+                    return;
+                }
 
                 AdminData currentAdmin = AdminSession.getCurrentUser();
 

@@ -174,6 +174,11 @@ public class EditMaterialForm extends javax.swing.JFrame {
             String title = this.getMaterialTitle().getText();
             String text = this.getContentField().getText();
 
+            if (title.isEmpty() || text.isEmpty()) {
+                Utils.warning("All the fields are required!");
+                return;
+            }
+
             ModuleDAO moduleDAO = new ModuleDAOImplementation();
             MaterialData material = new MaterialData(title, text);
             moduleDAO.updateMaterial(currentMaterial.getId(), material);

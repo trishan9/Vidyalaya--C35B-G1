@@ -121,17 +121,14 @@
                   <Component id="pnlSideNav" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Component id="pnlRight" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="pnlRight" min="-2" max="-2" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                           <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace pref="54" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -756,7 +753,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="chart" max="32767" attributes="0"/>
+                          <Component id="lineChart" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -765,14 +762,19 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="chart" pref="356" max="32767" attributes="0"/>
+                          <Component id="lineChart" pref="356" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="vidyalaya.Components.Charts.LineChart.CurveLineChart" name="chart">
+                <Component class="vidyalaya.Components.Charts.LineChart.CurveLineChart" name="lineChart">
+                  <Properties>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="0" green="0" red="0" type="rgb"/>
+                    </Property>
+                  </Properties>
                 </Component>
               </SubComponents>
             </Container>
@@ -787,7 +789,7 @@
                       <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel4" min="-2" pref="299" max="-2" attributes="0"/>
-                          <Component id="pieChart1" min="-2" pref="481" max="-2" attributes="0"/>
+                          <Component id="donutChart" min="-2" pref="481" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="19" max="32767" attributes="0"/>
                   </Group>
@@ -799,7 +801,7 @@
                       <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="pieChart1" min="-2" pref="280" max="-2" attributes="0"/>
+                      <Component id="donutChart" min="-2" pref="280" max="-2" attributes="0"/>
                       <EmptySpace pref="18" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -811,7 +813,7 @@
                 <Property name="text" type="java.lang.String" value="Distribution of Teachers and Students"/>
               </Properties>
             </Component>
-            <Container class="vidyalaya.Components.Charts.PieChart" name="pieChart1">
+            <Container class="vidyalaya.Components.Charts.PieChart" name="donutChart">
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
                 <Property name="useNullLayout" type="boolean" value="true"/>
@@ -829,7 +831,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel6" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
-                              <Component id="pieChart3" min="-2" pref="475" max="-2" attributes="0"/>
+                              <Component id="pieChart" min="-2" pref="475" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="23" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -842,7 +844,7 @@
                       <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                       <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="pieChart3" min="-2" pref="280" max="-2" attributes="0"/>
+                      <Component id="pieChart" min="-2" pref="280" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -854,7 +856,7 @@
                 <Property name="text" type="java.lang.String" value="Courses - With Teachers v/s Without Teachers"/>
               </Properties>
             </Component>
-            <Container class="vidyalaya.Components.Charts.PieChart" name="pieChart3">
+            <Container class="vidyalaya.Components.Charts.PieChart" name="pieChart">
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
                 <Property name="useNullLayout" type="boolean" value="true"/>

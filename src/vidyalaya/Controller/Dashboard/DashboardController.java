@@ -4,24 +4,24 @@
  */
 package vidyalaya.Controller.Dashboard;
 
-import vidyalaya.Controller.Courses.Admin.*;
-import javax.swing.JOptionPane;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
+import java.util.Map;
 import vidyalaya.Utils.Utils;
 
-import vidyalaya.Model.ModuleData;
+import vidyalaya.DAO.AttendanceDAO.AttendanceDAOImplementation;
+import vidyalaya.DAO.AuthDAO.AuthDAOImplementation;
+import vidyalaya.DAO.ModuleDAO.ModuleDAOImplementation;
+import vidyalaya.Model.ModelChart;
+import vidyalaya.Model.ModelPieChart;
+import vidyalaya.Model.StudentData;
+import vidyalaya.Model.TeacherData;
 import vidyalaya.SessionManagement.AdminSession;
 
-import vidyalaya.DAO.ModuleDAO.ModuleDAO;
-import vidyalaya.DAO.ModuleDAO.ModuleDAOImplementation;
-
+import vidyalaya.View.Dashboard.Admin.DashboardScreen;
 import vidyalaya.View.AdminLogin;
 import vidyalaya.View.Dashboard.Admin.AttendanceScreen;
 import vidyalaya.View.Dashboard.Admin.CoursesScreen;
@@ -29,11 +29,9 @@ import vidyalaya.View.Dashboard.Admin.NoticesScreen;
 import vidyalaya.View.Dashboard.Admin.RoutineScreen;
 import vidyalaya.View.Dashboard.Admin.SettingsScreen;
 import vidyalaya.View.Dashboard.Admin.UsersScreen;
-
-import vidyalaya.Components.Modals.CreateCourseForm;
+import vidyalaya.Components.Charts.PieChart;
 
 import vidyalaya.Controller.AdminLoginController;
-import vidyalaya.View.Dashboard.Admin.DashboardScreen;
 
 /**
  *
@@ -41,8 +39,11 @@ import vidyalaya.View.Dashboard.Admin.DashboardScreen;
  */
 public class DashboardController {
 
-    private final ModuleDAO moduleDAO = new ModuleDAOImplementation();
     private final DashboardScreen userView;
+
+    AuthDAOImplementation authDAO = new AuthDAOImplementation();
+    ModuleDAOImplementation moduleDAO = new ModuleDAOImplementation();
+    AttendanceDAOImplementation attendanceDAO = new AttendanceDAOImplementation();
 
     public DashboardController(DashboardScreen userView) {
         this.userView = userView;
@@ -53,6 +54,42 @@ public class DashboardController {
         userView.addUsersRedirectListener(new UsersRedirectListener());
         userView.addSettingsRedirectListener(new SettingsRedirectListener());
         userView.addLogoutListener(new LogoutListener());
+
+        fetchCharts();
+
+    }
+
+    private void fetchCharts() {
+        try {
+            List<StudentData> studentsList = authDAO.getAllStudents();
+            List<TeacherData> teachersList = authDAO.getAllTeachers();
+            Map<String, Integer> moduleCounts = moduleDAO.getModuleCounts(AdminSession.getCurrentUser().getId());
+            Map<String, Integer> last7DaysData = attendanceDAO.getLast7DaysAttendanceData();
+            this.userView.getDonutChart().setChartType(PieChart.PeiChartType.DONUT_CHART);
+            this.userView.getDonutChart().addData(new ModelPieChart("Teacher", teachersList.size(), new Color(23, 126, 238)));
+            this.userView.getDonutChart().addData(new ModelPieChart("Student", studentsList.size(), new Color(221, 65, 65)));
+
+            this.userView.getPieChart().setChartType(PieChart.PeiChartType.DEFAULT);
+            this.userView.getPieChart().addData(new ModelPieChart("With Teachers", moduleCounts.get("modules_with_teacher"), new Color(47, 157, 64)));
+            this.userView.getPieChart().addData(new ModelPieChart("Without Teachers", moduleCounts.get("modules_without_teacher"), new Color(196, 151, 58)));
+
+            this.userView.getLineChart().setTitle("Last 7 Days Attendance Data");
+            this.userView.getLineChart().addLegend("Present Students", Color.decode("#e65c00"), Color.decode("#F9D423"));
+            this.userView.getLineChart().addLegend("Absent Students", Color.decode("#0099F7"), Color.decode("#F11712"));
+            this.userView.getLineChart().clear();
+            for (Map.Entry<String, Integer> entry : last7DaysData.entrySet()) {
+                String date = entry.getKey();
+                int totalPresentStudents = entry.getValue();
+                int totalAbsentStudents = studentsList.size() - totalPresentStudents;
+                if (totalAbsentStudents < 0) {
+                    totalAbsentStudents = 0;
+                }
+                this.userView.getLineChart().addData(new ModelChart(date, new double[]{totalPresentStudents, totalAbsentStudents}));
+            }
+            this.userView.getLineChart().start();
+        } catch (Exception ex) {
+            Utils.error(ex.getMessage());
+        }
     }
 
     public void open() {

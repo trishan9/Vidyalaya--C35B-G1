@@ -4,27 +4,19 @@
  */
 package vidyalaya.View.Dashboard.Admin;
 
-import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import raven.toast.Notifications;
+import vidyalaya.Components.Charts.LineChart.CurveLineChart;
+
 import vidyalaya.Components.Charts.PieChart;
-import vidyalaya.DAO.AuthDAO.AuthDAOImplementation;
-import vidyalaya.DAO.ModuleDAO.ModuleDAOImplementation;
 
 import vidyalaya.Utils.Utils;
 
 import vidyalaya.Model.AdminData;
-import vidyalaya.Model.ModelChart;
-import vidyalaya.Model.ModelPieChart;
-import vidyalaya.Model.StudentData;
-import vidyalaya.Model.TeacherData;
 import vidyalaya.SessionManagement.AdminSession;
 
 /**
@@ -39,38 +31,6 @@ public class DashboardScreen extends javax.swing.JFrame {
     public DashboardScreen() {
         try {
             initComponents();
-
-            AuthDAOImplementation authDAO = new AuthDAOImplementation();
-            ModuleDAOImplementation moduleDAO = new ModuleDAOImplementation();
-            List<StudentData> studentsList;
-            List<TeacherData> teachersList;
-            Map<String, Integer> moduleCounts = moduleDAO.getModuleCounts(AdminSession.getCurrentUser().getId());
-
-            studentsList = authDAO.getAllStudents();
-            teachersList = authDAO.getAllTeachers();
-
-            pieChart1.setChartType(PieChart.PeiChartType.DONUT_CHART);
-            pieChart1.addData(new ModelPieChart("Teacher", teachersList.size(), new Color(23, 126, 238)));
-            pieChart1.addData(new ModelPieChart("Student", studentsList.size(), new Color(221, 65, 65)));
-
-            pieChart3.setChartType(PieChart.PeiChartType.DEFAULT);
-            pieChart3.addData(new ModelPieChart("With Teachers", moduleCounts.get("modules_with_teacher"), new Color(47, 157, 64)));
-            pieChart3.addData(new ModelPieChart("Without Teachers", moduleCounts.get("modules_without_teacher"), new Color(196, 151, 58)));
-
-            chart.setTitle("Chart Data");
-            chart.addLegend("Amount", Color.decode("#7b4397"), Color.decode("#dc2430"));
-            chart.addLegend("Cost", Color.decode("#e65c00"), Color.decode("#F9D423"));
-            chart.addLegend("Profit", Color.decode("#0099F7"), Color.decode("#F11712"));
-            chart.clear();
-            chart.addData(new ModelChart("January", new double[]{500, 50, 100}));
-            chart.addData(new ModelChart("February", new double[]{600, 300, 150}));
-            chart.addData(new ModelChart("March", new double[]{200, 50, 900}));
-            chart.addData(new ModelChart("April", new double[]{480, 700, 100}));
-            chart.addData(new ModelChart("May", new double[]{350, 540, 500}));
-            chart.addData(new ModelChart("June", new double[]{450, 800, 100}));
-            chart.start();
-
-            Notifications.getInstance().setJFrame(this);
 
             setTitle("Dashboard - Vidyalaya Admin");
             setSize(1400, 954);
@@ -98,6 +58,27 @@ public class DashboardScreen extends javax.swing.JFrame {
         } catch (Exception ex) {
             Logger.getLogger(DashboardScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    /**
+     * @return the lineChart
+     */
+    public CurveLineChart getLineChart() {
+        return lineChart;
+    }
+
+    /**
+     * @return the donutChart
+     */
+    public PieChart getDonutChart() {
+        return donutChart;
+    }
+
+    /**
+     * @return the pieChart
+     */
+    public PieChart getPieChart() {
+        return pieChart;
     }
 
     public void addCoursesRedirectListener(ActionListener listener) {
@@ -222,13 +203,13 @@ public class DashboardScreen extends javax.swing.JFrame {
         pnlRight = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        chart = new vidyalaya.Components.Charts.LineChart.CurveLineChart();
+        lineChart = new vidyalaya.Components.Charts.LineChart.CurveLineChart();
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        pieChart1 = new vidyalaya.Components.Charts.PieChart();
+        donutChart = new vidyalaya.Components.Charts.PieChart();
         jPanel3 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        pieChart3 = new vidyalaya.Components.Charts.PieChart();
+        pieChart = new vidyalaya.Components.Charts.PieChart();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -554,20 +535,22 @@ public class DashboardScreen extends javax.swing.JFrame {
         jLabel3.setFont(jLabel3.getFont().deriveFont((float)25));
         jLabel3.setText("Dashboard");
 
+        lineChart.setForeground(new java.awt.Color(0, 0, 0));
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(chart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lineChart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(chart, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
+                .addComponent(lineChart, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -603,7 +586,7 @@ public class DashboardScreen extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pieChart1, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(donutChart, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -612,7 +595,7 @@ public class DashboardScreen extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pieChart1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(donutChart, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
@@ -627,7 +610,7 @@ public class DashboardScreen extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(pieChart3, javax.swing.GroupLayout.PREFERRED_SIZE, 475, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(pieChart, javax.swing.GroupLayout.PREFERRED_SIZE, 475, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 23, Short.MAX_VALUE))))
         );
         jPanel3Layout.setVerticalGroup(
@@ -636,7 +619,7 @@ public class DashboardScreen extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pieChart3, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pieChart, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -648,14 +631,12 @@ public class DashboardScreen extends javax.swing.JFrame {
                 .addComponent(pnlSideNav, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlCenterLayout.createSequentialGroup()
-                        .addComponent(pnlRight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(pnlRight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnlCenterLayout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(34, 34, 34)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                .addContainerGap(54, Short.MAX_VALUE))
         );
         pnlCenterLayout.setVerticalGroup(
             pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -732,7 +713,7 @@ public class DashboardScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private vidyalaya.Components.Charts.LineChart.CurveLineChart chart;
+    private vidyalaya.Components.Charts.PieChart donutChart;
     private javax.swing.JLabel iconAttendance;
     private javax.swing.JLabel iconCourses;
     private javax.swing.JLabel iconLogout;
@@ -753,6 +734,7 @@ public class DashboardScreen extends javax.swing.JFrame {
     private javax.swing.JLabel lblId;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblRole;
+    private vidyalaya.Components.Charts.LineChart.CurveLineChart lineChart;
     private javax.swing.JPanel logOut;
     private javax.swing.JLabel menuAttendance;
     private javax.swing.JLabel menuCourses;
@@ -769,8 +751,7 @@ public class DashboardScreen extends javax.swing.JFrame {
     private javax.swing.JPanel navRoutine1;
     private javax.swing.JPanel navSettings;
     private javax.swing.JPanel navUsers;
-    private vidyalaya.Components.Charts.PieChart pieChart1;
-    private vidyalaya.Components.Charts.PieChart pieChart3;
+    private vidyalaya.Components.Charts.PieChart pieChart;
     private javax.swing.JPanel pnlCenter;
     private javax.swing.JPanel pnlNav;
     private javax.swing.JPanel pnlRight;

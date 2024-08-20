@@ -112,6 +112,11 @@ public class EditRoutineController {
                 String details = userView.getContentField().getText();
                 String content = time + " - " + details;
 
+                if (weekday.isEmpty() || moduleData.getName().isEmpty() || time.isEmpty() || details.isEmpty()) {
+                    Utils.warning("All the fields are required!");
+                    return;
+                }
+
                 RoutineData routine = new RoutineData(weekday, moduleCode, time, content);
                 routineDAO.updateRoutine(routineId, routine);
 

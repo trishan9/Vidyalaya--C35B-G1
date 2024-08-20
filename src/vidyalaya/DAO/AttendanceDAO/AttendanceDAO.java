@@ -25,7 +25,5 @@ public interface AttendanceDAO {
 
     public int getTotalTaughtDaysAcrossAllCourses() throws Exception;
 
-    public int getTotalAbsentDaysAcrossAllCourses() throws Exception;
-
     public int getStudentAbsentDaysAcrossAllCourses() throws Exception;
 }

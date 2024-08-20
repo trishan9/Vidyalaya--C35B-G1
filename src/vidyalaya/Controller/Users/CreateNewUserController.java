@@ -57,6 +57,11 @@ public class CreateNewUserController {
                 String email = userView.getEmailField().getText();
                 String password = new String(userView.getPasswordField().getPassword());
 
+                if (name.isEmpty() || user_type.isEmpty() || email.isEmpty() || password.isEmpty()) {
+                    Utils.warning("All the fields are required!");
+                    return;
+                }
+
                 AdminData currentAdmin = AdminSession.getCurrentUser();
 
                 switch (user_type) {

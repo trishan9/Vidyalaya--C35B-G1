@@ -85,6 +85,11 @@ public class EditUserController {
                 String user_type = userType;
                 String email = userView.getEmailField().getText();
 
+                if (name.isEmpty() || user_type.isEmpty() || email.isEmpty()) {
+                    Utils.warning("All the fields are required!");
+                    return;
+                }
+
                 AdminData currentAdmin = AdminSession.getCurrentUser();
 
                 switch (user_type) {
